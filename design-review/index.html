@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design vs Storybook</title>
+<style>
+:root{color-scheme:dark;--bg:#111;--panel:#1e1e1e;--line:#333;--text:#eee;--muted:#999;--ok:#05df72;--warn:#fac800;--bad:#ff6568}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,sans-serif}
+header,main{max-width:1500px;margin:0 auto;padding:16px}
+nav{display:flex;flex-wrap:wrap;gap:8px}nav a{color:var(--text);background:var(--panel);padding:4px 10px;border-radius:999px;text-decoration:none}
+h2{margin-top:48px;border-bottom:1px solid var(--line);padding-bottom:8px}h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:16px 0 4px}
+.status{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--panel);vertical-align:middle}
+.status.match{color:var(--ok)}.status.close{color:var(--warn)}.status.differs{color:var(--bad)}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+table{width:100%;border-collapse:collapse;margin-top:16px;table-layout:fixed}
+th,td{border-top:1px solid var(--line);padding:12px;vertical-align:top;text-align:left}
+thead th{color:var(--muted);font-weight:500}tbody th{width:220px;font-weight:600}
+.dim{display:block;color:var(--muted);font-weight:400;font-size:12px}.vnote{font-weight:400;color:var(--warn);font-size:12px}
+td img{max-width:100%;height:auto;background:#1e1e1e;image-rendering:auto}
+.lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:24px}
+@media (max-width:700px){tbody th{width:auto}table,thead,tbody,tr,th,td{display:block}}
+</style></head><body>
+<header><h1>Design vs Storybook</h1>
+<p>Left: PNG exported from the Brilliant master (scale 2, window background). Right: the matching Storybook story captured at 2× on the app's black canvas. Sizes are in CSS px.</p>
+<nav><a href="#button">Button</a><a href="#textinput">TextInput</a><a href="#checkbox">Checkbox</a><a href="#radio">Radio</a><a href="#switch">Switch</a><a href="#ssobutton">SsoButton / SsoButtonGroup</a><a href="#loginmodal">LoginModal</a><a href="#plancard">PlanCard</a><a href="#productcard">ProductCard</a><a href="#unioffer">UniOffer</a><a href="#soonerlogo">SoonerLogo</a><a href="#navlink">NavLink</a><a href="#languageselect">LanguageSelect</a><a href="#avatar">Avatar</a><a href="#header">Header</a><a href="#footer">Footer</a><a href="#socialicons">SocialIcons</a><a href="#availabilityfilter">AvailabilityFilter</a><a href="#channeltagtile">ChannelTagTile</a><a href="#channeltile">ChannelTile</a><a href="#editorialslice">EditorialSlice</a><a href="#featuredfilmcard">FeaturedFilmCard</a><a href="#filmbadge">FilmBadge</a><a href="#filmcard">FilmCard</a><a href="#filmdetails">FilmDetails</a><a href="#filmhero">FilmHero</a><a href="#genretile">GenreTile</a><a href="#masktile">MaskTile</a><a href="#promohero">PromoHero</a><a href="#quotecard">QuoteCard</a><a href="#sectionheader">SectionHeader</a><a href="#decisions">Decisions</a></nav></header>
+<main>
+<section id="decisions" class="lists">
+<div><h2>Needs a decision</h2><ul><li>Funding logos (Creative Europe MEDIA, Fédération Wallonie-Bruxelles, VAF) and the Amazon SSO mark are still PNGs: no vector source exists in Brilliant or simple-icons. Supply SVGs or approve keeping the rasters.</li><li>Footer copyright is white/40 on black (3.65:1), below WCAG AA 4.5:1. Kept as designed; raise to text.muted (white/60) or accept.</li><li>LoginModal.SelectedProduct is 352px wide; 'MONATSABO – 7,99 €/Monat' plus the pill doesn't fit (the master overlaps the pill onto the price, code wraps the line). Widen the slot, shorten the copy, or drop the pill at this size.</li><li>LanguageSelect has no open/menu state in the design; the dropdown in code is an implementation choice.</li><li>Social Icons 'Original': Instagram and Spotify render on a white tile in the master, YouTube and Facebook do not. Code renders all four without a tile.</li><li>Responsive strategy: one responsive component per concept in code (container queries); Brilliant keeps breakpoint variants only where the structure changes (Header, Footer viewport axis). Header/Footer no longer take a viewport prop.</li><li>PlanCard stories use a placeholder still (The Seventh Seal, public/images/placeholder/seventh-seal.webp) for the image slot. Story-only; design screens keep their own artwork.</li><li>Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts.</li></ul></div>
+<div><h2>Design gaps (fixed in code, flagged for the design)</h2><ul><li>Synced 2026-10-20 (production = truth): Button master and code follow .sooner-cta-* — primary 600/uppercase/0.03em, white 600 with white/85 hover and 60% disabled, ghost 500 with blur 10, lg 16/32 padding. The generated focus variants were removed from the master, board and code; keyboard focus is production's 2px white outline (offset 2).</li><li>Synced 2026-10-20: LoginModal and PlanCard masters now compose Button instances instead of hand-built button frames; the generated 'Sooner / Component library' duplicates and the detached Signup production frames moved to canvas '8 _archive'.</li><li>TextInput error is a white border in the master; code uses status.error (red-500) for border and message (your call).</li><li>TextInput default border: email is full white, password white/30 in the master; code uses white/30 for both (your call).</li><li>TextInput: the password type only has a 'default' variant on the master; other password states reuse the email styling.</li><li>LoginModal 'focus' omits the SSO block and Hochschul-Login in the master; code keeps them (only 'disabled' drops them).</li><li>PlanCard: the yearly master overrides the title to 32px; code keeps heading.plan (30px).</li><li>PlanCard film stills are placeholders and were removed; the 384×199 image slot takes an optional imageSrc.</li><li>Unbound values in masters: ProductCard shadow (0 4 8 / 25%), yearly PlanCard CTA shadow (0 3 8 / 25%), cta-white hover shadow (0 4 8 / 10%), TextInput supporting text #9CA3AF (Tailwind v3 gray-400; code uses v4 gray-400 #99A1AF), Button ghost blur 5 (DS says CTAs blur 10).</li><li>Copy inconsistency: the cta-light Button master says 'UNI wählen', the UniOffer master 'UNI WÄHLEN'. Code renders each as written.</li><li>Hover states on NavLink, LanguageSelect, footer links and SSO buttons are not drawn in the design; kept subtle in code (your call).</li><li>Icons: UI glyphs are Lucide (Search, Menu, ChevronDown, Eye, X, Check, Play); the design's custom chevron (16×8) and pupil-less eye differ slightly.</li></ul></div>
+</section>
+<section id="button">
+<h2>Button <span class="status match">match</span></h2>
+<p>19 master variants (focus removed). Values follow production .sooner-cta-*; Brilliant master synced to match.</p>
+<div class="notes"><h3>Differences</h3><ul><li>cta-round uses Lucide Play at 32px to match the 21×24 triangle.</li><li>Ghost tracking 0.025em is in code only (no letter-spacing token in default.ds).</li></ul><h3>Fixed in this pass</h3><ul><li>Focus variants removed in Brilliant and code; focus-visible = 2px white outline.</li><li>Primary uppercase / white semibold / ghost medium, white hover white/85, ghost blur 10, lg padding 16/32 — in both.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">ghost-lg-default<span class="dim">401×56.5 → 401×56 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--ghost-lg-default.png" alt="Design: button ghost-lg-default"></td>
+  <td><img loading="lazy" src="story/components-button--ghost-lg-default.png" alt="Storybook: button ghost-lg-default"></td>
+</tr>
+<tr>
+  <th scope="row">ghost-md-default<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--ghost-md-default.png" alt="Design: button ghost-md-default"></td>
+  <td><img loading="lazy" src="story/components-button--ghost-md-default.png" alt="Storybook: button ghost-md-default"></td>
+</tr>
+<tr>
+  <th scope="row">ghost-md-disabled<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--ghost-md-disabled.png" alt="Design: button ghost-md-disabled"></td>
+  <td><img loading="lazy" src="story/components-button--ghost-md-disabled.png" alt="Storybook: button ghost-md-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">ghost-md-hover<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--ghost-md-hover.png" alt="Design: button ghost-md-hover"></td>
+  <td><img loading="lazy" src="story/components-button--ghost-md-hover.png" alt="Storybook: button ghost-md-hover"></td>
+</tr>
+<tr>
+  <th scope="row">light-sm-default<span class="dim">98.5×36.5 → 98.5×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--light-sm-default.png" alt="Design: button light-sm-default"></td>
+  <td><img loading="lazy" src="story/components-button--light-sm-default.png" alt="Storybook: button light-sm-default"></td>
+</tr>
+<tr>
+  <th scope="row">light-sm-hover<span class="dim">98.5×36.5 → 98.5×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--light-sm-hover.png" alt="Design: button light-sm-hover"></td>
+  <td><img loading="lazy" src="story/components-button--light-sm-hover.png" alt="Storybook: button light-sm-hover"></td>
+</tr>
+<tr>
+  <th scope="row">primary-lg-default<span class="dim">401×56.5 → 401×56 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-lg-default.png" alt="Design: button primary-lg-default"></td>
+  <td><img loading="lazy" src="story/components-button--primary-lg-default.png" alt="Storybook: button primary-lg-default"></td>
+</tr>
+<tr>
+  <th scope="row">primary-md-default<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-md-default.png" alt="Design: button primary-md-default"></td>
+  <td><img loading="lazy" src="story/components-button--primary-md-default.png" alt="Storybook: button primary-md-default"></td>
+</tr>
+<tr>
+  <th scope="row">primary-md-disabled<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-md-disabled.png" alt="Design: button primary-md-disabled"></td>
+  <td><img loading="lazy" src="story/components-button--primary-md-disabled.png" alt="Storybook: button primary-md-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">primary-md-hover<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-md-hover.png" alt="Design: button primary-md-hover"></td>
+  <td><img loading="lazy" src="story/components-button--primary-md-hover.png" alt="Storybook: button primary-md-hover"></td>
+</tr>
+<tr>
+  <th scope="row">primary-sm-default<span class="dim">90.5×36.5 → 90.5×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-sm-default.png" alt="Design: button primary-sm-default"></td>
+  <td><img loading="lazy" src="story/components-button--primary-sm-default.png" alt="Storybook: button primary-sm-default"></td>
+</tr>
+<tr>
+  <th scope="row">primary-sm-hover<span class="dim">90.5×36.5 → 90.5×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--primary-sm-hover.png" alt="Design: button primary-sm-hover"></td>
+  <td><img loading="lazy" src="story/components-button--primary-sm-hover.png" alt="Storybook: button primary-sm-hover"></td>
+</tr>
+<tr>
+  <th scope="row">round-lg-default<span class="dim">56×56.5 → 56×56 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--round-lg-default.png" alt="Design: button round-lg-default"></td>
+  <td><img loading="lazy" src="story/components-button--round-lg-default.png" alt="Storybook: button round-lg-default"></td>
+</tr>
+<tr>
+  <th scope="row">round-lg-hover<span class="dim">56×56.5 → 56×56 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--round-lg-hover.png" alt="Design: button round-lg-hover"></td>
+  <td><img loading="lazy" src="story/components-button--round-lg-hover.png" alt="Storybook: button round-lg-hover"></td>
+</tr>
+<tr>
+  <th scope="row">text-sm-default<span class="dim">77×36.5 → 77×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--text-sm-default.png" alt="Design: button text-sm-default"></td>
+  <td><img loading="lazy" src="story/components-button--text-sm-default.png" alt="Storybook: button text-sm-default"></td>
+</tr>
+<tr>
+  <th scope="row">text-sm-hover<span class="dim">77×36.5 → 77×36 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--text-sm-hover.png" alt="Design: button text-sm-hover"></td>
+  <td><img loading="lazy" src="story/components-button--text-sm-hover.png" alt="Storybook: button text-sm-hover"></td>
+</tr>
+<tr>
+  <th scope="row">white-md-default<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--white-md-default.png" alt="Design: button white-md-default"></td>
+  <td><img loading="lazy" src="story/components-button--white-md-default.png" alt="Storybook: button white-md-default"></td>
+</tr>
+<tr>
+  <th scope="row">white-md-disabled<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--white-md-disabled.png" alt="Design: button white-md-disabled"></td>
+  <td><img loading="lazy" src="story/components-button--white-md-disabled.png" alt="Storybook: button white-md-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">white-md-hover<span class="dim">401×48.5 → 401×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-button--white-md-hover.png" alt="Design: button white-md-hover"></td>
+  <td><img loading="lazy" src="story/components-button--white-md-hover.png" alt="Storybook: button white-md-hover"></td>
+</tr>
+</tbody></table></section>
+<section id="textinput">
+<h2>TextInput <span class="status close">close</span></h2>
+<p>Label, 56px control, glass fill, radius 8, copy and supporting text match.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Default border white/30 for both types (email master is full white).</li><li>Error state is red-500 (master is white).</li><li>Eye icon is Lucide Eye (has a pupil).</li></ul><h3>Fixed in this pass</h3><ul><li>Reveal toggle hidden when disabled, as on the master.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">email-default<span class="dim">380×108.5 → 380×108 px</span><p class="vnote">Border white/30 instead of white (your call).</p></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--email-default.png" alt="Design: textinput email-default"></td>
+  <td><img loading="lazy" src="story/components-textinput--email-default.png" alt="Storybook: textinput email-default"></td>
+</tr>
+<tr>
+  <th scope="row">email-disabled<span class="dim">380×108.5 → 380×108 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--email-disabled.png" alt="Design: textinput email-disabled"></td>
+  <td><img loading="lazy" src="story/components-textinput--email-disabled.png" alt="Storybook: textinput email-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">email-error<span class="dim">380×108.5 → 380×108 px</span><p class="vnote">Red border and message (your call).</p></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--email-error.png" alt="Design: textinput email-error"></td>
+  <td><img loading="lazy" src="story/components-textinput--email-error.png" alt="Storybook: textinput email-error"></td>
+</tr>
+<tr>
+  <th scope="row">email-filled<span class="dim">380×108.5 → 380×108 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--email-filled.png" alt="Design: textinput email-filled"></td>
+  <td><img loading="lazy" src="story/components-textinput--email-filled.png" alt="Storybook: textinput email-filled"></td>
+</tr>
+<tr>
+  <th scope="row">email-focus<span class="dim">380×108.5 → 380×108 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--email-focus.png" alt="Design: textinput email-focus"></td>
+  <td><img loading="lazy" src="story/components-textinput--email-focus.png" alt="Storybook: textinput email-focus"></td>
+</tr>
+<tr>
+  <th scope="row">password-default<span class="dim">380×108.5 → 380×108 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-textinput--password-default.png" alt="Design: textinput password-default"></td>
+  <td><img loading="lazy" src="story/components-textinput--password-default.png" alt="Storybook: textinput password-default"></td>
+</tr>
+</tbody></table></section>
+<section id="checkbox">
+<h2>Checkbox <span class="status match">match</span></h2>
+<p>Box, gray-500 border kept when checked, violet fill, focus ring and disabled colors match.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Check glyph is Lucide Check rather than the master's 14px path.</li></ul><h3>Fixed in this pass</h3><ul><li>Row height 72px with supporting text (12px padding), 44px min without.</li><li>Check glyph sized up to match.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">checked-default<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--checked-default.png" alt="Design: checkbox checked-default"></td>
+  <td><img loading="lazy" src="story/components-checkbox--checked-default.png" alt="Storybook: checkbox checked-default"></td>
+</tr>
+<tr>
+  <th scope="row">checked-disabled<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--checked-disabled.png" alt="Design: checkbox checked-disabled"></td>
+  <td><img loading="lazy" src="story/components-checkbox--checked-disabled.png" alt="Storybook: checkbox checked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">checked-focus<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--checked-focus.png" alt="Design: checkbox checked-focus"></td>
+  <td><img loading="lazy" src="story/components-checkbox--checked-focus.png" alt="Storybook: checkbox checked-focus"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-default<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--unchecked-default.png" alt="Design: checkbox unchecked-default"></td>
+  <td><img loading="lazy" src="story/components-checkbox--unchecked-default.png" alt="Storybook: checkbox unchecked-default"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-disabled<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--unchecked-disabled.png" alt="Design: checkbox unchecked-disabled"></td>
+  <td><img loading="lazy" src="story/components-checkbox--unchecked-disabled.png" alt="Storybook: checkbox unchecked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-focus<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-checkbox--unchecked-focus.png" alt="Design: checkbox unchecked-focus"></td>
+  <td><img loading="lazy" src="story/components-checkbox--unchecked-focus.png" alt="Storybook: checkbox unchecked-focus"></td>
+</tr>
+</tbody></table></section>
+<section id="radio">
+<h2>Radio <span class="status match">match</span></h2>
+<p>Matches, including the exact copy '7,99€ pro Monat · jederzeit kündbar.'</p>
+<div class="notes"><h3>Fixed in this pass</h3><ul><li>Row height 72px with supporting text.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">checked-default<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--checked-default.png" alt="Design: radio checked-default"></td>
+  <td><img loading="lazy" src="story/components-radio--checked-default.png" alt="Storybook: radio checked-default"></td>
+</tr>
+<tr>
+  <th scope="row">checked-disabled<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--checked-disabled.png" alt="Design: radio checked-disabled"></td>
+  <td><img loading="lazy" src="story/components-radio--checked-disabled.png" alt="Storybook: radio checked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">checked-focus<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--checked-focus.png" alt="Design: radio checked-focus"></td>
+  <td><img loading="lazy" src="story/components-radio--checked-focus.png" alt="Storybook: radio checked-focus"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-default<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--unchecked-default.png" alt="Design: radio unchecked-default"></td>
+  <td><img loading="lazy" src="story/components-radio--unchecked-default.png" alt="Storybook: radio unchecked-default"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-disabled<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--unchecked-disabled.png" alt="Design: radio unchecked-disabled"></td>
+  <td><img loading="lazy" src="story/components-radio--unchecked-disabled.png" alt="Storybook: radio unchecked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-focus<span class="dim">364×72.5 → 364×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-radio--unchecked-focus.png" alt="Design: radio unchecked-focus"></td>
+  <td><img loading="lazy" src="story/components-radio--unchecked-focus.png" alt="Storybook: radio unchecked-focus"></td>
+</tr>
+</tbody></table></section>
+<section id="switch">
+<h2>Switch <span class="status match">match</span></h2>
+<p>Track, thumb inset, violet checked state, focus ring and disabled colors match.</p>
+<div class="notes"><h3>Fixed in this pass</h3><ul><li>Row height 72px with supporting text.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">checked-default<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--checked-default.png" alt="Design: switch checked-default"></td>
+  <td><img loading="lazy" src="story/components-switch--checked-default.png" alt="Storybook: switch checked-default"></td>
+</tr>
+<tr>
+  <th scope="row">checked-disabled<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--checked-disabled.png" alt="Design: switch checked-disabled"></td>
+  <td><img loading="lazy" src="story/components-switch--checked-disabled.png" alt="Storybook: switch checked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">checked-focus<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--checked-focus.png" alt="Design: switch checked-focus"></td>
+  <td><img loading="lazy" src="story/components-switch--checked-focus.png" alt="Storybook: switch checked-focus"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-default<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--unchecked-default.png" alt="Design: switch unchecked-default"></td>
+  <td><img loading="lazy" src="story/components-switch--unchecked-default.png" alt="Storybook: switch unchecked-default"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-disabled<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--unchecked-disabled.png" alt="Design: switch unchecked-disabled"></td>
+  <td><img loading="lazy" src="story/components-switch--unchecked-disabled.png" alt="Storybook: switch unchecked-disabled"></td>
+</tr>
+<tr>
+  <th scope="row">unchecked-focus<span class="dim">420×72.5 → 420×72 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-switch--unchecked-focus.png" alt="Design: switch unchecked-focus"></td>
+  <td><img loading="lazy" src="story/components-switch--unchecked-focus.png" alt="Storybook: switch unchecked-focus"></td>
+</tr>
+</tbody></table></section>
+<section id="ssobutton">
+<h2>SsoButton / SsoButtonGroup <span class="status close">close</span></h2>
+<p>50px circles, 16px gap, centred group match.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Google and Apple are now SVG (four-color G, Apple glyph); Amazon is still the master's PNG.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">amazon<span class="dim">50×50.5 → 50×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-ssobutton--amazon.png" alt="Design: ssobutton amazon"></td>
+  <td><img loading="lazy" src="story/components-ssobutton--amazon.png" alt="Storybook: ssobutton amazon"></td>
+</tr>
+<tr>
+  <th scope="row">apple<span class="dim">50×50.5 → 50×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-ssobutton--apple.png" alt="Design: ssobutton apple"></td>
+  <td><img loading="lazy" src="story/components-ssobutton--apple.png" alt="Storybook: ssobutton apple"></td>
+</tr>
+<tr>
+  <th scope="row">google<span class="dim">50×50.5 → 50×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-ssobutton--google.png" alt="Design: ssobutton google"></td>
+  <td><img loading="lazy" src="story/components-ssobutton--google.png" alt="Storybook: ssobutton google"></td>
+</tr>
+<tr>
+  <th scope="row">group<span class="dim">400×50 → 400×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-ssobutton--group.png" alt="Design: ssobutton group"></td>
+  <td><img loading="lazy" src="story/components-ssobutton--group.png" alt="Storybook: ssobutton group"></td>
+</tr>
+</tbody></table></section>
+<section id="loginmodal">
+<h2>LoginModal <span class="status close">close</span></h2>
+<p>Default and disabled match the master within a couple of pixels; copy is exact.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Focus keeps the SSO block and Hochschul-Login (master omits them).</li><li>SelectedProduct wraps its title at 352px (the master overlaps the pill).</li></ul><h3>Fixed in this pass</h3><ul><li>Disabled inputs dimmed to 40% and without the reveal toggle.</li><li>Checkbox row 44px min height, as on the master.</li><li>Master now composes Button instances (LOGIN uppercase, production ghost), and its email/password values are left-aligned.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">400×662 → 400×664 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-loginmodal--default.png" alt="Design: loginmodal default"></td>
+  <td><img loading="lazy" src="story/components-loginmodal--default.png" alt="Storybook: loginmodal default"></td>
+</tr>
+<tr>
+  <th scope="row">disabled<span class="dim">400×368 → 400×370 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-loginmodal--disabled.png" alt="Design: loginmodal disabled"></td>
+  <td><img loading="lazy" src="story/components-loginmodal--disabled.png" alt="Storybook: loginmodal disabled"></td>
+</tr>
+<tr>
+  <th scope="row">focus<span class="dim">400×480 → 400×664 px</span><p class="vnote">SSO block kept (your call).</p></th>
+  <td><img loading="lazy" src="../design-refs/components-loginmodal--focus.png" alt="Design: loginmodal focus"></td>
+  <td><img loading="lazy" src="story/components-loginmodal--focus.png" alt="Storybook: loginmodal focus"></td>
+</tr>
+<tr>
+  <th scope="row">selected-product<span class="dim">384×150 → 400×144 px</span><p class="vnote">Title wraps at 352px; see decisions.</p></th>
+  <td><img loading="lazy" src="../design-refs/components-loginmodal--selected-product.png" alt="Design: loginmodal selected-product"></td>
+  <td><img loading="lazy" src="story/components-loginmodal--selected-product.png" alt="Storybook: loginmodal selected-product"></td>
+</tr>
+</tbody></table></section>
+<section id="plancard">
+<h2>PlanCard <span class="status match">match</span></h2>
+<p>Layout, type, price and pill match. Placeholder film stills removed (empty slot).</p>
+<div class="notes"><h3>Differences</h3><ul><li>Yearly title 30px (master 32px).</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">monthly<span class="dim">384×509 → 384×509 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-plancard--monthly.png" alt="Design: plancard monthly"></td>
+  <td><img loading="lazy" src="story/components-plancard--monthly.png" alt="Storybook: plancard monthly"></td>
+</tr>
+<tr>
+  <th scope="row">plus<span class="dim">384×509.5 → 384×509 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-plancard--plus.png" alt="Design: plancard plus"></td>
+  <td><img loading="lazy" src="story/components-plancard--plus.png" alt="Storybook: plancard plus"></td>
+</tr>
+<tr>
+  <th scope="row">yearly<span class="dim">384×509.5 → 384×509 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-plancard--yearly.png" alt="Design: plancard yearly"></td>
+  <td><img loading="lazy" src="story/components-plancard--yearly.png" alt="Storybook: plancard yearly"></td>
+</tr>
+</tbody></table></section>
+<section id="productcard">
+<h2>ProductCard <span class="status match">match</span></h2>
+<p>Bold title line, pill, '&lt; Produkt ändern' as literal text, violet border and shadow match.</p>
+<div class="notes"><h3>Fixed in this pass</h3><ul><li>Gap between title and pill reduced to 8px so the monthly line no longer wraps at 400px.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">monthly<span class="dim">432×150.5 → 400×144 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-productcard--monthly.png" alt="Design: productcard monthly"></td>
+  <td><img loading="lazy" src="story/components-productcard--monthly.png" alt="Storybook: productcard monthly"></td>
+</tr>
+<tr>
+  <th scope="row">plus<span class="dim">432×150.5 → 400×114 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-productcard--plus.png" alt="Design: productcard plus"></td>
+  <td><img loading="lazy" src="story/components-productcard--plus.png" alt="Storybook: productcard plus"></td>
+</tr>
+<tr>
+  <th scope="row">yearly<span class="dim">432×150.5 → 400×114 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-productcard--yearly.png" alt="Design: productcard yearly"></td>
+  <td><img loading="lazy" src="story/components-productcard--yearly.png" alt="Storybook: productcard yearly"></td>
+</tr>
+</tbody></table></section>
+<section id="unioffer">
+<h2>UniOffer <span class="status match">match</span></h2>
+<p>Matches at 1200px, including 'UNI WÄHLEN'.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">1200×96.5 → 1200×98 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-unioffer--default.png" alt="Design: unioffer default"></td>
+  <td><img loading="lazy" src="story/components-unioffer--default.png" alt="Storybook: unioffer default"></td>
+</tr>
+</tbody></table></section>
+<section id="soonerlogo">
+<h2>SoonerLogo <span class="status match">match</span></h2>
+<p>SVG exported from the master.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">149×28.5 → 149×28 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-soonerlogo--default.png" alt="Design: soonerlogo default"></td>
+  <td><img loading="lazy" src="story/components-soonerlogo--default.png" alt="Storybook: soonerlogo default"></td>
+</tr>
+</tbody></table></section>
+<section id="navlink">
+<h2>NavLink <span class="status match">match</span></h2>
+<p>64px tab, nav.tab type, 2px violet bottom border when active.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">active<span class="dim">103.5×64.5 → 1568×64 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-navlink--active.png" alt="Design: navlink active"></td>
+  <td><img loading="lazy" src="story/components-navlink--active.png" alt="Storybook: navlink active"></td>
+</tr>
+<tr>
+  <th scope="row">inactive<span class="dim">103×64.5 → 1568×64 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-navlink--inactive.png" alt="Design: navlink inactive"></td>
+  <td><img loading="lazy" src="story/components-navlink--inactive.png" alt="Storybook: navlink inactive"></td>
+</tr>
+</tbody></table></section>
+<section id="languageselect">
+<h2>LanguageSelect <span class="status close">close</span></h2>
+<p>Hairline border-white/10 pill with nav.action label.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Lucide ChevronDown is narrower than the master's 16×8 chevron.</li></ul><h3>Fixed in this pass</h3><ul><li>Root is inline-block so it hugs its content like the master.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">english<span class="dim">59.5×28.5 → 61.5×30 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-languageselect--english.png" alt="Design: languageselect english"></td>
+  <td><img loading="lazy" src="story/components-languageselect--english.png" alt="Storybook: languageselect english"></td>
+</tr>
+</tbody></table></section>
+<section id="avatar">
+<h2>Avatar <span class="status match">match</span></h2>
+<p>32px violet circle, 12px semibold initials.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">32.5×32.5 → 32×32 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-avatar--default.png" alt="Design: avatar default"></td>
+  <td><img loading="lazy" src="story/components-avatar--default.png" alt="Storybook: avatar default"></td>
+</tr>
+</tbody></table></section>
+<section id="header">
+<h2>Header <span class="status match">match</span></h2>
+<p>All 14 variants match: logo, tabs, active underline, actions, mobile layout, blurred black/80 bar with hairline border.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Language chevron and menu icon are Lucide.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">desktop-logged-in-collections<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-collections.png" alt="Design: header desktop-logged-in-collections"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-collections.png" alt="Storybook: header desktop-logged-in-collections"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-in-discover<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-discover.png" alt="Design: header desktop-logged-in-discover"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-discover.png" alt="Storybook: header desktop-logged-in-discover"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-in-genres<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-genres.png" alt="Design: header desktop-logged-in-genres"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-genres.png" alt="Storybook: header desktop-logged-in-genres"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-in-magazine<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-magazine.png" alt="Design: header desktop-logged-in-magazine"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-magazine.png" alt="Storybook: header desktop-logged-in-magazine"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-in-none<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-none.png" alt="Design: header desktop-logged-in-none"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-none.png" alt="Storybook: header desktop-logged-in-none"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-in-watchlist<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-in-watchlist.png" alt="Design: header desktop-logged-in-watchlist"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-in-watchlist.png" alt="Storybook: header desktop-logged-in-watchlist"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-collections<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-collections.png" alt="Design: header desktop-logged-out-collections"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-collections.png" alt="Storybook: header desktop-logged-out-collections"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-discover<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-discover.png" alt="Design: header desktop-logged-out-discover"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-discover.png" alt="Storybook: header desktop-logged-out-discover"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-genres<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-genres.png" alt="Design: header desktop-logged-out-genres"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-genres.png" alt="Storybook: header desktop-logged-out-genres"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-magazine<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-magazine.png" alt="Design: header desktop-logged-out-magazine"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-magazine.png" alt="Storybook: header desktop-logged-out-magazine"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-none<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-none.png" alt="Design: header desktop-logged-out-none"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-none.png" alt="Storybook: header desktop-logged-out-none"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-logged-out-watchlist<span class="dim">1440×64.5 → 1440×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--desktop-logged-out-watchlist.png" alt="Design: header desktop-logged-out-watchlist"></td>
+  <td><img loading="lazy" src="story/components-header--desktop-logged-out-watchlist.png" alt="Storybook: header desktop-logged-out-watchlist"></td>
+</tr>
+<tr>
+  <th scope="row">mobile-logged-in<span class="dim">393×64.5 → 393×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--mobile-logged-in.png" alt="Design: header mobile-logged-in"></td>
+  <td><img loading="lazy" src="story/components-header--mobile-logged-in.png" alt="Storybook: header mobile-logged-in"></td>
+</tr>
+<tr>
+  <th scope="row">mobile-logged-out<span class="dim">393×64.5 → 393×65 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-header--mobile-logged-out.png" alt="Design: header mobile-logged-out"></td>
+  <td><img loading="lazy" src="story/components-header--mobile-logged-out.png" alt="Storybook: header mobile-logged-out"></td>
+</tr>
+</tbody></table></section>
+<section id="footer">
+<h2>Footer <span class="status match">match</span></h2>
+<p>Desktop and mobile in EN and DE match: columns, copy, funding logos, social icons, violet hairline, centred mobile legal line.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">desktop-de<span class="dim">1440×390.5 → 1440×391 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-footer--desktop-de.png" alt="Design: footer desktop-de"></td>
+  <td><img loading="lazy" src="story/components-footer--desktop-de.png" alt="Storybook: footer desktop-de"></td>
+</tr>
+<tr>
+  <th scope="row">desktop-en<span class="dim">1440×390.5 → 1440×391 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-footer--desktop-en.png" alt="Design: footer desktop-en"></td>
+  <td><img loading="lazy" src="story/components-footer--desktop-en.png" alt="Storybook: footer desktop-en"></td>
+</tr>
+<tr>
+  <th scope="row">mobile-de<span class="dim">393×840.5 → 393×841 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-footer--mobile-de.png" alt="Design: footer mobile-de"></td>
+  <td><img loading="lazy" src="story/components-footer--mobile-de.png" alt="Storybook: footer mobile-de"></td>
+</tr>
+<tr>
+  <th scope="row">mobile-en<span class="dim">393×820.5 → 393×821 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-footer--mobile-en.png" alt="Design: footer mobile-en"></td>
+  <td><img loading="lazy" src="story/components-footer--mobile-en.png" alt="Storybook: footer mobile-en"></td>
+</tr>
+</tbody></table></section>
+<section id="socialicons">
+<h2>SocialIcons <span class="status match">match</span></h2>
+<p>Footer platforms use the glyphs exported from the master in both colors.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Instagram/Spotify Original render without the white tile seen in the master export.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">facebook-negative<span class="dim">48×48 → 48×48 px</span><p class="vnote">Reference rendered from the exported SVG.</p></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--facebook-negative.png" alt="Design: socialicons facebook-negative"></td>
+  <td><img loading="lazy" src="story/components-socialicons--facebook-negative.png" alt="Storybook: socialicons facebook-negative"></td>
+</tr>
+<tr>
+  <th scope="row">facebook-original<span class="dim">48×48 → 48×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--facebook-original.png" alt="Design: socialicons facebook-original"></td>
+  <td><img loading="lazy" src="story/components-socialicons--facebook-original.png" alt="Storybook: socialicons facebook-original"></td>
+</tr>
+<tr>
+  <th scope="row">instagram-negative<span class="dim">48×48 → 48×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--instagram-negative.png" alt="Design: socialicons instagram-negative"></td>
+  <td><img loading="lazy" src="story/components-socialicons--instagram-negative.png" alt="Storybook: socialicons instagram-negative"></td>
+</tr>
+<tr>
+  <th scope="row">instagram-original<span class="dim">48×48 → 48×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--instagram-original.png" alt="Design: socialicons instagram-original"></td>
+  <td><img loading="lazy" src="story/components-socialicons--instagram-original.png" alt="Storybook: socialicons instagram-original"></td>
+</tr>
+<tr>
+  <th scope="row">spotify-negative<span class="dim">48×48 → 48×48 px</span><p class="vnote">Reference rendered from the exported SVG.</p></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--spotify-negative.png" alt="Design: socialicons spotify-negative"></td>
+  <td><img loading="lazy" src="story/components-socialicons--spotify-negative.png" alt="Storybook: socialicons spotify-negative"></td>
+</tr>
+<tr>
+  <th scope="row">spotify-original<span class="dim">48×48 → 48×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--spotify-original.png" alt="Design: socialicons spotify-original"></td>
+  <td><img loading="lazy" src="story/components-socialicons--spotify-original.png" alt="Storybook: socialicons spotify-original"></td>
+</tr>
+<tr>
+  <th scope="row">youtube-negative<span class="dim">48×48 → 48×48 px</span><p class="vnote">Reference rendered from the exported SVG (PNG export came back blank).</p></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--youtube-negative.png" alt="Design: socialicons youtube-negative"></td>
+  <td><img loading="lazy" src="story/components-socialicons--youtube-negative.png" alt="Storybook: socialicons youtube-negative"></td>
+</tr>
+<tr>
+  <th scope="row">youtube-original<span class="dim">48×48 → 48×48 px</span></th>
+  <td><img loading="lazy" src="../design-refs/components-socialicons--youtube-original.png" alt="Design: socialicons youtube-original"></td>
+  <td><img loading="lazy" src="story/components-socialicons--youtube-original.png" alt="Storybook: socialicons youtube-original"></td>
+</tr>
+</tbody></table></section>
+<section id="availabilityfilter">
+<h2>AvailabilityFilter <span class="status match">match</span></h2>
+<p>Glass segmented control on discover; value[all,subscription,rentals].</p>
+<div class="notes"><h3>Differences</h3><ul><li>New layout axis: menu = mobile dropdown (design 'Filter context menu'). The open panel is a separate Brilliant master, AvailabilityMenu. Design labels the third option 'Buy &amp; Rent'; code keeps 'Rentals' (de 'Mieten &amp; Kaufen').</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">all<span class="dim">286.5×48 → 290.5×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-availabilityfilter--all.png" alt="Design: availabilityfilter all"></td>
+  <td><img loading="lazy" src="story/discover-availabilityfilter--all.png" alt="Storybook: availabilityfilter all"></td>
+</tr>
+<tr>
+  <th scope="row">subscription<span class="dim">281×48 → 266.5×50 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-availabilityfilter--subscription.png" alt="Design: availabilityfilter subscription"></td>
+  <td><img loading="lazy" src="story/discover-availabilityfilter--subscription.png" alt="Storybook: availabilityfilter subscription"></td>
+</tr>
+</tbody></table></section>
+<section id="channeltagtile">
+<h2>ChannelTagTile <span class="status match">match</span></h2>
+<p>Landscape (film page "Featured in") and square (channels page tag collections) tiles.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">339×200 → 339×200 px</span></th>
+  <td><img loading="lazy" src="../design-refs/film-channeltagtile--default.png" alt="Design: channeltagtile default"></td>
+  <td><img loading="lazy" src="story/film-channeltagtile--default.png" alt="Storybook: channeltagtile default"></td>
+</tr>
+<tr>
+  <th scope="row">square<span class="dim">222×222 → 222×222 px</span></th>
+  <td><img loading="lazy" src="../design-refs/film-channeltagtile--square.png" alt="Design: channeltagtile square"></td>
+  <td><img loading="lazy" src="story/film-channeltagtile--square.png" alt="Storybook: channeltagtile square"></td>
+</tr>
+</tbody></table></section>
+<section id="channeltile">
+<h2>ChannelTile <span class="status close">close</span></h2>
+<p>Square channel/festival/curator tile. Real tiles use artwork; the name only renders without it.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Master name text renders in the fallback face in exports.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">person<span class="dim">222×222 → 222×222 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-channeltile--person.png" alt="Design: channeltile person"></td>
+  <td><img loading="lazy" src="story/feeds-channeltile--person.png" alt="Storybook: channeltile person"></td>
+</tr>
+</tbody></table></section>
+<section id="editorialslice">
+<h2>EditorialSlice <span class="status match">match</span></h2>
+<p>media[image,mask] × side[left,right], built on the EditorialContent master.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Was layout image-right/image-left/mask; mask-right existed in the design but not in code.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">image-left<span class="dim">1392×400 → 1392×400 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-editorialslice--image-left.png" alt="Design: editorialslice image-left"></td>
+  <td><img loading="lazy" src="story/discover-editorialslice--image-left.png" alt="Storybook: editorialslice image-left"></td>
+</tr>
+<tr>
+  <th scope="row">image-right<span class="dim">1392×400 → 1392×400 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-editorialslice--image-right.png" alt="Design: editorialslice image-right"></td>
+  <td><img loading="lazy" src="story/discover-editorialslice--image-right.png" alt="Storybook: editorialslice image-right"></td>
+</tr>
+<tr>
+  <th scope="row">mask-left<span class="dim">1392×389 → 1392×389 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-editorialslice--mask-left.png" alt="Design: editorialslice mask-left"></td>
+  <td><img loading="lazy" src="story/discover-editorialslice--mask-left.png" alt="Storybook: editorialslice mask-left"></td>
+</tr>
+<tr>
+  <th scope="row">mask-right<span class="dim">1392×389 → 1392×389 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-editorialslice--mask-right.png" alt="Design: editorialslice mask-right"></td>
+  <td><img loading="lazy" src="story/discover-editorialslice--mask-right.png" alt="Storybook: editorialslice mask-right"></td>
+</tr>
+</tbody></table></section>
+<section id="featuredfilmcard">
+<h2>FeaturedFilmCard <span class="status match">match</span></h2>
+<p>White feature card inside a feed (production filmcard--wide).</p>
+<div class="notes"><h3>Differences</h3><ul><li>Description clamps to 4 lines in code at 619px; the design shows 5.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">design<span class="dim">619×349 → 619×345 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-featuredfilmcard--design.png" alt="Design: featuredfilmcard design"></td>
+  <td><img loading="lazy" src="story/feeds-featuredfilmcard--design.png" alt="Storybook: featuredfilmcard design"></td>
+</tr>
+</tbody></table></section>
+<section id="filmbadge">
+<h2>FilmBadge <span class="status match">match</span></h2>
+<p>Black/50 pill over artwork; label (uppercase) and info (date) tones.</p>
+<div class="notes"></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">info<span class="dim">114×24 → 113×24 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-filmbadge--info.png" alt="Design: filmbadge info"></td>
+  <td><img loading="lazy" src="story/feeds-filmbadge--info.png" alt="Storybook: filmbadge info"></td>
+</tr>
+<tr>
+  <th scope="row">label<span class="dim">92.5×24 → 92.5×24 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-filmbadge--label.png" alt="Design: filmbadge label"></td>
+  <td><img loading="lazy" src="story/feeds-filmbadge--label.png" alt="Storybook: filmbadge label"></td>
+</tr>
+</tbody></table></section>
+<section id="filmcard">
+<h2>FilmCard <span class="status match">match</span></h2>
+<p>3:4 and 16:9 cards with badge, violet rent basket and an optional "Ab …" date.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Master date badge is hidden by default; the story shows it only in Coming soon.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">tall<span class="dim">222×296 → 222×296 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-filmcard--tall.png" alt="Design: filmcard tall"></td>
+  <td><img loading="lazy" src="story/feeds-filmcard--tall.png" alt="Storybook: filmcard tall"></td>
+</tr>
+<tr>
+  <th scope="row">wide<span class="dim">338×190 → 339×190.5 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-filmcard--wide.png" alt="Design: filmcard wide"></td>
+  <td><img loading="lazy" src="story/feeds-filmcard--wide.png" alt="Storybook: filmcard wide"></td>
+</tr>
+</tbody></table></section>
+<section id="filmdetails">
+<h2>FilmDetails <span class="status match">match</span></h2>
+<p>Film info grid: poster, tagline, synopsis, festivals, two-column facts.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Fact and section labels are design English; production German labels exist only for some (Regie, Genre, Jahr, Land).</li><li>Brilliant master has a viewport axis; the mobile variant mirrors the code below 672px (poster, text, facts 2-up). The 393 design screen drops the poster and lists facts in one column; kept code layout.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">696×191 → 1392×440 px</span></th>
+  <td><img loading="lazy" src="../design-refs/film-filmdetails--default.png" alt="Design: filmdetails default"></td>
+  <td><img loading="lazy" src="story/film-filmdetails--default.png" alt="Storybook: filmdetails default"></td>
+</tr>
+</tbody></table></section>
+<section id="filmhero">
+<h2>FilmHero <span class="status match">match</span></h2>
+<p>Film page hero built from Button instances (cta-primary/white/ghost lg, cta-round).</p>
+<div class="notes"><h3>Differences</h3><ul><li>Button master gained a hidden lg icon and a cta-white lg variant for parity with code.</li><li>Logo artwork replaces the title when provided (code prop logo, master "Logo" layer).</li><li>Brilliant master has a viewport axis; the mobile variant mirrors the code below 768px (560px tall, 36px title, full-width subscribe/rent, trailer + round buttons in one row). The 393 design centers the round buttons on their own row under a full-width trailer.</li><li>The second 1440 film screen shows the plain title at 72px; the component uses the 48px display-section size.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">720×408 → 1440×810 px</span></th>
+  <td><img loading="lazy" src="../design-refs/film-filmhero--default.png" alt="Design: filmhero default"></td>
+  <td><img loading="lazy" src="story/film-filmhero--default.png" alt="Storybook: filmhero default"></td>
+</tr>
+</tbody></table></section>
+<section id="genretile">
+<h2>GenreTile <span class="status match">match</span></h2>
+<p>Genre still under a 50% hard-light duotone that also tints the title; six tints as color.genre.* tokens.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Design typo "Triller" corrected to "Thriller".</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">violet<span class="dim">336×189 → 336×189 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-genretile--violet.png" alt="Design: genretile violet"></td>
+  <td><img loading="lazy" src="story/feeds-genretile--violet.png" alt="Storybook: genretile violet"></td>
+</tr>
+</tbody></table></section>
+<section id="masktile">
+<h2>MaskTile <span class="status close">close</span></h2>
+<p>Collection tile clipped to the binocular shape.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Code tints artwork with violet multiply; without artwork the master shows purple.deep.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">455×246 → 455×246.5 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-masktile--default.png" alt="Design: masktile default"></td>
+  <td><img loading="lazy" src="story/feeds-masktile--default.png" alt="Storybook: masktile default"></td>
+</tr>
+<tr>
+  <th scope="row">tinted<span class="dim">455×246 → 455×246.5 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-masktile--tinted.png" alt="Design: masktile tinted"></td>
+  <td><img loading="lazy" src="story/feeds-masktile--tinted.png" alt="Storybook: masktile tinted"></td>
+</tr>
+</tbody></table></section>
+<section id="promohero">
+<h2>PromoHero <span class="status close">close</span></h2>
+<p>Discover promo carousel slide.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Design adds next/unmute buttons in the action row; code has side arrows + dots only (no autoplay audio in production).</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">desktop<span class="dim">696×392 → 1392×783 px</span></th>
+  <td><img loading="lazy" src="../design-refs/discover-promohero--desktop.png" alt="Design: promohero desktop"></td>
+  <td><img loading="lazy" src="story/discover-promohero--desktop.png" alt="Storybook: promohero desktop"></td>
+</tr>
+</tbody></table></section>
+<section id="quotecard">
+<h2>QuoteCard <span class="status match">match</span></h2>
+<p>Review/award quote card on the film page.</p>
+<div class="notes"><h3>Differences</h3><ul><li>Logo gap 10 → 12 (spacing.md) in both code and design.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">default<span class="dim">341×198.5 → 341×198 px</span></th>
+  <td><img loading="lazy" src="../design-refs/film-quotecard--default.png" alt="Design: quotecard default"></td>
+  <td><img loading="lazy" src="story/film-quotecard--default.png" alt="Storybook: quotecard default"></td>
+</tr>
+</tbody></table></section>
+<section id="sectionheader">
+<h2>SectionHeader <span class="status match">match</span></h2>
+<p>Feed row title; linked variant adds the chevron (code also reveals "mehr" on hover, production behaviour).</p>
+<div class="notes"><h3>Differences</h3><ul><li>Below 640px of container width the title steps down to 20/26 (production rowLabel); the master shows desktop only.</li></ul></div>
+<table><thead><tr><th>Variant</th><th>Design (Brilliant)</th><th>Storybook</th></tr></thead><tbody>
+<tr>
+  <th scope="row">linked<span class="dim">180×32 → 1568×26 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-sectionheader--linked.png" alt="Design: sectionheader linked"></td>
+  <td><img loading="lazy" src="story/feeds-sectionheader--linked.png" alt="Storybook: sectionheader linked"></td>
+</tr>
+<tr>
+  <th scope="row">plain<span class="dim">148.5×32 → 1568×26 px</span></th>
+  <td><img loading="lazy" src="../design-refs/feeds-sectionheader--plain.png" alt="Design: sectionheader plain"></td>
+  <td><img loading="lazy" src="story/feeds-sectionheader--plain.png" alt="Storybook: sectionheader plain"></td>
+</tr>
+</tbody></table></section>
+</main></body></html>

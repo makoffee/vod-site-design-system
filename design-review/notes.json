@@ -1,0 +1,336 @@
+{
+  "order": [
+    "button",
+    "textinput",
+    "checkbox",
+    "radio",
+    "switch",
+    "ssobutton",
+    "loginmodal",
+    "plancard",
+    "productcard",
+    "unioffer",
+    "soonerlogo",
+    "navlink",
+    "languageselect",
+    "avatar",
+    "header",
+    "footer",
+    "socialicons"
+  ],
+  "decisions": [
+    "Funding logos (Creative Europe MEDIA, Fédération Wallonie-Bruxelles, VAF) and the Amazon SSO mark are still PNGs: no vector source exists in Brilliant or simple-icons. Supply SVGs or approve keeping the rasters.",
+    "Footer copyright is white/40 on black (3.65:1), below WCAG AA 4.5:1. Kept as designed; raise to text.muted (white/60) or accept.",
+    "LoginModal.SelectedProduct is 352px wide; 'MONATSABO – 7,99 €/Monat' plus the pill doesn't fit (the master overlaps the pill onto the price, code wraps the line). Widen the slot, shorten the copy, or drop the pill at this size.",
+    "LanguageSelect has no open/menu state in the design; the dropdown in code is an implementation choice.",
+    "Social Icons 'Original': Instagram and Spotify render on a white tile in the master, YouTube and Facebook do not. Code renders all four without a tile.",
+    "Responsive strategy: one responsive component per concept in code (container queries); Brilliant keeps breakpoint variants only where the structure changes (Header, Footer viewport axis). Header/Footer no longer take a viewport prop.",
+    "PlanCard stories use a placeholder still (The Seventh Seal, public/images/placeholder/seventh-seal.webp) for the image slot. Story-only; design screens keep their own artwork.",
+    "Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts."
+  ],
+  "gaps": [
+    "Synced 2026-10-20 (production = truth): Button master and code follow .sooner-cta-* — primary 600/uppercase/0.03em, white 600 with white/85 hover and 60% disabled, ghost 500 with blur 10, lg 16/32 padding. The generated focus variants were removed from the master, board and code; keyboard focus is production's 2px white outline (offset 2).",
+    "Synced 2026-10-20: LoginModal and PlanCard masters now compose Button instances instead of hand-built button frames; the generated 'Sooner / Component library' duplicates and the detached Signup production frames moved to canvas '8 _archive'.",
+    "TextInput error is a white border in the master; code uses status.error (red-500) for border and message (your call).",
+    "TextInput default border: email is full white, password white/30 in the master; code uses white/30 for both (your call).",
+    "TextInput: the password type only has a 'default' variant on the master; other password states reuse the email styling.",
+    "LoginModal 'focus' omits the SSO block and Hochschul-Login in the master; code keeps them (only 'disabled' drops them).",
+    "PlanCard: the yearly master overrides the title to 32px; code keeps heading.plan (30px).",
+    "PlanCard film stills are placeholders and were removed; the 384×199 image slot takes an optional imageSrc.",
+    "Unbound values in masters: ProductCard shadow (0 4 8 / 25%), yearly PlanCard CTA shadow (0 3 8 / 25%), cta-white hover shadow (0 4 8 / 10%), TextInput supporting text #9CA3AF (Tailwind v3 gray-400; code uses v4 gray-400 #99A1AF), Button ghost blur 5 (DS says CTAs blur 10).",
+    "Copy inconsistency: the cta-light Button master says 'UNI wählen', the UniOffer master 'UNI WÄHLEN'. Code renders each as written.",
+    "Hover states on NavLink, LanguageSelect, footer links and SSO buttons are not drawn in the design; kept subtle in code (your call).",
+    "Icons: UI glyphs are Lucide (Search, Menu, ChevronDown, Eye, X, Check, Play); the design's custom chevron (16×8) and pupil-less eye differ slightly."
+  ],
+  "components": {
+    "button": {
+      "title": "Button",
+      "status": "match",
+      "summary": "19 master variants (focus removed). Values follow production .sooner-cta-*; Brilliant master synced to match.",
+      "differences": [
+        "cta-round uses Lucide Play at 32px to match the 21×24 triangle.",
+        "Ghost tracking 0.025em is in code only (no letter-spacing token in default.ds)."
+      ],
+      "fixed": [
+        "Focus variants removed in Brilliant and code; focus-visible = 2px white outline.",
+        "Primary uppercase / white semibold / ghost medium, white hover white/85, ghost blur 10, lg padding 16/32 — in both."
+      ]
+    },
+    "textinput": {
+      "title": "TextInput",
+      "status": "close",
+      "summary": "Label, 56px control, glass fill, radius 8, copy and supporting text match.",
+      "differences": [
+        "Default border white/30 for both types (email master is full white).",
+        "Error state is red-500 (master is white).",
+        "Eye icon is Lucide Eye (has a pupil)."
+      ],
+      "fixed": [
+        "Reveal toggle hidden when disabled, as on the master."
+      ],
+      "variants": {
+        "email-error": "Red border and message (your call).",
+        "email-default": "Border white/30 instead of white (your call)."
+      }
+    },
+    "checkbox": {
+      "title": "Checkbox",
+      "status": "match",
+      "summary": "Box, gray-500 border kept when checked, violet fill, focus ring and disabled colors match.",
+      "differences": [
+        "Check glyph is Lucide Check rather than the master's 14px path."
+      ],
+      "fixed": [
+        "Row height 72px with supporting text (12px padding), 44px min without.",
+        "Check glyph sized up to match."
+      ]
+    },
+    "radio": {
+      "title": "Radio",
+      "status": "match",
+      "summary": "Matches, including the exact copy '7,99€ pro Monat · jederzeit kündbar.'",
+      "fixed": [
+        "Row height 72px with supporting text."
+      ]
+    },
+    "switch": {
+      "title": "Switch",
+      "status": "match",
+      "summary": "Track, thumb inset, violet checked state, focus ring and disabled colors match.",
+      "fixed": [
+        "Row height 72px with supporting text."
+      ]
+    },
+    "ssobutton": {
+      "title": "SsoButton / SsoButtonGroup",
+      "status": "close",
+      "summary": "50px circles, 16px gap, centred group match.",
+      "differences": [
+        "Google and Apple are now SVG (four-color G, Apple glyph); Amazon is still the master's PNG."
+      ]
+    },
+    "loginmodal": {
+      "title": "LoginModal",
+      "status": "close",
+      "summary": "Default and disabled match the master within a couple of pixels; copy is exact.",
+      "differences": [
+        "Focus keeps the SSO block and Hochschul-Login (master omits them).",
+        "SelectedProduct wraps its title at 352px (the master overlaps the pill)."
+      ],
+      "fixed": [
+        "Disabled inputs dimmed to 40% and without the reveal toggle.",
+        "Checkbox row 44px min height, as on the master.",
+        "Master now composes Button instances (LOGIN uppercase, production ghost), and its email/password values are left-aligned."
+      ],
+      "variants": {
+        "focus": "SSO block kept (your call).",
+        "selected-product": "Title wraps at 352px; see decisions."
+      }
+    },
+    "plancard": {
+      "title": "PlanCard",
+      "status": "match",
+      "summary": "Layout, type, price and pill match. Placeholder film stills removed (empty slot).",
+      "differences": [
+        "Yearly title 30px (master 32px)."
+      ]
+    },
+    "productcard": {
+      "title": "ProductCard",
+      "status": "match",
+      "summary": "Bold title line, pill, '< Produkt ändern' as literal text, violet border and shadow match.",
+      "fixed": [
+        "Gap between title and pill reduced to 8px so the monthly line no longer wraps at 400px."
+      ]
+    },
+    "unioffer": {
+      "title": "UniOffer",
+      "status": "match",
+      "summary": "Matches at 1200px, including 'UNI WÄHLEN'."
+    },
+    "soonerlogo": {
+      "title": "SoonerLogo",
+      "status": "match",
+      "summary": "SVG exported from the master."
+    },
+    "navlink": {
+      "title": "NavLink",
+      "status": "match",
+      "summary": "64px tab, nav.tab type, 2px violet bottom border when active."
+    },
+    "languageselect": {
+      "title": "LanguageSelect",
+      "status": "close",
+      "summary": "Hairline border-white/10 pill with nav.action label.",
+      "differences": [
+        "Lucide ChevronDown is narrower than the master's 16×8 chevron."
+      ],
+      "fixed": [
+        "Root is inline-block so it hugs its content like the master."
+      ]
+    },
+    "avatar": {
+      "title": "Avatar",
+      "status": "match",
+      "summary": "32px violet circle, 12px semibold initials."
+    },
+    "header": {
+      "title": "Header",
+      "status": "match",
+      "summary": "All 14 variants match: logo, tabs, active underline, actions, mobile layout, blurred black/80 bar with hairline border.",
+      "differences": [
+        "Language chevron and menu icon are Lucide."
+      ]
+    },
+    "footer": {
+      "title": "Footer",
+      "status": "match",
+      "summary": "Desktop and mobile in EN and DE match: columns, copy, funding logos, social icons, violet hairline, centred mobile legal line."
+    },
+    "socialicons": {
+      "title": "SocialIcons",
+      "status": "match",
+      "summary": "Footer platforms use the glyphs exported from the master in both colors.",
+      "differences": [
+        "Instagram/Spotify Original render without the white tile seen in the master export."
+      ],
+      "variants": {
+        "youtube-negative": "Reference rendered from the exported SVG (PNG export came back blank).",
+        "spotify-negative": "Reference rendered from the exported SVG.",
+        "facebook-negative": "Reference rendered from the exported SVG."
+      }
+    },
+    "filmbadge": {
+      "title": "FilmBadge",
+      "status": "match",
+      "summary": "Black/50 pill over artwork; label (uppercase) and info (date) tones.",
+      "differences": []
+    },
+    "sectionheader": {
+      "title": "SectionHeader",
+      "status": "match",
+      "summary": "Feed row title; linked variant adds the chevron (code also reveals \"mehr\" on hover, production behaviour).",
+      "differences": [
+        "Below 640px of container width the title steps down to 20/26 (production rowLabel); the master shows desktop only."
+      ]
+    },
+    "filmcard": {
+      "title": "FilmCard",
+      "status": "match",
+      "summary": "3:4 and 16:9 cards with badge, violet rent basket and an optional \"Ab …\" date.",
+      "differences": [
+        "Master date badge is hidden by default; the story shows it only in Coming soon."
+      ]
+    },
+    "channeltile": {
+      "title": "ChannelTile",
+      "status": "close",
+      "summary": "Square channel/festival/curator tile. Real tiles use artwork; the name only renders without it.",
+      "differences": [
+        "Master name text renders in the fallback face in exports."
+      ]
+    },
+    "channeltagtile": {
+      "title": "ChannelTagTile",
+      "status": "match",
+      "summary": "Landscape (film page \"Featured in\") and square (channels page tag collections) tiles.",
+      "differences": []
+    },
+    "genretile": {
+      "title": "GenreTile",
+      "status": "match",
+      "summary": "Genre still under a 50% hard-light duotone that also tints the title; six tints as color.genre.* tokens.",
+      "differences": [
+        "Design typo \"Triller\" corrected to \"Thriller\"."
+      ]
+    },
+    "quotecard": {
+      "title": "QuoteCard",
+      "status": "match",
+      "summary": "Review/award quote card on the film page.",
+      "differences": [
+        "Logo gap 10 → 12 (spacing.md) in both code and design."
+      ]
+    },
+    "masktile": {
+      "title": "MaskTile",
+      "status": "close",
+      "summary": "Collection tile clipped to the binocular shape.",
+      "differences": [
+        "Code tints artwork with violet multiply; without artwork the master shows purple.deep."
+      ]
+    },
+    "featuredfilmcard": {
+      "title": "FeaturedFilmCard",
+      "status": "match",
+      "summary": "White feature card inside a feed (production filmcard--wide).",
+      "differences": [
+        "Description clamps to 4 lines in code at 619px; the design shows 5."
+      ]
+    },
+    "availabilityfilter": {
+      "title": "AvailabilityFilter",
+      "status": "match",
+      "summary": "Glass segmented control on discover; value[all,subscription,rentals].",
+      "differences": [
+        "New layout axis: menu = mobile dropdown (design 'Filter context menu'). The open panel is a separate Brilliant master, AvailabilityMenu. Design labels the third option 'Buy & Rent'; code keeps 'Rentals' (de 'Mieten & Kaufen')."
+      ]
+    },
+    "editorialslice": {
+      "title": "EditorialSlice",
+      "status": "match",
+      "summary": "media[image,mask] × side[left,right], built on the EditorialContent master.",
+      "differences": [
+        "Was layout image-right/image-left/mask; mask-right existed in the design but not in code."
+      ]
+    },
+    "promohero": {
+      "title": "PromoHero",
+      "status": "close",
+      "summary": "Discover promo carousel slide.",
+      "differences": [
+        "Design adds next/unmute buttons in the action row; code has side arrows + dots only (no autoplay audio in production)."
+      ]
+    },
+    "filmdetails": {
+      "title": "FilmDetails",
+      "status": "match",
+      "summary": "Film info grid: poster, tagline, synopsis, festivals, two-column facts.",
+      "differences": [
+        "Fact and section labels are design English; production German labels exist only for some (Regie, Genre, Jahr, Land).",
+        "Brilliant master has a viewport axis; the mobile variant mirrors the code below 672px (poster, text, facts 2-up). The 393 design screen drops the poster and lists facts in one column; kept code layout."
+      ]
+    },
+    "filmhero": {
+      "title": "FilmHero",
+      "status": "match",
+      "summary": "Film page hero built from Button instances (cta-primary/white/ghost lg, cta-round).",
+      "differences": [
+        "Button master gained a hidden lg icon and a cta-white lg variant for parity with code.",
+        "Logo artwork replaces the title when provided (code prop logo, master \"Logo\" layer).",
+        "Brilliant master has a viewport axis; the mobile variant mirrors the code below 768px (560px tall, 36px title, full-width subscribe/rent, trailer + round buttons in one row). The 393 design centers the round buttons on their own row under a full-width trailer.",
+        "The second 1440 film screen shows the plain title at 72px; the component uses the 48px display-section size."
+      ]
+    },
+    "collectionheader": {
+      "title": "CollectionHeader",
+      "status": "match",
+      "summary": "Collection page banner: artwork, title, three-line description that expands in place, availability filter, grid/list switch.",
+      "differences": [
+        "Brilliant master has a viewport axis; mobile uses the AvailabilityFilter menu layout and centres the expand chevron.",
+        "The expanded state is a scrollable 220px block in code; Brilliant screens show it as a 6-line (desktop) / 9-line (mobile) clamp.",
+        "'Show more', 'Show less', 'Grid view', 'List view' are screen-reader names with no production source.",
+        "Grid view row gap is 48px as on the design (gap-y-12 from 896px); smaller containers use 12px."
+      ]
+    },
+    "filmlistitem": {
+      "title": "FilmListItem",
+      "status": "match",
+      "summary": "Collection list row: 3:4 poster, title, director, meta, clamped synopsis, subscribe / rent / watchlist.",
+      "differences": [
+        "Design content background is #1E1E1E at 60% over black; promoted to color.surface.card (#121212).",
+        "Below 672px of container width the actions are 32px icon-only circles and the director line is hidden, as on the 393 screens."
+      ]
+    }
+  }
+}

@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
+/*
+ * Sooner design system tokens.
+ * Source of truth: Styles/default.ds and DESIGN-SYSTEM.md in the Brilliant workspace.
+ * Names follow production (sooner.de): the Tailwind palette for text, surfaces and status
+ * (text-white/60, bg-white/10, border-white/10, red-500), the sooner-* brand vars, and the
+ * "Production drift" fixes (rounded-sooner instead of rounded-[10px], text-display-* sizes).
+ */
+
+/* Production CSS custom properties */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sooner-primary: #ae00ff;
+  --sooner-primary-light: #c94dff;
+  --sooner-primary-dark: #8a00cc;
+  --sooner-bg: #000000;
+  --sooner-border: rgb(255 255 255 / 0.1);
+  --sooner-radius: 10px;
 }
 
+/*
+ * Fonts are inline so utilities resolve var(--font-dm-sans) on the element itself: next/font sets those
+ * variables on <html> in the app but on a wrapper <div> in Storybook, below :root.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair-display), "Playfair Display", ui-serif, Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Brand: bg-sooner-primary, hover:bg-sooner-primary-dark, text-sooner-primary-light */
+  --color-sooner-primary: #ae00ff;
+  --color-sooner-primary-light: #c94dff;
+  --color-sooner-primary-dark: #8a00cc;
+
+  /* Tokens production only has as arbitrary hex (drift: promote to theme) */
+  --color-surface-uni: #1a0a2e; /* color.surface.uni, was bg-[#1a0a2e] */
+  --color-border-decorative: #312343; /* color.border.decorative, was ring-[#312343] */
+  --color-surface-card: #121212; /* color.surface.card: collection list rows, filter menu */
+  /* Genre tile duotones (Genres screen), laid 50% hard-light over the still: color.genre.* */
+  --color-genre-violet: #ae00ff;
+  --color-genre-yellow: #f4cc1a;
+  --color-genre-magenta: #eb2c92;
+  --color-genre-pink: #ee66a6;
+  --color-genre-red: #db4226;
+  --color-genre-green: #5fbd6a;
+
+  /* Radius: Tailwind v4 defaults (xs 2 · sm 4 · md 6 · lg 8 · xl 12 · 2xl 16 · 3xl 24) + sooner 10 */
+  --radius-sooner: 10px;
+
+  /* Blur: 10 for CTAs, 20 for the header and glass, 40 for inputs */
+  --blur-cta: 10px;
+  --blur-glass: 20px;
+  --blur-input: 40px;
+
+  /* Motion: slide cross-fade (production CinePromoHeader fadeIn, .6s) */
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
+
+  /* Effects */
+  --shadow-overlay: 0 12px 40px rgb(0 0 0 / 0.55);
+  --text-shadow-on-image: 0 1px 2px rgb(0 0 0 / 0.6);
+
+  /* Typography roles (pair with font-display / uppercase where the role needs it) */
+  --text-display-hero: 58px;
+  --text-display-hero--line-height: 72px;
+  --text-display-hero--letter-spacing: -1.5px;
+  --text-display-hero--font-weight: 800;
+
+  --text-display-section: 48px;
+  --text-display-section--line-height: 56px;
+  --text-display-section--letter-spacing: -1.2px;
+  --text-display-section--font-weight: 700;
+
+  --text-display-section-mobile: 32px;
+  --text-display-section-mobile--line-height: 36px;
+  --text-display-section-mobile--letter-spacing: -1.2px;
+  --text-display-section-mobile--font-weight: 700;
+
+  --text-heading-section: 24px;
+  --text-heading-section--line-height: 32px;
+  --text-heading-section--letter-spacing: 0.6px;
+  --text-heading-section--font-weight: 700;
+
+  --text-heading-plan: 30px;
+  --text-heading-plan--line-height: 36px;
+  --text-heading-plan--letter-spacing: -0.75px;
+  --text-heading-plan--font-weight: 900;
+
+  --text-button-cta: 16px;
+  --text-button-cta--line-height: 24px;
+  --text-button-cta--letter-spacing: 0.03em;
+  --text-button-cta--font-weight: 600;
+
+  --text-button-sm: 14px;
+  --text-button-sm--line-height: 20px;
+  --text-button-sm--letter-spacing: 0.05em;
+  --text-button-sm--font-weight: 500;
+
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.6px;
+  --text-label--font-weight: 600;
+
+  --text-nav-tab: 14px;
+  --text-nav-tab--line-height: 20px;
+  --text-nav-tab--letter-spacing: 0.35px;
+  --text-nav-tab--font-weight: 500;
+
+  --text-nav-action: 14px;
+  --text-nav-action--line-height: 20px;
+  --text-nav-action--letter-spacing: 0.7px;
+  --text-nav-action--font-weight: 500;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--sooner-bg);
+  color: var(--color-white);
+  font-family: --theme(--font-sans);
 }

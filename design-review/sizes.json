@@ -1,0 +1,1122 @@
+{
+  "components-avatar--default": {
+    "design": {
+      "w": 65,
+      "h": 65
+    },
+    "story": {
+      "w": 64,
+      "h": 64
+    }
+  },
+  "components-button--ghost-lg-default": {
+    "design": {
+      "w": 802,
+      "h": 113
+    },
+    "story": {
+      "w": 802,
+      "h": 112
+    }
+  },
+  "components-button--ghost-md-default": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--ghost-md-disabled": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--ghost-md-hover": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--light-sm-default": {
+    "design": {
+      "w": 197,
+      "h": 73
+    },
+    "story": {
+      "w": 197,
+      "h": 72
+    }
+  },
+  "components-button--light-sm-hover": {
+    "design": {
+      "w": 197,
+      "h": 73
+    },
+    "story": {
+      "w": 197,
+      "h": 72
+    }
+  },
+  "components-button--primary-lg-default": {
+    "design": {
+      "w": 802,
+      "h": 113
+    },
+    "story": {
+      "w": 802,
+      "h": 112
+    }
+  },
+  "components-button--primary-md-default": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--primary-md-disabled": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--primary-md-hover": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--primary-sm-default": {
+    "design": {
+      "w": 181,
+      "h": 73
+    },
+    "story": {
+      "w": 181,
+      "h": 72
+    }
+  },
+  "components-button--primary-sm-hover": {
+    "design": {
+      "w": 181,
+      "h": 73
+    },
+    "story": {
+      "w": 181,
+      "h": 72
+    }
+  },
+  "components-button--round-lg-default": {
+    "design": {
+      "w": 112,
+      "h": 113
+    },
+    "story": {
+      "w": 112,
+      "h": 112
+    }
+  },
+  "components-button--round-lg-hover": {
+    "design": {
+      "w": 112,
+      "h": 113
+    },
+    "story": {
+      "w": 112,
+      "h": 112
+    }
+  },
+  "components-button--text-sm-default": {
+    "design": {
+      "w": 154,
+      "h": 73
+    },
+    "story": {
+      "w": 154,
+      "h": 72
+    }
+  },
+  "components-button--text-sm-hover": {
+    "design": {
+      "w": 154,
+      "h": 73
+    },
+    "story": {
+      "w": 154,
+      "h": 72
+    }
+  },
+  "components-button--white-md-default": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--white-md-disabled": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-button--white-md-hover": {
+    "design": {
+      "w": 802,
+      "h": 97
+    },
+    "story": {
+      "w": 802,
+      "h": 96
+    }
+  },
+  "components-checkbox--checked-default": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-checkbox--checked-disabled": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-checkbox--checked-focus": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-checkbox--unchecked-default": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-checkbox--unchecked-disabled": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-checkbox--unchecked-focus": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-footer--desktop-de": {
+    "design": {
+      "w": 2880,
+      "h": 781
+    },
+    "story": {
+      "w": 2880,
+      "h": 782
+    }
+  },
+  "components-footer--desktop-en": {
+    "design": {
+      "w": 2880,
+      "h": 781
+    },
+    "story": {
+      "w": 2880,
+      "h": 782
+    }
+  },
+  "components-footer--mobile-de": {
+    "design": {
+      "w": 786,
+      "h": 1681
+    },
+    "story": {
+      "w": 786,
+      "h": 1682
+    }
+  },
+  "components-footer--mobile-en": {
+    "design": {
+      "w": 786,
+      "h": 1641
+    },
+    "story": {
+      "w": 786,
+      "h": 1642
+    }
+  },
+  "components-header--desktop-logged-in-collections": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-in-discover": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-in-genres": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-in-magazine": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-in-none": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-in-watchlist": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-collections": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-discover": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-genres": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-magazine": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-none": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--desktop-logged-out-watchlist": {
+    "design": {
+      "w": 2880,
+      "h": 129
+    },
+    "story": {
+      "w": 2880,
+      "h": 130
+    }
+  },
+  "components-header--mobile-logged-in": {
+    "design": {
+      "w": 786,
+      "h": 129
+    },
+    "story": {
+      "w": 786,
+      "h": 130
+    }
+  },
+  "components-header--mobile-logged-out": {
+    "design": {
+      "w": 786,
+      "h": 129
+    },
+    "story": {
+      "w": 786,
+      "h": 130
+    }
+  },
+  "components-languageselect--english": {
+    "design": {
+      "w": 119,
+      "h": 57
+    },
+    "story": {
+      "w": 123,
+      "h": 60
+    }
+  },
+  "components-loginmodal--default": {
+    "design": {
+      "w": 800,
+      "h": 1324
+    },
+    "story": {
+      "w": 800,
+      "h": 1328
+    }
+  },
+  "components-loginmodal--disabled": {
+    "design": {
+      "w": 800,
+      "h": 736
+    },
+    "story": {
+      "w": 800,
+      "h": 740
+    }
+  },
+  "components-loginmodal--focus": {
+    "design": {
+      "w": 800,
+      "h": 960
+    },
+    "story": {
+      "w": 800,
+      "h": 1328
+    }
+  },
+  "components-loginmodal--selected-product": {
+    "design": {
+      "w": 768,
+      "h": 300
+    },
+    "story": {
+      "w": 800,
+      "h": 288
+    }
+  },
+  "components-navlink--active": {
+    "design": {
+      "w": 207,
+      "h": 129
+    },
+    "story": {
+      "w": 3136,
+      "h": 128
+    }
+  },
+  "components-navlink--inactive": {
+    "design": {
+      "w": 206,
+      "h": 129
+    },
+    "story": {
+      "w": 3136,
+      "h": 128
+    }
+  },
+  "components-plancard--monthly": {
+    "design": {
+      "w": 768,
+      "h": 1018
+    },
+    "story": {
+      "w": 768,
+      "h": 1018
+    }
+  },
+  "components-plancard--plus": {
+    "design": {
+      "w": 768,
+      "h": 1019
+    },
+    "story": {
+      "w": 768,
+      "h": 1018
+    }
+  },
+  "components-plancard--yearly": {
+    "design": {
+      "w": 768,
+      "h": 1019
+    },
+    "story": {
+      "w": 768,
+      "h": 1018
+    }
+  },
+  "components-productcard--monthly": {
+    "design": {
+      "w": 864,
+      "h": 301
+    },
+    "story": {
+      "w": 800,
+      "h": 288
+    }
+  },
+  "components-productcard--plus": {
+    "design": {
+      "w": 864,
+      "h": 301
+    },
+    "story": {
+      "w": 800,
+      "h": 228
+    }
+  },
+  "components-productcard--yearly": {
+    "design": {
+      "w": 864,
+      "h": 301
+    },
+    "story": {
+      "w": 800,
+      "h": 228
+    }
+  },
+  "components-radio--checked-default": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-radio--checked-disabled": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-radio--checked-focus": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-radio--unchecked-default": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-radio--unchecked-disabled": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-radio--unchecked-focus": {
+    "design": {
+      "w": 728,
+      "h": 145
+    },
+    "story": {
+      "w": 728,
+      "h": 144
+    }
+  },
+  "components-socialicons--facebook-negative": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--facebook-original": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--instagram-negative": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--instagram-original": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--spotify-negative": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--spotify-original": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--youtube-negative": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-socialicons--youtube-original": {
+    "design": {
+      "w": 96,
+      "h": 96
+    },
+    "story": {
+      "w": 96,
+      "h": 96
+    }
+  },
+  "components-soonerlogo--default": {
+    "design": {
+      "w": 298,
+      "h": 57
+    },
+    "story": {
+      "w": 298,
+      "h": 56
+    }
+  },
+  "components-ssobutton--amazon": {
+    "design": {
+      "w": 100,
+      "h": 101
+    },
+    "story": {
+      "w": 100,
+      "h": 100
+    }
+  },
+  "components-ssobutton--apple": {
+    "design": {
+      "w": 100,
+      "h": 101
+    },
+    "story": {
+      "w": 100,
+      "h": 100
+    }
+  },
+  "components-ssobutton--google": {
+    "design": {
+      "w": 100,
+      "h": 101
+    },
+    "story": {
+      "w": 100,
+      "h": 100
+    }
+  },
+  "components-ssobutton--group": {
+    "design": {
+      "w": 800,
+      "h": 100
+    },
+    "story": {
+      "w": 800,
+      "h": 100
+    }
+  },
+  "components-switch--checked-default": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-switch--checked-disabled": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-switch--checked-focus": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-switch--unchecked-default": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-switch--unchecked-disabled": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-switch--unchecked-focus": {
+    "design": {
+      "w": 840,
+      "h": 145
+    },
+    "story": {
+      "w": 840,
+      "h": 144
+    }
+  },
+  "components-textinput--email-default": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-textinput--email-disabled": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-textinput--email-error": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-textinput--email-filled": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-textinput--email-focus": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-textinput--password-default": {
+    "design": {
+      "w": 760,
+      "h": 217
+    },
+    "story": {
+      "w": 760,
+      "h": 216
+    }
+  },
+  "components-unioffer--default": {
+    "design": {
+      "w": 2400,
+      "h": 193
+    },
+    "story": {
+      "w": 2400,
+      "h": 196
+    }
+  },
+  "discover-availabilityfilter--all": {
+    "design": {
+      "w": 573,
+      "h": 96
+    },
+    "story": {
+      "w": 581,
+      "h": 100
+    }
+  },
+  "discover-availabilityfilter--subscription": {
+    "design": {
+      "w": 562,
+      "h": 96
+    },
+    "story": {
+      "w": 533,
+      "h": 100
+    }
+  },
+  "discover-editorialslice--image-left": {
+    "design": {
+      "w": 2784,
+      "h": 800
+    },
+    "story": {
+      "w": 2784,
+      "h": 800
+    }
+  },
+  "discover-editorialslice--image-right": {
+    "design": {
+      "w": 2784,
+      "h": 800
+    },
+    "story": {
+      "w": 2784,
+      "h": 800
+    }
+  },
+  "discover-editorialslice--mask-left": {
+    "design": {
+      "w": 2784,
+      "h": 778
+    },
+    "story": {
+      "w": 2784,
+      "h": 778
+    }
+  },
+  "discover-editorialslice--mask-right": {
+    "design": {
+      "w": 2784,
+      "h": 778
+    },
+    "story": {
+      "w": 2784,
+      "h": 778
+    }
+  },
+  "discover-promohero--desktop": {
+    "design": {
+      "w": 1392,
+      "h": 784
+    },
+    "story": {
+      "w": 2784,
+      "h": 1566
+    }
+  },
+  "feeds-channeltile--person": {
+    "design": {
+      "w": 444,
+      "h": 444
+    },
+    "story": {
+      "w": 444,
+      "h": 444
+    }
+  },
+  "feeds-featuredfilmcard--design": {
+    "design": {
+      "w": 1238,
+      "h": 698
+    },
+    "story": {
+      "w": 1238,
+      "h": 690
+    }
+  },
+  "feeds-filmbadge--info": {
+    "design": {
+      "w": 228,
+      "h": 48
+    },
+    "story": {
+      "w": 226,
+      "h": 48
+    }
+  },
+  "feeds-filmbadge--label": {
+    "design": {
+      "w": 185,
+      "h": 48
+    },
+    "story": {
+      "w": 185,
+      "h": 48
+    }
+  },
+  "feeds-filmcard--tall": {
+    "design": {
+      "w": 444,
+      "h": 592
+    },
+    "story": {
+      "w": 444,
+      "h": 592
+    }
+  },
+  "feeds-filmcard--wide": {
+    "design": {
+      "w": 676,
+      "h": 380
+    },
+    "story": {
+      "w": 678,
+      "h": 381
+    }
+  },
+  "feeds-genretile--violet": {
+    "design": {
+      "w": 672,
+      "h": 378
+    },
+    "story": {
+      "w": 672,
+      "h": 378
+    }
+  },
+  "feeds-masktile--default": {
+    "design": {
+      "w": 910,
+      "h": 492
+    },
+    "story": {
+      "w": 910,
+      "h": 493
+    }
+  },
+  "feeds-masktile--tinted": {
+    "design": {
+      "w": 910,
+      "h": 492
+    },
+    "story": {
+      "w": 910,
+      "h": 493
+    }
+  },
+  "feeds-sectionheader--linked": {
+    "design": {
+      "w": 360,
+      "h": 64
+    },
+    "story": {
+      "w": 3136,
+      "h": 52
+    }
+  },
+  "feeds-sectionheader--plain": {
+    "design": {
+      "w": 297,
+      "h": 64
+    },
+    "story": {
+      "w": 3136,
+      "h": 52
+    }
+  },
+  "film-channeltagtile--default": {
+    "design": {
+      "w": 678,
+      "h": 400
+    },
+    "story": {
+      "w": 678,
+      "h": 400
+    }
+  },
+  "film-channeltagtile--square": {
+    "design": {
+      "w": 444,
+      "h": 444
+    },
+    "story": {
+      "w": 444,
+      "h": 444
+    }
+  },
+  "film-filmdetails--default": {
+    "design": {
+      "w": 1392,
+      "h": 382
+    },
+    "story": {
+      "w": 2784,
+      "h": 880
+    }
+  },
+  "film-filmhero--default": {
+    "design": {
+      "w": 1440,
+      "h": 816
+    },
+    "story": {
+      "w": 2880,
+      "h": 1620
+    }
+  },
+  "film-quotecard--default": {
+    "design": {
+      "w": 682,
+      "h": 397
+    },
+    "story": {
+      "w": 682,
+      "h": 396
+    }
+  }
+}
