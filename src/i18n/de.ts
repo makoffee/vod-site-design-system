@@ -56,3 +56,15 @@ export const availabilityDe = {
   // No German "All" exists in production; it stays as designed.
   labels: { subscription: "Abonnement", rentals: "Mieten & Kaufen" },
 };
+
+export const searchDe = {
+  placeholder: "Filme, Regisseure, Schauspieler suchen…",
+  label: "Suche",
+};
+
+/** Production "results for" / "No results for" / hint (strings file, de). */
+export const searchResultsDe = {
+  resultsFor: "Ergebnisse für",
+  noResultsFor: "Keine Ergebnisse für",
+  noResultsHint: "Versuchen Sie einen anderen Titel, Regisseur oder Schauspieler",
+};

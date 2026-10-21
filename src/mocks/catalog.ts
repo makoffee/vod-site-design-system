@@ -264,3 +264,7 @@ export const collection = {
     rentable: true,
   })),
 };
+
+/** Search design screens ("search results | Static / Sticky in-nav | 1440px", "| 393px"). */
+export const searchSuggestions = ["Drama", "Documentary", "Short Films", "LGBTQ+", "World Cinema", "Animation", "Festival Winners"];
+export const searchQuery = "Drama";

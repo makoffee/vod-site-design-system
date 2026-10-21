@@ -26,7 +26,8 @@
     "Social Icons 'Original': Instagram and Spotify render on a white tile in the master, YouTube and Facebook do not. Code renders all four without a tile.",
     "Responsive strategy: one responsive component per concept in code (container queries); Brilliant keeps breakpoint variants only where the structure changes (Header, Footer viewport axis). Header/Footer no longer take a viewport prop.",
     "PlanCard stories use a placeholder still (The Seventh Seal, public/images/placeholder/seventh-seal.webp) for the image slot. Story-only; design screens keep their own artwork.",
-    "Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts."
+    "Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts.",
+    "Search segmented sketches (Films/Series, Genres/Themes/Filters, Subscription/Rentals with the Sooner icon) are on no screen, so they stay sketches on 2 Components › Search. Results title follows production 'Ergebnisse für „…“' on the German screen; the design reads 'Search Results: Drama'."
   ],
   "gaps": [
     "Synced 2026-10-20 (production = truth): Button master and code follow .sooner-cta-* — primary 600/uppercase/0.03em, white 600 with white/85 hover and 60% disabled, ghost 500 with blur 10, lg 16/32 padding. The generated focus variants were removed from the master, board and code; keyboard focus is production's 2px white outline (offset 2).",
@@ -330,6 +331,30 @@
       "differences": [
         "Design content background is #1E1E1E at 60% over black; promoted to color.surface.card (#121212).",
         "Below 672px of container width the actions are 32px icon-only circles and the director line is hidden, as on the 393 screens."
+      ]
+    },
+    "searchfield": {
+      "title": "SearchField",
+      "status": "match",
+      "summary": "Search input: lucide search icon, 18px text, clear button with a query. lg = overlay (16px radius, two shadows), md = in-nav bar (10px radius, blur).",
+      "differences": [
+        "Placeholder follows production 'Search films, directors, actors…'; the design says '…directors, collections…'.",
+        "The design shows the clear button even when empty; code shows it once there is a query.",
+        "Clear button label 'Clear search' has no production source."
+      ]
+    },
+    "chip": {
+      "title": "Chip",
+      "status": "match",
+      "summary": "Suggested-search pill: 14px medium on white/10 with a white/10 border.",
+      "differences": []
+    },
+    "viewtoggle": {
+      "title": "ViewToggle",
+      "status": "match",
+      "summary": "Grid / list switch shared by CollectionHeader and search results; shows the icon of the view it switches to (lucide LayoutGrid / List).",
+      "differences": [
+        "Extracted from CollectionHeader; the Brilliant CollectionHeader master now nests the ViewToggle instance."
       ]
     }
   }

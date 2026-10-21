@@ -4,6 +4,7 @@ import { CollectionScreen } from "./CollectionScreen";
 import { ChannelsScreen } from "./ChannelsScreen";
 import { DiscoverScreen } from "./DiscoverScreen";
 import { FilmScreen } from "./FilmScreen";
+import { SearchScreen } from "./SearchScreen";
 
 // Full key screens composed from the library, one story per design screen on "2 Key Screens".
 const meta = {
@@ -43,3 +44,7 @@ export const CollectionList: Story = { render: () => <CollectionScreen /> };
 export const CollectionGrid: Story = { render: () => <CollectionScreen defaultView="grid" /> };
 /** "collection view | list | expanded text | 1440" */
 export const CollectionExpanded: Story = { render: () => <CollectionScreen defaultExpanded /> };
+/** "search results | Static | 1440px": suggestions and feeds before a query. */
+export const Search: Story = { render: () => <SearchScreen /> };
+/** "search results | Sticky in-nav | 1440px" and "| 393px": results for a query. */
+export const SearchResults: Story = { render: () => <SearchScreen defaultQuery="Drama" /> };

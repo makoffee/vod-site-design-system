@@ -1,12 +1,13 @@
 "use client";
 
-import { ChevronDown, LayoutGrid, List } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
+import { ViewToggle, type CollectionView } from "../ViewToggle/ViewToggle";
 import { AvailabilityFilter, type Availability, type AvailabilityFilterProps } from "../AvailabilityFilter/AvailabilityFilter";
 
-export type CollectionView = "grid" | "list";
+export type { CollectionView } from "../ViewToggle/ViewToggle";
 
 export interface CollectionHeaderProps {
   title: string;
@@ -55,7 +56,6 @@ export function CollectionHeader({
   const [uncontrolledAvailability, setAvailability] = useState(defaultAvailability);
   const currentAvailability = availability ?? uncontrolledAvailability;
   const descriptionId = useId();
-  const nextView: CollectionView = view === "grid" ? "list" : "grid";
   const changeAvailability = (value: Availability) => {
     setAvailability(value);
     onAvailabilityChange?.(value);
@@ -111,21 +111,7 @@ export function CollectionHeader({
               {...filterLabels}
               className="hidden @2xl:inline-flex"
             />
-            <button
-              type="button"
-              aria-label={nextView === "grid" ? gridViewLabel : listViewLabel}
-              onClick={() => onViewChange?.(nextView)}
-              className={cn(
-                "flex size-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-cta transition-colors hover:bg-white/18",
-                focus,
-              )}
-            >
-              {nextView === "grid" ? (
-                <LayoutGrid className="size-6" strokeWidth={2} aria-hidden />
-              ) : (
-                <List className="size-6" strokeWidth={2} aria-hidden />
-              )}
-            </button>
+            <ViewToggle view={view} onViewChange={onViewChange} gridViewLabel={gridViewLabel} listViewLabel={listViewLabel} />
           </div>
         </div>
       </section>
