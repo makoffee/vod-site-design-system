@@ -28,9 +28,6 @@ export const Desktop: Story = { decorators: [desktop] };
 // The frame width picks the layout (the master's viewport axis).
 export const Mobile: Story = { decorators: [mobile], globals: viewport("mobile") };
 
-/** Instance override on "3 BE Review page". */
-export const BeReviewTagline: Story = { args: { tagline: "Stream Different" }, decorators: [desktop] };
-
 /** Instance override on "4 Sooner DE Marketing Pages". */
 export const MarketingCopyright: Story = {
   args: { copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Germany" },

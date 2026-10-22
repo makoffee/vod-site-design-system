@@ -69,7 +69,7 @@ const defaultSocial: { platform: SocialPlatform; href: string }[] = [
 
 export interface FooterProps {
   locale?: FooterLocale;
-  /** Instance override: "Stream Different" on the BE review pages. */
+  /** Defaults to "Curated Cinema" in both locales (every screen uses the default). */
   tagline?: string;
   /** Instance override, e.g. "… • Adlershof-Berlin, Germany" on the marketing pages. */
   copyright?: string;
