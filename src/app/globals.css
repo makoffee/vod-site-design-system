@@ -36,6 +36,7 @@
   /* Tokens production only has as arbitrary hex (drift: promote to theme) */
   --color-surface-uni: #1a0a2e; /* color.surface.uni, was bg-[#1a0a2e] */
   --color-border-decorative: #312343; /* color.border.decorative, was ring-[#312343] */
+  --color-announcement: #fffd50; /* design "Pushdown Alert banner" (AnnouncementBar) */
   --color-surface-card: #121212; /* color.surface.card: collection list rows, filter menu */
   /* Genre tile duotones (Genres screen), laid 50% hard-light over the still: color.genre.* */
   --color-genre-violet: #ae00ff;
