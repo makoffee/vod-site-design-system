@@ -19,7 +19,8 @@ export function CollectionScreen({ defaultView = "list", defaultExpanded = false
 
   return (
     <AppShell>
-      <div className="@container mx-auto flex w-full max-w-[1200px] flex-col gap-4 px-6 pt-8 pb-16 @2xl:gap-8">
+      {/* Content caps at 1920 (widest gutter target, 2026-10-22); 1440 screens and laptops are the primary target. */}
+      <div className="@container mx-auto flex w-full max-w-[1920px] flex-col gap-4 px-6 pt-8 pb-16 @2xl:gap-8">
         <CollectionHeader
           title={collection.title}
           description={collection.description}
@@ -29,7 +30,7 @@ export function CollectionScreen({ defaultView = "list", defaultExpanded = false
           filterLabels={availabilityDe}
         />
         {view === "grid" ? (
-          <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-4 @4xl:gap-y-12 @5xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-4 @4xl:gap-y-12 @5xl:grid-cols-5 @7xl:grid-cols-6 @min-[1600px]:grid-cols-7">
             {collection.films.map((film) => (
               <FilmCard key={film.id} title={film.title} href={film.href} badge={film.badge} rentable={film.rentable} {...filmCardDe} />
             ))}
