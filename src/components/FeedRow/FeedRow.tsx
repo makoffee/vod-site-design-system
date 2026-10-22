@@ -8,12 +8,13 @@ import { SectionHeader } from "../SectionHeader/SectionHeader";
 /** tall = boxart feeds, wide = 16:9 stills, square = channel/festival tiles. */
 export type FeedKind = "tall" | "wide" | "square";
 
-// Cards per visible row by *container* width, after production's --items-per-screen (2.3 → 3.5 → 5 → 6 → 7);
-// fractional counts let the next card peek in. Wide stills show fewer, matching the 4-up "Wide cover feed".
+// Cards per visible row by *container* width. Always whole numbers: a row never shows a cut-off card (design rule,
+// 2026-10-22; production's --items-per-screen uses fractional 2.3 / 3.5 to let the next card peek in). Wide stills
+// show fewer, matching the 4-up "Wide cover feed".
 const itemsPerRow: Record<FeedKind, string> = {
-  tall: "[--items:2.3] @xl:[--items:3.5] @4xl:[--items:5] @7xl:[--items:6] @min-[1600px]:[--items:7]",
-  wide: "[--items:1.3] @xl:[--items:2] @4xl:[--items:3] @7xl:[--items:4] @min-[1600px]:[--items:5]",
-  square: "[--items:2.3] @xl:[--items:3.5] @4xl:[--items:5] @7xl:[--items:6] @min-[1600px]:[--items:7]",
+  tall: "[--items:2] @xl:[--items:3] @4xl:[--items:5] @7xl:[--items:6] @min-[1600px]:[--items:7]",
+  wide: "[--items:1] @xl:[--items:2] @4xl:[--items:3] @7xl:[--items:4] @min-[1600px]:[--items:5]",
+  square: "[--items:2] @xl:[--items:3] @4xl:[--items:5] @7xl:[--items:6] @min-[1600px]:[--items:7]",
 };
 
 export interface FeedItemProps {

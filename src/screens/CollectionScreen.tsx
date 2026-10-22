@@ -30,7 +30,7 @@ export function CollectionScreen({ defaultView = "list", defaultExpanded = false
           filterLabels={availabilityDe}
         />
         {view === "grid" ? (
-          <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-4 @4xl:gap-y-12 @5xl:grid-cols-5 @7xl:grid-cols-6 @min-[1600px]:grid-cols-7">
+          <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-4 @4xl:gap-y-12 @5xl:grid-cols-5 @7xl:grid-cols-6">
             {collection.films.map((film) => (
               <FilmCard key={film.id} title={film.title} href={film.href} badge={film.badge} rentable={film.rentable} {...filmCardDe} />
             ))}
