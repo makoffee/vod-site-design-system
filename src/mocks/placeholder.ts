@@ -83,3 +83,28 @@ export const placeholderFilm = {
 export const placeholderQuote = { source: "Source Name", quote: loremShort, author: "Author Name" };
 
 export const placeholderCollection = { title: "Collection Title", description: [loremLong, loremLong, loremLong].join(" ") };
+
+export const placeholderBanner = {
+  eyebrow: placeholder.eyebrow,
+  title: placeholder.headline,
+  subtitle: loremShort,
+  description: "Lorem ipsum dolor sit amet",
+  actions: [
+    { label: placeholder.button, href: "/discover", tone: "primary" as const },
+    { label: placeholder.button, href: "/signup", tone: "white" as const },
+  ],
+};
+
+export const placeholderFeaturedCollection = {
+  title: placeholder.headline,
+  lead: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  cta: { label: placeholder.button, href: "/collection/example" },
+};
+
+export const placeholderTwoColumn = { title: placeholder.headline, description: loremShort };
+
+export const placeholderFaq = {
+  title: placeholder.sectionTitle,
+  items: range(5).map(() => ({ question: "Question", answer: `${loremShort}\n\n${loremShort}` })),
+};

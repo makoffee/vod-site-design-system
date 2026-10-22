@@ -17,7 +17,12 @@
     "avatar",
     "header",
     "footer",
-    "socialicons"
+    "socialicons",
+    "imagectabanner",
+    "featuredcollectionblock",
+    "subscriptionplans",
+    "twocolumnmedia",
+    "faq"
   ],
   "decisions": [
     "Funding logos (Creative Europe MEDIA, Fédération Wallonie-Bruxelles, VAF) and the Amazon SSO mark are still PNGs: no vector source exists in Brilliant or simple-icons. Supply SVGs or approve keeping the rasters.",
@@ -28,7 +33,8 @@
     "Responsive strategy: one responsive component per concept in code (container queries); Brilliant keeps breakpoint variants only where the structure changes (Header, Footer viewport axis). Header/Footer no longer take a viewport prop.",
     "PlanCard stories use a placeholder still (The Seventh Seal, public/images/placeholder/seventh-seal.webp) for the image slot. Story-only; design screens keep their own artwork.",
     "Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts.",
-    "Search segmented sketches (Films/Series, Genres/Themes/Filters, Subscription/Rentals with the Sooner icon) are on no screen, so they stay sketches on 2 Components › Search. Results title follows production 'Ergebnisse für „…“' on the German screen; the design reads 'Search Results: Drama'."
+    "Search segmented sketches (Films/Series, Genres/Themes/Filters, Subscription/Rentals with the Sooner icon) are on no screen, so they stay sketches on 2 Components › Search. Results title follows production 'Ergebnisse für „…“' on the German screen; the design reads 'Search Results: Drama'.",
+    "Landing pages (2026-10-22): rebuilt from production's Prismic slices (hero, featured_collection_block ×4, subscription_plans, split_image_block = EditorialSlice, two_column_media, image_cta_banner, faq). Code screens / and /en use production copy and film rows; the Brilliant landing screens keep their design copy via instance overrides. Production confirms the plan prices €59.95 / €14.95."
   ],
   "gaps": [
     "Synced 2026-10-20 (production = truth): Button master and code follow .sooner-cta-* — primary 600/uppercase/0.03em, white 600 with white/85 hover and 60% disabled, ghost 500 with blur 10, lg 16/32 padding. The generated focus variants were removed from the master, board and code; keyboard focus is production's 2px white outline (offset 2).",
@@ -368,6 +374,54 @@
         "'Login with your institute' / 'Mit Hochschul-Login anmelden' has no strings-file entry (taken from the LoginModal master).",
         "Title centres below 384px of container width, as on the 393 screens.",
         "The violet binocular backdrop is screen art: the design uses a PNG; code draws the binocular path with a violet-to-black gradient."
+      ]
+    },
+    "imagectabanner": {
+      "title": "ImageCtaBanner",
+      "status": "match",
+      "summary": "Image banner with a call to action: layout full (landing hero, production hero banner) or contained (closing banner, production slice image_cta_banner) × align left/center/right.",
+      "differences": [
+        "One component for the hero and the closing 'final CTA' banner; align right is new (the designs only use left for the hero and center for the banner), added so it supports both sides like the other marketing blocks.",
+        "Values from production markup: hero 58/72 extrabold, lead 24/34 bold gray-200, 920px column, 200px top inset; banner min-height 420, 890px column, Playfair 48/56.",
+        "Buttons are links (ActionLink) as in production, uppercase labels."
+      ]
+    },
+    "featuredcollectionblock": {
+      "title": "FeaturedCollectionBlock",
+      "status": "match",
+      "summary": "Landing collection teaser (production slice featured_collection_block): full-bleed artwork, 620px copy column with violet CTA and a FeedRow of the collection inside the artwork's bounds; side left/right.",
+      "differences": [
+        "The feed is a FeedRow (headerless) in code and a nested FeedRow instance in the master, so any feed kind (tall/wide/square) fits the block; the landing uses tall.",
+        "The design's fixed row of five 246px cards becomes production's slider (222px cards + next arrow).",
+        "Gradient from production: #000 0% → transparent 24.7% → black/20 48.9% → #000 93.2%.",
+        "Copy side right is new (not on a screen yet)."
+      ]
+    },
+    "subscriptionplans": {
+      "title": "SubscriptionPlans",
+      "status": "match",
+      "summary": "Plan picker section (design PlanBlock, production slice subscription_plans): centred heading, three PlanCards, UNI offer. Contextual: production copy per locale.",
+      "differences": [
+        "Cards go 1 → 2 (third spanning) → 3 columns at 768/1024px of container width, as production.",
+        "DE landing design reads 'Wahle dein Sooner-Abo', €59.99/€14.99 and '/ Year'; the DE screen instance now uses production 'Wähle dein Sooner-Abo', 59,95 €, 14,95 € and '/ JAHR'."
+      ]
+    },
+    "twocolumnmedia": {
+      "title": "TwoColumnMedia",
+      "status": "match",
+      "summary": "Image beside heading, text and app-store logos (production slice two_column_media / withAppButtons); side left/right.",
+      "differences": [
+        "Logos are production's five SVGs (public/images/apps); the design also shows Samsung, kept on the screens (hidden in the master's AppLogos).",
+        "The design's Android TV logo was clipped ('ndroidtv') by its import mask; the AppLogos master now uses production's paths."
+      ]
+    },
+    "faq": {
+      "title": "Faq",
+      "status": "match",
+      "summary": "Questions with expandable answers beside a binocular-masked image (production slice faq / withImage); side left/right.",
+      "differences": [
+        "Answers are production copy (EN two paragraphs; DE one). Button + region accordion as in production.",
+        "EN design 'Sooner, in brief.' matches production; the DE design still shows the older 'Häufig gestellte Fragen' set (kept on the DE screen, production DE is 'Sooner, kurz erklärt.')."
       ]
     }
   }

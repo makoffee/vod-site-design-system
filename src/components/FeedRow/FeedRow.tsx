@@ -41,7 +41,10 @@ export function FeedItem({ children, span = 1, className }: FeedItemProps) {
 }
 
 export interface FeedRowProps {
-  title: string;
+  /** Row title (SectionHeader). Without one the row has no header, e.g. inside FeaturedCollectionBlock. */
+  title?: string;
+  /** Accessible name when there is no title. */
+  label?: string;
   /** Links the title to the full feed (shows "more" + chevron). */
   href?: string;
   moreLabel?: string;
@@ -58,6 +61,7 @@ export interface FeedRowProps {
  */
 export function FeedRow({
   title,
+  label,
   href,
   moreLabel,
   kind = "tall",
@@ -100,8 +104,8 @@ export function FeedRow({
     "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white @3xl:flex";
 
   return (
-    <section className={cn("@container flex w-full flex-col gap-4", className)}>
-      <SectionHeader title={title} href={href} moreLabel={moreLabel} />
+    <section aria-label={title ? undefined : label} className={cn("@container flex w-full flex-col gap-4", className)}>
+      {title && <SectionHeader title={title} href={href} moreLabel={moreLabel} />}
       <div className={cn("relative [--gap:12px]", itemsPerRow[kind])}>
         <div
           ref={trackRef}

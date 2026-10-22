@@ -5,6 +5,7 @@ import { CollectionScreen } from "./CollectionScreen";
 import { ChannelsScreen } from "./ChannelsScreen";
 import { DiscoverScreen } from "./DiscoverScreen";
 import { FilmScreen } from "./FilmScreen";
+import { LandingScreen } from "./LandingScreen";
 import { SearchScreen } from "./SearchScreen";
 
 // Full key screens composed from the library, one story per design screen on "2 Key Screens".
@@ -53,3 +54,8 @@ export const SearchResults: Story = { render: () => <SearchScreen defaultQuery="
 export const Login: Story = { render: () => <AuthScreen /> };
 /** "signup with product card | 1440px" / "Signup | 393px" */
 export const Signup: Story = { render: () => <AuthScreen defaultMode="signup" product="monthly" /> };
+
+/** "Landing Page EN | 1440w" (4 Sooner DE Marketing Pages) */
+export const LandingEn: Story = { render: () => <LandingScreen locale="en" /> };
+/** "Landing Page DE | 1440w" */
+export const LandingDe: Story = { render: () => <LandingScreen locale="de" /> };

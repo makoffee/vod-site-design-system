@@ -13,7 +13,7 @@ const notes = existsSync(notesFile) ? JSON.parse(readFileSync(notesFile, "utf8")
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const groups = {};
 for (const id of Object.keys(sizes).sort()) {
-  const m = id.match(/^(?:components|feeds|discover|film|collections|search)-([^-]+)--(.+)$/);
+  const m = id.match(/^(?:components|feeds|discover|film|collections|search|marketing)-([^-]+)--(.+)$/);
   if (!m) continue; // screens / boards are references only
   const [, comp, variant] = m;
   (groups[comp] ??= []).push({ id, variant });

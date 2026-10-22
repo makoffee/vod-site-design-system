@@ -1,20 +1,24 @@
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer/Footer";
 import { Header, type HeaderTab } from "@/components/Header/Header";
+import type { Locale } from "@/components/_shared/locale";
 import { headerDe } from "@/i18n/de";
 
 export interface AppShellProps {
   active?: HeaderTab | "none";
+  /** The key screens are German; the landing page also ships in English. */
+  locale?: Locale;
   children: ReactNode;
 }
 
 /** Header + page + Footer, as every key screen composes them (Header/Footer instances on the canvas). */
-export function AppShell({ active = "none", children }: AppShellProps) {
+export function AppShell({ active = "none", locale = "de", children }: AppShellProps) {
+  const de = locale === "de";
   return (
     <>
-      <Header active={active} language="de" labels={headerDe} />
+      <Header active={active} language={locale} labels={de ? headerDe : undefined} />
       <main className="flex w-full flex-1 flex-col bg-black">{children}</main>
-      <Footer locale="de" />
+      <Footer locale={locale} />
     </>
   );
 }
