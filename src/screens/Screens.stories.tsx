@@ -6,6 +6,7 @@ import { ChannelsScreen } from "./ChannelsScreen";
 import { DiscoverScreen } from "./DiscoverScreen";
 import { FilmScreen } from "./FilmScreen";
 import { LandingScreen } from "./LandingScreen";
+import { OnboardingScreen } from "./OnboardingScreen";
 import { SearchScreen } from "./SearchScreen";
 
 // Full key screens composed from the library, one story per design screen on "2 Key Screens".
@@ -59,3 +60,8 @@ export const Signup: Story = { render: () => <AuthScreen defaultMode="signup" pr
 export const LandingEn: Story = { render: () => <LandingScreen locale="en" /> };
 /** "Landing Page DE | 1440w" */
 export const LandingDe: Story = { render: () => <LandingScreen locale="de" /> };
+
+/** "onboarding EN | 1440" (4 Sooner DE Marketing Pages) */
+export const OnboardingEn: Story = { render: () => <OnboardingScreen locale="en" /> };
+/** "onboarding DE | 1440" */
+export const OnboardingDe: Story = { render: () => <OnboardingScreen locale="de" /> };

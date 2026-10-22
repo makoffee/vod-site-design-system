@@ -10,7 +10,10 @@ const meta = {
   title: "Components/PlanCard",
   component: PlanCard,
   args: { plan: "monthly", onSelect: fn(), imageSrc: placeholderStill, imageAlt: "" },
-  argTypes: { plan: { control: "inline-radio", options: ["monthly", "yearly", "plus"] } },
+  argTypes: {
+    plan: { control: "inline-radio", options: ["monthly", "yearly", "plus"] },
+    pricePosition: { control: "inline-radio", options: ["top", "bottom"] },
+  },
   decorators: [frame(384)],
   parameters: {
     design: {
@@ -26,6 +29,8 @@ type Story = StoryObj<typeof meta>;
 export const Monthly: Story = {};
 export const Yearly: Story = { args: { plan: "yearly" } };
 export const Plus: Story = { args: { plan: "plus" } };
+/** Subscribe page: price after the features. */
+export const PriceBottom: Story = { args: { plan: "yearly", pricePosition: "bottom" } };
 
 /** Cards fill their grid cell; the grid goes to three columns at 896px of container width (@4xl). Switch the viewport to see it stack. */
 export const AllPlans: Story = {

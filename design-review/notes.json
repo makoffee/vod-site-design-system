@@ -34,7 +34,8 @@
     "PlanCard stories use a placeholder still (The Seventh Seal, public/images/placeholder/seventh-seal.webp) for the image slot. Story-only; design screens keep their own artwork.",
     "Component library copy is generic (2026-10-21): masters and stories use placeholder copy (Film Title, Director Name, Headline, Section Title, Lorem ipsum for eyebrows and body, 'Button' on generic buttons). Contextual actions keep English labels (Subscribe, Rent, Trailer, Watch Now, Add to list). Contextual components keep production copy: PlanCard, ProductCard, UniOffer, LoginModal, Header, Footer, AvailabilityFilter. Design screens keep their real content through instance overrides; story fixtures live in src/mocks/placeholder.ts, screen data in catalog.ts / editorial.ts.",
     "Search segmented sketches (Films/Series, Genres/Themes/Filters, Subscription/Rentals with the Sooner icon) are on no screen, so they stay sketches on 2 Components › Search. Results title follows production 'Ergebnisse für „…“' on the German screen; the design reads 'Search Results: Drama'.",
-    "Landing pages (2026-10-22): rebuilt from production's Prismic slices (hero, featured_collection_block ×4, subscription_plans, split_image_block = EditorialSlice, two_column_media, image_cta_banner, faq). Code screens / and /en use production copy and film rows; the Brilliant landing screens keep their design copy via instance overrides. Production confirms the plan prices €59.95 / €14.95."
+    "Landing pages (2026-10-22): rebuilt from production's Prismic slices (hero, featured_collection_block ×4, subscription_plans, split_image_block = EditorialSlice, two_column_media, image_cta_banner, faq). Code screens / and /en use production copy and film rows; the Brilliant landing screens keep their design copy via instance overrides. Production confirms the plan prices €59.95 / €14.95.",
+    "Onboarding (2026-10-22): 'onboarding EN/DE | 1440' on 4 Sooner DE Marketing Pages = production sooner.de/subscribe → SubscriptionPlans layout=subscribe; code OnboardingScreen at /subscribe (de) and /en/subscribe. The onboarding screens on 3 Key Screens come from the original BE site (Essential/Premium, CinePass) and keep their own content."
   ],
   "gaps": [
     "Synced 2026-10-20 (production = truth): Button master and code follow .sooner-cta-* — primary 600/uppercase/0.03em, white 600 with white/85 hover and 60% disabled, ghost 500 with blur 10, lg 16/32 padding. The generated focus variants were removed from the master, board and code; keyboard focus is production's 2px white outline (offset 2).",
@@ -140,7 +141,8 @@
       "status": "match",
       "summary": "Layout, type, price and pill match. Placeholder film stills removed (empty slot).",
       "differences": [
-        "Yearly title 30px (master 32px)."
+        "Yearly title 30px (master 32px).",
+        "New axis price[top,bottom] (code pricePosition): bottom = price after the features, as on the onboarding page / sooner.de/subscribe."
       ]
     },
     "productcard": {
@@ -400,10 +402,11 @@
     "subscriptionplans": {
       "title": "SubscriptionPlans",
       "status": "match",
-      "summary": "Plan picker section (design PlanBlock, production slice subscription_plans): centred heading, three PlanCards, UNI offer. Contextual: production copy per locale.",
+      "summary": "Plan picker (master axis layout[landing,subscribe]). landing = home page slice subscription_plans (Playfair heading). subscribe = onboarding page sooner.de/subscribe: DM Sans page title, cards with the price after the features, UNI offer, legal copy (production string 'Subscribe legal').",
       "differences": [
         "Cards go 1 → 2 (third spanning) → 3 columns at 768/1024px of container width, as production.",
-        "DE landing design reads 'Wahle dein Sooner-Abo', €59.99/€14.99 and '/ Year'; the DE screen instance now uses production 'Wähle dein Sooner-Abo', 59,95 €, 14,95 € and '/ JAHR'."
+        "DE landing design reads 'Wahle dein Sooner-Abo', €59.99/€14.99 and '/ Year'; the DE screen instance now uses production 'Wähle dein Sooner-Abo', 59,95 €, 14,95 € and '/ JAHR'.",
+        "Subscribe layout: production sooner.de/subscribe has no UNI banner today; both onboarding designs show it, so it stays (showUni). The onboarding designs' hidden Monthly/Yearly/CinePass toggle and notifications checkbox are not built."
       ]
     },
     "twocolumnmedia": {

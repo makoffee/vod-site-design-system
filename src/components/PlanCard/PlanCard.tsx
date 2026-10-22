@@ -16,12 +16,20 @@ export interface PlanCardProps {
   imageAlt?: string;
   /** Copy language; English by default. */
   locale?: Locale;
+  /** top = price under the name (landing, master price[top]); bottom = after the features (subscribe page, price[bottom]). */
+  pricePosition?: "top" | "bottom";
   className?: string;
 }
 
 /** Master db8d72090caab1b0 (Prismic slice subscription_plans). The yearly plan is the highlighted card. */
-export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale = "en", className }: PlanCardProps) {
+export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale = "en", pricePosition = "top", className }: PlanCardProps) {
   const plan = plansByLocale[locale][id];
+  const price = (
+    <p className="flex items-start gap-1.5 text-white">
+      <span className="text-[30px] leading-9 font-bold tracking-[-0.75px]">{plan.price}</span>
+      <span className="text-xs leading-[29px] font-bold uppercase tracking-[0.3px]">/ {plan.period}</span>
+    </p>
+  );
 
   return (
     <article
@@ -48,15 +56,13 @@ export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale =
           </h3>
           <Pill>{plan.badge}</Pill>
         </div>
-        <p className="flex items-start gap-1.5 text-white">
-          <span className="text-[30px] leading-9 font-bold tracking-[-0.75px]">{plan.price}</span>
-          <span className="text-xs leading-[29px] font-bold uppercase tracking-[0.3px]">/ {plan.period}</span>
-        </p>
+        {pricePosition === "top" && price}
         <ul className="text-base leading-[30px] text-white">
           {plan.features.map((f) => (
             <li key={f}>{f}</li>
           ))}
         </ul>
+        {pricePosition === "bottom" && price}
       </div>
       <div className="p-6">
         <Button
