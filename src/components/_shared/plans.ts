@@ -2,8 +2,8 @@ import type { Locale } from "./locale";
 
 // Plan copy per locale. en = "Landing Page EN | 1440w" (4 Sooner DE Marketing Pages); de = the PlanCard/ProductCard
 // masters as they shipped. Business rules (DESIGN-SYSTEM.md): monthly 7.99, yearly 59.95 (the highlighted card),
-// Plus 14.95 (the only plan with 3 rentals), UNI 5.99. The EN landing page shows €59.99 / €14.99; prices here follow
-// the business rules until that is confirmed.
+// Plus 14.95 (the only plan with 3 rentals), UNI 5.99 — the prices live on sooner.de (confirmed 2026-10-22; the
+// designs were updated from €59.99 / €14.99).
 
 export type PlanId = "monthly" | "yearly" | "plus";
 
