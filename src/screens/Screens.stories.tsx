@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AuthScreen } from "./AuthScreen";
 import { CategoriesScreen } from "./CategoriesScreen";
 import { CollectionScreen } from "./CollectionScreen";
 import { ChannelsScreen } from "./ChannelsScreen";
@@ -48,3 +49,7 @@ export const CollectionExpanded: Story = { render: () => <CollectionScreen defau
 export const Search: Story = { render: () => <SearchScreen /> };
 /** "search results | Sticky in-nav | 1440px" and "| 393px": results for a query. */
 export const SearchResults: Story = { render: () => <SearchScreen defaultQuery="Drama" /> };
+/** "login | 1440px" / "login | 393px" */
+export const Login: Story = { render: () => <AuthScreen /> };
+/** "signup with product card | 1440px" / "Signup | 393px" */
+export const Signup: Story = { render: () => <AuthScreen defaultMode="signup" product="monthly" /> };

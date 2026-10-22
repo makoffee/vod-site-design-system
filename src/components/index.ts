@@ -1,3 +1,4 @@
+export * from "./AuthForm/AuthForm";
 export * from "./AvailabilityFilter/AvailabilityFilter";
 export * from "./Avatar/Avatar";
 export * from "./Button/Button";

@@ -1,0 +1,40 @@
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { fn } from "storybook/test";
+import { AuthForm } from "./AuthForm";
+import { frame, viewport } from "../_shared/storyFrames";
+
+const meta = {
+  title: "Components/AuthForm",
+  component: AuthForm,
+  args: {
+    mode: "login",
+    onSubmit: fn(),
+    onForgotPassword: fn(),
+    onSso: fn(),
+    onInstitutionLogin: fn(),
+    onSwitchMode: fn(),
+    onChangeProduct: fn(),
+  },
+  argTypes: {
+    mode: { control: "inline-radio", options: ["login", "signup"] },
+    locale: { control: "inline-radio", options: ["en", "de"] },
+  },
+  decorators: [frame(400)],
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
+    },
+  },
+} satisfies Meta<typeof AuthForm>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/** "login | 1440px" form. Contextual copy: production strings. */
+export const Login: Story = {};
+/** "signup | 1440px" form. */
+export const Signup: Story = { args: { mode: "signup" } };
+/** "signup with product card | 1440px": the plan chosen at checkout above the form. */
+export const SignupWithProduct: Story = { args: { mode: "signup", product: "monthly" } };
+export const Mobile: Story = { args: { mode: "signup", product: "monthly" }, parameters: { frameWidth: 345 }, globals: viewport("mobile") };

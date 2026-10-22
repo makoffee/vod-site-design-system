@@ -6,6 +6,7 @@
     "radio",
     "switch",
     "ssobutton",
+    "authform",
     "loginmodal",
     "plancard",
     "productcard",
@@ -355,6 +356,18 @@
       "summary": "Grid / list switch shared by CollectionHeader and search results; shows the icon of the view it switches to (lucide LayoutGrid / List).",
       "differences": [
         "Extracted from CollectionHeader; the Brilliant CollectionHeader master now nests the ViewToggle instance."
+      ]
+    },
+    "authform": {
+      "title": "AuthForm",
+      "status": "match",
+      "summary": "Page-level login / signup form: title, optional ProductCard, label-less e-mail + password, white submit, SSO, institute login, legal copy, mode switch. Production strings (en/de).",
+      "differences": [
+        "Built from TextInput, Button, SsoButtonGroup and ProductCard instances; LoginModal stays the dialog variant (close, cancel, stay logged in).",
+        "The design's 'Signup | 393px' switch line reads 'Don't have an account? Signup'; the component uses 'Do you already have an account? Login' as on the 1440 signup screens.",
+        "'Login with your institute' / 'Mit Hochschul-Login anmelden' has no strings-file entry (taken from the LoginModal master).",
+        "Title centres below 384px of container width, as on the 393 screens.",
+        "The violet binocular backdrop is screen art: the design uses a PNG; code draws the binocular path with a violet-to-black gradient."
       ]
     }
   }
