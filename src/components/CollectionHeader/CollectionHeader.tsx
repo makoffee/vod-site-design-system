@@ -31,8 +31,8 @@ export interface CollectionHeaderProps {
 }
 
 /**
- * Collection page banner (design "collection view", Banner): artwork at a fixed ratio (1872:600 from 672px of
- * container width, 345:400 below; it only grows when the expanded text needs room) with a bottom fade, title, a
+ * Collection page banner (design "collection view", Banner): artwork at a fixed ratio (3:1 from 672px of
+ * container width, 6:7 below; it only grows when the expanded text needs room) with a bottom fade, title, a
  * three-line description that expands in place, the availability filter and the grid / list switch.
  * The filter becomes a dropdown below 672px of container width.
  */
@@ -66,7 +66,7 @@ export function CollectionHeader({
 
   return (
     <div className={cn("@container w-full", className)}>
-      <section className="relative isolate flex aspect-[345/400] w-full flex-col overflow-clip rounded-[20px] bg-linear-135 from-gray-700 to-gray-800 @2xl:aspect-[1872/600]">
+      <section className="relative isolate flex aspect-[6/7] w-full flex-col overflow-clip rounded-[20px] bg-linear-135 from-gray-700 to-gray-800 @2xl:aspect-[3/1]">
         {imageSrc && <Image src={imageSrc} alt="" fill priority sizes="(min-width: 1968px) 1872px, 100vw" className="-z-10 object-cover" />}
         <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/10 from-25% to-black/70 @2xl:from-45%" />
 
