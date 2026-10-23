@@ -1,14 +1,15 @@
 {
-  "name": "component-design",
+  "name": "vod-site-design-system",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build --output-dir storybook-static"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -42,6 +43,5 @@
     "typescript": "^5",
     "vite": "latest",
     "vitest": "^4"
-  },
-  "type": "module"
+  }
 }
