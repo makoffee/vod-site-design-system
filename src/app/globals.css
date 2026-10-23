@@ -139,3 +139,26 @@ body {
 @utility surface-glass-floating {
   --glass-tint: rgb(0 0 0 / 0.7);
 }
+
+/*
+ * Styled scroll bar for scrolling text panels (CollectionHeader expanded description; design "Scroll cue"):
+ * 6px light-grey thumb (gray.300, set --scrollbar-thumb to change it), rounded, no track. WebKit/Blink get the exact
+ * size; Firefox has no width control and gets its thin bar in the same colours.
+ */
+@utility scrollbar-sooner {
+  --scrollbar-thumb: rgb(209 213 220);
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+}

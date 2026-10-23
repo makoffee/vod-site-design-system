@@ -77,7 +77,7 @@ export function CollectionHeader({
                 id={descriptionId}
                 className={cn(
                   "m-0 text-sm leading-[1.57] text-white @2xl:text-lg @2xl:leading-[1.44]",
-                  expanded ? "max-h-[220px] overflow-y-auto pr-2" : "line-clamp-3",
+                  expanded ? "scrollbar-sooner max-h-[220px] overflow-y-auto pr-2 @2xl:[--scrollbar-thumb:rgb(209_213_220/0.5)]" : "line-clamp-3",
                 )}
               >
                 {description}
