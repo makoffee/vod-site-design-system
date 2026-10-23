@@ -26,6 +26,7 @@
   ],
   "decisions": [
     "Funding logos (Creative Europe MEDIA, Fédération Wallonie-Bruxelles, VAF) and the Amazon SSO mark are still PNGs: no vector source exists in Brilliant or simple-icons. Supply SVGs or approve keeping the rasters.",
+    "Footer sponsor logos (2026-10-23): the component shows only Creative Europe MEDIA (as on sooner.de). The Belgian logos (Fédération Wallonie-Bruxelles, VAF) are hidden layers named '· BE only' in the master, switched on per instance on the BE screens (3 Key Screens); code passes fundingLogos={beFundingLogos}.",
     "Footer copyright is white/40 on black (3.65:1), below WCAG AA 4.5:1. Kept as designed; raise to text.muted (white/60) or accept.",
     "LoginModal.SelectedProduct is 352px wide; 'MONATSABO – 7,99 €/Monat' plus the pill doesn't fit (the master overlaps the pill onto the price, code wraps the line). Widen the slot, shorten the copy, or drop the pill at this size.",
     "LanguageSelect has no open/menu state in the design; the dropdown in code is an implementation choice.",

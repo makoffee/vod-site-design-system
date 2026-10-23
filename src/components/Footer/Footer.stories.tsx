@@ -1,5 +1,5 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Footer } from "./Footer";
+import { Footer, beFundingLogos } from "./Footer";
 import { frame, viewport } from "../_shared/storyFrames";
 
 const meta = {
@@ -31,5 +31,11 @@ export const Mobile: Story = { decorators: [mobile], globals: viewport("mobile")
 /** Instance override on "4 Sooner DE Marketing Pages". */
 export const MarketingCopyright: Story = {
   args: { copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Germany" },
+  decorators: [desktop],
+};
+
+/** Belgian site: three sponsor logos (instance override on "3 Key Screens"). */
+export const BelgiumSponsors: Story = {
+  args: { fundingLogos: beFundingLogos },
   decorators: [desktop],
 };

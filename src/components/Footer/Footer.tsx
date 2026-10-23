@@ -53,9 +53,21 @@ const copy: Record<FooterLocale, { columns: { label: string; href: string }[][];
   },
 };
 
+export interface FundingLogo {
+  name: string;
+  src: string;
+  width: number;
+}
+
 // Raster logos from the master; replace with SVGs once vector sources are supplied.
-const fundingLogos = [
-  { name: "Creative Europe Media", src: "/images/funding/creative-europe-media.png", width: 125 },
+const creativeEuropeMedia: FundingLogo = { name: "Creative Europe Media", src: "/images/funding/creative-europe-media.png", width: 125 };
+
+/** Default: the one logo sooner.de shows. */
+export const defaultFundingLogos: FundingLogo[] = [creativeEuropeMedia];
+
+/** Belgian site only (screens on "3 Key Screens"); the master keeps these hidden, named "· BE only". */
+export const beFundingLogos: FundingLogo[] = [
+  creativeEuropeMedia,
   { name: "Fédération Wallonie-Bruxelles", src: "/images/funding/federation-wallonie-bruxelles.png", width: 44 },
   { name: "VAF", src: "/images/funding/vaf.png", width: 74 },
 ];
@@ -74,11 +86,13 @@ export interface FooterProps {
   /** Instance override, e.g. "… • Adlershof-Berlin, Germany" on the marketing pages. */
   copyright?: string;
   social?: { platform: SocialPlatform; href: string }[];
+  /** Sponsor logos. Only Creative Europe MEDIA by default; pass beFundingLogos for the Belgian site. */
+  fundingLogos?: FundingLogo[];
   className?: string;
 }
 
 /** Fills its container (instances are s(fill, hug) on every screen). */
-export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, social = defaultSocial, className }: FooterProps) {
+export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, social = defaultSocial, fundingLogos = defaultFundingLogos, className }: FooterProps) {
   const t = copy[locale];
 
   return (
