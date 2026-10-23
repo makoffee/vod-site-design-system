@@ -75,6 +75,7 @@ function applyLayout(node, n) {
   if (!n.al) return;
   const a = n.al;
   node.layoutMode = a.d;
+  try { node.strokesIncludedInLayout = false; } catch (e) {} // Brilliant lays out by box, never by stroke
   node.itemSpacing = a.g; [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft] = a.pad.map((v) => Math.max(0, v || 0));
   node.primaryAxisAlignItems = a.pr; node.counterAxisAlignItems = a.cr;
   if (a.wrap) { node.layoutWrap = 'WRAP'; node.counterAxisSpacing = a.cg; }
@@ -153,6 +154,7 @@ async function build(n, parent, index) {
         node = figma.createVector();
         if (n.vnet) await node.setVectorNetworkAsync(n.vnet);
         else if (n.vp) node.vectorPaths = [{ windingRule: 'NONZERO', data: n.vp }];
+        node.strokes = []; // createVector starts with a 1px black stroke
         const ox = node.x, oy = node.y; insert(parent, node, index);
         if (!n.vnet && !n.vp) node.resize(Math.max(n.w || 1, 0.01), Math.max(n.h || 1, 0.01));
         applyVisual(node, n);
@@ -165,7 +167,7 @@ async function build(n, parent, index) {
         const fr = figma.createNodeFromSvg(n.svg);
         node = fr.children.length === 1 ? fr.children[0] : figma.flatten([...fr.children], fr);
         if (node.type !== 'VECTOR') node = figma.flatten([node]);
-        insert(parent, node, index); fr.remove();
+        node.strokes = []; insert(parent, node, index); fr.remove();
         node.resize(Math.max(n.w || 1, 0.01), Math.max(n.h || 1, 0.01));
         applyVisual(node, n); place(node, n, parent); break;
       }
@@ -236,7 +238,7 @@ async function pageNamed(name) {
 }
 
 async function runJob(job) {
-  if (job.t === 'page') { const p = await pageNamed(job.name); map['page:' + job.name] = p.id; return 'page'; }
+  if (job.t === 'page') { const p = await pageNamed(job.name); map['page:' + job.name] = p.id; if (job.clear) { await p.loadAsync(); for (const c of [...p.children]) c.remove(); } return 'page'; }
   if (job.t === 'build') {
     const parent = job.parent.startsWith('page:') ? await figma.getNodeByIdAsync(map[job.parent]) : await getNode(job.parent);
     if (!parent) { errors.push('no parent ' + job.parent); return; }

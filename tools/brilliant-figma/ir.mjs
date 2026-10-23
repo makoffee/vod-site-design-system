@@ -17,6 +17,9 @@ function linearTransform(angle) {
   const v = [e[0] - s[0], e[1] - s[1]], q = [-v[1], v[0]];
   return inv([[v[0], q[0], s[0] - 0.5 * q[0]], [v[1], q[1], s[1] - 0.5 * q[1]]]);
 }
+function linearHandles([sx, sy, ex, ey, wx, wy]) { // Figma handle form: start, end, width
+  return inv([[ex - sx, wx - sx, sx - 0.5 * (wx - sx)], [ey - sy, wy - sy, sy - 0.5 * (wy - sy)]]);
+}
 function radialTransform([cx, cy, ex, ey, wx, wy]) {
   const ux = ex - cx, uy = ey - cy, vx = wx - cx, vy = wy - cy;
   return inv([[2 * ux, 2 * vx, cx - ux - vx], [2 * uy, 2 * vy, cy - uy - vy]]);
@@ -36,7 +39,7 @@ function paint(p) {
     if (out.o === 1) delete out.o; return out;
   }
   if (p.type === 'LINEAR' || p.type === 'RADIAL') {
-    return { t: p.type === 'LINEAR' ? 'L' : 'R', m: p.type === 'LINEAR' ? linearTransform(p.angle ?? 180) : radialTransform(p.handles),
+    return { t: p.type === 'LINEAR' ? 'L' : 'R', m: p.type === 'LINEAR' ? (p.handles ? linearHandles(p.handles) : linearTransform(p.angle ?? 180)) : radialTransform(p.handles),
       s: p.stops.map((s) => ({ p: Math.min(1, Math.max(0, r4(s.pos ?? 0))), c: { ...rgb(s.c), a: r4(alphaOf(s.c)) } })), ...(p.o !== undefined && p.o !== 1 ? { o: p.o } : {}) };
   }
   if (p.type === 'IMAGE') {
@@ -62,11 +65,9 @@ function pathData(d) {
 }
 function network(n) {
   const mir = { mi: 'ANGLE_AND_LENGTH', as: 'ANGLE', di: 'NONE', st: 'NONE' };
-  const regions = []; let cur = null;
-  for (const r of n.regions || []) {
-    if (r.hole && cur) { cur.loops.push(r.loop); cur.windingRule = 'EVENODD'; }
-    else { cur = { windingRule: 'NONZERO', loops: [r.loop] }; regions.push(cur); }
-  }
+  const solid = (n.regions || []).filter((r) => !r.hole), holes = (n.regions || []).filter((r) => r.hole);
+  const regions = solid.map((r) => ({ windingRule: 'NONZERO', loops: [r.loop] }));
+  if (holes.length && regions.length) { regions[0].loops.push(...holes.map((h) => h.loop)); regions[0].windingRule = 'EVENODD'; } // holes may be listed before their outline
   return { vertices: n.vertices.map((v) => ({ x: r4(v.x), y: r4(v.y), handleMirroring: mir[v.t] ?? 'NONE' })),
     segments: n.segments.map((s) => ({ start: s.start, end: s.end, tangentStart: { x: s.ts[0], y: s.ts[1] }, tangentEnd: { x: s.te[0], y: s.te[1] } })), regions };
 }

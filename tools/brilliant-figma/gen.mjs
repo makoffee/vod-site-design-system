@@ -81,7 +81,7 @@ const byId = new Map(); const parentOf = new Map();
 const index = (r, parent) => { byId.set(r.id, r); if (parent) parentOf.set(r.id, parent); r.children.forEach((c) => index(c, r)); };
 comps.forEach((r) => index(r));
 
-jobs.push({ t: 'page', name: PAGES.components });
+jobs.push({ t: 'page', name: PAGES.components, clear: true });
 const P = (name) => 'page:' + name;
 
 // glyph components (built first: masters instance them)
@@ -98,8 +98,10 @@ for (const [key, g] of glyphs) {
   glyphComps.push({ i: key, k: 'C', n: GLYPH_NAMES[key] ?? 'Icon/' + key.slice(6), w, h, wm: 'fixed', hm: 'fixed', c: [child] });
 }
 function vectorNet(net) {
-  const mir = { mi: 'ANGLE_AND_LENGTH', as: 'ANGLE', di: 'NONE', st: 'NONE' }; const regions = []; let cur = null;
-  for (const r of net.regions || []) { if (r.hole && cur) { cur.loops.push(r.loop); cur.windingRule = 'EVENODD'; } else { cur = { windingRule: 'NONZERO', loops: [r.loop] }; regions.push(cur); } }
+  const mir = { mi: 'ANGLE_AND_LENGTH', as: 'ANGLE', di: 'NONE', st: 'NONE' }; const n = net;
+  const solid = (n.regions || []).filter((r) => !r.hole), holes = (n.regions || []).filter((r) => r.hole);
+  const regions = solid.map((r) => ({ windingRule: 'NONZERO', loops: [r.loop] }));
+  if (holes.length && regions.length) { regions[0].loops.push(...holes.map((h) => h.loop)); regions[0].windingRule = 'EVENODD'; } // holes may be listed before their outline
   return { vertices: net.vertices.map((v) => ({ x: v.x, y: v.y, handleMirroring: mir[v.t] ?? 'NONE' })), segments: net.segments.map((s) => ({ start: s.start, end: s.end, tangentStart: { x: s.ts[0], y: s.ts[1] }, tangentEnd: { x: s.te[0], y: s.te[1] } })), regions };
 }
 jobs.push({ t: 'build', page: PAGES.components, parent: P(PAGES.components), node: { i: 'glyph-board', k: 'F', n: 'Icons · glyph components', x: 0, y: -900, w: 1200, h: 200, wm: 'hug', hm: 'hug', al: { d: 'HORIZONTAL', g: 48, pad: [40, 40, 40, 40], pr: 'MIN', cr: 'CENTER' }, f: [{ t: 'S', c: { r: 0.07, g: 0.07, b: 0.07 } }], rd: [24], c: glyphComps } });
@@ -146,7 +148,7 @@ for (const inst of skel.instances) jobs.push({ t: 'build', page: PAGES.component
 
 // ── design system + key screens ─────────────────────────────────────────────────────────────────────────
 for (const [key, roots] of [['ds', ds], ['screens', screens]]) {
-  jobs.push({ t: 'page', name: PAGES[key] });
+  jobs.push({ t: 'page', name: PAGES[key], clear: true });
   for (const r of roots) { const n = toIR(r); negativePadding(n); splitJobs(n, P(PAGES[key]), PAGES[key]); }
 }
 

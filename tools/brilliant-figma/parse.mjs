@@ -64,9 +64,11 @@ export function parsePaints(body) {
       const o = a.find((x) => x.startsWith('o(')); if (o) out.o = num(head(o).a);
     } else if (h.h === 'linear' || h.h === 'radial') {
       const a = args(h); out.type = h.h === 'linear' ? 'LINEAR' : 'RADIAL';
-      if (h.h === 'linear') out.angle = num(a[0]);
-      else { out.handles = [num(a[0]), num(a[1]), num(a[2]), num(a[3]), ...args(head(a[4])).map(Number)]; }
+      const handleForm = a.length > 4 && a[4].startsWith('w(');
+      if (h.h === 'linear' && !handleForm) out.angle = num(a[0]);
+      else out.handles = [num(a[0]), num(a[1]), num(a[2]), num(a[3]), ...args(head(a[4])).map(Number)];
       out.stops = a.filter((x) => x.startsWith('stop(')).map((x) => { const s = args(head(x)); const c = parseColor(s[0]); const o = s.find((y) => y.startsWith('o(')); if (o) { c.o = num(head(o).a); } return { c, pos: num(s[1]) }; });
+      if (!out.stops.length) { const cols = a.slice(handleForm ? 5 : 1).filter((x) => x.startsWith('#') || x.startsWith('tok(') || x.startsWith('solid(')); out.stops = cols.map((x, i) => ({ c: parseColor(x), pos: cols.length > 1 ? i / (cols.length - 1) : 0 })); }
     } else if (h.h === 'blur') { out.type = 'BG_BLUR'; out.radius = num(h.a); }
     else { out.type = 'SOLID'; out.c = parseColor(paint); }
     for (const x of extra) { const e = head(x);
