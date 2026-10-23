@@ -60,7 +60,7 @@ export function TextInput({
           className={cn(
             "h-14 w-full rounded-lg border px-4 text-base text-white outline-none transition-colors",
             "placeholder:text-white/70",
-            type === "password" && "pr-20",
+            type === "password" && "pr-12",
             isDisabled
               ? "cursor-not-allowed border-white/13 bg-white/4 text-gray-200 placeholder:text-gray-200"
               : cn(
@@ -78,7 +78,7 @@ export function TextInput({
             onClick={() => setRevealed((r) => !r)}
             disabled={isDisabled}
             aria-label={revealed ? hidePasswordLabel : showPasswordLabel}
-            className="absolute inset-y-0 right-12 my-auto flex size-5 items-center justify-center rounded-sm text-white outline-none focus-visible:ring-2 focus-visible:ring-white disabled:pointer-events-none"
+            className="absolute inset-y-0 right-4 my-auto flex size-5 items-center justify-center rounded-sm text-white outline-none focus-visible:ring-2 focus-visible:ring-white disabled:pointer-events-none"
           >
             {revealed ? <EyeOff className="size-5" aria-hidden /> : <Eye className="size-5" aria-hidden />}
           </button>
