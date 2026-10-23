@@ -28,3 +28,4 @@ storybook-static/
 *.njsproj
 *.sln
 *.swp
+.next/
