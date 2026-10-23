@@ -297,7 +297,7 @@
     "promohero": {
       "title": "PromoHero",
       "status": "close",
-      "summary": "Discover promo carousel slide.",
+      "summary": "Discover promo carousel slide: 2:1 anamorphic frame from 672px container width (design 1392×696), 3:4 below.",
       "differences": [
         "Design adds next/unmute buttons in the action row; code has side arrows + dots only (no autoplay audio in production)."
       ]
@@ -381,7 +381,7 @@
     "imagectabanner": {
       "title": "ImageCtaBanner",
       "status": "match",
-      "summary": "Image banner with a call to action: layout full (landing hero, production hero banner) or contained (closing banner, production slice image_cta_banner) × align left/center/right.",
+      "summary": "Image banner with a call to action: layout full (landing hero, production hero banner) or contained (closing banner, production slice image_cta_banner) × align left/center/right. The full hero is a 2:1 anamorphic frame (design 1440×720) that grows only if the copy needs room.",
       "differences": [
         "One component for the hero and the closing 'final CTA' banner; align right is new (the designs only use left for the hero and center for the banner), added so it supports both sides like the other marketing blocks.",
         "Values from production markup: hero 58/72 extrabold, lead 24/34 bold gray-200, 920px column, 200px top inset; banner min-height 420, 890px column, Playfair 48/56.",

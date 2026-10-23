@@ -40,7 +40,8 @@ const actionRow: Record<ImageCtaBannerAlign, string> = {
 /**
  * Image banner with a call to action (design "Hero" + "ContainedBanner", master axes layout[full,contained] ×
  * align[left,center,right]). full is the landing hero (production hero banner): full-bleed artwork fading to black,
- * Playfair 58 title, lead and rental note. contained is the closing banner (production image_cta_banner): a 420px
+ * Playfair 58 title, lead and rental note. From 672px of container width the full hero is a 2:1 anamorphic frame
+ * (1440×720 in the design) that only grows when the copy needs more room; below that it is a 560px-min stack. contained is the closing banner (production image_cta_banner): a 420px
  * rounded box with a Playfair 48 title. Actions stack full-width below 672px of container width.
  */
 export function ImageCtaBanner({
@@ -62,9 +63,9 @@ export function ImageCtaBanner({
     <div className={cn("@container w-full", className)}>
       <section
         className={cn(
-          "relative isolate flex w-full overflow-hidden bg-black text-white",
+          "relative isolate flex w-full overflow-clip bg-black text-white",
           full
-            ? "min-h-[560px] flex-col justify-end px-6 pt-24 pb-10 @2xl:min-h-[865px] @2xl:justify-center @2xl:px-20 @2xl:pt-[200px] @2xl:pb-8"
+            ? "min-h-[560px] flex-col justify-end px-6 pt-24 pb-10 @2xl:aspect-[2/1] @2xl:min-h-auto @2xl:justify-center @2xl:px-20 @2xl:pt-[200px] @2xl:pb-8"
             : "min-h-[420px] items-center rounded-2xl px-6 py-12 @2xl:px-10 @2xl:py-16 @5xl:px-20",
         )}
       >
