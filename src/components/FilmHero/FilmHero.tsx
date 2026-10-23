@@ -42,7 +42,8 @@ export interface FilmHeroProps {
 /**
  * Film page overview (production film `overview`, design "single film view" hero): full-bleed backdrop fading
  * to black, title treatment, director, then the .sooner-cta-* actions: subscribe, rent, trailer, watchlist, share.
- * 3:4-ish on small containers, 16:9 capped at 816px from 768px of container width.
+ * 560px-min stack on small containers; from 768px of container width a 2:1 anamorphic frame (design 1440×720) that
+ * grows only when the content needs more room.
  */
 export function FilmHero({
   title,
@@ -68,7 +69,7 @@ export function FilmHero({
 }: FilmHeroProps) {
   return (
     <div className={cn("@container w-full", className)}>
-      <section className="relative isolate flex min-h-[560px] w-full flex-col justify-end overflow-hidden bg-linear-135 from-gray-700 to-gray-800 @3xl:aspect-video @3xl:max-h-[816px] @3xl:min-h-0">
+      <section className="relative isolate flex min-h-[560px] w-full flex-col justify-end overflow-clip bg-linear-135 from-gray-700 to-gray-800 @3xl:aspect-[2/1] @3xl:min-h-auto">
         {backdropSrc && <Image src={backdropSrc} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />}
         <div className="absolute inset-x-0 top-0 -bottom-px -z-10 bg-linear-to-b from-transparent to-black" />
 
