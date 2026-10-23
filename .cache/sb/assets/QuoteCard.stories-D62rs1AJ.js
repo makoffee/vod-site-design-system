@@ -1,0 +1,5 @@
+import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{n as t,t as n}from"./storyFrames-DETwqqSC.js";import{l as r,s as i}from"./catalog-SyQ0kYJV.js";import{n as a,t as o}from"./QuoteCard-Caej4QR6.js";var s,c,l,u;function d(){return(d=e((()=>{r(),t(),a(),s={title:`Film/QuoteCard`,component:o,args:i[0],decorators:[n(`w-[341px]`)],parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},c={},l={args:{author:void 0}},u=[`Default`,`WithoutAuthor`],c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{}`,...c.parameters?.docs?.source}}},l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
+  args: {
+    author: undefined
+  }
+}`,...l.parameters?.docs?.source}}}})))()}d();export{c as Default,l as WithoutAuthor,u as __namedExportsOrder,s as default};

@@ -1,0 +1,6 @@
+import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{n as t,t as n}from"./SectionHeader-cXg8HHoT.js";var r,i,a,o;function s(){return(s=e((()=>{t(),r={title:`Feeds/SectionHeader`,component:n,args:{title:`New to Rent`,href:`/channel/new-to-rent`,moreLabel:`mehr`},parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},i={},a={args:{title:`The Sooner Curators`,href:void 0}},o=[`Linked`,`Plain`],i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`{}`,...i.parameters?.docs?.source},description:{story:`Linked feed title; hover reveals "mehr".`,...i.parameters?.docs?.description}}},a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  args: {
+    title: "The Sooner Curators",
+    href: undefined
+  }
+}`,...a.parameters?.docs?.source},description:{story:`Plain section title (channels page, film page rows).`,...a.parameters?.docs?.description}}}})))()}s();export{i as Linked,a as Plain,o as __namedExportsOrder,r as default};

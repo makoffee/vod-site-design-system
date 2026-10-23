@@ -1,0 +1,6 @@
+import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{n as t,t as n}from"./FilmBadge-DsCfmZDB.js";var r,i,a,o;function s(){return(s=e((()=>{t(),r={title:`Feeds/FilmBadge`,component:n,args:{children:`Exclusive`,tone:`label`},argTypes:{tone:{control:`inline-radio`,options:[`label`,`info`]}},parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},i={},a={args:{children:`Ab 9. Nov. 2026`,tone:`info`}},o=[`Label`,`Info`],i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`{}`,...i.parameters?.docs?.source},description:{story:`Master FilmBadge tone(label): "Exclusive" on film cards and the promo hero.`,...i.parameters?.docs?.description}}},a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  args: {
+    children: "Ab 9. Nov. 2026",
+    tone: "info"
+  }
+}`,...a.parameters?.docs?.source},description:{story:`Master FilmBadge tone(info): the coming-soon date.`,...a.parameters?.docs?.description}}}})))()}s();export{a as Info,i as Label,o as __namedExportsOrder,r as default};

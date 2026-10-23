@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-DOekyo14.js";e();
