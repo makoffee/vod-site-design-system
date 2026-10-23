@@ -43,6 +43,8 @@
     "typescript": "^5",
     "vite": "latest",
     "vitest": "^4"
+  },
+  "optionalDependencies": {
+    "@oxc-resolver/binding-linux-x64-gnu": "^11.24.2"
   }
 }
-
