@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --output-dir storybook-static"
+    "build-storybook": "storybook build -o storybook-static"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -45,3 +45,4 @@
     "vitest": "^4"
   }
 }
+
