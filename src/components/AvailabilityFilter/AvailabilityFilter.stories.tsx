@@ -18,9 +18,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design copy. */
 export const All: Story = {};
 export const Subscription: Story = { args: { defaultValue: "subscription" } };
+export const Rentals: Story = { args: { defaultValue: "rentals" } };
+
+/** Worst case for the glass surface: floating over a white film cover. */
+export const OnBrightCover: Story = {
+  args: { defaultValue: "subscription" },
+  decorators: [
+    (Story) => (
+      <div className="bg-white p-6">
+        <Story />
+      </div>
+    ),
+  ],
+};
 
 /** Mobile dropdown (design "Filter context menu" on the 393 collection screens). */
 export const Menu: Story = { args: { variant: "menu" }, parameters: { layout: "padded" } };

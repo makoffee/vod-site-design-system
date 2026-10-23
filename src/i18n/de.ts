@@ -36,6 +36,7 @@ export const feedRowDe = {
 export const featuredFilmCardDe = {
   byLabel: "Von",
   rentLabel: "Leihen",
+  subscribeLabel: "Abonnieren",
   watchlistLabel: "Zur Merkliste hinzufügen",
 } satisfies Partial<FeaturedFilmCardProps>;
 

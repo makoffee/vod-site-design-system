@@ -20,7 +20,7 @@ export interface FeaturedFilmCardProps {
   byLabel?: string;
   /** Rent action label; production "Rent", design "Rent - 4,99€". Omit to hide. */
   rentLabel?: string;
-  /** Subscribe action (design "Subscribe"); omit to hide, as on production. */
+  /** Subscribe action (design "Subscribe"); pass undefined to hide. */
   subscribeLabel?: string;
   /** Production "Add to Watchlist". */
   watchlistLabel?: string;
@@ -44,7 +44,7 @@ export function FeaturedFilmCard({
   eyebrow = "Sooner Selection",
   byLabel = "By",
   rentLabel = "Rent",
-  subscribeLabel,
+  subscribeLabel = "Subscribe",
   watchlistLabel = "Add to Watchlist",
   onRent,
   onSubscribe,

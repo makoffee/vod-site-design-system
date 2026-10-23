@@ -32,7 +32,11 @@ const icons: Record<Availability, ReactNode> = {
 
 const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
-/** Discover/collection availability switch (design "AvailabilityFilter"): glass bar with a white pill on the active option, or a dropdown on mobile. */
+/**
+ * Discover/collection availability switch (design "AvailabilityFilter"): glass bar with a white pill on the active
+ * option, or a dropdown on mobile. Both use the shared surface-glass recipe, so the same component works over black
+ * pages, collection art and bright film covers. Every option keeps its icon, active or not.
+ */
 export function AvailabilityFilter({
   value,
   defaultValue = "all",
@@ -61,7 +65,7 @@ export function AvailabilityFilter({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex items-center gap-2 rounded-sooner border border-white/20 bg-black/80 p-1.5 backdrop-blur-cta", className)}
+      className={cn("surface-glass inline-flex items-center gap-2 rounded-sooner p-1.5", className)}
     >
       {(Object.keys(text) as Availability[]).map((option) => {
         const active = option === current;
@@ -78,7 +82,7 @@ export function AvailabilityFilter({
               active ? "rounded-lg bg-white px-4 text-surface-uni" : "rounded-sooner px-2 text-white/60 hover:text-white",
             )}
           >
-            {!active && icons[option] && <span className="text-white">{icons[option]}</span>}
+            {icons[option] && <span className={active ? undefined : "text-white"}>{icons[option]}</span>}
             {text[option]}
           </button>
         );
@@ -124,7 +128,7 @@ function AvailabilityMenu({ current, text, label, defaultOpen, onSelect, classNa
         aria-controls={menuId}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "flex h-9 items-center gap-2 rounded-sooner border border-white/10 bg-surface-uni/80 px-3 text-sm font-medium text-white backdrop-blur-cta",
+          "surface-glass flex h-9 items-center gap-2 rounded-sooner px-3 text-sm font-medium text-white",
           focusVisible,
         )}
       >
@@ -156,7 +160,7 @@ function AvailabilityMenu({ current, text, label, defaultOpen, onSelect, classNa
                   active ? "justify-center bg-gray-100 text-gray-900" : "text-white hover:bg-white/10",
                 )}
               >
-                {!active && icons[option]}
+                {icons[option]}
                 {text[option]}
               </button>
             );

@@ -29,14 +29,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Production action set: rent and watchlist. */
-export const Production: Story = {};
-
-/** Design "Featured card with feed": adds Subscribe. */
-export const Design: Story = {
-  args: {
-    directorHref: undefined,
-    subscribeLabel: "Subscribe",
-    onSubscribe: fn(),
-  },
-};
+/** Design "Featured card with feed": subscribe, rent and watchlist. */
+export const Default: Story = { args: { onSubscribe: fn() } };
