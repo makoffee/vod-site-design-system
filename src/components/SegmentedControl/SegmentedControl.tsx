@@ -22,7 +22,7 @@ const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline
 
 /**
  * Plan period switch (design "highlight" on the plan-select screens: Monthly / Yearly / CinePass). Same pill
- * styling as AvailabilityFilter's bar: violet-black track with a white/10 border, white pill on the active option.
+ * styling as AvailabilityFilter's bar: ghost glass track (surface-glass), white pill on the active option.
  */
 export function SegmentedControl<T extends string = string>({
   options,
@@ -39,7 +39,7 @@ export function SegmentedControl<T extends string = string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex items-center gap-2 rounded-sooner border border-white/10 bg-surface-uni p-1.5", className)}
+      className={cn("surface-glass inline-flex items-center gap-2 rounded-sooner p-1.5", className)}
     >
       {options.map((option) => {
         const active = option.value === current;

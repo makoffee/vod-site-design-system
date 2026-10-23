@@ -6,7 +6,10 @@ const meta = {
   title: "Discover/AvailabilityFilter",
   component: AvailabilityFilter,
   args: { defaultValue: "all", onValueChange: fn() },
-  argTypes: { defaultValue: { control: "inline-radio", options: ["all", "subscription", "rentals"] } },
+  argTypes: {
+    defaultValue: { control: "inline-radio", options: ["all", "subscription", "rentals"] },
+    surface: { control: "inline-radio", options: ["ghost", "floating"] },
+  },
   parameters: {
     design: {
       type: "figma",
@@ -22,9 +25,9 @@ export const All: Story = {};
 export const Subscription: Story = { args: { defaultValue: "subscription" } };
 export const Rentals: Story = { args: { defaultValue: "rentals" } };
 
-/** Worst case for the glass surface: floating over a white film cover. */
-export const OnBrightCover: Story = {
-  args: { defaultValue: "subscription" },
+/** Discover: content scrolls under the filter, so it takes the darker floating glass (worst case: a white cover). */
+export const Floating: Story = {
+  args: { defaultValue: "subscription", surface: "floating" },
   decorators: [
     (Story) => (
       <div className="bg-white p-6">

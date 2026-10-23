@@ -10,11 +10,15 @@ export type Availability = "all" | "subscription" | "rentals";
 /** bar = segmented glass bar (desktop discover/collection), menu = compact dropdown (design "Filter context menu", 393 screens). */
 export type AvailabilityFilterVariant = "bar" | "menu";
 
+/** ghost = ghost-button glass (default); floating = darker tint where content scrolls under the filter (discover). */
+export type AvailabilityFilterSurface = "ghost" | "floating";
+
 export interface AvailabilityFilterProps {
   value?: Availability;
   defaultValue?: Availability;
   onValueChange?: (value: Availability) => void;
   variant?: AvailabilityFilterVariant;
+  surface?: AvailabilityFilterSurface;
   /** Option labels; defaults are the design's copy ("All", "Subscription", "Rentals"). */
   labels?: Partial<Record<Availability, string>>;
   /** Accessible group name (production string "Availability"). */
@@ -34,14 +38,15 @@ const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline
 
 /**
  * Discover/collection availability switch (design "AvailabilityFilter"): glass bar with a white pill on the active
- * option, or a dropdown on mobile. Both use the shared surface-glass recipe, so the same component works over black
- * pages, collection art and bright film covers. Every option keeps its icon, active or not.
+ * option, or a dropdown on mobile. surface ghost (default) is the ghost-button glass; floating adds a dark tint for
+ * places where content scrolls under the filter. The dropdown panel is always floating. Every option keeps its icon.
  */
 export function AvailabilityFilter({
   value,
   defaultValue = "all",
   onValueChange,
   variant = "bar",
+  surface = "ghost",
   labels,
   label = "Availability",
   defaultOpen = false,
@@ -57,7 +62,15 @@ export function AvailabilityFilter({
 
   if (variant === "menu") {
     return (
-      <AvailabilityMenu current={current} text={text} label={label} defaultOpen={defaultOpen} onSelect={select} className={className} />
+      <AvailabilityMenu
+        current={current}
+        text={text}
+        label={label}
+        surface={surface}
+        defaultOpen={defaultOpen}
+        onSelect={select}
+        className={className}
+      />
     );
   }
 
@@ -65,7 +78,7 @@ export function AvailabilityFilter({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("surface-glass inline-flex items-center gap-2 rounded-sooner p-1.5", className)}
+      className={cn("surface-glass inline-flex items-center gap-2 rounded-sooner p-1.5", surface === "floating" && "surface-glass-floating", className)}
     >
       {(Object.keys(text) as Availability[]).map((option) => {
         const active = option === current;
@@ -95,12 +108,13 @@ interface AvailabilityMenuProps {
   current: Availability;
   text: Record<Availability, string>;
   label: string;
+  surface: AvailabilityFilterSurface;
   defaultOpen: boolean;
   onSelect: (option: Availability) => void;
   className?: string;
 }
 
-function AvailabilityMenu({ current, text, label, defaultOpen, onSelect, className }: AvailabilityMenuProps) {
+function AvailabilityMenu({ current, text, label, surface, defaultOpen, onSelect, className }: AvailabilityMenuProps) {
   const [open, setOpen] = useState(defaultOpen);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -129,6 +143,7 @@ function AvailabilityMenu({ current, text, label, defaultOpen, onSelect, classNa
         onClick={() => setOpen((o) => !o)}
         className={cn(
           "surface-glass flex h-9 items-center gap-2 rounded-sooner px-3 text-sm font-medium text-white",
+          surface === "floating" && "surface-glass-floating",
           focusVisible,
         )}
       >
@@ -140,7 +155,7 @@ function AvailabilityMenu({ current, text, label, defaultOpen, onSelect, classNa
           id={menuId}
           role="menu"
           aria-label={label}
-          className="absolute top-full left-0 z-30 mt-2 flex min-w-[139px] flex-col gap-1 rounded-xl border border-white/10 bg-surface-card/80 p-1 shadow-[0_4px_8px_rgb(0_0_0/0.25)] backdrop-blur-cta"
+          className="surface-glass surface-glass-floating absolute top-full left-0 z-30 mt-2 flex min-w-[139px] flex-col gap-1 rounded-xl p-1 shadow-[0_4px_8px_rgb(0_0_0/0.25)]"
         >
           {(Object.keys(text) as Availability[]).map((option) => {
             const active = option === current;

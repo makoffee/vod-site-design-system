@@ -47,7 +47,7 @@ export function DiscoverScreen() {
       <div className="flex flex-col gap-6 px-6">
         <div className="flex flex-col">
           <PromoHero {...promoHeroDe} slides={promoSlides} />
-          <AvailabilityFilter {...availabilityDe} className="mx-auto my-4" />
+          <AvailabilityFilter {...availabilityDe} surface="floating" className="mx-auto my-4" />
         </div>
         <div className="flex flex-col gap-12 pb-16">
           <TallRow title="New to Rent" films={newToRent} />

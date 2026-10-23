@@ -124,13 +124,18 @@ body {
 }
 
 /*
- * Glass surface for floating controls (AvailabilityFilter, ViewToggle). One recipe for every background: on black
- * it reads exactly like ghost glass (white/10 + blur 10), and the black/70 tint under it keeps the white labels
- * legible when the control floats over a bright film cover. Hover lifts the tint via --glass-tint.
+ * Glass surfaces for controls. surface-glass is the ghost-button glass (white/10 + blur 10) with a white/10 border:
+ * the default for filters, segmented controls and toggles. Add surface-glass-floating where content scrolls under
+ * the control (discover filter, dropdown panels): a black/70 tint under the same white/10 keeps the labels legible
+ * over bright film covers. Hover can lift the tint via --glass-tint.
  */
 @utility surface-glass {
-  --glass-tint: rgb(0 0 0 / 0.7);
+  --glass-tint: transparent;
   background: linear-gradient(rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.1)), var(--glass-tint);
   backdrop-filter: blur(var(--blur-cta));
   border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+@utility surface-glass-floating {
+  --glass-tint: rgb(0 0 0 / 0.7);
 }

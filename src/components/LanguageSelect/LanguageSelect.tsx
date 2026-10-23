@@ -89,7 +89,7 @@ export function LanguageSelect({
           id={listId}
           role="menu"
           aria-label={label}
-          className="absolute right-0 top-full z-50 mt-2 min-w-40 rounded-lg border border-white/10 bg-black/80 py-1 backdrop-blur-glass"
+          className="surface-glass surface-glass-floating absolute right-0 top-full z-50 mt-2 min-w-40 rounded-lg py-1"
         >
           {options.map((option) => {
             const selected = option.value === current;
