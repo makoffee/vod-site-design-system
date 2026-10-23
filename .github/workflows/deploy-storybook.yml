@@ -30,7 +30,7 @@ jobs:
           node-version: 22
 
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps --force --no-audit
+        run: npm install --no-package-lock --legacy-peer-deps
 
       - name: Build Storybook
         run: npm run build-storybook
