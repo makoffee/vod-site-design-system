@@ -38,7 +38,7 @@ const effectStyles = Object.entries(TOK.shadows).map(([k, v]) => {
   const effects = [...v.matchAll(/drop\(([^)]*)\)/g)].map(([, a]) => { const o = Object.fromEntries(a.split(',').map((x) => x.split(':').map((s) => s.trim()))); const h = o.color.slice(1); return { type: 'DROP_SHADOW', color: { r: parseInt(h.slice(0, 2), 16) / 255, g: parseInt(h.slice(2, 4), 16) / 255, b: parseInt(h.slice(4, 6), 16) / 255, a: h.length > 6 ? parseInt(h.slice(6, 8), 16) / 255 : 1 }, offset: { x: +(o.x || 0), y: +(o.y || 0) }, radius: +(o.blur || 0), spread: +(o.spread || 0), visible: true, blendMode: 'NORMAL' }; });
   return { name: 'shadow/' + k, effects };
 });
-const tokensJob = { t: 'tokens', collection: 'brilliant-tokens', vars, textStyles, effectStyles };
+const tokensJob = { t: 'tokens', collection: 'Sooner', vars, textStyles, effectStyles };
 jobs.push(tokensJob);
 jobs.push({ t: 'hashes' });
 

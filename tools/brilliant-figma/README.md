@@ -13,7 +13,7 @@ One-way push of the Brilliant project "sooner.de rebrand" into the Figma file as
 4. Run `loader.js` through `use_figma` until `cursor === total` (one page per call). State lives in the
    `state` text node on `brilliant-assets`.
 
-What it produces: `brilliant-tokens` variables (with RGBA alpha variants such as `color/surface/glass/10`,
+What it produces: `Sooner` variables (with RGBA alpha variants such as `color/surface/glass/10`,
 because Figma instances drop paint opacity on variable-bound paints), text and effect styles, every master
 as a component or component set, icon glyphs as `Icon/*` components (instance-swappable), and screens built
 from instances with only their differences applied as overrides.
