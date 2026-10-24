@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Avatar } from "./Avatar";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/Avatar",
   component: Avatar,
   args: { initials: "AB" },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("Avatar"),
   },
 } satisfies Meta<typeof Avatar>;
 

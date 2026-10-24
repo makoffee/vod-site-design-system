@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChannelTagTile } from "./ChannelTagTile";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Film/ChannelTagTile",
@@ -8,10 +9,7 @@ const meta = {
   args: { title: "Channel Tag Title", href: "/channel/tag" },
   decorators: [frame(339)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("ChannelTagTile"),
   },
 } satisfies Meta<typeof ChannelTagTile>;
 

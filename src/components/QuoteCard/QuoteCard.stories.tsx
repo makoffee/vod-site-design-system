@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholderQuote } from "@/mocks/placeholder";
 import { QuoteCard } from "./QuoteCard";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Film/QuoteCard",
@@ -9,10 +10,7 @@ const meta = {
   args: placeholderQuote,
   decorators: [frame(341)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("QuoteCard"),
   },
 } satisfies Meta<typeof QuoteCard>;
 

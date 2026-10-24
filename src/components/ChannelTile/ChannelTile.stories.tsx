@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholderChannels } from "@/mocks/placeholder";
 import { ChannelTile } from "./ChannelTile";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/ChannelTile",
@@ -9,10 +10,7 @@ const meta = {
   args: { ...placeholderChannels[0], tint: "bg-sooner-primary" },
   decorators: [frame(222)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("ChannelTile"),
   },
 } satisfies Meta<typeof ChannelTile>;
 

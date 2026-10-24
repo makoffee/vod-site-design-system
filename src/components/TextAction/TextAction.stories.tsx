@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { TextAction } from "./TextAction";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Account/TextAction",
   component: TextAction,
   args: { children: "Edit", onClick: fn() },
-  parameters: { design: { type: "figma", url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l" } },
+  parameters: { ...figmaComponent("TextAction"), },
 } satisfies Meta<typeof TextAction>;
 
 export default meta;

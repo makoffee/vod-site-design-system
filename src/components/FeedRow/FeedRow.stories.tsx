@@ -3,6 +3,7 @@ import { FilmCard } from "../FilmCard/FilmCard";
 import { placeholder, placeholderFilms } from "@/mocks/placeholder";
 import { FeedRow } from "./FeedRow";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/FeedRow",
@@ -11,10 +12,7 @@ const meta = {
   argTypes: { kind: { control: "inline-radio", options: ["tall", "wide", "square"] } },
   parameters: {
     layout: "padded",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FeedRow"),
   },
   decorators: [frame(1392)],
 } satisfies Meta<typeof FeedRow>;

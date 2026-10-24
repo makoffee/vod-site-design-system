@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { SegmentedControl } from "./SegmentedControl";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/SegmentedControl",
@@ -14,10 +15,7 @@ const meta = {
     onValueChange: fn(),
   },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("SegmentedControl"),
   },
 } satisfies Meta<typeof SegmentedControl>;
 

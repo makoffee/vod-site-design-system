@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { plansEn } from "@/content/plans";
 import { ProductCard } from "./ProductCard";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/ProductCard",
@@ -11,10 +12,7 @@ const meta = {
   argTypes: { product: { control: "inline-radio", options: ["monthly", "yearly", "plus"], mapping: plansEn } },
   decorators: [frame(400)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("ProductCard"),
   },
 } satisfies Meta<typeof ProductCard>;
 

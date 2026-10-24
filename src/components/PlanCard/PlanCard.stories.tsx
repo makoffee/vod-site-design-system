@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { plansEn } from "@/content/plans";
 import { PlanCard } from "./PlanCard";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 // Story-only placeholder still (The Seventh Seal); the design screens keep their own artwork.
 const placeholderStill = "/images/placeholder/seventh-seal.webp";
@@ -17,10 +18,7 @@ const meta = {
   },
   decorators: [frame(384)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("PlanCard"),
   },
 } satisfies Meta<typeof PlanCard>;
 

@@ -17,3 +17,10 @@ What it produces: `Sooner` variables (with RGBA alpha variants such as `color/su
 because Figma instances drop paint opacity on variable-bound paints), text and effect styles, every master
 as a component or component set, icon glyphs as `Icon/*` components (instance-swappable), and screens built
 from instances with only their differences applied as overrides.
+
+## Storybook design links
+
+Stories link their Design tab to Figma through `src/figma-nodes.json` (`figmaComponent("Button")`,
+`figmaScreen("Discover | desktop")` in `src/components/_shared/figma.ts`). A sync rebuilds the Figma pages, so node ids
+change: after every sync run `links.js` through `use_figma`, save the returned JSON and run
+`node tools/brilliant-figma/write-links.mjs <file>`.

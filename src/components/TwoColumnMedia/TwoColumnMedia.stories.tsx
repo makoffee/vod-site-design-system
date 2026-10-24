@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholderTwoColumn } from "@/mocks/placeholder";
 import { TwoColumnMedia } from "./TwoColumnMedia";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Marketing/TwoColumnMedia",
@@ -11,10 +12,7 @@ const meta = {
   decorators: [frame(1440)],
   parameters: {
     layout: "fullscreen",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("TwoColumnMedia"),
   },
 } satisfies Meta<typeof TwoColumnMedia>;
 

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { Checkbox } from "./Checkbox";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 // Variants mirror the Checkbox master: checked[false,true] × state[default,focus,disabled].
 const meta = {
@@ -20,10 +21,7 @@ const meta = {
   },
   decorators: [frame(364)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("Checkbox"),
   },
 } satisfies Meta<typeof Checkbox>;
 

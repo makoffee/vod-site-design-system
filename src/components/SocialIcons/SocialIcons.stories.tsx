@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SocialIcons, socialGlyphs, type SocialPlatform } from "./SocialIcons";
+import { figmaComponent } from "../_shared/figma";
 
 const platforms = Object.keys(socialGlyphs) as SocialPlatform[];
 
@@ -12,10 +13,7 @@ const meta = {
     color: { control: "inline-radio", options: ["negative", "original"] },
   },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("Social Icons"),
   },
 } satisfies Meta<typeof SocialIcons>;
 

@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { plansEn } from "@/content/plans";
 import { LoginModal } from "./LoginModal";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/LoginModal",
@@ -23,10 +24,7 @@ const meta = {
   },
   decorators: [frame(400)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("LoginModal"),
   },
 } satisfies Meta<typeof LoginModal>;
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { ViewToggle } from "./ViewToggle";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Collections/ViewToggle",
@@ -8,10 +9,7 @@ const meta = {
   args: { view: "list", onViewChange: fn() },
   argTypes: { view: { control: "inline-radio", options: ["grid", "list"] } },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("ViewToggle"),
   },
 } satisfies Meta<typeof ViewToggle>;
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { FilmBadge } from "./FilmBadge";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/FilmBadge",
@@ -7,10 +8,7 @@ const meta = {
   args: { children: "Badge", tone: "label" },
   argTypes: { tone: { control: "inline-radio", options: ["label", "info"] } },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FilmBadge"),
   },
 } satisfies Meta<typeof FilmBadge>;
 

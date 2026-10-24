@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholderFilm } from "@/mocks/placeholder";
 import { FilmDetails } from "./FilmDetails";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Film/FilmDetails",
@@ -11,10 +12,7 @@ const meta = {
   },
   decorators: [frame(1392)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FilmDetails"),
   },
 } satisfies Meta<typeof FilmDetails>;
 

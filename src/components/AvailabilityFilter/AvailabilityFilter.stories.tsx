@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { AvailabilityFilter } from "./AvailabilityFilter";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Discover/AvailabilityFilter",
@@ -11,10 +12,7 @@ const meta = {
     surface: { control: "inline-radio", options: ["ghost", "floating"] },
   },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("AvailabilityFilter"),
   },
 } satisfies Meta<typeof AvailabilityFilter>;
 

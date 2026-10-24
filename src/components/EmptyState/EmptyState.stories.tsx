@@ -2,13 +2,14 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Bookmark, CircleAlert, Search } from "lucide-react";
 import { ActionLink } from "../_shared/ActionLink";
 import { EmptyState } from "./EmptyState";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Account/EmptyState",
   component: EmptyState,
   args: { message: "You do not have active purchases" },
   decorators: [(Story) => <div className="w-full max-w-[768px]"><Story /></div>],
-  parameters: { design: { type: "figma", url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l" } },
+  parameters: { ...figmaComponent("EmptyState"), },
 } satisfies Meta<typeof EmptyState>;
 
 export default meta;

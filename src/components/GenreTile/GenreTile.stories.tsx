@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholderGenres } from "@/mocks/placeholder";
 import { GenreTile } from "./GenreTile";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/GenreTile",
@@ -9,10 +10,7 @@ const meta = {
   args: placeholderGenres[0],
   decorators: [frame(336)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("GenreTile"),
   },
 } satisfies Meta<typeof GenreTile>;
 

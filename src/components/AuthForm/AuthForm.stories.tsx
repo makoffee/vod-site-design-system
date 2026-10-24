@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { plansEn } from "@/content/plans";
 import { AuthForm } from "./AuthForm";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/AuthForm",
@@ -21,10 +22,7 @@ const meta = {
   },
   decorators: [frame(400)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("AuthForm"),
   },
 } satisfies Meta<typeof AuthForm>;
 

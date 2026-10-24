@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NavLink } from "./NavLink";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/NavLink",
   component: NavLink,
   args: { href: "/discover", children: "Link", active: false },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("NavLink"),
   },
 } satisfies Meta<typeof NavLink>;
 

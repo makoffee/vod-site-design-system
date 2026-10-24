@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { LanguageSelect } from "./LanguageSelect";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/LanguageSelect",
@@ -8,10 +9,7 @@ const meta = {
   args: { defaultValue: "en", onValueChange: fn() },
   argTypes: { defaultValue: { control: "inline-radio", options: ["en", "de", "fr"] } },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("LanguageSelect"),
   },
 } satisfies Meta<typeof LanguageSelect>;
 

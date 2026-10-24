@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { DeviceCodeForm } from "./DeviceCodeForm";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Account/DeviceCodeForm",
   component: DeviceCodeForm,
   args: { onSubmit: fn() },
   decorators: [(Story) => <div className="w-full max-w-[768px]"><Story /></div>],
-  parameters: { design: { type: "figma", url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l" } },
+  parameters: { ...figmaComponent("DeviceCodeForm"), },
 } satisfies Meta<typeof DeviceCodeForm>;
 
 export default meta;

@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SoonerLogo } from "./SoonerLogo";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/SoonerLogo",
   component: SoonerLogo,
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("SoonerLogo"),
   },
 } satisfies Meta<typeof SoonerLogo>;
 

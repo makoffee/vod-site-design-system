@@ -3,6 +3,7 @@ import { placeholderFeaturedCollection, placeholderFilms } from "@/mocks/placeho
 import { FilmCard } from "../FilmCard/FilmCard";
 import { FeaturedCollectionBlock } from "./FeaturedCollectionBlock";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const films = placeholderFilms.slice(0, 7).map(({ id, title, href, rentable }) => (
   <FilmCard key={id} title={title} href={href} rentable={rentable} />
@@ -19,10 +20,7 @@ const meta = {
   decorators: [frame(1440)],
   parameters: {
     layout: "fullscreen",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FeaturedCollectionBlock"),
   },
 } satisfies Meta<typeof FeaturedCollectionBlock>;
 

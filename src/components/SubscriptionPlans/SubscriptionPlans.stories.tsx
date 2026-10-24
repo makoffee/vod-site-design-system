@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubscriptionPlans } from "./SubscriptionPlans";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 // Contextual component: keeps the production plan copy (no placeholder text).
 const meta = {
@@ -18,11 +19,9 @@ const meta = {
   },
   decorators: [frame(1440)],
   parameters: {
+    ...figmaComponent("SubscriptionPlans"),
     layout: "fullscreen",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    
   },
 } satisfies Meta<typeof SubscriptionPlans>;
 

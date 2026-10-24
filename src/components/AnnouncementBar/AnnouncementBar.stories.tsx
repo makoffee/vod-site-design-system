@@ -3,6 +3,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import { placeholder } from "@/mocks/placeholder";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Marketing/AnnouncementBar",
@@ -15,10 +16,7 @@ const meta = {
   decorators: [frame(1440)],
   parameters: {
     layout: "fullscreen",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("AnnouncementBar"),
   },
 } satisfies Meta<typeof AnnouncementBar>;
 

@@ -3,6 +3,7 @@ import { placeholderFilms, placeholderSlice } from "@/mocks/placeholder";
 import { FilmCard } from "../FilmCard/FilmCard";
 import { CollectionFeature } from "./CollectionFeature";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Discover/CollectionFeature",
@@ -14,10 +15,7 @@ const meta = {
   decorators: [frame(1392)],
   parameters: {
     layout: "padded",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("CollectionFeature"),
   },
 } satisfies Meta<typeof CollectionFeature>;
 

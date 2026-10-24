@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { placeholder } from "@/mocks/placeholder";
 import { FilmCard } from "./FilmCard";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/FilmCard",
@@ -10,10 +11,7 @@ const meta = {
   argTypes: { aspect: { control: "inline-radio", options: ["tall", "wide"] } },
   decorators: [frame(222)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FilmCard"),
   },
 } satisfies Meta<typeof FilmCard>;
 

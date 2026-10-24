@@ -9,7 +9,6 @@ const meta = {
   component: AccountPanel,
   args: { children: null },
   decorators: [(Story) => <div className="w-full max-w-[768px]"><Story /></div>],
-  parameters: { design: { type: "figma", url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l" } },
 } satisfies Meta<typeof AccountPanel>;
 
 export default meta;

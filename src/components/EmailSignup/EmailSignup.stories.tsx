@@ -3,6 +3,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import { placeholder } from "@/mocks/placeholder";
 import { EmailSignup } from "./EmailSignup";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Marketing/EmailSignup",
@@ -16,10 +17,7 @@ const meta = {
   decorators: [frame(1280)],
   parameters: {
     layout: "padded",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("EmailSignup"),
   },
 } satisfies Meta<typeof EmailSignup>;
 

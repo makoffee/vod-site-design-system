@@ -3,6 +3,7 @@ import { placeholderSlice } from "@/mocks/placeholder";
 import { SocialIcons } from "../SocialIcons/SocialIcons";
 import { EditorialSlice } from "./EditorialSlice";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Discover/EditorialSlice",
@@ -15,10 +16,7 @@ const meta = {
   decorators: [frame(1392)],
   parameters: {
     layout: "padded",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("EditorialSlice"),
   },
 } satisfies Meta<typeof EditorialSlice>;
 

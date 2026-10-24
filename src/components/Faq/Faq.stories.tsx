@@ -3,6 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { placeholderFaq } from "@/mocks/placeholder";
 import { Faq } from "./Faq";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Marketing/Faq",
@@ -12,10 +13,7 @@ const meta = {
   decorators: [frame(1440)],
   parameters: {
     layout: "fullscreen",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("Faq"),
   },
 } satisfies Meta<typeof Faq>;
 

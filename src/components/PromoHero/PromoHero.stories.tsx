@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { placeholderPromoSlides } from "@/mocks/placeholder";
 import { PromoHero } from "./PromoHero";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Discover/PromoHero",
@@ -10,10 +11,7 @@ const meta = {
   args: { slides: placeholderPromoSlides, onAddToList: fn() },
   decorators: [frame(1392)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("PromoHero"),
   },
 } satisfies Meta<typeof PromoHero>;
 

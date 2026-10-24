@@ -2,16 +2,14 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { UniOffer } from "./UniOffer";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/UniOffer",
   component: UniOffer,
   args: { onSelect: fn() },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("UniOffer"),
   },
 } satisfies Meta<typeof UniOffer>;
 

@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { placeholderFilms } from "@/mocks/placeholder";
 import { FilmListItem } from "./FilmListItem";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const [film] = placeholderFilms;
 
@@ -12,10 +13,7 @@ const meta = {
   args: { ...film, onSubscribe: fn(), onRent: fn(), onAddToWatchlist: fn() },
   decorators: [frame(1152)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FilmListItem"),
   },
 } satisfies Meta<typeof FilmListItem>;
 

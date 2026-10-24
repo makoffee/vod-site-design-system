@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TextInput } from "./TextInput";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Components/TextInput",
@@ -18,10 +19,7 @@ const meta = {
   },
   decorators: [frame(380)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("TextInput"),
   },
 } satisfies Meta<typeof TextInput>;
 

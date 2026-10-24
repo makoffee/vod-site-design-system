@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SectionHeader } from "./SectionHeader";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/SectionHeader",
   component: SectionHeader,
   args: { title: "Section Title", href: "/channel/section" },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("SectionHeader"),
   },
 } satisfies Meta<typeof SectionHeader>;
 

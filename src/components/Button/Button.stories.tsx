@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { Button } from "./Button";
+import { figmaComponent } from "../_shared/figma";
 
 // One story per variant on the master; ids match design-refs/components-button--*.png.
 // The master's focus variants were removed: production has none (keyboard focus = 2px white outline).
@@ -27,10 +28,7 @@ const meta = {
     },
   ],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("Button"),
   },
 } satisfies Meta<typeof Button>;
 

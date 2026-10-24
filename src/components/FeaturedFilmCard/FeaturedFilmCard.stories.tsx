@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { loremLong, placeholder } from "@/mocks/placeholder";
 import { FeaturedFilmCard } from "./FeaturedFilmCard";
 import { frame } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/FeaturedFilmCard",
@@ -19,10 +20,7 @@ const meta = {
   },
   decorators: [frame(619)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FeaturedFilmCard"),
   },
 } satisfies Meta<typeof FeaturedFilmCard>;
 

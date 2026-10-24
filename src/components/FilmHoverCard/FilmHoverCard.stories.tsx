@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { placeholder } from "@/mocks/placeholder";
 import { FilmHoverCard } from "./FilmHoverCard";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Feeds/FilmHoverCard",
@@ -19,10 +20,7 @@ const meta = {
     onAddToWatchlist: fn(),
   },
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("FilmHoverCard"),
   },
 } satisfies Meta<typeof FilmHoverCard>;
 

@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TextAction } from "../TextAction/TextAction";
 import { DetailRow } from "./DetailRow";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Account/DetailRow",
   component: DetailRow,
   args: { label: "Email", value: "name@example.com" },
   decorators: [(Story) => <div className="w-full max-w-[768px] rounded-xl border border-white/10 bg-white/5"><Story /></div>],
-  parameters: { design: { type: "figma", url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l" } },
+  parameters: { ...figmaComponent("DetailRow"), },
 } satisfies Meta<typeof DetailRow>;
 
 export default meta;

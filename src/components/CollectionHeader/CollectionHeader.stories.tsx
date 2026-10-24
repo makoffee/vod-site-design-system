@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { placeholderCollection } from "@/mocks/placeholder";
 import { CollectionHeader } from "./CollectionHeader";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Collections/CollectionHeader",
@@ -11,10 +12,7 @@ const meta = {
   argTypes: { view: { control: "inline-radio", options: ["grid", "list"] } },
   decorators: [frame(1152)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("CollectionHeader"),
   },
 } satisfies Meta<typeof CollectionHeader>;
 

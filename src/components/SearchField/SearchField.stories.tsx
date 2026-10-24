@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { SearchField } from "./SearchField";
 import { frame, viewport } from "../_shared/storyFrames";
+import { figmaComponent } from "../_shared/figma";
 
 const meta = {
   title: "Search/SearchField",
@@ -10,10 +11,7 @@ const meta = {
   argTypes: { size: { control: "inline-radio", options: ["lg", "md"] } },
   decorators: [frame(720)],
   parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
+    ...figmaComponent("SearchField"),
   },
 } satisfies Meta<typeof SearchField>;
 
