@@ -14,7 +14,7 @@ export function AccountPanel({ children, variant = "padded", className }: Accoun
     <div
       className={cn(
         "w-full rounded-xl border border-white/10 bg-white/5",
-        variant === "rows" ? "divide-y divide-white/10" : "flex flex-col gap-6 p-5",
+        variant === "rows" ? "divide-y divide-white/10" : "flex flex-col gap-6 p-6",
         className,
       )}
     >
