@@ -134,8 +134,10 @@ export function FeedRow({
           ref={trackRef}
           onScroll={update}
           className={cn(
-            "flex snap-x snap-mandatory gap-(--gap) overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-            loading ? "overflow-hidden" : "overflow-x-auto",
+            // 12px bleed on every side (cancelled by negative margins, matched by scroll padding) so tiles that scale up on
+            // hover aren't clipped, and overflow-y stays hidden so the hover never adds a vertical scrollbar.
+            "-m-3 flex snap-x snap-mandatory scroll-px-3 gap-(--gap) p-3 overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            loading ? "overflow-hidden" : "overflow-x-auto overflow-y-hidden",
           )}
         >
           {items}
