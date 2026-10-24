@@ -4,16 +4,21 @@ import { cn } from "@/lib/cn";
 export interface QuoteCardProps {
   /** Festival, jury or publication the quote comes from. */
   source: string;
+  /** Quote text. */
   quote: string;
   /** Person quoted, shown after the quote. */
   author?: string;
+  /** Round 46px source logo; gray circle when omitted. */
   logoSrc?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Review / award quote (design "Quotes and reviews"): white card, round source logo with a Playfair source line,
  * then the quote in gray-700.
+ * Use for: press and festival quotes on the film page, in a FeedRow kind="wide".
+ * Not for: editorial features with images (use EditorialSlice).
  */
 export function QuoteCard({ source, quote, author, logoSrc, className }: QuoteCardProps) {
   return (

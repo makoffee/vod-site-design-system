@@ -10,18 +10,25 @@ import { plansByLocale, type PlanId } from "../_shared/plans";
 export interface PlanCardProps {
   /** Master axis plan[monthly,yearly,plus]; the master's state axis only has "default". */
   plan: PlanId;
+  /** Called with the plan id when the card's CTA button is pressed. */
   onSelect?: (plan: PlanId) => void;
   /** Artwork for the 384 × 199 header. The master's film stills are placeholders, so none ships by default. */
   imageSrc?: string;
+  /** Alt text of imageSrc (default "", decorative). */
   imageAlt?: string;
-  /** Copy language; English by default. */
+  /** Copy language; English by default. Pass "de" on DE screens (all card copy comes from the plan data). */
   locale?: Locale;
   /** top = price under the name (landing, master price[top]); bottom = after the features (subscribe page, price[bottom]). */
   pricePosition?: "top" | "bottom";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Master db8d72090caab1b0 (Prismic slice subscription_plans). The yearly plan is the highlighted card. */
+/**
+ * Master db8d72090caab1b0 (Prismic slice subscription_plans). The yearly plan is the highlighted card.
+ * Use for: a single plan offer with its CTA; SubscriptionPlans lays out all three.
+ * Not for: the chosen plan summary in signup/checkout (use ProductCard); the full plan picker (use SubscriptionPlans).
+ */
 export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale = "en", pricePosition = "top", className }: PlanCardProps) {
   const plan = plansByLocale[locale][id];
   const price = (

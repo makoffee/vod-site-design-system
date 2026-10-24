@@ -4,6 +4,7 @@ import { cn } from "@/lib/cn";
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   /** Full name; initials are derived from it unless `initials` is given. */
   name?: string;
+  /** Text in the circle; overrides the initials derived from `name` (first letters of the first two words). */
   initials?: string;
 }
 
@@ -15,7 +16,10 @@ const toInitials = (name: string) =>
     .map((part) => part[0]!.toUpperCase())
     .join("");
 
-/** Master 1bcc172336cdf601: 32px violet circle, initials in text.xs-semibold. */
+/**
+ * Master 1bcc172336cdf601: 32px violet circle, initials in text.xs-semibold.
+ * Use for: the logged-in user in Header and other compact user references.
+ */
 export function Avatar({ name, initials, className, ...props }: AvatarProps) {
   const text = initials ?? (name ? toInitials(name) : "");
   return (

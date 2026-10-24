@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export interface EmptyStateProps {
+  /** Text explaining that there is nothing here. Label text; pass German on DE screens. */
   message: string;
   /** Optional glyph above the message (watchlist bookmark). */
   icon?: ReactNode;
@@ -9,12 +10,15 @@ export interface EmptyStateProps {
   action?: ReactNode;
   /** panel = inside the account panel surface; plain = on the page (watchlist). */
   surface?: "panel" | "plain";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Nothing-here state (production account subscriptions/rentals and the empty watchlist): centred message in
  * white/60 with an optional icon and action. Production left-aligns the watchlist icon; here it is centred with the text.
+ * Use for: empty subscriptions, rentals or watchlist.
+ * Not for: panels that have content (use AccountPanel).
  */
 export function EmptyState({ message, icon, action, surface = "panel", className }: EmptyStateProps) {
   return (

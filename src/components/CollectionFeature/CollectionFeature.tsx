@@ -5,16 +5,21 @@ import { BinocularMask } from "../_shared/BinocularMask";
 import { EditorialContent, type EditorialContentProps } from "../EditorialSlice/EditorialSlice";
 
 export interface CollectionFeatureProps extends EditorialContentProps {
+  /** Image URL shown in the binocular mask; empty mask when omitted. */
   imageSrc?: string;
+  /** Image alt text; default "" (decorative). */
   imageAlt?: string;
   /** The collection's films (FilmCards); laid out 2-up, then 4-up from 768px of container width. */
   children?: ReactNode;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Collection intro with its films (design "FeaturedCollectionStack"): binocular image + editorial text on a
  * white panel, followed by a grid of tall film cards.
+ * Use for: introducing a collection on discover together with a handful of its FilmCards.
+ * Not for: a text + image feature without films (use EditorialSlice) or a horizontally scrolling row (use FeedRow).
  */
 export function CollectionFeature({ imageSrc, imageAlt = "", children, className, ...content }: CollectionFeatureProps) {
   return (

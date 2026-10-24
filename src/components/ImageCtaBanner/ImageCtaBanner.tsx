@@ -8,20 +8,27 @@ export type ImageCtaBannerLayout = "full" | "contained";
 export type ImageCtaBannerAlign = "left" | "center" | "right";
 
 export interface ImageCtaBannerProps {
+  /** full = full-bleed landing hero; contained = rounded 420px banner (default). */
   layout?: ImageCtaBannerLayout;
+  /** Text and action alignment: left, center or right; default left for full, center for contained. */
   align?: ImageCtaBannerAlign;
   /** Pill above the title, e.g. "Sooner recommends". */
   eyebrow?: string;
+  /** Playfair heading; line breaks are kept. */
   title: string;
   /** Bold lead under the hero title (full layout). */
   subtitle?: string;
   /** Body line: the rental note on the hero, the supporting sentence on the contained banner. */
   description?: string;
+  /** Link buttons ({ label, href, tone?: primary|white|black, icon? }), set in caps; default none. */
   actions?: Action[];
+  /** Background artwork URL; gray gradient when omitted. */
   imageSrc?: string;
+  /** Artwork alt text; default "" (decorative). */
   imageAlt?: string;
-  /** The landing hero is the page's h1; banners further down are h2. */
+  /** The landing hero is the page's h1; banners further down are h2. Default h1 for full, h2 for contained. */
   as?: "h1" | "h2";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -43,6 +50,8 @@ const actionRow: Record<ImageCtaBannerAlign, string> = {
  * Playfair 58 title, lead and rental note. From 672px of container width the full hero is a 2:1 anamorphic frame
  * (1440×720 in the design) that only grows when the copy needs more room; below that it is a 560px-min stack. contained is the closing banner (production image_cta_banner): a 420px
  * rounded box with a Playfair 48 title. Actions stack full-width below 672px of container width.
+ * Use for: the landing page hero (full) or a closing call-to-action banner (contained).
+ * Not for: the discover carousel (use PromoHero), a film page header (use FilmHero) or a collection teaser with films (use FeaturedCollectionBlock).
  */
 export function ImageCtaBanner({
   layout = "contained",

@@ -8,19 +8,25 @@ import { cn } from "@/lib/cn";
 export type SearchFieldSize = "lg" | "md";
 
 export interface SearchFieldProps {
+  /** Controlled query; when set, the field shows it and onValueChange must update it. */
   value?: string;
+  /** Initial query when uncontrolled (default ""). */
   defaultValue?: string;
+  /** Called on every edit and with "" when the clear button is pressed. */
   onValueChange?: (value: string) => void;
   /** Enter / submit. */
   onSearch?: (value: string) => void;
+  /** lg = search overlay, md = in-nav bar on results (default). */
   size?: SearchFieldSize;
-  /** Production "Search films, directors, actors…" (de "Filme, Regisseure, Schauspieler suchen…"). */
+  /** Production "Search films, directors, actors…" (de "Filme, Regisseure, Schauspieler suchen…"). Label text; English default, pass German on DE screens. */
   placeholder?: string;
-  /** Accessible name of the field and the search landmark. */
+  /** Accessible name of the field and the search landmark (default "Search"). Label text; English default, pass German on DE screens. */
   label?: string;
-  /** No production source. */
+  /** Accessible name of the clear button (default "Clear search"). No production source. Label text; English default, pass German on DE screens. */
   clearLabel?: string;
+  /** Focuses the input on mount. */
   autoFocus?: boolean;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -29,7 +35,11 @@ const sizes: Record<SearchFieldSize, string> = {
   md: "rounded-sooner py-[11px] backdrop-blur-cta shadow-[0_8px_10px_-6px_rgb(0_0_0/0.1)]",
 };
 
-/** Search input (design "Search Nav" / search overlay "Form"): lucide search icon, 18px text, clear button once there is a query. */
+/**
+ * Search input (design "Search Nav" / search overlay "Form"): lucide search icon, 18px text, clear button once there is a query.
+ * Use for: the film search query on the search overlay and results page.
+ * Not for: form fields such as email or device code (use TextInput).
+ */
 export function SearchField({
   value,
   defaultValue = "",

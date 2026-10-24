@@ -9,8 +9,11 @@ export type ChoiceState = "default" | "focus" | "disabled";
 
 export interface ChoiceFieldProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "onChange" | "role"> {
+  /** Visible text right of the control (14px, white/80); also the input's accessible name. Label text; pass German on DE screens. */
   label: ReactNode;
+  /** Optional 12px white/40 line under the label, linked via aria-describedby. */
   description?: ReactNode;
+  /** Called with the new checked value. Without it, a controlled `checked` renders read-only (static documentation). */
   onCheckedChange?: (checked: boolean) => void;
   /** focus pins the focus ring for documentation; real focus uses :focus-visible. */
   state?: ChoiceState;

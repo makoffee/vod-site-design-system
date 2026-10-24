@@ -21,8 +21,13 @@ export type ButtonState = "default" | "hover" | "disabled";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Native button type; "button" unless set (use "submit" for a form's submit button). */
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  /** cta-primary (default) violet main action; cta-ghost white/10 glass; cta-white white on dark; cta-text transparent; cta-light gray-100, 14px semibold (UNI banner); cta-round 56px glass circle, play icon when empty; cta-danger red outline (destructive). */
   variant?: ButtonVariant;
+  /** default follows real hover/disabled; hover pins the hover look (documentation); disabled disables the button like `disabled`. */
   state?: ButtonState;
+  /** sm = 36px, uppercase 14px nav type (header); md = 48px (default); lg = 56px (production CTA). Ignored by cta-round. */
   size?: ButtonSize;
   /** fill = stretch to the parent (default for md/lg, as on every design instance); hug = fit the label (default for sm). */
   width?: Sizing;
@@ -88,6 +93,12 @@ const sizes: Record<ButtonSize, string> = {
   lg: "h-14 px-8 text-base",
 };
 
+/**
+ * Call-to-action button (production .sooner-cta-* / .sooner-filled-btn). Native <button>, type="button" unless set;
+ * other button attributes pass through. Children are the label (and optional icon).
+ * Use for: form submits, dialog actions, hero/banner CTAs, header Login / Sign up (size sm), play (cta-round).
+ * Not for: small inline text actions (use TextAction); header navigation tabs (use NavLink).
+ */
 export function Button({
   variant = "cta-primary",
   state = "default",

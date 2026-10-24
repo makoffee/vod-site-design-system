@@ -10,23 +10,35 @@ import { AvailabilityFilter, type Availability, type AvailabilityFilterProps } f
 export type { CollectionView } from "../ViewToggle/ViewToggle";
 
 export interface CollectionHeaderProps {
+  /** Collection name (h1). */
   title: string;
+  /** Collection text, clamped to three lines with a show more / less toggle; omitted with its toggle when empty. */
   description?: string;
+  /** Banner artwork (decorative); a grey gradient shows without it. */
   imageSrc?: string;
+  /** Current view passed to ViewToggle (default "grid"); the header does not store it. */
   view?: CollectionView;
+  /** Called with the other view when the ViewToggle is pressed. */
   onViewChange?: (view: CollectionView) => void;
+  /** Controlled availability filter value. */
   availability?: Availability;
+  /** Initial availability when uncontrolled (default "all"). */
   defaultAvailability?: Availability;
+  /** Called when the availability filter changes. */
   onAvailabilityChange?: (value: Availability) => void;
   /** Passed to both AvailabilityFilter layouts (labels, group label). */
   filterLabels?: Pick<AvailabilityFilterProps, "labels" | "label">;
   /** Description starts expanded (design "list | expanded text"). */
   defaultExpanded?: boolean;
-  /** No production source; screen-reader names for the toggles. */
+  /** No production source; screen-reader names for the toggles. Label text; English default, pass German on DE screens. */
   showMoreLabel?: string;
+  /** Screen-reader name of the collapse toggle (default "Show less"). Label text; English default, pass German on DE screens. */
   showLessLabel?: string;
+  /** Screen-reader name of the ViewToggle when it switches to grid (default "Grid view"). Label text; English default, pass German on DE screens. */
   gridViewLabel?: string;
+  /** Screen-reader name of the ViewToggle when it switches to list (default "List view"). Label text; English default, pass German on DE screens. */
   listViewLabel?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -35,6 +47,8 @@ export interface CollectionHeaderProps {
  * container width, 6:7 below; it only grows when the expanded text needs room) with a bottom fade, title, a
  * three-line description that expands in place, the availability filter and the grid / list switch.
  * The filter becomes a dropdown below 672px of container width.
+ * Use for: the top of a collection page above its film grid or list.
+ * Not for: a title above a feed row (use SectionHeader).
  */
 export function CollectionHeader({
   title,

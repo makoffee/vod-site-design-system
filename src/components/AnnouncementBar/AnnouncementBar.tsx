@@ -6,12 +6,15 @@ import { useState } from "react";
 import { cn } from "@/lib/cn";
 
 export interface AnnouncementBarProps {
+  /** Bold promo text; also the region's accessible name. */
   message: string;
-  /** Optional call to action on the right (design "Code einlösen"). */
+  /** Optional call to action on the right ({ label, href }; design "Code einlösen"). */
   action?: { label: string; href: string };
-  /** Screen-reader name of the close button; no production source. */
+  /** Screen-reader name of the close button; no production source. Label text; English default ("Close"), pass German on DE screens. */
   closeLabel?: string;
+  /** Called after the bar hides itself on close. */
   onClose?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -20,6 +23,8 @@ const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline
 /**
  * Promo strip above the header (design "Pushdown Alert banner"): yellow bar, party icon + bold 14px message,
  * black action button and a close button. Dismissible.
+ * Use for: a site-wide promo or voucher notice placed above the Header.
+ * Not for: free-trial email capture (use EmailSignup) or an image banner with actions (use ImageCtaBanner).
  */
 export function AnnouncementBar({ message, action, closeLabel = "Close", onClose, className }: AnnouncementBarProps) {
   const [open, setOpen] = useState(true);

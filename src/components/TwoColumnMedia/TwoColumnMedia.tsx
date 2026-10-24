@@ -2,11 +2,15 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 export interface AppLink {
+  /** Store or platform name; used as the logo's alt text. */
   name: string;
+  /** Link target. */
   href: string;
+  /** Logo image URL. */
   logoSrc: string;
   /** Intrinsic logo size; logos are capped at 40px high. */
   width: number;
+  /** Intrinsic logo height. */
   height: number;
 }
 
@@ -23,20 +27,27 @@ export const defaultApps: AppLink[] = [
 export type TwoColumnMediaSide = "left" | "right";
 
 export interface TwoColumnMediaProps {
+  /** Playfair heading. */
   title: string;
+  /** Body paragraph under the heading. */
   description?: string;
-  /** Which side the image sits on from 1024px of container width (it stacks on top below). */
+  /** Which side the image sits on from 1024px of container width (it stacks on top below); default left. */
   side?: TwoColumnMediaSide;
+  /** Image URL (575:372 rounded frame); gray gradient when omitted. */
   imageSrc?: string;
+  /** Image alt text; default "" (decorative). */
   imageAlt?: string;
-  /** App store buttons (variation withAppButtons); pass [] for none. */
+  /** App store buttons (variation withAppButtons; { name, href, logoSrc, width, height }); defaults to the five production logos, pass [] for none. */
   apps?: AppLink[];
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Image beside a heading, text and app-store logos (design "Your films. Your devices.", production slice
  * two_column_media / withAppButtons, master axis side[left,right]). Logos sit in a 2- then 3-column grid.
+ * Use for: a dark landing slice pairing an image with text, optionally listing the apps/devices.
+ * Not for: the white discover feature panel (use EditorialSlice) or questions and answers (use Faq).
  */
 export function TwoColumnMedia({ title, description, side = "left", imageSrc, imageAlt = "", apps = defaultApps, className }: TwoColumnMediaProps) {
   return (

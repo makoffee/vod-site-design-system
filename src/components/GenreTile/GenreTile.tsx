@@ -14,16 +14,23 @@ const tints: Record<GenreTint, string> = {
 };
 
 export interface GenreTileProps {
+  /** Genre name, bold in the bottom-left corner. */
   name: string;
+  /** Genre page link; the whole tile is the link. */
   href: string;
+  /** Colour wash over still and title: violet | yellow | magenta | pink | red | green (genre-* tokens at 50%). */
   tint: GenreTint;
+  /** 16:9 still; gray gradient placeholder when omitted. */
   imageSrc?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Genre entry on the categories page (design "Genres | 1440px", master GenreTile): 16:9 still under a 50% hard-light colour wash
  * that also tints the bold title (18px below 280px of tile width, 28px above), rounded-[14px] with a white/10 inner border.
+ * Use for: the genre grid on the categories page.
+ * Not for: channel/festival squares (use ChannelTile) or collection tiles (use MaskTile or ChannelTagTile).
  */
 export function GenreTile({ name, href, tint, imageSrc, className }: GenreTileProps) {
   return (

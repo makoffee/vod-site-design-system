@@ -4,8 +4,12 @@ import { ChoiceField, type ChoiceFieldProps } from "../_shared/ChoiceField";
 
 export type SwitchProps = ChoiceFieldProps;
 
-// Production account settings toggle (w-11 h-6 bg-white/10 rounded-full, peer-checked:bg-[#AE00FF], 20px white thumb
-// inset 2px): no border, no outline.
+/**
+ * Production account settings toggle (w-11 h-6 bg-white/10 rounded-full, peer-checked:bg-[#AE00FF], 20px white thumb
+ * inset 2px): no border, no outline. Native checkbox with role="switch".
+ * Use for: on/off settings that apply immediately, e.g. as the SettingRow control on the account screen.
+ * Not for: opt-ins submitted with a form (use Checkbox).
+ */
 export function Switch(props: SwitchProps) {
   return (
     <ChoiceField

@@ -7,35 +7,45 @@ import { Button } from "../Button/Button";
 import { SoonerBasket } from "../_shared/icons";
 
 export interface FilmHeroProps {
+  /** Film title; Playfair h1 text, or the logo's alt text when logo is set. */
   title: string;
+  /** Director name after directorLabel; line hidden when omitted. */
   director?: string;
   /** Backdrop still or trailer poster frame. */
   backdropSrc?: string;
   /** Title treatment artwork; the plain title is shown (in Playfair) when omitted. */
   logo?: { src: string; width: number; height: number };
-  /** Production "Directed by" (de "Regie:"). */
+  /** Production "Directed by" (de "Regie:"). Label text; English default, pass German on DE screens (filmHeroDe). */
   directorLabel?: string;
-  /** Production "Subscribe" (de "Abonnieren"); design "FREE TRIAL". Omit with null. */
+  /** Production "Subscribe" (de "Abonnieren"); design "FREE TRIAL". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   subscribeLabel?: string | null;
-  /** Production "Rent" (de "Leihen"); design "Rent - 4,99€". Omit with null. */
+  /** Production "Rent" (de "Leihen"); design "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   rentLabel?: string | null;
-  /** Production "Trailer". Omit with null. */
+  /** Production "Trailer". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   trailerLabel?: string | null;
-  /** Production "Add to Watchlist". */
+  /** Accessible name of the round + button; production "Add to Watchlist". Label text; English default, pass German on DE screens (filmHeroDe). */
   watchlistLabel?: string;
-  /** Production "Share". */
+  /** Accessible name of the share button; production "Share". Label text; English default, pass German on DE screens (filmHeroDe). */
   shareLabel?: string;
-  /** Production "Mute" / "Unmute". */
+  /** Production "Mute" / "Unmute". Label text; English default, pass German on DE screens (filmHeroDe). */
   muteLabel?: string;
+  /** Accessible name of the sound toggle while muted (default "Unmute"). Label text; English default, pass German on DE screens (filmHeroDe). */
   unmuteLabel?: string;
   /** Trailer sound state; the mute toggle shows only when onMutedChange is set. */
   muted?: boolean;
+  /** Called with the toggled muted value; setting it shows the sound toggle (from 768px of container width). */
   onMutedChange?: (muted: boolean) => void;
+  /** Subscribe button click. */
   onSubscribe?: () => void;
+  /** Rent button click. */
   onRent?: () => void;
+  /** Trailer button click. */
   onTrailer?: () => void;
+  /** Watchlist (+) button click. */
   onAddToWatchlist?: () => void;
+  /** Share button click. */
   onShare?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -44,6 +54,8 @@ export interface FilmHeroProps {
  * to black, title treatment, director, then the .sooner-cta-* actions: subscribe, rent, trailer, watchlist, share.
  * 560px-min stack on small containers; from 768px of container width a 2:1 anamorphic frame (design 1440×720) that
  * grows only when the content needs more room.
+ * Use for: the top of a single film page, followed by FilmDetails.
+ * Not for: the discover carousel (use PromoHero) or collection banners (use CollectionHeader).
  */
 export function FilmHero({
   title,

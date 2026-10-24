@@ -8,29 +8,40 @@ import { cn } from "@/lib/cn";
 import { FilmBadge } from "../FilmBadge/FilmBadge";
 
 export interface PromoSlide {
+  /** Unique key for the slide. */
   id: string;
+  /** Playfair headline. */
   title: string;
+  /** Synopsis, clamped to three lines. */
   description?: string;
+  /** Target of the watch button. */
   href: string;
+  /** Backdrop image URL; gray gradient when omitted. */
   imageSrc?: string;
+  /** FilmBadge above the title, e.g. "Exclusive". */
   badge?: string;
 }
 
 export interface PromoHeroProps {
+  /** Slides ({ id, title, description?, href, imageSrc?, badge? }); arrows and dots show only with more than one. Renders nothing when empty. */
   slides: PromoSlide[];
-  /** Design "Watch Now" (production de "Hier anschauen"). */
+  /** Design "Watch Now" (production de "Hier anschauen"). Label text; English default, pass German on DE screens. */
   watchLabel?: string;
-  /** Production "Add to list". */
+  /** Production "Add to list". Label text; English default, pass German on DE screens. */
   addToListLabel?: string;
+  /** Screen-reader name of the left arrow. Label text; English default, pass German on DE screens. */
   previousLabel?: string;
-  /** Production "Next promo". */
+  /** Production "Next promo". Label text; English default, pass German on DE screens. */
   nextLabel?: string;
-  /** Production "Featured titles" (tablist name). */
+  /** Production "Featured titles" (carousel and tablist name). Label text; English default, pass German on DE screens. */
   slidesLabel?: string;
-  /** Screen-reader name for each dot; production "Promo 1 von 12: Cold War". */
+  /** Screen-reader name for each dot (1-based index, total, title), e.g. "Promo 1 of 12: Cold War". English default, pass German on DE screens. */
   slideLabel?: (index: number, total: number, title: string) => string;
+  /** Slide shown first (0-based); default 0. */
   defaultIndex?: number;
+  /** Called with the current slide when add-to-list is pressed. */
   onAddToList?: (slide: PromoSlide) => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -39,15 +50,17 @@ export interface PromoHeroProps {
  * design; fits 16:9 stills and letterboxed scope films with little crop) with a
  * bottom fade, Playfair title, three-line description, watch / add-to-list actions, side arrows and dots.
  * Below 672px of container width it becomes a 3:4 card with icon-only actions, as on mobile sooner.de.
+ * Use for: the rotating featured-titles carousel at the top of discover.
+ * Not for: a single film's page header (use FilmHero) or a static marketing banner (use ImageCtaBanner).
  */
 export function PromoHero({
   slides,
   watchLabel = "Watch Now",
   addToListLabel = "Add to list",
-  previousLabel = "Vorherige Promo",
+  previousLabel = "Previous promo",
   nextLabel = "Next promo",
   slidesLabel = "Featured titles",
-  slideLabel = (i, n, title) => `Promo ${i} von ${n}: ${title}`,
+  slideLabel = (i, n, title) => `Promo ${i} of ${n}: ${title}`,
   defaultIndex = 0,
   onAddToList,
   className,

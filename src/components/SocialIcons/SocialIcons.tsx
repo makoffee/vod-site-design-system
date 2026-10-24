@@ -121,6 +121,7 @@ export const socialGlyphs = {
 export type SocialPlatform = keyof typeof socialGlyphs;
 
 export interface SocialIconsProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Brand glyph, e.g. Instagram, YouTube, Spotify, Facebook; its name is the accessible label. */
   platform: SocialPlatform;
   /** negative = white glyph for dark surfaces (footer); original = brand color. */
   color?: SocialIconColor;
@@ -128,7 +129,11 @@ export interface SocialIconsProps extends AnchorHTMLAttributes<HTMLAnchorElement
   size?: number;
 }
 
-/** A single social glyph; renders as a link when `href` is set. */
+/**
+ * A single social glyph; renders as a link when `href` is set.
+ * Use for: social profile links (Footer) and brand marks inside other components.
+ * Not for: SSO sign-in (use SsoButton).
+ */
 export function SocialIcons({ platform, color = "negative", size = 42, href, className, ...props }: SocialIconsProps) {
   const glyph: Glyph = socialGlyphs[platform];
   const original = color === "original";

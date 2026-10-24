@@ -5,8 +5,12 @@ import { ChoiceField, type ChoiceFieldProps } from "../_shared/ChoiceField";
 
 export type CheckboxProps = ChoiceFieldProps;
 
-// Production signup checkbox (h-4 w-4 rounded border-white/40 bg-white/10, accent #AE00FF): 16px box,
-// white/40 hairline when off, solid violet with a white tick when on (no border, no outline).
+/**
+ * Production signup checkbox (h-4 w-4 rounded border-white/40 bg-white/10, accent #AE00FF): 16px box,
+ * white/40 hairline when off, solid violet with a white tick when on (no border, no outline).
+ * Use for: opt-ins and independent yes/no choices submitted with a form (e.g. "Stay logged in" in LoginModal).
+ * Not for: settings that apply immediately (use Switch); one choice out of several (use Radio).
+ */
 export function Checkbox(props: CheckboxProps) {
   return (
     <ChoiceField

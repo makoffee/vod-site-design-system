@@ -4,15 +4,23 @@ import { cn } from "@/lib/cn";
 import { BinocularMask } from "../_shared/BinocularMask";
 
 export interface MaskTileProps {
+  /** Collection title, centred in Playfair over the image. */
   title: string;
+  /** Collection link; the whole tile is the link. */
   href: string;
+  /** Artwork, shown grayscale and clipped to the binocular shape. */
   imageSrc?: string;
   /** Violet duotone wash (the first tile in the design row). */
   tinted?: boolean;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Collection tile clipped to the binocular shape with a centred Playfair title (design "Collection row with icon-mask"). */
+/**
+ * Collection tile clipped to the binocular shape with a centred Playfair title (design "Collection row with icon-mask").
+ * Use for: collection tiles in a FeedRow kind="wide" (discover "Collections").
+ * Not for: a collection intro with text and CTA (use EditorialSlice) or channel squares (use ChannelTile).
+ */
 export function MaskTile({ title, href, imageSrc, tinted = false, className }: MaskTileProps) {
   return (
     <Link

@@ -14,17 +14,23 @@ export type AvailabilityFilterVariant = "bar" | "menu";
 export type AvailabilityFilterSurface = "ghost" | "floating";
 
 export interface AvailabilityFilterProps {
+  /** Selected option (controlled): all, subscription or rentals. */
   value?: Availability;
+  /** Initial option when uncontrolled; default "all". */
   defaultValue?: Availability;
+  /** Called with the option the user picks. */
   onValueChange?: (value: Availability) => void;
+  /** bar = segmented glass bar (default); menu = compact dropdown for narrow screens. */
   variant?: AvailabilityFilterVariant;
+  /** ghost = ghost-button glass (default); floating = darker tint where content scrolls underneath. */
   surface?: AvailabilityFilterSurface;
-  /** Option labels; defaults are the design's copy ("All", "Subscription", "Rentals"). */
+  /** Option labels; defaults are the design's copy ("All", "Subscription", "Rentals"). Label text; English default, pass German on DE screens. */
   labels?: Partial<Record<Availability, string>>;
-  /** Accessible group name (production string "Availability"). */
+  /** Accessible group name (production string "Availability"). Label text; English default, pass German on DE screens. */
   label?: string;
   /** Opens the menu variant on mount (documentation of the open state). */
   defaultOpen?: boolean;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -40,6 +46,8 @@ const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline
  * Discover/collection availability switch (design "AvailabilityFilter"): glass bar with a white pill on the active
  * option, or a dropdown on mobile. surface ghost (default) is the ghost-button glass; floating adds a dark tint for
  * places where content scrolls under the filter. The dropdown panel is always floating. Every option keeps its icon.
+ * Use for: filtering a film grid or feed by All / Subscription / Rentals on discover and collection pages.
+ * Not for: other option switches such as plan periods (use SegmentedControl) or grid/list view (use ViewToggle).
  */
 export function AvailabilityFilter({
   value,

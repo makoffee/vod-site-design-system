@@ -3,14 +3,19 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export interface TextActionProps {
+  /** Visible action text ("Edit", "Add"). Label text; pass German on DE screens. */
   children: ReactNode;
+  /** Renders a Link instead of a button. */
   href?: string;
+  /** Click handler of the button (ignored when href is set). */
   onClick?: () => void;
   /** xs for inline row actions (Edit, Add), sm for standalone actions (Set my PIN). */
   size?: "xs" | "sm";
   /** Accessible name when the visible label needs context ("Edit Name"). */
   label?: string;
+  /** Disables the button (50% opacity); has no effect when href is set. */
   disabled?: boolean;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -21,6 +26,8 @@ const base =
 /**
  * Inline text action (account "Edit", "Add", "Set my PIN"): text.accent-light, white on hover, never underlined.
  * Production mixes underlined violet and plain violet-light; this is the one style.
+ * Use for: small inline actions in DetailRow or SettingRow.
+ * Not for: primary or form-submitting actions (use Button).
  */
 export function TextAction({ children, href, onClick, size = "xs", label, disabled, className }: TextActionProps) {
   const cls = cn(base, size === "xs" ? "text-xs" : "text-sm", className);

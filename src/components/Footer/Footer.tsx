@@ -80,18 +80,24 @@ const defaultSocial: { platform: SocialPlatform; href: string }[] = [
 ];
 
 export interface FooterProps {
+  /** Link labels and default copyright: en (default) or de. Link targets are the same in both. */
   locale?: FooterLocale;
   /** Defaults to "Curated Cinema" in both locales (every screen uses the default). */
   tagline?: string;
   /** Instance override, e.g. "… • Adlershof-Berlin, Germany" on the marketing pages. */
   copyright?: string;
+  /** Social links shown as white 42px icons; defaults to Instagram, YouTube, Spotify, Facebook. */
   social?: { platform: SocialPlatform; href: string }[];
   /** Sponsor logos. Only Creative Europe MEDIA by default; pass beFundingLogos for the Belgian site. */
   fundingLogos?: FundingLogo[];
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Fills its container (instances are s(fill, hug) on every screen). */
+/**
+ * Fills its container (instances are s(fill, hug) on every screen).
+ * Use for: the bottom of every page screen.
+ */
 export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, social = defaultSocial, fundingLogos = defaultFundingLogos, className }: FooterProps) {
   const t = copy[locale];
 

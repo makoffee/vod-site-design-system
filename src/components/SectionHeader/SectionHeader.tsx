@@ -3,19 +3,23 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 export interface SectionHeaderProps {
+  /** Heading text. */
   title: string;
   /** Turns the title into a link to the full channel/collection. */
   href?: string;
-  /** Label revealed on hover next to a linked title (production de: "mehr"). */
+  /** Label revealed on hover next to a linked title (production de: "mehr"). Label text; English default, pass German on DE screens. */
   moreLabel?: string;
   /** Heading level; feeds use h2. */
   as?: "h2" | "h3";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Row title (production Row-module `rowLabel`): 24/32 bold, 0.6px tracking, 20/26 below 640px of container width.
  * Linked titles reveal "more" ("mehr" on the German site) in sooner-primary-light and carry a chevron, as on sooner.de.
+ * Use for: a standalone row or section title on a dark background.
+ * Not for: a feed's title (pass title/href to FeedRow, which renders this) or page banners (use CollectionHeader).
  */
 export function SectionHeader({ title, href, moreLabel = "more", as: Heading = "h2", className }: SectionHeaderProps) {
   const heading = (

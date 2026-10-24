@@ -2,13 +2,19 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export interface AccountPanelProps {
+  /** Panel content: DetailRows (rows) or SettingRows, forms and text (padded). */
   children: ReactNode;
   /** rows = stacked rows with hairline dividers (profile details); padded = one padded block (settings, PIN). */
   variant?: "rows" | "padded";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Account content panel (production sooner.de/account): white/5 on black, white/10 hairline, 12px radius. */
+/**
+ * Account content panel (production sooner.de/account): white/5 on black, white/10 hairline, 12px radius.
+ * Use for: grouping DetailRows, SettingRows or DeviceCodeForm on account pages.
+ * Not for: an empty list message (use EmptyState).
+ */
 export function AccountPanel({ children, variant = "padded", className }: AccountPanelProps) {
   return (
     <div
@@ -24,11 +30,17 @@ export function AccountPanel({ children, variant = "padded", className }: Accoun
 }
 
 export interface AccountPageTitleProps {
+  /** Title text. Label text; pass German on DE screens. */
   children: ReactNode;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Account section title: typography.text.2xl-bold. */
+/**
+ * Account section title: typography.text.2xl-bold.
+ * Use for: the h1 above an account section's panels.
+ * Not for: titles of content rows (use SectionHeader).
+ */
 export function AccountPageTitle({ children, className }: AccountPageTitleProps) {
   return <h1 className={cn("m-0 text-2xl font-bold text-white", className)}>{children}</h1>;
 }

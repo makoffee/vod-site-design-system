@@ -7,10 +7,13 @@ import { SoonerBasket } from "../_shared/icons";
 export type FilmCardAspect = "tall" | "wide";
 
 export interface FilmCardProps {
+  /** Film title; accessible name when ariaLabel is not set (not rendered as visible text). */
   title: string;
+  /** Film page link; the whole card is the link. */
   href: string;
   /** tall = 3:4 boxart (default), wide = 16:9 still. */
   aspect?: FilmCardAspect;
+  /** Poster artwork, cover-cropped to the aspect; gray gradient placeholder when omitted. */
   imageSrc?: string;
   /** Top-left badge, e.g. "Exclusive". */
   badge?: string;
@@ -18,15 +21,21 @@ export interface FilmCardProps {
   rentable?: boolean;
   /** Coming-soon date shown as "From {availableFrom}" (de "Ab"). */
   availableFrom?: string;
+  /** Prefix before availableFrom (default "From"). Label text; English default, pass German on DE screens (filmCardDe). */
   availableLabel?: string;
   /** Accessible name; production uses "Title. Directed by … . Year. Runtime. Genres." */
   ariaLabel?: string;
   /** Image `sizes`; defaults to production's feed value. */
   sizes?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Feed poster card (production `.filmcard`). Fills its feed slot; the artwork sets the height. */
+/**
+ * Feed poster card (production `.filmcard`). Fills its feed slot; the artwork sets the height.
+ * Use for: film posters in a FeedRow (kind tall or wide) or a grid of whole cards; keep 3:4 / 16:9, don't stretch to another height.
+ * Not for: the two-slot feature with synopsis and actions (use FeaturedFilmCard) or list rows (use FilmListItem).
+ */
 export function FilmCard({
   title,
   href,

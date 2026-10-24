@@ -18,9 +18,11 @@ const itemsPerRow: Record<FeedKind, string> = {
 };
 
 export interface FeedItemProps {
+  /** The card for this slot. */
   children: ReactNode;
   /** Slots this item spans (a FeaturedFilmCard takes 2, like production's filmcard--wide). */
   span?: 1 | 2;
+  /** Extra classes for the slot (layout only, e.g. a custom basis). */
   className?: string;
 }
 
@@ -48,17 +50,25 @@ export interface FeedRowProps {
   label?: string;
   /** Links the title to the full feed (shows "more" + chevron). */
   href?: string;
+  /** Hover label next to a linked title (SectionHeader default "more"). Label text; English default, pass German on DE screens (feedRowDe). */
   moreLabel?: string;
+  /** Card shape; sets whole cards per row by container width: tall (default) 2–7, wide 1–5, square 2–7. */
   kind?: FeedKind;
+  /** Accessible name of the previous arrow (default "Previous"). Label text; English default, pass German on DE screens (feedRowDe). */
   previousLabel?: string;
+  /** Accessible name of the next arrow (default "Next"). Label text; English default, pass German on DE screens (feedRowDe). */
   nextLabel?: string;
+  /** Cards; each child is wrapped in a FeedItem unless it already is one. */
   children: ReactNode;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * A titled, horizontally scrolling feed (production Row / ScrollSlider). Scroll-snap track with 12px gaps;
  * 54px prev/next buttons appear from 768px of container width while there is more to scroll.
+ * Use for: rows of FilmCard, ChannelTile, ChannelTagTile, MaskTile or QuoteCard; set kind to the card shape. Shows whole cards only, never a cut-off card.
+ * Not for: the discover hero carousel (use PromoHero) or a wrapping grid of films (use CollectionFeature).
  */
 export function FeedRow({
   title,

@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { BinocularMask } from "../_shared/BinocularMask";
 
 export interface FaqItem {
+  /** Question text (the toggle button). */
   question: string;
   /** Paragraphs are separated by a blank line. */
   answer: string;
@@ -15,20 +16,27 @@ export interface FaqItem {
 export type FaqSide = "left" | "right";
 
 export interface FaqProps {
+  /** Playfair section heading. */
   title: string;
+  /** Questions and answers ({ question, answer }); answers split into paragraphs at blank lines. */
   items: FaqItem[];
-  /** Indexes of the questions that start open. */
+  /** Indexes of the questions that start open; default none. */
   defaultOpen?: number[];
-  /** Which side the binocular image sits on from 1024px of container width (it stacks on top below). */
+  /** Which side the binocular image sits on from 1024px of container width (it stacks on top below); default left. */
   side?: FaqSide;
+  /** Image URL shown in the binocular mask; empty mask when omitted. */
   imageSrc?: string;
+  /** Image alt text; default "" (decorative). */
   imageAlt?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Questions and answers beside a binocular-masked image (design "Sooner, in brief.", production slice faq /
  * withImage, master axis side[left,right]). Each question is a button controlling its answer region.
+ * Use for: an expandable question/answer list on landing pages.
+ * Not for: a text + image feature without questions (use TwoColumnMedia or EditorialSlice).
  */
 export function Faq({ title, items, defaultOpen = [], side = "left", imageSrc, imageAlt = "", className }: FaqProps) {
   const [open, setOpen] = useState(() => new Set(defaultOpen));

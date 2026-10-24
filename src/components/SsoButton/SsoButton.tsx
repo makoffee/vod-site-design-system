@@ -35,17 +35,25 @@ const providers: Record<SsoProvider, { name: string; className: string; glyph: R
 };
 
 export interface SsoButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Native button type; "button" unless set ("submit" only inside a form that should submit). */
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  /** google (gray-100 circle), apple (white circle, black mark) or amazon (raster mark). */
   provider: SsoProvider;
-  /** Accessible label; defaults to "Mit <Provider> anmelden". */
+  /** Accessible label; English default "Sign in with <Provider>", pass German on DE screens. */
   label?: string;
 }
 
+/**
+ * 50px round sign-in button showing only the provider mark (SsoButton master). Native <button>, type="button" unless set.
+ * Use for: SSO provider choices on login/signup; SsoButtonGroup renders the standard Google / Apple / Amazon row.
+ * Not for: text actions such as the institute login (use Button).
+ */
 export function SsoButton({ provider, label, className, type = "button", ...props }: SsoButtonProps) {
   const p = providers[provider];
   return (
     <button
       type={type}
-      aria-label={label ?? `Mit ${p.name} anmelden`}
+      aria-label={label ?? `Sign in with ${p.name}`}
       className={cn(
         "flex size-[50px] shrink-0 items-center justify-center rounded-full outline-none transition-opacity hover:opacity-85",
         "focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black",
@@ -60,10 +68,15 @@ export function SsoButton({ provider, label, className, type = "button", ...prop
 }
 
 export interface SsoButtonGroupProps {
+  /** Providers to show, in order; defaults to google, apple, amazon. */
   providers?: SsoProvider[];
+  /** Called with the provider whose button was clicked. */
   onSelect?: (provider: SsoProvider) => void;
+  /** Accessible label per provider name; English default "Sign in with <Provider>", pass German on DE screens. */
+  labelFor?: (providerName: string) => string;
   /** fill (default, as on the design instances) centres the buttons in the parent; hug fits them. */
   width?: Sizing;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -71,13 +84,14 @@ export interface SsoButtonGroupProps {
 export function SsoButtonGroup({
   providers: list = ["google", "apple", "amazon"],
   onSelect,
+  labelFor,
   width = "fill",
   className,
 }: SsoButtonGroupProps) {
   return (
     <div className={cn("flex items-center justify-center gap-4", widthClass[width], className)}>
       {list.map((p) => (
-        <SsoButton key={p} provider={p} onClick={() => onSelect?.(p)} />
+        <SsoButton key={p} provider={p} label={labelFor?.(providers[p].name)} onClick={() => onSelect?.(p)} />
       ))}
     </div>
   );

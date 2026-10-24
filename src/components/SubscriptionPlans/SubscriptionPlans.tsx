@@ -41,20 +41,27 @@ const copy: Record<SubscriptionPlansLayout, Record<Locale, { title: string; desc
 const allPlans: PlanId[] = ["monthly", "yearly", "plus"];
 
 export interface SubscriptionPlansProps {
+  /** landing = home page slice (default); subscribe = plan picker page with h1 and legal paragraph. */
   layout?: SubscriptionPlansLayout;
+  /** Copy language for built-in heading, legal text, PlanCards and UniOffer: en (default) or de. */
   locale?: Locale;
   /** Overrides the production heading. */
   title?: string;
+  /** Overrides the production intro sentence under the heading. */
   description?: string;
   /** Overrides the legal paragraph (subscribe layout only). */
   legal?: string;
+  /** Plans to show, in order: monthly, yearly, plus; default all three. */
   plans?: PlanId[];
   /** PlanCard header artwork per plan. */
   images?: Partial<Record<PlanId, string>>;
-  /** Shows the UNI banner under the cards (both designs do; production /subscribe currently does not). */
+  /** Shows the UNI banner under the cards (both designs do; production /subscribe currently does not). Default true. */
   showUni?: boolean;
+  /** Called with the plan id when a PlanCard's button is pressed. */
   onSelect?: (plan: PlanId) => void;
+  /** Called when the UNI offer's button is pressed. */
   onSelectUni?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -62,6 +69,8 @@ export interface SubscriptionPlansProps {
  * Plan picker (master axis layout[landing,subscribe]). landing = home page slice subscription_plans: Playfair heading,
  * cards 1 → 2 (third spanning) → 3 columns. subscribe = onboarding page sooner.de/subscribe: page-level DM Sans h1,
  * cards with the price after the features (2 → 3 columns) and the legal paragraph below. Both end with the UNI offer.
+ * Use for: showing all subscription plans on the home page or the subscribe step.
+ * Not for: a single plan (use PlanCard), the chosen product in checkout (use ProductCard) or a period switch (use SegmentedControl).
  */
 export function SubscriptionPlans({
   layout = "landing",

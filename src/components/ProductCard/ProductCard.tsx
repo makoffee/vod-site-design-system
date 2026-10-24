@@ -10,13 +10,19 @@ export interface ProductCardProps {
   product: PlanId;
   /** Renders the "< Change plan" link when provided. */
   onChangeProduct?: () => void;
+  /** Text of the change link; defaults to "< Change plan" (de "< Produkt ändern") by locale. */
   changeLabel?: string;
-  /** Copy language; English by default. */
+  /** Copy language; English by default. Pass "de" on DE screens. */
   locale?: Locale;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Master ab49ce9c06103e53: selected product summary during signup and checkout. */
+/**
+ * Master ab49ce9c06103e53: selected product summary during signup and checkout.
+ * Use for: showing the chosen plan above the signup/checkout form (AuthForm, LoginModal use it).
+ * Not for: offering plans to choose from (use PlanCard or SubscriptionPlans).
+ */
 export function ProductCard({ product, onChangeProduct, changeLabel, locale = "en", className }: ProductCardProps) {
   const plan = plansByLocale[locale][product];
   const change = changeLabel ?? (locale === "de" ? "< Produkt ändern" : "< Change plan");

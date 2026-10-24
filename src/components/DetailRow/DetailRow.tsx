@@ -2,18 +2,25 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export interface DetailRowProps {
+  /** Field name above the value ("Name", "Email"). Label text; pass German on DE screens. */
   label: string;
   /** Empty values show the placeholder in text.subtle. */
   value?: string;
+  /** Shown in white/30 when value is empty (production repeats the label). Label text; pass German on DE screens. */
   placeholder?: string;
   /** Trailing action, usually a TextAction ("Edit", "Add"). */
   action?: ReactNode;
   /** compact = ids and codes (12px, breaks anywhere). */
   compact?: boolean;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Read-only account detail (production profile rows): 12px label in white/40, 14px value in white/80, optional action. */
+/**
+ * Read-only account detail (production profile rows): 12px label in white/40, 14px value in white/80, optional action.
+ * Use for: label/value pairs in an AccountPanel variant="rows" (name, email, customer id).
+ * Not for: settings with a switch or select (use SettingRow).
+ */
 export function DetailRow({ label, value, placeholder, action, compact = false, className }: DetailRowProps) {
   return (
     <div className={cn("flex flex-col gap-1 px-4 py-3", className)}>

@@ -32,7 +32,9 @@ export interface HeaderLabels {
 const defaultLabels: HeaderLabels = { home: "Sooner home", navigation: "Main navigation", search: "Search", menu: "Menu" };
 
 export interface HeaderProps {
+  /** logged-out (default) shows Login + Sign up (desktop only); logged-in shows the Avatar instead. */
   auth?: HeaderAuth;
+  /** Tab with the violet underline and aria-current; none (default) highlights no tab. */
   active?: HeaderTab | "none";
   /** Instance override: the DE/EN landing pages hide the Watchlist tab. */
   hideWatchlist?: boolean;
@@ -40,20 +42,34 @@ export interface HeaderProps {
   language?: Language;
   /** Avatar initials when logged in ("MK" on the master). */
   userInitials?: string;
+  /** Full name for the Avatar's accessible name when logged in. */
   userName?: string;
+  /** Called with the language picked in the LanguageSelect. */
   onLanguageChange?: (language: Language) => void;
+  /** Search icon button click. */
   onSearch?: () => void;
+  /** Login button click (logged out, desktop layout only). */
   onLogin?: () => void;
+  /** Sign up button click (logged out, desktop layout only). */
   onSignUp?: () => void;
+  /** Menu button click (mobile layout only). */
   onMenu?: () => void;
   /** Accessible names; English by default. */
   labels?: Partial<HeaderLabels>;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 const iconButton =
   "flex items-center justify-center rounded-sooner text-white outline-none hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white";
 
+/**
+ * Sticky 64px site header (Header master): logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
+ * Sign up or the Avatar. Below 1024px of container width: logo, search, language, Avatar (logged in) and a menu
+ * button; tabs and Login / Sign up are hidden. Tab and button text is fixed English; only `labels` is translatable.
+ * Use for: the top bar of every page screen.
+ * Not for: account-section navigation (use AccountNav).
+ */
 export function Header({
   auth = "logged-out",
   active = "none",

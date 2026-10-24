@@ -14,20 +14,27 @@ export interface FeaturedCollectionBlockProps {
   title: string;
   /** Bold opening sentence of the description. */
   lead?: string;
+  /** Body text after the lead, in the same paragraph. */
   description?: string;
+  /** Link button under the text ({ label, href, tone?: primary|white|black, icon? }); tone defaults to violet primary. */
   cta?: Action;
+  /** Which side the copy sits on; default left. */
   side?: FeaturedCollectionSide;
+  /** Full-bleed background artwork URL; gray gradient when omitted. */
   imageSrc?: string;
+  /** Artwork alt text; default "" (decorative). */
   imageAlt?: string;
   /** The collection's cards, shown in a FeedRow without a header. */
   children?: ReactNode;
-  /** Feed type of the row (tall boxart by default; wide stills or square tiles also work). */
+  /** Feed type of the row: tall boxart (default), wide stills or square tiles. */
   kind?: FeedKind;
   /** Accessible name of the film row; defaults to the title. */
   rowLabel?: string;
-  /** Passed to the film row (German screens). */
+  /** Screen-reader name of the row's previous button (FeedRow default "Previous"). Label text; English default, pass German on DE screens. */
   previousLabel?: string;
+  /** Screen-reader name of the row's next button (FeedRow default "Next"). Label text; English default, pass German on DE screens. */
   nextLabel?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -36,6 +43,8 @@ export interface FeaturedCollectionBlockProps {
  * full-bleed artwork fading to black at top and bottom, a 620px copy column with a violet CTA, and a FeedRow of
  * the collection inside the artwork's bounds (any feed kind; the master nests a FeedRow instance). The artwork band
  * shrinks with the container (256px top inset from 1024px).
+ * Use for: a landing-page collection teaser over artwork with a scrolling row of its films.
+ * Not for: the white discover collection panel with a card grid (use CollectionFeature) or a banner without films (use ImageCtaBanner).
  */
 export function FeaturedCollectionBlock({
   eyebrow,

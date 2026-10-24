@@ -4,19 +4,25 @@ import { useId, type FormEvent } from "react";
 import { cn } from "@/lib/cn";
 
 export interface EmailSignupProps {
+  /** Bold 32px heading. */
   title: string;
+  /** Copy under the title; line breaks are kept. */
   description?: string;
-  /** Input placeholder; design "E-Mail". */
+  /** Input placeholder and its screen-reader label; default "E-Mail". */
   placeholder?: string;
-  /** Submit label; design "Jetzt testen" / "COMMENCER". */
+  /** Submit label (required, no default); design "Jetzt testen" / "COMMENCER". Shown uppercase. */
   submitLabel: string;
+  /** Called with the entered email on submit (default form submission is prevented). */
   onSubmit?: (email: string) => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Free-trial email capture (design "Email CTA" on the original landing pages): violet card with a soft glow,
  * 32px black title and bold copy on the left, a white email field joined to a black uppercase button on the right.
+ * Use for: a free-trial email capture slice on landing pages.
+ * Not for: sign-in or account forms (use AuthForm) or a promo notice above the header (use AnnouncementBar).
  */
 export function EmailSignup({ title, description, placeholder = "E-Mail", submitLabel, onSubmit, className }: EmailSignupProps) {
   const inputId = useId();

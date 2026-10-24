@@ -20,17 +20,25 @@ export const defaultLanguages: LanguageOption[] = [
 export interface LanguageSelectProps {
   /** The label shown on the trigger (instance override in the design, e.g. "DE" on landing pages). */
   value?: Language;
+  /** Initial language when `value` is not set; default en. */
   defaultValue?: Language;
+  /** Called with the picked language; the menu then closes. */
   onValueChange?: (value: Language) => void;
+  /** Menu entries (code + name); defaults to English, Deutsch, Français. */
   options?: LanguageOption[];
   /** Start with the menu open (documentation). The menu itself is not drawn in the design. */
   defaultOpen?: boolean;
-  /** Accessible name for the trigger. */
+  /** Accessible name for the trigger and menu. Label text; English default, pass German on DE screens. */
   label?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Master 59970d9a5afd0647: hairline border-white/10 pill, typography.nav.action label, chevron. */
+/**
+ * Master 59970d9a5afd0647: hairline border-white/10 pill, typography.nav.action label, chevron.
+ * Use for: the interface language switch (Header, account settings).
+ * Not for: switching between options on a page (use SegmentedControl or AvailabilityFilter).
+ */
 export function LanguageSelect({
   value,
   defaultValue = "en",

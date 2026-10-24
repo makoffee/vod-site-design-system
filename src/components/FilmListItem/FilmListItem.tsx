@@ -7,24 +7,33 @@ import { cn } from "@/lib/cn";
 import { SoonerBasket } from "../_shared/icons";
 
 export interface FilmListItemProps {
+  /** Film title, linked to href. */
   title: string;
+  /** Film page URL for the title and poster. */
   href: string;
+  /** Shown as "{byLabel} {director}" from 672px of container width; hidden below. */
   director?: string;
   /** Genre, runtime, year, … shown as "Documentary | 90 min | 2020". */
   meta?: string[];
+  /** Short text, clamped to 3 lines (5 from 672px of container width). */
   synopsis?: string;
+  /** 3:4 poster image; a grey gradient shows without it. */
   posterSrc?: string;
-  /** Production "By" (de "Von"). */
+  /** Production "By" (de "Von"). Label text; English default, pass German on DE screens. */
   byLabel?: string;
-  /** Design "Subscribe". Omit with null. */
+  /** Design "Subscribe". Omit with null. Label text; English default, pass German on DE screens. */
   subscribeLabel?: string | null;
-  /** Production "Rent"; design "Rent - 4,99€". Omit with null. */
+  /** Production "Rent"; design "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens. */
   rentLabel?: string | null;
-  /** Production "Add to Watchlist". */
+  /** Production "Add to Watchlist". Accessible name of the + button. Label text; English default, pass German on DE screens. */
   watchlistLabel?: string;
+  /** Click handler of the Subscribe button. */
   onSubscribe?: () => void;
+  /** Click handler of the Rent button. */
   onRent?: () => void;
+  /** Click handler of the + (watchlist) button. */
   onAddToWatchlist?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -36,6 +45,8 @@ const action =
 /**
  * Collection list row (design "collection view | list"): 3:4 poster beside the title, director, meta line,
  * clamped synopsis and subscribe / rent / watchlist actions. Compact below 672px of container width.
+ * Use for: one film per row in a collection's list view.
+ * Not for: posters in grids or feed rows (use FilmCard).
  */
 export function FilmListItem({
   title,

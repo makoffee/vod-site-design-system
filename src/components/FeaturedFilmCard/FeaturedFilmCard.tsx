@@ -8,31 +8,43 @@ import { BinocularIcon } from "../_shared/BinocularMask";
 import { SoonerBasket } from "../_shared/icons";
 
 export interface FeaturedFilmCardProps {
+  /** Film title (Playfair, clamped to 2 lines), linked to href. */
   title: string;
+  /** Film page link for the title and the poster. */
   href: string;
+  /** Director name after byLabel; line hidden when omitted. */
   director?: string;
+  /** Links the director name when set. */
   directorHref?: string;
+  /** Synopsis; clamped to 3 lines (4 from a 512px-wide container). */
   description?: string;
+  /** 3:4 poster on the right (always carries the rent basket); gray gradient placeholder when omitted. */
   imageSrc?: string;
-  /** Production "Sooner Selection". */
+  /** Eyebrow next to the binocular icon; production "Sooner Selection". Label text; English default, pass German on DE screens. */
   eyebrow?: string;
-  /** Production "By" (de "Von"). */
+  /** Production "By" (de "Von"). Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   byLabel?: string;
-  /** Rent action label; production "Rent", design "Rent - 4,99€". Omit to hide. */
+  /** Rent action label; production "Rent", design "Rent - 4,99€". Default "Rent"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   rentLabel?: string;
-  /** Subscribe action (design "Subscribe"); pass undefined to hide. */
+  /** Subscribe action (design "Subscribe"). Default "Subscribe"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   subscribeLabel?: string;
-  /** Production "Add to Watchlist". */
+  /** Accessible name of the round + button; production "Add to Watchlist". Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   watchlistLabel?: string;
+  /** Rent button click. */
   onRent?: () => void;
+  /** Subscribe button click. */
   onSubscribe?: () => void;
+  /** Watchlist (+) button click. */
   onAddToWatchlist?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * White feature card inside a feed (production `filmcard--wide`, design "Featured card with feed").
  * Takes two feed slots: eyebrow, Playfair title, director, clamped synopsis, actions, and the poster.
+ * Use for: one highlighted film inside a FeedRow, wrapped in a FeedItem (span={2} or a wider basis).
+ * Not for: regular feed posters (use FilmCard) or the film page header (use FilmHero).
  */
 export function FeaturedFilmCard({
   title,

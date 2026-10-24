@@ -9,12 +9,17 @@ export interface SegmentedOption<T extends string = string> {
 }
 
 export interface SegmentedControlProps<T extends string = string> {
+  /** Segments in order (value + visible label). Label text; pass German on DE screens. */
   options: SegmentedOption<T>[];
+  /** Selected value (controlled). */
   value?: T;
+  /** Initial value when `value` is not set; defaults to the first option. */
   defaultValue?: T;
+  /** Called with the clicked option's value. */
   onValueChange?: (value: T) => void;
   /** Accessible group name. */
   label: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -23,6 +28,8 @@ const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline
 /**
  * Plan period switch (design "highlight" on the plan-select screens: Monthly / Yearly / CinePass). Same pill
  * styling as AvailabilityFilter's bar: ghost glass track (surface-glass), white pill on the active option.
+ * Use for: switching between a few mutually exclusive options, e.g. the plan period.
+ * Not for: availability filtering (use AvailabilityFilter); grid/list view (use ViewToggle).
  */
 export function SegmentedControl<T extends string = string>({
   options,

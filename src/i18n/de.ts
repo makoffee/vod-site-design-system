@@ -24,7 +24,9 @@ export const promoHeroDe = {
   // Production markup (not in the strings file).
   watchLabel: "Hier anschauen",
   addToListLabel: "Zur Liste hinzufügen",
+  previousLabel: "Vorherige Promo",
   nextLabel: "Nächste Promo",
+  slideLabel: (i: number, n: number, title: string) => `Promo ${i} von ${n}: ${title}`,
   slidesLabel: "Vorgestellte Titel",
 } satisfies Partial<PromoHeroProps>;
 

@@ -6,15 +6,19 @@ import type { Locale } from "../_shared/locale";
 import { uniOfferByLocale } from "../_shared/plans";
 
 export interface UniOfferProps {
+  /** Click handler of the CTA button. */
   onSelect?: () => void;
-  /** Copy language; English by default. */
+  /** Copy language; English by default. Pass "de" on DE screens (all copy comes from uniOfferByLocale). */
   locale?: Locale;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Master 9ac0f0f75ddb30fd: UNI banner on surface.uni with a decorative border.
  * Fills its container; below 672px of container width (@2xl) it stacks, above it is the 1200px master's row.
+ * Use for: the student (UNI) offer below the plan cards (SubscriptionPlans includes it).
+ * Not for: regular subscription plans (use PlanCard).
  */
 export function UniOffer({ onSelect, locale = "en", className }: UniOfferProps) {
   const t = uniOfferByLocale[locale];

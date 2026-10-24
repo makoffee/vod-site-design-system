@@ -9,7 +9,11 @@ export interface NavLinkProps
   active?: boolean;
 }
 
-/** Master 0bc97b853c801178: 64px tall header tab, typography.nav.tab. */
+/**
+ * Master 0bc97b853c801178: 64px tall header tab, typography.nav.tab.
+ * Use for: top-level navigation tabs in Header.
+ * Not for: actions (use Button); small inline links (use TextAction).
+ */
 export function NavLink({ active = false, className, children, ...props }: NavLinkProps) {
   return (
     <Link

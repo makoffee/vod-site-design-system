@@ -2,10 +2,14 @@ import type { SVGProps } from "react";
 import { cn } from "@/lib/cn";
 
 export interface SoonerLogoProps extends SVGProps<SVGSVGElement> {
+  /** Accessible name (aria-label); default "Sooner". */
   title?: string;
 }
 
-/** Wordmark exported from the SoonerLogo master. Fill follows currentColor (brand violet by default). */
+/**
+ * Wordmark exported from the SoonerLogo master. Fill follows currentColor (brand violet by default).
+ * Use for: the brand mark in Header and Footer.
+ */
 export function SoonerLogo({ title = "Sooner", className, ...props }: SoonerLogoProps) {
   return (
     <svg

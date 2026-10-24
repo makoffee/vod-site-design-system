@@ -3,17 +3,23 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 export interface ChannelTagTileProps {
+  /** Tag/collection name, centred bold white over the artwork. */
   title: string;
+  /** Tag/collection link; the whole tile is the link. */
   href: string;
+  /** Background artwork under a bottom scrim; gray gradient placeholder when omitted. */
   imageSrc?: string;
   /** landscape = film page "Featured in" (339×200); square = channels page tag collections. */
   aspect?: "landscape" | "square";
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Landscape channel tile with a centred title (design "Featured in" row, production "Enthalten in"):
  * artwork under a black 0 → 30% scrim, bold white/90 title (20px landscape, 16px square), rounded-sooner, scales to 1.05 on hover.
+ * Use for: film page "Featured in" (FeedRow kind="wide") and channels-page tag collections (FeedRow kind="square", aspect="square").
+ * Not for: channel art that carries its own name (use ChannelTile).
  */
 export function ChannelTagTile({ title, href, imageSrc, aspect = "landscape", className }: ChannelTagTileProps) {
   return (

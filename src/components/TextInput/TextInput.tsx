@@ -11,17 +11,28 @@ export type TextInputType = "email" | "password" | "text";
 export type TextInputState = "default" | "filled" | "focus" | "error" | "disabled";
 
 export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+  /** email (default); password adds a show/hide toggle; text is a plain field (device codes). */
   type?: TextInputType;
   /** filled follows the value; focus pins the focus look for documentation. */
   state?: TextInputState;
+  /** Optional uppercase label above the field. Without it pass `aria-label`. Label text; pass German on DE screens. */
   label?: string;
+  /** Helper or error message under the field (red when state is error), linked via aria-describedby. */
   supportingText?: string;
   /** fill (default) stretches to the parent; hug keeps the input's intrinsic width. */
   width?: Sizing;
+  /** Accessible name of the reveal button (password only). Label text; English default, pass German on DE screens. */
   showPasswordLabel?: string;
+  /** Accessible name of the hide button (password only). Label text; English default, pass German on DE screens. */
   hidePasswordLabel?: string;
 }
 
+/**
+ * Form field (TextInput master): 56px glass input with optional label and supporting text. error sets aria-invalid
+ * and a red border; disabled greys it out. Other input attributes (name, value, placeholder, …) pass through.
+ * Use for: e-mail, password and plain text entry in forms (AuthForm, LoginModal, DeviceCodeForm).
+ * Not for: search (use SearchField); the newsletter e-mail capture card (use EmailSignup).
+ */
 export function TextInput({
   type = "email",
   state = "default",

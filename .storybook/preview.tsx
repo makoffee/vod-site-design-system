@@ -14,7 +14,7 @@ const preview: Preview = {
     // Foundations → Tokens → Screens → components (in the order of the design boards).
     options: {
       storySort: {
-        order: ["Foundations", ["Introduction", "*"], "Tokens", "Screens", "Components", "Account", "Feeds", "Discover", "Film", "Search", "Collections", "Marketing", "*"],
+        order: ["Foundations", ["Introduction", "Rules for generated UI", "*"], "Tokens", "Screens", "Components", "Account", "Feeds", "Discover", "Film", "Search", "Collections", "Marketing", "*"],
       },
     },
     // Sooner is a dark-only UI; the canvas background comes from globals.css

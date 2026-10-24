@@ -10,18 +10,24 @@ export type EditorialMedia = "image" | "mask";
 export type EditorialSide = "left" | "right";
 
 export interface EditorialCta {
+  /** Button text. */
   label: string;
+  /** Link target. */
   href: string;
   /** Optional leading icon (e.g. a Spotify glyph for the podcast slice). */
   icon?: ReactNode;
 }
 
 export interface EditorialContentProps {
+  /** Small uppercase gray label above the title; omitted when empty. */
   eyebrow?: string;
+  /** Playfair heading text. */
   title: string;
+  /** Body paragraph under the title; omitted when empty. */
   description?: string;
+  /** Black link button under the text ({ label, href, icon? }); omitted when unset. */
   cta?: EditorialCta;
-  /** Title level; slices sit under page-level h1/h2 rows. */
+  /** Title level; slices sit under page-level h1/h2 rows. Default h2. */
   as?: "h2" | "h3";
 }
 
@@ -52,10 +58,15 @@ export function EditorialContent({ eyebrow, title, description, cta, as: Heading
 }
 
 export interface EditorialSliceProps extends EditorialContentProps {
+  /** image = full-bleed half panel (default); mask = image clipped to the Sooner binocular. */
   media?: EditorialMedia;
+  /** Which side the media sits on from 768px of container width; default right. */
   side?: EditorialSide;
+  /** Image URL; a gray gradient placeholder shows when omitted. */
   imageSrc?: string;
+  /** Image alt text; default "" (decorative). */
   imageAlt?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -63,6 +74,8 @@ export interface EditorialSliceProps extends EditorialContentProps {
  * White editorial panel on discover (design "EditorialSlice", master axes media[image,mask] × side[left,right]):
  * a festival/collection/podcast feature. image splits text and a full-bleed image; mask clips the image to the
  * Sooner binocular. Stacks (media on top) below 768px of container width.
+ * Use for: a standalone text + image feature (festival, collection, podcast) between discover rows.
+ * Not for: a collection intro followed by its film cards (use CollectionFeature) or a dark landing teaser with a film row (use FeaturedCollectionBlock).
  */
 export function EditorialSlice({ media = "image", side = "right", imageSrc, imageAlt = "", className, ...content }: EditorialSliceProps) {
   const picture = imageSrc && <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />;

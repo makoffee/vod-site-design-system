@@ -24,12 +24,15 @@ export const accountNavItems: AccountNavItem[] = [
 ];
 
 export interface AccountNavProps {
+  /** Section shown as current (violet tint, aria-current="page"; also the dropdown button text). */
   active: AccountSection;
+  /** Sections with label and href; defaults to accountNavItems (production routes, English labels). Pass German labels on DE screens. */
   items?: AccountNavItem[];
   /** list = side navigation, menu = collapsed dropdown, auto = menu below a 48rem container and list above it. */
   layout?: "list" | "menu" | "auto";
-  /** Accessible name of the navigation. */
+  /** Accessible name of the navigation. Label text; English default, pass German on DE screens. */
   label?: string;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -41,6 +44,8 @@ const current = "border-sooner-primary/30 bg-sooner-primary/15 text-white";
 /**
  * Account section navigation (production sooner.de/account): a sticky list with the active section on a violet tint,
  * collapsing into a dropdown on narrow containers. Place it inside an @container (AccountScreen does).
+ * Use for: switching between account sections (profile, settings, subscription, rentals, PIN, devices).
+ * Not for: switching between options within one view (use SegmentedControl).
  */
 export function AccountNav({ active, items = accountNavItems, layout = "auto", label = "Account navigation", className }: AccountNavProps) {
   const [open, setOpen] = useState(false);

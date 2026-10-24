@@ -15,6 +15,8 @@ import { recommended } from "@/mocks/catalog";
 // Full key screens composed from the library, one story per design screen on "2 Key Screens".
 const meta = {
   title: "Screens/Key screens",
+  // Compositions, not components: kept out of the component manifest (the rules page points agents at src/screens).
+  tags: ["!manifest"],
   parameters: {
     layout: "fullscreen",
     design: {

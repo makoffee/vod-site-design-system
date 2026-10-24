@@ -6,18 +6,27 @@ import { Button } from "../Button/Button";
 import { TextInput } from "../TextInput/TextInput";
 
 export interface DeviceCodeFormProps {
+  /** Heading (h2). Label text; English default, pass German on DE screens. */
   title?: string;
+  /** Hint under the heading. Label text; English default, pass German on DE screens. */
   description?: string;
+  /** Field placeholder, also its accessible name. Label text; English default, pass German on DE screens. */
   placeholder?: string;
+  /** Submit button text (default "Continue"). Label text; English default, pass German on DE screens. */
   submitLabel?: string;
+  /** Initial code in the field (uncontrolled). */
   defaultValue?: string;
+  /** Called on submit with the trimmed, upper-cased code; not called when the field is blank. */
   onSubmit?: (code: string) => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Pair a TV or device (production /account/devices): heading, hint, the code field and Continue.
  * Built from TextInput and Button; Continue stays disabled until a code is entered.
+ * Use for: entering a device pairing code on the account devices page.
+ * Not for: email/password login or signup (use AuthForm).
  */
 export function DeviceCodeForm({
   title = "Login in other devices",

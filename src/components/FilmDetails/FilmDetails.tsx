@@ -3,30 +3,38 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 export interface FilmFact {
+  /** Fact name, e.g. "Director" (rendered as <dt>). */
   label: string;
   /** One entry per line (cast lists); a single entry for everything else. */
   value: string[];
 }
 
 export interface FilmDetailsProps {
+  /** Film title; used as the poster's alt text (not rendered as text). */
   title: string;
+  /** 3:4 poster; gray gradient placeholder when omitted. */
   posterSrc?: string;
   /** Bold lead paragraph. */
   tagline?: string;
+  /** Synopsis text; the synopsis heading shows only when set. */
   synopsis?: string;
-  /** Design "Synopsis". */
+  /** Design "Synopsis". Label text; English default, pass German on DE screens. */
   synopsisLabel?: string;
+  /** Festivals/awards, comma-separated; entries with href are links. Section hidden when empty. */
   festivals?: { name: string; href?: string }[];
-  /** Design "Festivals & Awards". */
+  /** Design "Festivals & Awards". Label text; English default, pass German on DE screens. */
   festivalsLabel?: string;
   /** Metadata pairs (Director, Genres, Cast, Duration, Year, Country, …), split over two columns. */
   facts?: FilmFact[];
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
  * Film info grid under the hero (production `film-info-grid`, design "single film view"): 3:4 poster, tagline,
  * synopsis and festivals, then the metadata as a two-column definition list. Stacks below 1024px of container width.
+ * Use for: the film page body below FilmHero.
+ * Not for: the film page header with actions (use FilmHero) or list rows (use FilmListItem).
  */
 export function FilmDetails({
   title,

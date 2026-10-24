@@ -12,7 +12,7 @@ import type { PlanId } from "../_shared/plans";
 export type AuthFormMode = "login" | "signup";
 
 // Production strings (Copy/production-strings.json). "Login with your institute" has no strings-file entry;
-// en/de follow the LoginModal master.
+// en/de follow the LoginModal master. The SSO buttons' accessible names ("Mit Google anmelden") are production markup.
 const copy: Record<Locale, Record<string, string>> = {
   en: {
     login: "Login",
@@ -25,6 +25,7 @@ const copy: Record<Locale, Record<string, string>> = {
     submitSignup: "Continue",
     forgot: "Forgot password",
     sso: "or sign in with SSO",
+    ssoProvider: "Sign in with {provider}",
     institution: "Login with your institute",
     terms: "By registering your account, you agree to our terms and conditions, privacy and services agreement.",
     noAccount: "Don't have an account?",
@@ -44,6 +45,7 @@ const copy: Record<Locale, Record<string, string>> = {
     submitSignup: "Weiter",
     forgot: "Passwort vergessen",
     sso: "oder mit SSO anmelden",
+    ssoProvider: "Mit {provider} anmelden",
     institution: "Mit Hochschul-Login anmelden",
     terms: "Mit der Registrierung stimmst du unseren AGB, der Datenschutzerklärung und den Servicebedingungen zu.",
     noAccount: "Noch kein Konto?",
@@ -55,17 +57,25 @@ const copy: Record<Locale, Record<string, string>> = {
 };
 
 export interface AuthFormProps {
+  /** login (default) or signup: switches title, submit text (Login / Continue), forgot-password link (login) and terms copy (signup). */
   mode?: AuthFormMode;
-  /** Signup from checkout: the chosen plan above the form (ProductCard). */
+  /** Signup from checkout: the chosen plan above the form (ProductCard). Shown in signup mode only. */
   product?: PlanId;
+  /** ProductCard's "< Select another plan" link click. */
   onChangeProduct?: () => void;
+  /** Copy language: en (default) or de. */
   locale?: Locale;
+  /** Form submit with e-mail and password; the native submit is prevented. */
   onSubmit?: (values: { email: string; password: string }) => void;
+  /** Forgot-password link click (login mode only). */
   onForgotPassword?: () => void;
+  /** Called with the clicked SSO provider. */
   onSso?: (provider: SsoProvider) => void;
+  /** Institute login button click. */
   onInstitutionLogin?: () => void;
   /** The "Sign up" / "Login" link under the form. */
   onSwitchMode?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -76,6 +86,8 @@ const link = "rounded-sm outline-none hover:underline focus-visible:outline-2 fo
  * title, optional plan card, e-mail + password, white submit, SSO providers, institute login, legal copy and
  * the switch to the other mode. The title centres below 384px of container width (393 screens). The dialog
  * version with close / cancel is LoginModal.
+ * Use for: dedicated login and signup pages, including signup from checkout (`product`).
+ * Not for: logging in on top of an existing page (use LoginModal).
  */
 export function AuthForm({
   mode = "login",
@@ -132,7 +144,7 @@ export function AuthForm({
 
       <div className="flex flex-col gap-7">
         <p className="m-0 text-center text-base">{t.sso}</p>
-        <SsoButtonGroup onSelect={onSso} />
+        <SsoButtonGroup onSelect={onSso} labelFor={(name) => t.ssoProvider.replace("{provider}", name)} />
         <Button variant="cta-ghost" onClick={onInstitutionLogin}>
           {t.institution}
         </Button>

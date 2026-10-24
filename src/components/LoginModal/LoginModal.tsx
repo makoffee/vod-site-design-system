@@ -51,8 +51,11 @@ const copy: Record<Locale, Record<string, string>> = {
 export interface LoginModalSelectedProductProps {
   /** Master axis visible[on,off] (e1bc9d53d909d53f). */
   visible?: boolean;
+  /** Plan shown in the ProductCard; default monthly. */
   product?: PlanId;
+  /** ProductCard's change-product link click. */
   onChangeProduct?: () => void;
+  /** Copy language; inherits the modal's locale. */
   locale?: Locale;
 }
 
@@ -66,6 +69,7 @@ function SelectedProduct({ visible = true, product = "monthly", onChangeProduct,
 export type LoginModalState = "default" | "focus" | "disabled";
 
 export interface LoginModalProps {
+  /** Master axis type[login]; "login" is the only value and the component does not read it. */
   type?: "login";
   /** focus pins the e-mail field's focus look; disabled is the locked, reduced form. */
   state?: LoginModalState;
@@ -75,19 +79,34 @@ export interface LoginModalProps {
   overlay?: boolean;
   /** Copy language; English by default. */
   locale?: Locale;
+  /** Heading text; defaults to the locale's title ("Login" / "Willkommen zurück"). */
   title?: string;
+  /** Close (X) and Cancel button click. */
   onClose?: () => void;
+  /** Form submit with e-mail, password and the "Stay logged in" checkbox; the native submit is prevented. */
   onSubmit?: (values: { email: string; password: string; remember: boolean }) => void;
+  /** Forgot-password link click (not shown when disabled). */
   onForgotPassword?: () => void;
+  /** Called with the clicked SSO provider (not shown when disabled). */
   onSso?: (provider: SsoProvider) => void;
+  /** Institute login button click (not shown when disabled). */
   onInstitutionLogin?: () => void;
+  /** Sign-up link click at the bottom. */
   onRegister?: () => void;
+  /** Extra classes for the dialog panel (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 const textLink =
   "rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-white";
 
+/**
+ * Login dialog (LoginModal master): title and close, e-mail, password, "Stay logged in", forgot password,
+ * Cancel / Login, SSO providers, institute login and the sign-up link. All copy follows `locale`.
+ * LoginModal.SelectedProduct is the checkout product slot (also set via `selectedProduct`).
+ * Use for: logging in on top of an existing page (`overlay` adds the fixed blurred scrim).
+ * Not for: the full-page login/signup screen (use AuthForm).
+ */
 function LoginModalRoot({
   state = "default",
   selectedProduct,

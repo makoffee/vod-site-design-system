@@ -7,25 +7,33 @@ import { cn } from "@/lib/cn";
 import { SoonerBasket } from "../_shared/icons";
 
 export interface FilmHoverCardProps {
+  /** Film title (Playfair), linked to href; also the accessible name of the still link. */
   title: string;
+  /** Film page link for the still and the title. */
   href: string;
   /** Wide still (16:9) shown on top. */
   imageSrc?: string;
+  /** Director name after byLabel; line hidden when omitted. */
   director?: string;
-  /** Production "By" (de "Von"). */
+  /** Production "By" (de "Von"). Label text; English default, pass German on DE screens. */
   byLabel?: string;
   /** Genre, runtime, year… joined with "|". */
   meta?: string[];
+  /** Synopsis, clamped to 2 lines. */
   description?: string;
-  /** Subscribe action (design "Subscribe"); omit to hide. */
+  /** Subscribe action (design "Subscribe"); omit to hide. Label text; English default, pass German on DE screens. */
   subscribeLabel?: string;
-  /** Rent action (design "Rent - 4,99€"); omit to hide. */
+  /** Rent action (design "Rent - 4,99€"); omit to hide. Label text; English default, pass German on DE screens. */
   rentLabel?: string;
-  /** Production "Add to Watchlist". */
+  /** Accessible name of the round + button; production "Add to Watchlist". Label text; English default, pass German on DE screens. */
   watchlistLabel?: string;
+  /** Subscribe button click. */
   onSubscribe?: () => void;
+  /** Rent button click. */
   onRent?: () => void;
+  /** Watchlist (+) button click. */
   onAddToWatchlist?: () => void;
+  /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
@@ -34,6 +42,8 @@ const focus = "outline-none focus-visible:outline-2 focus-visible:outline-offset
 /**
  * Expanded preview of a film card on hover (design "Film Hover Card"): white card with a 16:9 still, Playfair
  * title, director, meta line, two-line synopsis and Subscribe / Rent / watchlist actions.
+ * Use for: a hover/focus preview of a film (max 450px wide).
+ * Not for: the card inside a feed (use FilmCard or FeaturedFilmCard).
  */
 export function FilmHoverCard({
   title,
