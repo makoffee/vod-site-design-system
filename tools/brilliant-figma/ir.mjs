@@ -223,7 +223,9 @@ export function diff(instRow, varRow, scoring = false) {
         const vi = scoring ? null : resolveVariant(ic), vm = scoring ? null : resolveVariant(mc);
         if (!scoring && vi && vm && vi.id !== vm.id) { op.swap = vi.id; base = vi; }
       }
-      const props = overrideProps(ic.p, base === mc ? mc.p : instancedRoot(ic.p, base.p), false, parentAL);
+      // a summarized vector prints no fills: take the copy's own fills from data/full-vectors.bl
+      const ip = ic.p.type === 'vector' && ic.summarized && FULL.has(ic.id) ? { ...ic.p, fills: FULL.get(ic.id).p.fills } : ic.p;
+      const props = overrideProps(ip, base === mc ? mc.p : instancedRoot(ip, base.p), false, parentAL);
       Object.assign(op, props);
       if (Object.keys(op).length) { ops.push({ path: pth, ...op }); score += Object.keys(op).length; }
       const kids = base === mc ? mc.children : base.children;
