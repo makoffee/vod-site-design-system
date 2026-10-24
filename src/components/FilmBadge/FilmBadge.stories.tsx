@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Master FilmBadge tone(label): film cards and the promo hero. */
+/** tone label: film cards and the promo hero. */
 export const Label: Story = {};
-/** Master FilmBadge tone(info): the coming-soon date. */
+/** tone info: the coming-soon date. */
 export const Info: Story = { args: { children: "From Date", tone: "info" } };

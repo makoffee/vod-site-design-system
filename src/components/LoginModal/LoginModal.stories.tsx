@@ -35,7 +35,7 @@ export const Default: Story = {};
 export const Focus: Story = { args: { state: "focus" } };
 export const Disabled: Story = { args: { state: "disabled" } };
 
-/** LoginModal.SelectedProduct, visible=on (the master shows the monthly product at 352px). */
+/** LoginModal.SelectedProduct, visible=on: the monthly product at 352px. */
 export const SelectedProduct: Story = {
   decorators: [frame(352)],
   render: () => <LoginModal.SelectedProduct visible product={plansEn.monthly} onChangeProduct={fn()} />,

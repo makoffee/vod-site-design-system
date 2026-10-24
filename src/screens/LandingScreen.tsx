@@ -29,7 +29,7 @@ export interface LandingScreenProps {
 }
 
 /**
- * Landing page (design "Landing Page EN | 1440w" / "Landing Page DE | 1440w", production sooner.de home):
+ * Landing page (production sooner.de home):
  * hero, four collection blocks with the plans after the third, the Berlin split, devices, the closing banner
  * and the FAQ. Production order and copy.
  */

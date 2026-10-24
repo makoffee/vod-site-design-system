@@ -13,7 +13,7 @@ export interface AppShellProps {
   children: ReactNode;
 }
 
-/** Header + page + Footer, as every key screen composes them (Header/Footer instances on the canvas). */
+/** Header + page + Footer, as every key screen composes them. */
 export function AppShell({ active = "none", auth, locale = "en", children }: AppShellProps) {
   const de = locale === "de";
   return (

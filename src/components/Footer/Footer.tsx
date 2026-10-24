@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 import { SocialIcons, type SocialPlatform } from "../SocialIcons/SocialIcons";
 import { SoonerLogo } from "../SoonerLogo/SoonerLogo";
 
-// The master's viewport[desktop,mobile] axis is not a prop: the layout follows the container (desktop from 768px).
+// No viewport prop: the layout follows the container (desktop from 768px).
 // English only; German screens pass footerDe (src/i18n/de.ts).
 
 export interface FooterLink {
@@ -38,13 +38,13 @@ export interface FundingLogo {
   width: number;
 }
 
-// Raster logos from the master; replace with SVGs once vector sources are supplied.
+// Raster logos; replace with SVGs once vector sources are supplied.
 const creativeEuropeMedia: FundingLogo = { name: "Creative Europe Media", src: "/images/funding/creative-europe-media.png", width: 125 };
 
 /** Default: the one logo sooner.de shows. */
 export const defaultFundingLogos: FundingLogo[] = [creativeEuropeMedia];
 
-/** Belgian site only (screens on "3 Key Screens"); the master keeps these hidden, named "· BE only". */
+/** Belgian site only. */
 export const beFundingLogos: FundingLogo[] = [
   creativeEuropeMedia,
   { name: "Fédération Wallonie-Bruxelles", src: "/images/funding/federation-wallonie-bruxelles.png", width: 44 },
@@ -74,7 +74,7 @@ export interface FooterProps {
 }
 
 /**
- * Fills its container (instances are s(fill, hug) on every screen).
+ * Fills its container's width.
  * Use for: the bottom of every page screen.
  */
 export function Footer({

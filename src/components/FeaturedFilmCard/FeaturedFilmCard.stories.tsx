@@ -27,5 +27,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design "Featured card with feed": subscribe, rent and watchlist. */
+/** Subscribe, rent and watchlist actions. */
 export const Default: Story = { args: { onSubscribe: fn() } };

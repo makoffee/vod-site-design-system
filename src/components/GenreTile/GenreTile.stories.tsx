@@ -18,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Violet: Story = {};
-/** All six duotones in the design's order. */
+/** All six duotones in order. */
 export const Tints: Story = {
   parameters: { frameWidth: 1392 },
   render: () => (

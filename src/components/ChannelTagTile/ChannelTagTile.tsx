@@ -16,7 +16,7 @@ export interface ChannelTagTileProps {
 }
 
 /**
- * Landscape channel tile with a centred title (design "Featured in" row, production "Enthalten in"):
+ * Landscape channel tile with a centred title (film page "Featured in" row, production "Enthalten in"):
  * artwork under a black 0 → 30% scrim, bold white/90 title (20px landscape, 16px square), rounded-sooner, scales to 1.05 on hover.
  * Use for: film page "Featured in" (FeedRow kind="wide") and channels-page tag collections (FeedRow kind="square", aspect="square").
  * Not for: channel art that carries its own name (use ChannelTile).

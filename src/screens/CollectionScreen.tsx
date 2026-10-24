@@ -17,8 +17,8 @@ export interface CollectionScreenProps {
 }
 
 /**
- * Collection page (design "collection view | list / Grid | 1440" and the 393 versions): banner, then a poster grid or
- * film list. Collection and films are the design's placeholders.
+ * Collection page (list or grid view, desktop and mobile): banner, then a poster grid or
+ * film list. Collection and films are placeholder content.
  */
 export function CollectionScreen({ defaultView = "list", defaultExpanded = false, locale = "en" }: CollectionScreenProps) {
   const [view, setView] = useState(defaultView);

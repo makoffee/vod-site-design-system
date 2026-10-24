@@ -13,7 +13,7 @@ export interface Plan {
   /** Pill on the checkout ProductCard. */
   checkoutBadge: string;
   features: string[];
-  /** CTA label exactly as written in the design (uppercase in the copy itself). */
+  /** CTA label as written (uppercase in the copy itself). */
   cta: string;
   highlighted: boolean;
 }

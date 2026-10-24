@@ -35,7 +35,7 @@ export const Floating: Story = {
   ],
 };
 
-/** Mobile dropdown (design "Filter context menu" on the 393 collection screens). */
+/** Mobile dropdown (collection pages on mobile). */
 export const Menu: Story = { args: { variant: "menu" }, parameters: { layout: "padded" } };
 export const MenuOpen: Story = {
   args: { variant: "menu", defaultOpen: true },

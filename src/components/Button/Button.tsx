@@ -5,7 +5,7 @@ import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 import { widthClass, type Sizing } from "../_shared/sizing";
 
-// Axes mirror the Button master on "1 Design System" (0b03c8fea86a51a4); values follow production's
+// Values follow production's
 // .sooner-cta-* / .sooner-filled-btn classes on sooner.de, which are the source of truth.
 export type ButtonVariant =
   | "cta-primary"
@@ -29,7 +29,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   state?: ButtonState;
   /** sm = 36px, uppercase 14px nav type (header); md = 48px (default); lg = 56px (production CTA). Ignored by cta-round. */
   size?: ButtonSize;
-  /** fill = stretch to the parent (default for md/lg, as on every design instance); hug = fit the label (default for sm). */
+  /** fill = stretch to the parent (default for md/lg); hug = fit the label (default for sm). */
   width?: Sizing;
 }
 

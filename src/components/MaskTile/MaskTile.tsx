@@ -10,14 +10,14 @@ export interface MaskTileProps {
   href: string;
   /** Artwork, shown grayscale and clipped to the binocular shape. */
   imageSrc?: string;
-  /** Violet duotone wash (the first tile in the design row). */
+  /** Violet duotone wash (the first tile in the discover "Collections" row). */
   tinted?: boolean;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
- * Collection tile clipped to the binocular shape with a centred Playfair title (design "Collection row with icon-mask").
+ * Collection tile clipped to the binocular shape with a centred Playfair title.
  * Use for: collection tiles in a FeedRow kind="wide" (discover "Collections").
  * Not for: a collection intro with text and CTA (use EditorialSlice) or channel squares (use ChannelTile).
  */

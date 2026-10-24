@@ -33,7 +33,7 @@ const searchEn = {
 };
 
 /**
- * Search (design "search results | Static / Sticky in-nav | 1440px" and "| 393px"). Without a query: the large
+ * Search results page, desktop and mobile. Without a query: the large
  * field, suggested searches and feeds. With a query: in-nav field, availability filter, grid switch, results grid.
  */
 export function SearchScreen({ defaultQuery = "", results, locale = "en" }: SearchScreenProps) {

@@ -18,7 +18,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design "HeroSection" at 1392px (discover | 1440). */
+/** At 1392px, the discover desktop content width. */
 export const Desktop: Story = {};
 /** Below 672px of container width: 3:4 card, icon-only actions (production mobile). */
 export const Mobile: Story = { parameters: { frameWidth: 393 }, globals: viewport("mobile") };

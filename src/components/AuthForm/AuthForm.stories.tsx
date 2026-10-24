@@ -29,10 +29,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** "login | 1440px" form. Contextual copy: production strings. */
+/** Login form. Contextual copy: production strings. */
 export const Login: Story = {};
-/** "signup | 1440px" form. */
+/** Signup form. */
 export const Signup: Story = { args: { mode: "signup" } };
-/** "signup with product card | 1440px": the plan chosen at checkout above the form. */
+/** Signup with the plan chosen at checkout above the form. */
 export const SignupWithProduct: Story = { args: { mode: "signup", product: plansEn.monthly } };
 export const Mobile: Story = { args: { mode: "signup", product: plansEn.monthly }, parameters: { frameWidth: 345 }, globals: viewport("mobile") };

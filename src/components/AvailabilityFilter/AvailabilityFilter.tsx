@@ -7,7 +7,7 @@ import { SoonerBasket } from "../_shared/icons";
 
 export type Availability = "all" | "subscription" | "rentals";
 
-/** bar = segmented glass bar (desktop discover/collection), menu = compact dropdown (design "Filter context menu", 393 screens). */
+/** bar = segmented glass bar (desktop discover/collection), menu = compact dropdown (mobile). */
 export type AvailabilityFilterVariant = "bar" | "menu";
 
 /** ghost = ghost-button glass (default); floating = darker tint where content scrolls under the filter (discover). */
@@ -24,7 +24,7 @@ export interface AvailabilityFilterProps {
   variant?: AvailabilityFilterVariant;
   /** ghost = ghost-button glass (default); floating = darker tint where content scrolls underneath. */
   surface?: AvailabilityFilterSurface;
-  /** Option labels; defaults are the design's copy ("All", "Subscription", "Rentals"). Label text; English default, pass German on DE screens. */
+  /** Option labels; defaults "All", "Subscription", "Rentals". Label text; English default, pass German on DE screens. */
   labels?: Partial<Record<Availability, string>>;
   /** Accessible group name (production string "Availability"). Label text; English default, pass German on DE screens. */
   label?: string;
@@ -43,7 +43,7 @@ const icons: Record<Availability, ReactNode> = {
 const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 /**
- * Discover/collection availability switch (design "AvailabilityFilter"): glass bar with a white pill on the active
+ * Discover/collection availability switch: glass bar with a white pill on the active
  * option, or a dropdown on mobile. surface ghost (default) is the ghost-button glass; floating adds a dark tint for
  * places where content scrolls under the filter. The dropdown panel is always floating. Every option keeps its icon.
  * Use for: filtering a film grid or feed by All / Subscription / Rentals on discover and collection pages.

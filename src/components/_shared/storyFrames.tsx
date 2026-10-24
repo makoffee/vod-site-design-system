@@ -3,7 +3,7 @@ import type { Decorator } from "@storybook/nextjs-vite";
 // Story-only helpers (not exported from the component barrel).
 
 /**
- * Fluid frame capped at the master's width on the design board. Components fill it, so the Viewport toolbar
+ * Fluid frame capped at the component's reference width. Components fill it, so the Viewport toolbar
  * (Mobile 393 · Tablet 768 · Laptop 1024 · Desktop 1440) shrinks them and their container queries respond.
  */
 export function frame(maxWidth: number): Decorator {

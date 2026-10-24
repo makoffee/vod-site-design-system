@@ -19,7 +19,7 @@ export interface ViewToggleProps {
 }
 
 /**
- * Grid / list switch (design "grid-icon"): 48px glass circle showing the icon of the view it switches to.
+ * Grid / list switch: 48px glass circle showing the icon of the view it switches to.
  * Use for: toggling a collection between grid and list view (CollectionHeader includes it).
  * Not for: choosing among more than two options (use SegmentedControl).
  */

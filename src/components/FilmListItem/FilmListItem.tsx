@@ -21,9 +21,9 @@ export interface FilmListItemProps {
   posterSrc?: string;
   /** Production "By" (de "Von"). Label text; English default, pass German on DE screens. */
   byLabel?: string;
-  /** Design "Subscribe". Omit with null. Label text; English default, pass German on DE screens. */
+  /** Subscribe action, e.g. "Subscribe". Omit with null. Label text; English default, pass German on DE screens. */
   subscribeLabel?: string | null;
-  /** Production "Rent"; design "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens. */
+  /** Production "Rent", or with a price, e.g. "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens. */
   rentLabel?: string | null;
   /** Production "Add to Watchlist". Accessible name of the + button. Label text; English default, pass German on DE screens. */
   watchlistLabel?: string;
@@ -38,12 +38,12 @@ export interface FilmListItemProps {
 }
 
 const focus = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
-// Icon-only 32px circles below 672px of container width (design "ListItemCard" 393), labelled 36px buttons above.
+// Icon-only 32px circles below 672px of container width (mobile), labelled 36px buttons above.
 const action =
   "flex size-8 shrink-0 items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors @2xl:h-9 @2xl:w-auto @2xl:rounded-sooner @2xl:px-3";
 
 /**
- * Collection list row (design "collection view | list"): 3:4 poster beside the title, director, meta line,
+ * Collection list row (collection list view): 3:4 poster beside the title, director, meta line,
  * clamped synopsis and subscribe / rent / watchlist actions. Compact below 672px of container width.
  * Use for: one film per row in a collection's list view.
  * Not for: posters in grids or feed rows (use FilmCard).

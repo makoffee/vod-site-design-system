@@ -17,9 +17,9 @@ export interface FilmHeroProps {
   logo?: { src: string; width: number; height: number };
   /** Production "Directed by" (de "Regie:"). Label text; English default, pass German on DE screens (filmHeroDe). */
   directorLabel?: string;
-  /** Production "Subscribe" (de "Abonnieren"); design "FREE TRIAL". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
+  /** Production "Subscribe" (de "Abonnieren"), or e.g. "FREE TRIAL". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   subscribeLabel?: string | null;
-  /** Production "Rent" (de "Leihen"); design "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
+  /** Production "Rent" (de "Leihen"), or with a price, e.g. "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   rentLabel?: string | null;
   /** Production "Trailer". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   trailerLabel?: string | null;
@@ -50,9 +50,9 @@ export interface FilmHeroProps {
 }
 
 /**
- * Film page overview (production film `overview`, design "single film view" hero): full-bleed backdrop fading
+ * Film page overview (production film `overview`): full-bleed backdrop fading
  * to black, title treatment, director, then the .sooner-cta-* actions: subscribe, rent, trailer, watchlist, share.
- * 560px-min stack on small containers; from 768px of container width a 2:1 anamorphic frame (design 1440×720) that
+ * 560px-min stack on small containers; from 768px of container width a 2:1 anamorphic frame (1440×720 at desktop) that
  * grows only when the content needs more room.
  * Use for: the top of a single film page, followed by FilmDetails.
  * Not for: the discover carousel (use PromoHero) or collection banners (use CollectionHeader).

@@ -14,7 +14,7 @@ import { WatchlistScreen } from "./WatchlistScreen";
 import { getCatalog } from "@/mocks/catalog";
 import { figmaScreen } from "@/components/_shared/figma";
 
-// Full key screens composed from the library, one story per design screen on "2 Key Screens". Storybook is English
+// Full key screens composed from the library, one story per screen. Storybook is English
 // only: every screen renders its English default; the German app routes pass locale="de".
 const meta = {
   title: "Screens/Key screens",
@@ -37,52 +37,52 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** "discover | 1440" */
+/** Discover page. */
 export const Discover: Story = { parameters: figmaScreen("Discover | desktop"), render: () => <DiscoverScreen /> };
-/** "channels | 1440" */
+/** Channels page. */
 export const Channels: Story = { parameters: figmaScreen("Channels | desktop"), render: () => <ChannelsScreen /> };
-/** "Genres | 1440px" */
+/** Genres (categories) page. */
 export const Genres: Story = { parameters: figmaScreen("Genres | desktop"), render: () => <CategoriesScreen /> };
-/** "single film view | 1440" */
+/** Single film page. */
 export const Film: Story = { parameters: figmaScreen("Film | desktop"), render: () => <FilmScreen /> };
-/** "collection view | list | 1440" */
+/** Collection page, list view. */
 export const CollectionList: Story = { parameters: figmaScreen("Collection · list | desktop"), render: () => <CollectionScreen /> };
-/** "collection view new | Grid | 1440" */
+/** Collection page, grid view. */
 export const CollectionGrid: Story = { parameters: figmaScreen("Collection · grid | desktop"), render: () => <CollectionScreen defaultView="grid" /> };
-/** "collection view | list | expanded text | 1440" */
+/** Collection page, list view with the description expanded. */
 export const CollectionExpanded: Story = { parameters: figmaScreen("Collection · list · expanded text | desktop"), render: () => <CollectionScreen defaultExpanded /> };
-/** "search results | Static | 1440px": suggestions and feeds before a query. */
+/** Search before a query: suggestions and feeds. */
 export const Search: Story = { parameters: figmaScreen("Search Overlay | desktop"), render: () => <SearchScreen /> };
-/** "search results | Sticky in-nav | 1440px" and "| 393px": results for a query. */
+/** Search results for a query, with the in-nav field. */
 export const SearchResults: Story = { parameters: figmaScreen("Search Results | desktop"), render: () => <SearchScreen defaultQuery="Drama" /> };
 /** "No results for" + hint, production strings. */
 export const SearchNoResults: Story = { render: () => <SearchScreen defaultQuery="Kubrik" results={[]} /> };
-/** "login | 1440px" / "login | 393px" */
+/** Login page. */
 export const Login: Story = { parameters: figmaScreen("Login | desktop"), render: () => <AuthScreen /> };
-/** "signup with product card | 1440px" / "Signup | 393px" */
+/** Signup page with the chosen plan above the form. */
 export const Signup: Story = { parameters: figmaScreen("Signup · product card | desktop"), render: () => <AuthScreen defaultMode="signup" product="monthly" /> };
 
-/** "Landing Page EN | 1440w" (4 Sooner DE Marketing Pages) */
+/** Landing page (sooner.de home). */
 export const Landing: Story = { parameters: figmaScreen("Landing Page | EN | desktop"), render: () => <LandingScreen /> };
 
-/** "onboarding EN | 1440" (4 Sooner DE Marketing Pages) */
+/** Onboarding / plan picker (sooner.de/subscribe). */
 export const Onboarding: Story = { parameters: figmaScreen("Plan Select | EN | desktop"), render: () => <OnboardingScreen /> };
 
-/** "Account · Profile" (production /en/account) */
+/** Account · Profile (production /en/account). */
 export const AccountProfile: Story = { parameters: figmaScreen("Account · Profile | EN | desktop"), render: () => <AccountScreen section="profile" /> };
-/** "Account · Settings" */
+/** Account · Settings. */
 export const AccountSettings: Story = { parameters: figmaScreen("Account · Settings | EN | desktop"), render: () => <AccountScreen section="settings" /> };
-/** "Account · Subscriptions" */
+/** Account · Subscriptions. */
 export const AccountSubscriptions: Story = { parameters: figmaScreen("Account · Subscriptions | EN | desktop"), render: () => <AccountScreen section="subscriptions" /> };
-/** "Account · Rentals" */
+/** Account · Rentals. */
 export const AccountRentals: Story = { parameters: figmaScreen("Account · Rentals | EN | desktop"), render: () => <AccountScreen section="rentals" /> };
-/** "Account · Parental PIN" */
+/** Account · Parental PIN. */
 export const AccountParentalPin: Story = { parameters: figmaScreen("Account · Parental PIN | EN | desktop"), render: () => <AccountScreen section="parental-pin" /> };
-/** "Account · Devices" */
+/** Account · Devices. */
 export const AccountDevices: Story = { parameters: figmaScreen("Account · Devices | EN | desktop"), render: () => <AccountScreen section="devices" /> };
-/** "Watchlist · empty" */
+/** Watchlist, empty. */
 export const WatchlistEmpty: Story = { parameters: figmaScreen("Watchlist · empty | EN | desktop"), render: () => <WatchlistScreen /> };
-/** "Watchlist" with saved titles. */
+/** Watchlist with saved titles. */
 export const Watchlist: Story = { parameters: figmaScreen("Watchlist | EN | desktop"), render: () => <WatchlistScreen films={getCatalog("en").recommended} /> };
 /** 404: production "The page could not be found". */
 export const NotFound: Story = { render: () => <NotFoundScreen /> };

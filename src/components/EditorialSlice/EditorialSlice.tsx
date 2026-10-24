@@ -31,7 +31,7 @@ export interface EditorialContentProps {
   as?: "h2" | "h3";
 }
 
-/** Text block shared by EditorialSlice and CollectionFeature (design "ContentBlock"). */
+/** Text block shared by EditorialSlice and CollectionFeature. */
 export function EditorialContent({ eyebrow, title, description, cta, as: Heading = "h2" }: EditorialContentProps) {
   return (
     <div className="flex flex-col justify-center gap-4">
@@ -71,7 +71,7 @@ export interface EditorialSliceProps extends EditorialContentProps {
 }
 
 /**
- * White editorial panel on discover (design "EditorialSlice", master axes media[image,mask] × side[left,right]):
+ * White editorial panel on discover (media[image,mask] × side[left,right]):
  * a festival/collection/podcast feature. image splits text and a full-bleed image; mask clips the image to the
  * Sooner binocular. Stacks (media on top) below 768px of container width.
  * Use for: a standalone text + image feature (festival, collection, podcast) between discover rows.

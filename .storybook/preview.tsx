@@ -11,15 +11,15 @@ const preview: Preview = {
     ),
   ],
   parameters: {
-    // Tokens → Screens → components (in the order of the design boards).
+    // Tokens → Screens → components.
     options: {
       storySort: {
         order: ["Tokens", "Screens", "Components", "Account", "Feeds", "Discover", "Film", "Search", "Collections", "Marketing", "*"],
       },
     },
-    // Sooner is a dark-only UI; the canvas background comes from globals.css
+    // Sooner is a dark-only UI; the page background comes from globals.css
     backgrounds: { disable: true },
-    // Toolbar presets = the widths of the design screens. Components use container queries, so stories
+    // Toolbar presets = the Sooner screen widths. Components use container queries, so stories
     // (fluid frames, see _shared/storyFrames) respond when you switch viewport.
     viewport: {
       options: {

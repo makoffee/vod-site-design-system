@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 export const English: Story = {};
 export const German: Story = { args: { defaultValue: "de" } };
 export const French: Story = { args: { defaultValue: "fr" } };
-/** The open menu is not drawn in the design; this shows the implementation. */
+/** The open language menu. */
 export const Open: Story = {
   args: { defaultOpen: true },
   decorators: [

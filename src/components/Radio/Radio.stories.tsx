@@ -4,7 +4,7 @@ import { Radio } from "./Radio";
 import { frame } from "../_shared/storyFrames";
 import { figmaComponent } from "../_shared/figma";
 
-// Variants mirror the Radio master: checked[false,true] × state[default,focus,disabled].
+// Variants: checked[false,true] × state[default,focus,disabled].
 const meta = {
   title: "Components/Radio",
   component: Radio,

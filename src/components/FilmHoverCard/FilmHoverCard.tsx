@@ -21,9 +21,9 @@ export interface FilmHoverCardProps {
   meta?: string[];
   /** Synopsis, clamped to 2 lines. */
   description?: string;
-  /** Subscribe action (design "Subscribe"); omit to hide. Label text; English default, pass German on DE screens. */
+  /** Subscribe action; omit to hide. Label text; English default, pass German on DE screens. */
   subscribeLabel?: string;
-  /** Rent action (design "Rent - 4,99€"); omit to hide. Label text; English default, pass German on DE screens. */
+  /** Rent action (e.g. "Rent - 4,99€"); omit to hide. Label text; English default, pass German on DE screens. */
   rentLabel?: string;
   /** Accessible name of the round + button; production "Add to Watchlist". Label text; English default, pass German on DE screens. */
   watchlistLabel?: string;
@@ -40,7 +40,7 @@ export interface FilmHoverCardProps {
 const focus = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sooner-primary";
 
 /**
- * Expanded preview of a film card on hover (design "Film Hover Card"): white card with a 16:9 still, Playfair
+ * Expanded preview of a film card on hover: white card with a 16:9 still, Playfair
  * title, director, meta line, two-line synopsis and Subscribe / Rent / watchlist actions.
  * Use for: a hover/focus preview of a film (max 450px wide).
  * Not for: the card inside a feed (use FilmCard or FeaturedFilmCard).

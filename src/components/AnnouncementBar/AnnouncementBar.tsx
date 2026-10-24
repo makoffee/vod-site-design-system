@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 export interface AnnouncementBarProps {
   /** Bold promo text; also the region's accessible name. */
   message: string;
-  /** Optional call to action on the right ({ label, href }; design "Code einlösen"). */
+  /** Optional call to action on the right ({ label, href }, e.g. "Code einlösen"). */
   action?: { label: string; href: string };
   /** Screen-reader name of the close button; no production source. Label text; English default ("Close"), pass German on DE screens. */
   closeLabel?: string;
@@ -21,7 +21,7 @@ export interface AnnouncementBarProps {
 const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 
 /**
- * Promo strip above the header (design "Pushdown Alert banner"): yellow bar, party icon + bold 14px message,
+ * Promo strip above the header (pushdown alert banner): yellow bar, party icon + bold 14px message,
  * black action button and a close button. Dismissible.
  * Use for: a site-wide promo or voucher notice placed above the Header.
  * Not for: free-trial email capture (use EmailSignup) or an image banner with actions (use ImageCtaBanner).

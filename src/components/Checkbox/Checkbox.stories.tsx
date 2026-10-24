@@ -4,7 +4,7 @@ import { Checkbox } from "./Checkbox";
 import { frame } from "../_shared/storyFrames";
 import { figmaComponent } from "../_shared/figma";
 
-// Variants mirror the Checkbox master: checked[false,true] × state[default,focus,disabled].
+// Variants: checked[false,true] × state[default,focus,disabled].
 const meta = {
   title: "Components/Checkbox",
   component: Checkbox,

@@ -3,8 +3,7 @@ import { fn } from "storybook/test";
 import { Button } from "./Button";
 import { figmaComponent } from "../_shared/figma";
 
-// One story per variant on the master; ids match design-refs/components-button--*.png.
-// The master's focus variants were removed: production has none (keyboard focus = 2px white outline).
+// One story per variant. No focus variants: keyboard focus is production's 2px white outline.
 const meta = {
   title: "Components/Button",
   component: Button,
@@ -18,7 +17,7 @@ const meta = {
     size: { control: "inline-radio", options: ["md", "lg", "sm"] },
   },
   decorators: [
-    // md/lg default to width="fill": cap them at the master's 401px; sm and round hug their content.
+    // md/lg default to width="fill": cap them at 401px; sm and round hug their content.
     function ButtonFrame(Story, { args }) {
       return (
         <div className={args.size === "sm" || args.variant === "cta-round" ? "w-fit" : "w-full max-w-[401px]"}>

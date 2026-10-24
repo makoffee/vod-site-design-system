@@ -10,7 +10,7 @@ export interface EmailSignupProps {
   description?: string;
   /** Input placeholder and its screen-reader label; default "E-Mail". */
   placeholder?: string;
-  /** Submit label (required, no default); design "Jetzt testen" / "COMMENCER". Shown uppercase. */
+  /** Submit label (required, no default), e.g. "Jetzt testen" / "COMMENCER". Shown uppercase. */
   submitLabel: string;
   /** Called with the entered email on submit (default form submission is prevented). */
   onSubmit?: (email: string) => void;
@@ -19,7 +19,7 @@ export interface EmailSignupProps {
 }
 
 /**
- * Free-trial email capture (design "Email CTA" on the original landing pages): violet card with a soft glow,
+ * Free-trial email capture: violet card with a soft glow,
  * 32px black title and bold copy on the left, a white email field joined to a black uppercase button on the right.
  * Use for: a free-trial email capture slice on landing pages.
  * Not for: sign-in or account forms (use AuthForm) or a promo notice above the header (use AnnouncementBar).

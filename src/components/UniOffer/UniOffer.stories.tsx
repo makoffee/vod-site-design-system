@@ -16,7 +16,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Master at 1200px. */
+/** At 1200px. */
 export const Default: Story = {
   decorators: [frame(1200)],
 };

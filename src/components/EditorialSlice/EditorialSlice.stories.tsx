@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ImageRight: Story = {};
 export const ImageLeft: Story = { args: { side: "left" } };
-/** Binocular-masked image with an icon CTA (design podcast slice). */
+/** Binocular-masked image with an icon CTA (podcast slice). */
 export const MaskLeft: Story = {
   args: {
     ...placeholderSlice,

@@ -14,7 +14,7 @@ export interface BinocularMaskProps {
 
 /**
  * Clips its content to the Sooner "binocular" shape (editorial slices, collection tiles), keeping the
- * 600 × 325 proportions of the design's LogoMask. Without children it shows the placeholder gradient.
+ * 600 × 325 proportions of the Sooner logo mask. Without children it shows the placeholder gradient.
  */
 export function BinocularMask({ children, className }: BinocularMaskProps) {
   return (

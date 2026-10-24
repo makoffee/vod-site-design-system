@@ -24,7 +24,7 @@ import {
 } from "simple-icons";
 import { cn } from "@/lib/cn";
 
-// Axes mirror the "Social Icons" master on canvas Components (dc53d585bfb82132).
+// color[negative,original] × platform.
 export type SocialIconColor = "negative" | "original";
 
 interface Glyph {
@@ -40,7 +40,7 @@ interface Glyph {
   originalMark?: string;
 }
 
-// Exported from the master (48 × 48). Instagram's Original variant is drawn in black in the design.
+// Brand artwork (48 × 48). Instagram's Original variant is drawn in black.
 const fromDesign = {
   Instagram: {
     title: "Instagram",
@@ -85,7 +85,7 @@ const fromDesign = {
   },
 } satisfies Record<string, Glyph>;
 
-// Remaining platforms on the master's axis: vector paths from simple-icons until they are exported too.
+// Remaining platforms: vector paths from simple-icons until brand artwork is supplied.
 const si = (icon: { title: string; hex: string; path: string }): Glyph => ({
   title: icon.title,
   viewBox: "0 0 24 24",

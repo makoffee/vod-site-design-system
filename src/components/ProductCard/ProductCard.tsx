@@ -7,7 +7,7 @@ import type { Plan } from "../_shared/plans";
 export interface ProductCardProps {
   /**
    * The chosen plan (name, price, period, checkoutBadge are shown). Content: pass plansEn.* on English screens,
-   * plansDe.* on DE screens (src/content/plans.ts). Its id is the master axis product[monthly,yearly,plus].
+   * plansDe.* on DE screens (src/content/plans.ts). Its id is monthly, yearly or plus.
    */
   product: Plan;
   /** Renders the change link when provided. */
@@ -19,7 +19,7 @@ export interface ProductCardProps {
 }
 
 /**
- * Master ab49ce9c06103e53: selected product summary during signup and checkout.
+ * Selected product summary during signup and checkout.
  * Use for: showing the chosen plan above the signup/checkout form (AuthForm, LoginModal use it).
  * Not for: offering plans to choose from (use PlanCard or SubscriptionPlans).
  */

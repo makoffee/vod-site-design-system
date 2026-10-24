@@ -4,7 +4,7 @@ import { useId, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { widthClass, type Sizing } from "./sizing";
 
-/** Axes on the Checkbox / Radio / Switch masters: checked[false,true] × state[default,focus,disabled]. */
+/** Checkbox / Radio / Switch variants: checked[false,true] × state[default,focus,disabled]. */
 export type ChoiceState = "default" | "focus" | "disabled";
 
 export interface ChoiceFieldProps

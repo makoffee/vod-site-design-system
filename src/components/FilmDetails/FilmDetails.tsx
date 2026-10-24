@@ -18,11 +18,11 @@ export interface FilmDetailsProps {
   tagline?: string;
   /** Synopsis text; the synopsis heading shows only when set. */
   synopsis?: string;
-  /** Design "Synopsis". Label text; English default, pass German on DE screens. */
+  /** Synopsis heading, e.g. "Synopsis". Label text; English default, pass German on DE screens. */
   synopsisLabel?: string;
   /** Festivals/awards, comma-separated; entries with href are links. Section hidden when empty. */
   festivals?: { name: string; href?: string }[];
-  /** Design "Festivals & Awards". Label text; English default, pass German on DE screens. */
+  /** Festivals heading, e.g. "Festivals & Awards". Label text; English default, pass German on DE screens. */
   festivalsLabel?: string;
   /** Metadata pairs (Director, Genres, Cast, Duration, Year, Country, …), split over two columns. */
   facts?: FilmFact[];
@@ -31,7 +31,7 @@ export interface FilmDetailsProps {
 }
 
 /**
- * Film info grid under the hero (production `film-info-grid`, design "single film view"): 3:4 poster, tagline,
+ * Film info grid under the hero (production `film-info-grid`): 3:4 poster, tagline,
  * synopsis and festivals, then the metadata as a two-column definition list. Stacks below 1024px of container width.
  * Use for: the film page body below FilmHero.
  * Not for: the film page header with actions (use FilmHero) or list rows (use FilmListItem).

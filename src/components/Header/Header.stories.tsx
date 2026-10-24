@@ -35,8 +35,7 @@ type Story = StoryObj<typeof meta>;
 const desktop: Decorator = frame(1440);
 const mobile: Decorator = frame(393);
 
-// One story per master variant; ids match design-refs/components-header--*.png. The frame width picks the layout
-// (the master's viewport axis): 1440 renders desktop, 393 mobile.
+// One story per variant. The frame width picks the layout: 1440 renders desktop, 393 mobile.
 export const DesktopLoggedOutNone: Story = { decorators: [desktop] };
 export const DesktopLoggedOutDiscover: Story = { args: { active: "discover" }, decorators: [desktop] };
 export const DesktopLoggedOutCollections: Story = { args: { active: "collections" }, decorators: [desktop] };

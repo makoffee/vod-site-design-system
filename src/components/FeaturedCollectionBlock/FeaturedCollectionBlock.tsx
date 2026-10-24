@@ -8,7 +8,7 @@ import { ActionLink, type Action } from "../_shared/ActionLink";
 export type FeaturedCollectionSide = "left" | "right";
 
 export interface FeaturedCollectionBlockProps {
-  /** Small caps label above the title (hidden on the current landing design). */
+  /** Small caps label above the title (hidden on the current landing page). */
   eyebrow?: string;
   /** Line breaks are kept ("Curated cinema.\nYour choice."). */
   title: string;
@@ -39,9 +39,9 @@ export interface FeaturedCollectionBlockProps {
 }
 
 /**
- * Landing collection teaser (design and production slice "featured_collection_block", master axis side[left,right]):
+ * Landing collection teaser (production slice "featured_collection_block", side[left,right]):
  * full-bleed artwork fading to black at top and bottom, a 620px copy column with a violet CTA, and a FeedRow of
- * the collection inside the artwork's bounds (any feed kind; the master nests a FeedRow instance). The artwork band
+ * the collection inside the artwork's bounds (any feed kind). The artwork band
  * shrinks with the container (256px top inset from 1024px).
  * Use for: a landing-page collection teaser over artwork with a scrolling row of its films.
  * Not for: the white discover collection panel with a card grid (use CollectionFeature) or a banner without films (use ImageCtaBanner).

@@ -224,7 +224,7 @@ export const footerDe = {
   copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Deutschland",
 } satisfies Partial<FooterProps>;
 
-// "Mit Hochschul-Login anmelden" has no strings-file entry (LoginModal master). The SSO accessible names
+// "Mit Hochschul-Login anmelden" has no strings-file entry. The SSO accessible names
 // ("Mit Google anmelden") are production markup.
 export const authFormDe: AuthFormLabels = {
   login: "Anmelden",
@@ -247,7 +247,7 @@ export const authFormDe: AuthFormLabels = {
   changePlan: "< Anderes Abo wählen",
 };
 
-/** The LoginModal master as it shipped. */
+/** LoginModal (de). */
 export const loginModalDe: LoginModalLabels = {
   title: "Willkommen zurück",
   close: "Schließen",
@@ -265,7 +265,7 @@ export const loginModalDe: LoginModalLabels = {
   register: "Jetzt registrieren.",
 };
 
-/** ProductCard master (de). AuthForm passes its own changePlan label instead. */
+/** ProductCard (de). AuthForm passes its own changePlan label instead. */
 export const productCardDe = { changeLabel: "< Produkt ändern" } satisfies Partial<ProductCardProps>;
 
 // SubscriptionPlans headings. Plan and UNI copy is content: plansDe / uniOfferDe in src/content/plans.ts.

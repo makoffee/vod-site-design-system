@@ -9,7 +9,7 @@ import { Skeleton, type SkeletonShape } from "../Skeleton/Skeleton";
 /** tall = boxart feeds, wide = 16:9 stills, square = channel/festival tiles. */
 export type FeedKind = "tall" | "wide" | "square";
 
-// Cards per visible row by *container* width. Always whole numbers: a row never shows a cut-off card (design rule,
+// Cards per visible row by *container* width. Always whole numbers: a row never shows a cut-off card (rule since
 // 2026-10-22; production's --items-per-screen uses fractional 2.3 / 3.5 to let the next card peek in). Wide stills
 // show fewer, matching the 4-up "Wide cover feed".
 const itemsPerRow: Record<FeedKind, string> = {

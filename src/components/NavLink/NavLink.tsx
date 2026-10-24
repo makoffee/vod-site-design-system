@@ -5,12 +5,12 @@ import { cn } from "@/lib/cn";
 export interface NavLinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
     Pick<LinkProps, "href" | "prefetch"> {
-  /** Master axis active[false,true]: true adds the 2px violet bottom border. */
+  /** true adds the 2px violet bottom border. */
   active?: boolean;
 }
 
 /**
- * Master 0bc97b853c801178: 64px tall header tab, typography.nav.tab.
+ * 64px tall header tab, typography.nav.tab.
  * Use for: top-level navigation tabs in Header.
  * Not for: actions (use Button); small inline links (use TextAction).
  */
@@ -21,7 +21,7 @@ export function NavLink({ active = false, className, children, ...props }: NavLi
       className={cn(
         "flex h-16 items-center border-b-2 px-4 text-nav-tab uppercase text-white outline-none transition-colors",
         "focus-visible:bg-white/10",
-        // Hover is not drawn in the design; kept subtle.
+        // Subtle hover.
         active ? "border-sooner-primary" : "border-transparent hover:text-sooner-primary-light",
         className,
       )}

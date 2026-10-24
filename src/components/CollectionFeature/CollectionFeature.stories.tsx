@@ -22,5 +22,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design "FeaturedCollectionStack". */
+/** Collection intro followed by its film cards. */
 export const Default: Story = {};

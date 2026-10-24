@@ -9,8 +9,8 @@ import { LanguageSelect, type Language } from "../LanguageSelect/LanguageSelect"
 import { NavLink } from "../NavLink/NavLink";
 import { SoonerLogo } from "../SoonerLogo/SoonerLogo";
 
-// Axes mirror the Header master (57ed19848119b0dc): auth[logged-out,logged-in] × active[none,…,watchlist].
-// The master's viewport[desktop,mobile] axis is not a prop: the layout follows the container (desktop from 1024px).
+// auth[logged-out,logged-in] × active[none,…,watchlist].
+// No viewport prop: the layout follows the container (desktop from 1024px).
 export type HeaderAuth = "logged-out" | "logged-in";
 export type HeaderTab = "discover" | "collections" | "genres" | "magazine" | "watchlist";
 
@@ -58,11 +58,11 @@ export interface HeaderProps {
   auth?: HeaderAuth;
   /** Tab with the violet underline and aria-current; none (default) highlights no tab. */
   active?: HeaderTab | "none";
-  /** Instance override: the DE/EN landing pages hide the Watchlist tab. */
+  /** Hides the Watchlist tab (DE/EN landing pages). */
   hideWatchlist?: boolean;
-  /** Instance override: LanguageSelect label ("DE" on the DE landing page). */
+  /** LanguageSelect label ("DE" on the DE landing page). */
   language?: Language;
-  /** Avatar initials when logged in ("MK" on the master). */
+  /** Avatar initials when logged in (e.g. "MK"). */
   userInitials?: string;
   /** Full name for the Avatar's accessible name when logged in. */
   userName?: string;
@@ -86,7 +86,7 @@ const iconButton =
   "flex items-center justify-center rounded-sooner text-white outline-none hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white";
 
 /**
- * Sticky 64px site header (Header master): logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
+ * Sticky 64px site header: logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
  * Sign up or the Avatar. Below 1024px of container width: logo, search, language, Avatar (logged in) and a menu
  * button; tabs and Login / Sign up are hidden. All text comes from `labels` (English defaults).
  * Use for: the top bar of every page screen.

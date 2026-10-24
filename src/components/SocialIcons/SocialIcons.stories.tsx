@@ -20,7 +20,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// The four footer platforms, exported from the master, in both colors.
+// The four footer platforms, in both colors.
 export const InstagramNegative: Story = {};
 export const YoutubeNegative: Story = { args: { platform: "YouTube" } };
 export const SpotifyNegative: Story = { args: { platform: "Spotify" } };

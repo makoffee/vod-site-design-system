@@ -19,10 +19,10 @@ const desktop: Decorator = frame(1440);
 const mobile: Decorator = frame(393);
 
 export const Desktop: Story = { decorators: [desktop] };
-// The frame width picks the layout (the master's viewport axis).
+// The frame width picks the layout (desktop or mobile).
 export const Mobile: Story = { decorators: [mobile], globals: viewport("mobile") };
 
-/** Belgian site: three sponsor logos (instance override on "3 Key Screens"). */
+/** Belgian site: three sponsor logos. */
 export const BelgiumSponsors: Story = {
   args: { fundingLogos: beFundingLogos },
   decorators: [desktop],

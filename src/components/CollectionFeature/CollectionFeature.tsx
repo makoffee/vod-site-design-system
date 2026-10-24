@@ -16,7 +16,7 @@ export interface CollectionFeatureProps extends EditorialContentProps {
 }
 
 /**
- * Collection intro with its films (design "FeaturedCollectionStack"): binocular image + editorial text on a
+ * Collection intro with its films: binocular image + editorial text on a
  * white panel, followed by a grid of tall film cards.
  * Use for: introducing a collection on discover together with a handful of its FilmCards.
  * Not for: a text + image feature without films (use EditorialSlice) or a horizontally scrolling row (use FeedRow).

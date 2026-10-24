@@ -36,7 +36,7 @@ const sizes: Record<SearchFieldSize, string> = {
 };
 
 /**
- * Search input (design "Search Nav" / search overlay "Form"): lucide search icon, 18px text, clear button once there is a query.
+ * Search input (in-nav bar or search overlay): lucide search icon, 18px text, clear button once there is a query.
  * Use for: the film search query on the search overlay and results page.
  * Not for: form fields such as email or device code (use TextInput).
  */

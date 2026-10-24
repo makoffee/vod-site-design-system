@@ -16,8 +16,8 @@ export interface ChannelTileProps {
 }
 
 /**
- * Square channel / festival / curator tile (production channels ScrollSlider slide, design "Collection row
- * squares" and "Director Focus"): rounded-[10px] artwork, scales to 1.05 on hover.
+ * Square channel / festival / curator tile (production channels ScrollSlider slide;
+ * also director focus rows): rounded-[10px] artwork, scales to 1.05 on hover.
  * Without artwork it prints the name so demos stay legible.
  * Use for: channel, festival and curator squares in a FeedRow kind="square".
  * Not for: tag collections with a title over the art (use ChannelTagTile) or genres (use GenreTile).

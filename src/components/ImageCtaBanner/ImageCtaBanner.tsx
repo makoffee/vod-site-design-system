@@ -45,10 +45,9 @@ const actionRow: Record<ImageCtaBannerAlign, string> = {
 };
 
 /**
- * Image banner with a call to action (design "Hero" + "ContainedBanner", master axes layout[full,contained] ×
- * align[left,center,right]). full is the landing hero (production hero banner): full-bleed artwork fading to black,
+ * Image banner with a call to action (layout[full,contained] × align[left,center,right]). full is the landing hero (production hero banner): full-bleed artwork fading to black,
  * Playfair 58 title, lead and rental note. From 672px of container width the full hero is a 2:1 anamorphic frame
- * (1440×720 in the design) that only grows when the copy needs more room; below that it is a 560px-min stack. contained is the closing banner (production image_cta_banner): a 420px
+ * (1440×720 at desktop) that only grows when the copy needs more room; below that it is a 560px-min stack. contained is the closing banner (production image_cta_banner): a 420px
  * rounded box with a Playfair 48 title. Actions stack full-width below 672px of container width.
  * Use for: the landing page hero (full) or a closing call-to-action banner (contained).
  * Not for: the discover carousel (use PromoHero), a film page header (use FilmHero) or a collection teaser with films (use FeaturedCollectionBlock).

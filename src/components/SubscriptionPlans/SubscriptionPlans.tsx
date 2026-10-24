@@ -51,7 +51,7 @@ export interface SubscriptionPlansProps {
   uni?: UniOfferContent;
   /** PlanCard header artwork per plan. */
   images?: Partial<Record<PlanId, string>>;
-  /** Shows the UNI banner under the cards (both designs do; production /subscribe currently does not). Default true. */
+  /** Shows the UNI banner under the cards (production /subscribe currently does not). Default true. */
   showUni?: boolean;
   /** Called with the plan id when a PlanCard's button is pressed. */
   onSelect?: (plan: PlanId) => void;
@@ -62,7 +62,7 @@ export interface SubscriptionPlansProps {
 }
 
 /**
- * Plan picker (master axis layout[landing,subscribe]). landing = home page slice subscription_plans: Playfair heading,
+ * Plan picker (layout[landing,subscribe]). landing = home page slice subscription_plans: Playfair heading,
  * cards 1 → 2 (third spanning) → 3 columns. subscribe = onboarding page sooner.de/subscribe: page-level DM Sans h1,
  * cards with the price after the features (2 → 3 columns) and the legal paragraph below. Both end with the UNI offer.
  * Use for: showing all subscription plans on the home page or the subscribe step.

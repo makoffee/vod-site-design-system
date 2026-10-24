@@ -13,6 +13,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Master f247698934b0bb50 at 149 × 28. */
+/** Default size, 149 × 28. */
 export const Default: Story = {};
 export const Large: Story = { args: { className: "h-16" } };

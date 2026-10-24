@@ -19,7 +19,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design screen content at 1392px (1440 minus the 24px page gutters). */
+/** Desktop content width, 1392px (1440 minus the 24px page gutters). */
 export const Default: Story = {};
 export const Tablet: Story = { parameters: { frameWidth: 720 }, globals: viewport("tablet") };
 export const Mobile: Story = { parameters: { frameWidth: 345 }, globals: viewport("mobile") };

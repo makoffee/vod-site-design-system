@@ -1,9 +1,8 @@
 import type { Plan, PlanId, UniOfferContent } from "@/components/_shared/plans";
 
-// Plan copy, one object per language. en = "Landing Page EN | 1440w" (4 Sooner DE Marketing Pages); de = the
-// PlanCard/ProductCard masters as they shipped. Business rules (DESIGN-SYSTEM.md): monthly 7.99, yearly 59.95 (the
+// Plan copy, one object per language: en = the English landing page, de = the German plan cards. Business rules (DESIGN-SYSTEM.md): monthly 7.99, yearly 59.95 (the
 // highlighted card), Plus 14.95 (the only plan with 3 rentals), UNI 5.99 — the prices live on sooner.de (confirmed
-// 2026-10-22; the designs were updated from €59.99 / €14.99).
+// 2026-10-22).
 
 export const plansEn: Record<PlanId, Plan> = {
   monthly: {

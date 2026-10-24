@@ -44,8 +44,8 @@ export interface TwoColumnMediaProps {
 }
 
 /**
- * Image beside a heading, text and app-store logos (design "Your films. Your devices.", production slice
- * two_column_media / withAppButtons, master axis side[left,right]). Logos sit in a 2- then 3-column grid.
+ * Image beside a heading, text and app-store logos (production slice two_column_media / withAppButtons,
+ * side[left,right]). Logos sit in a 2- then 3-column grid.
  * Use for: a dark landing slice pairing an image with text, optionally listing the apps/devices.
  * Not for: the white discover feature panel (use EditorialSlice) or questions and answers (use Faq).
  */

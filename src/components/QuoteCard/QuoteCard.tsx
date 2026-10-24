@@ -15,7 +15,7 @@ export interface QuoteCardProps {
 }
 
 /**
- * Review / award quote (design "Quotes and reviews"): white card, round source logo with a Playfair source line,
+ * Review / award quote: white card, round source logo with a Playfair source line,
  * then the quote in gray-700.
  * Use for: press and festival quotes on the film page, in a FeedRow kind="wide".
  * Not for: editorial features with images (use EditorialSlice).

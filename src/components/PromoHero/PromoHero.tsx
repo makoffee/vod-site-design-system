@@ -25,7 +25,7 @@ export interface PromoSlide {
 export interface PromoHeroProps {
   /** Slides ({ id, title, description?, href, imageSrc?, badge? }); arrows and dots show only with more than one. Renders nothing when empty. */
   slides: PromoSlide[];
-  /** Design "Watch Now" (production de "Hier anschauen"). Label text; English default, pass German on DE screens. */
+  /** Watch action, e.g. "Watch Now" (production de "Hier anschauen"). Label text; English default, pass German on DE screens. */
   watchLabel?: string;
   /** Production "Add to list". Label text; English default, pass German on DE screens. */
   addToListLabel?: string;
@@ -46,8 +46,7 @@ export interface PromoHeroProps {
 }
 
 /**
- * Discover hero carousel (production CinePromoHeader, design "HeroSection"). 2:1 anamorphic card (1392×696 in the
- * design; fits 16:9 stills and letterboxed scope films with little crop) with a
+ * Discover hero carousel (production CinePromoHeader). 2:1 anamorphic card (1392×696 at desktop; fits 16:9 stills and letterboxed scope films with little crop) with a
  * bottom fade, Playfair title, three-line description, watch / add-to-list actions, side arrows and dots.
  * Below 672px of container width it becomes a 3:4 card with icon-only actions, as on mobile sooner.de.
  * Use for: the rotating featured-titles carousel at the top of discover.

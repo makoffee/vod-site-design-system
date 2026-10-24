@@ -3,14 +3,10 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 /** Visual check that the default.ds tokens resolve through globals.css (production class names). */
 const meta = {
   title: "Tokens",
-  // No component to describe; the tokens live in globals.css and the Figma "Sooner" collection.
+  // No component to describe; the tokens live in globals.css.
   tags: ["!manifest"],
   parameters: {
     layout: "padded",
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l",
-    },
   },
 } satisfies Meta;
 

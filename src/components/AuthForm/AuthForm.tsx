@@ -51,7 +51,7 @@ export interface AuthFormLabels {
 }
 
 // Production strings (Copy/production-strings.json). "Login with your institute" has no strings-file entry and
-// follows the LoginModal master. German: authFormDe in src/i18n/de.ts.
+// matches LoginModal. German: authFormDe in src/i18n/de.ts.
 export const authFormLabels: AuthFormLabels = {
   login: "Login",
   signup: "Create your account",
@@ -105,9 +105,9 @@ export interface AuthFormProps {
 const link = "rounded-sm outline-none hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 /**
- * Page-level login and signup form (design "login | 1440px", "signup | 1440px", "signup with product card"):
+ * Page-level login and signup form (login, signup, signup with a chosen plan):
  * title, optional plan card, e-mail + password, white submit, SSO providers, institute login, legal copy and
- * the switch to the other mode. The title centres below 384px of container width (393 screens). The dialog
+ * the switch to the other mode. The title centres below 384px of container width (mobile). The dialog
  * version with close / cancel is LoginModal.
  * Use for: dedicated login and signup pages, including signup from checkout (`product`).
  * Not for: logging in on top of an existing page (use LoginModal).

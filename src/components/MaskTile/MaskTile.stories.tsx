@@ -16,6 +16,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Design "Collection row with icon-mask". */
+/** Collection tile in the binocular mask. */
 export const Default: Story = {};
 export const Tinted: Story = { args: { tinted: true } };

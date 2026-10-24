@@ -10,7 +10,7 @@ export interface CategoriesScreenProps {
   title?: string;
 }
 
-/** Genres (design "Genres | 1440px", production /en/categories and /de/categories): duotone genre tiles, 2 → 4 columns. */
+/** Genres (production /en/categories and /de/categories): duotone genre tiles, 2 → 4 columns. */
 export function CategoriesScreen({ locale = "en", title = locale === "de" ? "Genre" : "Genres" }: CategoriesScreenProps) {
   const { genres } = getCatalog(locale);
   return (

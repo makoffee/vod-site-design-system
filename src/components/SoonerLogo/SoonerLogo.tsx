@@ -7,7 +7,7 @@ export interface SoonerLogoProps extends SVGProps<SVGSVGElement> {
 }
 
 /**
- * Wordmark exported from the SoonerLogo master. Fill follows currentColor (brand violet by default).
+ * Sooner wordmark (SVG). Fill follows currentColor (brand violet by default).
  * Use for: the brand mark in Header and Footer.
  */
 export function SoonerLogo({ title = "Sooner", className, ...props }: SoonerLogoProps) {

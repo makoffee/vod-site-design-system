@@ -18,8 +18,7 @@ export interface AuthScreenProps {
 }
 
 /**
- * Login / signup page (design "login | 1440px", "signup | 1440px", "signup with product card | 1440px" and the 393
- * versions): the violet binocular mark fading to black behind the form, logo and tagline top left, no header or footer.
+ * Login / signup page (login, signup, and signup with a chosen plan; desktop and mobile): the violet binocular mark fading to black behind the form, logo and tagline top left, no header or footer.
  */
 export function AuthScreen({ defaultMode = "login", product, locale = "en" }: AuthScreenProps) {
   const de = locale === "de";

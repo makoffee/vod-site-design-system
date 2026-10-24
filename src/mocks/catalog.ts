@@ -1,6 +1,6 @@
 // Demo data for the screens and the demo routes, in both site languages. Titles, row names, channel names and genre
 // names are taken from production (sooner.de/en/… and sooner.de/de/…, 2026-10-24): discover, channels,
-// categories, the Animale film page and the "Only on Sooner" channel page. No artwork: cards render the design's
+// categories, the Animale film page and the "Only on Sooner" channel page. No artwork: cards render the
 // placeholder gradient. Replace with the real catalog API once the repo is connected.
 // Screens read everything through getCatalog(locale); Storybook renders English, the German app routes German.
 
@@ -24,7 +24,7 @@ export interface ChannelSummary {
   href: string;
   /** Square artwork; channel tiles carry their name in the image, so name is the accessible label. */
   imageSrc?: string;
-  /** Fallback tile colour when no artwork (design festival tiles). */
+  /** Fallback tile colour when no artwork (festival tiles). */
   tint?: string;
 }
 
@@ -302,20 +302,20 @@ const animaleFeaturedIn: { title: L10n; href: string }[] = [
 ];
 
 // ---------------------------------------------------------------------------------------------------------------
-// Collection page: the design's placeholder collection (long text, so the clamp and "expanded" states show).
+// Collection page: a placeholder collection (long text, so the clamp and "expanded" states show).
 
 const collectionLorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
 
 const placeholderCollection: Record<Locale, { title: string; description: string }> = {
   en: { title: "Collection Title", description: Array.from({ length: 4 }, () => collectionLorem).join(" ") },
-  // placeholder: design placeholder collection, German screen
+  // placeholder collection, German screen
   de: { title: "Titel der Kollektion", description: Array.from({ length: 4 }, () => collectionLorem).join(" ") },
 };
 
 const collectionFilm: Record<Locale, { title: string; meta: string[] }> = {
   en: { title: "Film Title", meta: ["Documentary", "90 min", "2020"] },
-  // placeholder: design placeholder film, German screen
+  // placeholder film, German screen
   de: { title: "Filmtitel", meta: ["Dokus", "90 Min", "2020"] },
 };
 

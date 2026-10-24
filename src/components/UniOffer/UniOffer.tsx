@@ -18,8 +18,8 @@ export interface UniOfferProps {
 }
 
 /**
- * Master 9ac0f0f75ddb30fd: UNI banner on surface.uni with a decorative border.
- * Fills its container; below 672px of container width (@2xl) it stacks, above it is the 1200px master's row.
+ * UNI banner on surface.uni with a decorative border.
+ * Fills its container; below 672px of container width (@2xl) it stacks, above it is a single row (1200px wide).
  * Use for: the student (UNI) offer below the plan cards (SubscriptionPlans includes it).
  * Not for: regular subscription plans (use PlanCard).
  */

@@ -1,6 +1,6 @@
 // Landing page content (sooner.de and sooner.de/en home, 2026-10-22). Copy, film rows and release dates are taken
-// from production, which ships the same section order as "Landing Page EN | 1440w" / "Landing Page DE | 1440w".
-// No artwork: blocks render the design's placeholder gradient.
+// from production, including the section order.
+// No artwork: blocks render the placeholder gradient.
 
 import type { Action } from "@/components/_shared/ActionLink";
 import type { FaqItem } from "@/components/Faq/Faq";

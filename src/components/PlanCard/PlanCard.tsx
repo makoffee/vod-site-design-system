@@ -10,23 +10,23 @@ export interface PlanCardProps {
   /**
    * The plan to show (name, price, period, badge, features, CTA label, highlighted). Content, not copy in the
    * component: pass plansEn.monthly / .yearly / .plus on English screens, plansDe.* on DE screens (src/content/plans.ts).
-   * Its id is the master axis plan[monthly,yearly,plus]; the master's state axis only has "default".
+   * Its id is monthly, yearly or plus.
    */
   plan: Plan;
   /** Called with the plan id when the card's CTA button is pressed. */
   onSelect?: (plan: PlanId) => void;
-  /** Artwork for the 384 × 199 header. The master's film stills are placeholders, so none ships by default. */
+  /** Artwork for the 384 × 199 header. None ships by default. */
   imageSrc?: string;
   /** Alt text of imageSrc (default "", decorative). */
   imageAlt?: string;
-  /** top = price under the name (landing, master price[top]); bottom = after the features (subscribe page, price[bottom]). */
+  /** top = price under the name (landing); bottom = after the features (subscribe page). */
   pricePosition?: "top" | "bottom";
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
 /**
- * Master db8d72090caab1b0 (Prismic slice subscription_plans). The yearly plan is the highlighted card.
+ * One subscription plan with its CTA (Prismic slice subscription_plans). The yearly plan is the highlighted card.
  * Use for: a single plan offer with its CTA; SubscriptionPlans lays out all three.
  * Not for: the chosen plan summary in signup/checkout (use ProductCard); the full plan picker (use SubscriptionPlans).
  */
@@ -51,7 +51,7 @@ export function PlanCard({ plan, onSelect, imageSrc, imageAlt = "", pricePositio
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6">
         <div className="flex items-center justify-between gap-4">
-          {/* Production and the yearly master set the highlighted plan's title to 32px; the others use heading.plan (30px). */}
+          {/* Production sets the highlighted plan's title to 32px; the others use heading.plan (30px). */}
           <h3
             className={cn(
               "text-white uppercase",

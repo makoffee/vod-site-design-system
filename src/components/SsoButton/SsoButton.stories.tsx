@@ -21,7 +21,7 @@ export const Google: Story = {};
 export const Apple: Story = { args: { provider: "apple" } };
 export const Amazon: Story = { args: { provider: "amazon" } };
 
-/** SsoButtonGroup master. */
+/** SsoButtonGroup: the standard Google / Apple / Amazon row. */
 export const Group: Story = {
   decorators: [frame(400)],
   render: () => <SsoButtonGroup onSelect={fn()} />,

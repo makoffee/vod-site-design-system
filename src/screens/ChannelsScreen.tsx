@@ -14,7 +14,7 @@ export interface ChannelsScreenProps {
 }
 
 /**
- * Channels (design "channels | 1440", production /en/channels and /de/channels): page title, one square-tile row per
+ * Channels (production /en/channels and /de/channels): page title, one square-tile row per
  * channel group, then the text-tile groups (Screen, Topic, Storyline) as tag collections.
  */
 export function ChannelsScreen({ locale = "en", title = locale === "de" ? "Kanäle" : "Channels" }: ChannelsScreenProps) {

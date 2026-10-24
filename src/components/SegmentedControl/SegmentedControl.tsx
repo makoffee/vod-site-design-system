@@ -26,7 +26,7 @@ export interface SegmentedControlProps<T extends string = string> {
 const focusVisible = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 /**
- * Plan period switch (design "highlight" on the plan-select screens: Monthly / Yearly / CinePass). Same pill
+ * Plan period switch on the plan-select screens (Monthly / Yearly / CinePass). Same pill
  * styling as AvailabilityFilter's bar: ghost glass track (surface-glass), white pill on the active option.
  * Use for: switching between a few mutually exclusive options, e.g. the plan period.
  * Not for: availability filtering (use AvailabilityFilter); grid/list view (use ViewToggle).

@@ -19,11 +19,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** "collection view | list | 1440": the switch offers the grid. */
+/** List view: the switch offers the grid. */
 export const Default: Story = {};
-/** "collection view new | Grid | 1440": the switch offers the list. */
+/** Grid view: the switch offers the list. */
 export const GridView: Story = { args: { view: "grid" } };
-/** "collection view | list | expanded text | 1440". */
+/** List view with the description expanded. */
 export const Expanded: Story = { args: { defaultExpanded: true } };
-/** "collection view | 393px": dropdown filter, centered expand toggle. */
+/** Mobile: dropdown filter, centered expand toggle. */
 export const Mobile: Story = { parameters: { frameWidth: 345 }, globals: viewport("mobile") };

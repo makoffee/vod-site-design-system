@@ -24,9 +24,9 @@ export interface FeaturedFilmCardProps {
   eyebrow?: string;
   /** Production "By" (de "Von"). Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   byLabel?: string;
-  /** Rent action label; production "Rent", design "Rent - 4,99€". Default "Rent"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
+  /** Rent action label; production "Rent", or with a price, e.g. "Rent - 4,99€". Default "Rent"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   rentLabel?: string;
-  /** Subscribe action (design "Subscribe"). Default "Subscribe"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
+  /** Subscribe action. Default "Subscribe"; pass "" to hide. Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   subscribeLabel?: string;
   /** Accessible name of the round + button; production "Add to Watchlist". Label text; English default, pass German on DE screens (featuredFilmCardDe). */
   watchlistLabel?: string;
@@ -41,7 +41,7 @@ export interface FeaturedFilmCardProps {
 }
 
 /**
- * White feature card inside a feed (production `filmcard--wide`, design "Featured card with feed").
+ * White feature card inside a feed (production `filmcard--wide`).
  * Takes two feed slots: eyebrow, Playfair title, director, clamped synopsis, actions, and the poster.
  * Use for: one highlighted film inside a FeedRow, wrapped in a FeedItem (span={2} or a wider basis).
  * Not for: regular feed posters (use FilmCard) or the film page header (use FilmHero).

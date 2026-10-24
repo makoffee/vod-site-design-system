@@ -43,8 +43,8 @@ export interface LoginModalLabels {
   register: string;
 }
 
-// "login | 1440px" screen + production strings. "Stay logged in" has no English source yet (production has no
-// remember-me string). German (the LoginModal master as it shipped): loginModalDe in src/i18n/de.ts.
+// Production strings. "Stay logged in" has no English source yet (production has no
+// remember-me string). German: loginModalDe in src/i18n/de.ts.
 export const loginModalLabels: LoginModalLabels = {
   title: "Login",
   close: "Close",
@@ -63,7 +63,7 @@ export const loginModalLabels: LoginModalLabels = {
 };
 
 export interface LoginModalSelectedProductProps {
-  /** Master axis visible[on,off] (e1bc9d53d909d53f). */
+  /** Shows or hides the product slot. */
   visible?: boolean;
   /**
    * Plan shown in the ProductCard. Content; English default plansEn.monthly, pass plansDe.* on DE screens
@@ -82,11 +82,11 @@ function SelectedProduct({ visible = true, product = plansEn.monthly, onChangePr
   return <ProductCard product={product} changeLabel={changeLabel} onChangeProduct={onChangeProduct ?? (() => {})} />;
 }
 
-// Axes mirror the LoginModal master (3981f9f72f51ef72): type[login] × state[default,focus,disabled].
+// type[login] × state[default,focus,disabled].
 export type LoginModalState = "default" | "focus" | "disabled";
 
 export interface LoginModalProps {
-  /** Master axis type[login]; "login" is the only value and the component does not read it. */
+  /** "login" is the only value and the component does not read it. */
   type?: "login";
   /** focus pins the e-mail field's focus look; disabled is the locked, reduced form. */
   state?: LoginModalState;
@@ -120,7 +120,7 @@ const textLink =
   "rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-white";
 
 /**
- * Login dialog (LoginModal master): title and close, e-mail, password, "Stay logged in", forgot password,
+ * Login dialog: title and close, e-mail, password, "Stay logged in", forgot password,
  * Cancel / Login, SSO providers, institute login and the sign-up link. All copy comes from `labels` (English defaults).
  * LoginModal.SelectedProduct is the checkout product slot (also set via `selectedProduct`).
  * Use for: logging in on top of an existing page (`overlay` adds the fixed blurred scrim).
@@ -219,7 +219,7 @@ function LoginModalRoot({
         </div>
       </form>
 
-      {/* Design gap: the focus master omits this block; only the disabled state drops it here. */}
+      {/* The disabled state drops this block. */}
       {!disabled && (
         <>
           <div className="flex flex-col gap-3">

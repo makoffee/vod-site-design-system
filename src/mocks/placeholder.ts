@@ -1,5 +1,4 @@
-// Generic, unopinionated content for the component library (Storybook) — the same copy as the masters on
-// "2 Components". Screens keep their real content in catalog.ts / editorial.ts. Contextual components
+// Generic, unopinionated content for the component library (Storybook). Screens keep their real content in catalog.ts / editorial.ts. Contextual components
 // (plans, login, header, footer) keep production copy and don't use this file.
 
 import type { FilmFact } from "@/components/FilmDetails/FilmDetails";

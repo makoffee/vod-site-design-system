@@ -20,7 +20,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Production labels at the 1152px content width of "collection view | list | 1440". */
+/** Production labels at the 1152px desktop collection content width. */
 export const Default: Story = {};
-/** Icon-only actions, as on "collection view | 393px". */
+/** Icon-only actions, as on mobile. */
 export const Mobile: Story = { parameters: { frameWidth: 345 }, globals: viewport("mobile") };

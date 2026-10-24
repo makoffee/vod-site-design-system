@@ -5,7 +5,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { widthClass, type Sizing } from "../_shared/sizing";
 
-// Axes mirror the SsoButton master (aaddcace0e7059b4): provider[google,apple,amazon]; 50px circle.
+// provider[google,apple,amazon]; 50px circle.
 export type SsoProvider = "google" | "apple" | "amazon";
 
 const GoogleGlyph = () => (
@@ -26,7 +26,7 @@ const AppleGlyph = () => (
 const providers: Record<SsoProvider, { name: string; className: string; glyph: ReactNode }> = {
   google: { name: "Google", className: "bg-gray-100", glyph: <GoogleGlyph /> },
   apple: { name: "Apple", className: "bg-white text-black", glyph: <AppleGlyph /> },
-  // No vector source for the Amazon mark yet (simple-icons dropped it); the master's PNG stays until one is supplied.
+  // No vector source for the Amazon mark yet (simple-icons dropped it); a PNG stays until one is supplied.
   amazon: {
     name: "Amazon",
     className: "overflow-hidden",
@@ -44,7 +44,7 @@ export interface SsoButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 /**
- * 50px round sign-in button showing only the provider mark (SsoButton master). Native <button>, type="button" unless set.
+ * 50px round sign-in button showing only the provider mark. Native <button>, type="button" unless set.
  * Use for: SSO provider choices on login/signup; SsoButtonGroup renders the standard Google / Apple / Amazon row.
  * Not for: text actions such as the institute login (use Button).
  */
@@ -74,13 +74,13 @@ export interface SsoButtonGroupProps {
   onSelect?: (provider: SsoProvider) => void;
   /** Accessible label per provider name; English default "Sign in with <Provider>", pass German on DE screens. */
   labelFor?: (providerName: string) => string;
-  /** fill (default, as on the design instances) centres the buttons in the parent; hug fits them. */
+  /** fill (default) centres the buttons in the parent; hug fits them. */
   width?: Sizing;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
 
-/** Master dff7da5cebbb4728: the three providers centred with a 16px gap. */
+/** The three providers centred with a 16px gap. */
 export function SsoButtonGroup({
   providers: list = ["google", "apple", "amazon"],
   onSelect,

@@ -18,7 +18,7 @@ const chip =
   "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 /**
- * Suggestion pill (design search "Suggested" chips): 14px medium on white/10 with a white/10 border. One line; a label
+ * Suggestion pill (the search "Suggested" chips): 14px medium on white/10 with a white/10 border. One line; a label
  * longer than its container truncates with an ellipsis.
  * Use for: suggested search terms or genre shortcuts.
  * Not for: badges on film artwork (use FilmBadge); selecting one of several options (use SegmentedControl).

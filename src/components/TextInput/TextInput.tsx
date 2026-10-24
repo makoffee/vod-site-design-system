@@ -5,8 +5,7 @@ import { useId, useState, type InputHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 import { widthClass, type Sizing } from "../_shared/sizing";
 
-// Axes mirror the TextInput master (3cba7ff2b88f51f2). The master only draws password/default;
-// the other password states reuse the email styling. text = plain field (device codes).
+// The password states reuse the email styling. text = plain field (device codes).
 export type TextInputType = "email" | "password" | "text";
 export type TextInputState = "default" | "filled" | "focus" | "error" | "disabled";
 
@@ -28,7 +27,7 @@ export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 
 /**
- * Form field (TextInput master): 56px glass input with optional label and supporting text. error sets aria-invalid
+ * Form field: 56px glass input with optional label and supporting text. error sets aria-invalid
  * and a red border; disabled greys it out. Other input attributes (name, value, placeholder, …) pass through.
  * Use for: e-mail, password and plain text entry in forms (AuthForm, LoginModal, DeviceCodeForm).
  * Not for: search (use SearchField); the newsletter e-mail capture card (use EmailSignup).
@@ -76,7 +75,7 @@ export function TextInput({
               ? "cursor-not-allowed border-white/13 bg-white/4 text-gray-200 placeholder:text-gray-200"
               : cn(
                   "bg-white/10 backdrop-blur-glass focus:border-2 focus:border-white focus:px-[15px]",
-                  // Design gap: the master's error state is a white border; we use status.error (red-500).
+                  // Error border uses status.error (red-500).
                   isError ? "border-2 border-red-500 px-[15px] text-gray-200" : "border-white/30",
                   state === "focus" && "border-2 border-white px-[15px]",
                 ),

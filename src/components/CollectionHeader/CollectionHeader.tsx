@@ -28,7 +28,7 @@ export interface CollectionHeaderProps {
   onAvailabilityChange?: (value: Availability) => void;
   /** Passed to both AvailabilityFilter layouts (labels, group label). */
   filterLabels?: Pick<AvailabilityFilterProps, "labels" | "label">;
-  /** Description starts expanded (design "list | expanded text"). */
+  /** Description starts expanded. */
   defaultExpanded?: boolean;
   /** No production source; screen-reader names for the toggles. Label text; English default, pass German on DE screens. */
   showMoreLabel?: string;
@@ -43,7 +43,7 @@ export interface CollectionHeaderProps {
 }
 
 /**
- * Collection page banner (design "collection view", Banner): artwork at a fixed ratio (3:1 from 672px of
+ * Collection page banner: artwork at a fixed ratio (3:1 from 672px of
  * container width, 6:7 below; it only grows when the expanded text needs room) with a bottom fade, title, a
  * three-line description that expands in place, the availability filter and the grid / list switch.
  * The filter becomes a dropdown below 672px of container width.

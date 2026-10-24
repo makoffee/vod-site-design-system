@@ -17,7 +17,7 @@ const toInitials = (name: string) =>
     .join("");
 
 /**
- * Master 1bcc172336cdf601: 32px violet circle, initials in text.xs-semibold.
+ * 32px violet circle, initials in text.xs-semibold.
  * Use for: the logged-in user in Header and other compact user references.
  */
 export function Avatar({ name, initials, className, ...props }: AvatarProps) {

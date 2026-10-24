@@ -5,7 +5,7 @@ import { PlanCard } from "./PlanCard";
 import { frame } from "../_shared/storyFrames";
 import { figmaComponent } from "../_shared/figma";
 
-// Story-only placeholder still (The Seventh Seal); the design screens keep their own artwork.
+// Story-only placeholder still (The Seventh Seal); screens pass their own artwork.
 const placeholderStill = "/images/placeholder/seventh-seal.webp";
 
 const meta = {

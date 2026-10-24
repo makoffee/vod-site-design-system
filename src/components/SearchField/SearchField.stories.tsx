@@ -18,10 +18,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Search overlay field (design "Form"). */
+/** Search overlay field. */
 export const Overlay: Story = {};
 /** With a query: the clear button appears. */
 export const Filled: Story = { args: { defaultValue: "Search term" } };
-/** In-nav bar on the results page (design "Search Nav"). */
+/** In-nav bar on the results page. */
 export const InNav: Story = { args: { size: "md", defaultValue: "Search term" } };
 export const Mobile: Story = { args: { size: "md" }, parameters: { frameWidth: 345 }, globals: viewport("mobile") };

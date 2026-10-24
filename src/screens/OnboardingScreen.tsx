@@ -9,8 +9,7 @@ export interface OnboardingScreenProps {
 }
 
 /**
- * Onboarding / plan picker (design "onboarding EN | 1440" / "onboarding DE | 1440" on 4 Sooner DE Marketing Pages,
- * production sooner.de/subscribe): the subscribe layout of SubscriptionPlans between Header and Footer.
+ * Onboarding / plan picker (production sooner.de/subscribe): the subscribe layout of SubscriptionPlans between Header and Footer.
  */
 export function OnboardingScreen({ locale = "en" }: OnboardingScreenProps) {
   return (

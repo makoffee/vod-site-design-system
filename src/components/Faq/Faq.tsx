@@ -33,8 +33,7 @@ export interface FaqProps {
 }
 
 /**
- * Questions and answers beside a binocular-masked image (design "Sooner, in brief.", production slice faq /
- * withImage, master axis side[left,right]). Each question is a button controlling its answer region.
+ * Questions and answers beside a binocular-masked image (production slice faq / withImage, side[left,right]). Each question is a button controlling its answer region.
  * Use for: an expandable question/answer list on landing pages.
  * Not for: a text + image feature without questions (use TwoColumnMedia or EditorialSlice).
  */

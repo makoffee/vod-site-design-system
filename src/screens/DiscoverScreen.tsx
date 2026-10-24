@@ -19,8 +19,8 @@ export interface DiscoverScreenProps {
 }
 
 /**
- * Discover (design "discover | 1440", production /en/discover and /de/discover): promo hero + availability filter,
- * then feeds and editorial slices in the design's section order, filled with production row titles, films and copy.
+ * Discover (production /en/discover and /de/discover): promo hero + availability filter,
+ * then feeds and editorial slices in production's section order, filled with production row titles, films and copy.
  */
 export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
   const de = locale === "de";

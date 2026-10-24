@@ -18,7 +18,7 @@ export interface FilmScreenProps {
 }
 
 /**
- * Single film view (design "single film view | 1440", production /en/id/… and /de/id/…): hero with the CTAs, the info
+ * Single film view (production /en/id/… and /de/id/…): hero with the CTAs, the info
  * grid, then recommendations, festivals, channels it is featured in, and quotes (only when the film has some).
  */
 export function FilmScreen({ locale = "en", film }: FilmScreenProps) {
