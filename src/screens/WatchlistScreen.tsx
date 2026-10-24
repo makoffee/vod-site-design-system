@@ -1,7 +1,7 @@
 import { Bookmark } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { FilmCard } from "@/components/FilmCard/FilmCard";
-import type { Locale } from "@/components/_shared/locale";
+import type { Locale } from "@/i18n/locale";
 import { filmCardDe, watchlistDe } from "@/i18n/de";
 import type { FilmSummary } from "@/mocks/catalog";
 import { AppShell, PageTitle } from "./AppShell";

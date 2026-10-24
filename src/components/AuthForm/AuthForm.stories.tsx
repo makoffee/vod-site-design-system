@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
+import { plansEn } from "@/content/plans";
 import { AuthForm } from "./AuthForm";
 import { frame, viewport } from "../_shared/storyFrames";
 
@@ -17,7 +18,6 @@ const meta = {
   },
   argTypes: {
     mode: { control: "inline-radio", options: ["login", "signup"] },
-    locale: { control: "inline-radio", options: ["en", "de"] },
   },
   decorators: [frame(400)],
   parameters: {
@@ -36,5 +36,5 @@ export const Login: Story = {};
 /** "signup | 1440px" form. */
 export const Signup: Story = { args: { mode: "signup" } };
 /** "signup with product card | 1440px": the plan chosen at checkout above the form. */
-export const SignupWithProduct: Story = { args: { mode: "signup", product: "monthly" } };
-export const Mobile: Story = { args: { mode: "signup", product: "monthly" }, parameters: { frameWidth: 345 }, globals: viewport("mobile") };
+export const SignupWithProduct: Story = { args: { mode: "signup", product: plansEn.monthly } };
+export const Mobile: Story = { args: { mode: "signup", product: plansEn.monthly }, parameters: { frameWidth: 345 }, globals: viewport("mobile") };

@@ -4,7 +4,7 @@
 
 import type { Action } from "@/components/_shared/ActionLink";
 import type { FaqItem } from "@/components/Faq/Faq";
-import type { Locale } from "@/components/_shared/locale";
+import type { Locale } from "@/i18n/locale";
 import type { FilmSummary } from "./catalog";
 
 const film = (id: string, title: string, extra: Partial<FilmSummary> = {}): FilmSummary => ({ id, title, href: `/film/${id}`, ...extra });

@@ -46,7 +46,7 @@ export * from "./TextInput/TextInput";
 export * from "./TwoColumnMedia/TwoColumnMedia";
 export * from "./UniOffer/UniOffer";
 export { ViewToggle, type ViewToggleProps } from "./ViewToggle/ViewToggle";
-export { plans, type Plan, type PlanId } from "./_shared/plans";
+export type { Plan, PlanId, UniOfferContent } from "./_shared/plans";
 export { ActionLink, type Action, type ActionTone } from "./_shared/ActionLink";
 export * from "./AccountNav/AccountNav";
 export * from "./AccountPanel/AccountPanel";

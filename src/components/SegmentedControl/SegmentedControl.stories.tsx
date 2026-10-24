@@ -25,13 +25,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-/** Plan select with the CinePass option (BE). */
+/** Three segments. */
 export const ThreeOptions: Story = {
   args: {
     options: [
       { value: "monthly", label: "Monthly" },
       { value: "yearly", label: "Yearly" },
-      { value: "cinepass", label: "CinePass" },
+      { value: "quarterly", label: "Quarterly" },
     ],
   },
 };

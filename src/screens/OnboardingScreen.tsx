@@ -1,5 +1,7 @@
 import { SubscriptionPlans } from "@/components/SubscriptionPlans/SubscriptionPlans";
-import type { Locale } from "@/components/_shared/locale";
+import { planList, plansDe, uniOfferDe } from "@/content/plans";
+import { subscriptionPlansSubscribeDe } from "@/i18n/de";
+import type { Locale } from "@/i18n/locale";
 import { AppShell } from "./AppShell";
 
 export interface OnboardingScreenProps {
@@ -13,7 +15,10 @@ export interface OnboardingScreenProps {
 export function OnboardingScreen({ locale = "de" }: OnboardingScreenProps) {
   return (
     <AppShell locale={locale}>
-      <SubscriptionPlans layout="subscribe" locale={locale} />
+      <SubscriptionPlans
+        layout="subscribe"
+        {...(locale === "de" ? { ...subscriptionPlansSubscribeDe, plans: planList(plansDe), uni: uniOfferDe } : {})}
+      />
     </AppShell>
   );
 }

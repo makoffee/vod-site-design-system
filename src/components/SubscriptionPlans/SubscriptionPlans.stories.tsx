@@ -7,7 +7,6 @@ const meta = {
   title: "Marketing/SubscriptionPlans",
   component: SubscriptionPlans,
   args: {
-    locale: "en",
     images: {
       monthly: "/images/placeholder/seventh-seal.webp",
       yearly: "/images/placeholder/seventh-seal.webp",
@@ -16,7 +15,6 @@ const meta = {
   },
   argTypes: {
     layout: { control: "inline-radio", options: ["landing", "subscribe"] },
-    locale: { control: "inline-radio", options: ["en", "de"] },
   },
   decorators: [frame(1440)],
   parameters: {
@@ -32,10 +30,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-export const German: Story = { args: { locale: "de" } };
 /** Onboarding page (sooner.de/subscribe): page title, price after the features, legal copy. */
 export const Subscribe: Story = { args: { layout: "subscribe" } };
-export const SubscribeGerman: Story = { args: { layout: "subscribe", locale: "de" } };
 /** Two columns with the third card spanning (768–1023px). */
 export const Tablet: Story = { parameters: { frameWidth: 768 }, globals: viewport("tablet") };
 export const Mobile: Story = { parameters: { frameWidth: 393 }, globals: viewport("mobile") };

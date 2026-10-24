@@ -2,67 +2,84 @@
 
 import { X } from "lucide-react";
 import { useId, type FormEvent } from "react";
+import { plansEn } from "@/content/plans";
 import { cn } from "@/lib/cn";
 import { Button } from "../Button/Button";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { SsoButtonGroup, type SsoProvider } from "../SsoButton/SsoButton";
 import { TextInput } from "../TextInput/TextInput";
-import type { Locale } from "../_shared/locale";
-import type { PlanId } from "../_shared/plans";
+import type { Plan } from "../_shared/plans";
 
-// en = "login | 1440px" screen + production strings; de = the LoginModal master as it shipped.
-// "Stay logged in" has no English source yet (production has no remember-me string).
-const copy: Record<Locale, Record<string, string>> = {
-  en: {
-    title: "Login",
-    close: "Close",
-    email: "E-Mail",
-    emailFocus: "E-Mail",
-    sampleEmail: "cinema@example.com",
-    password: "Password",
-    remember: "Stay logged in",
-    forgot: "Forgot password",
-    cancel: "Cancel",
-    submit: "Login",
-    sso: "or sign in with SSO",
-    institution: "Login with your institute",
-    noAccount: "Don't have an account?",
-    register: "Sign up",
-  },
-  de: {
-    title: "Willkommen zurück",
-    close: "Schließen",
-    email: "E-Mail",
-    emailFocus: "E-Mail eingeben",
-    sampleEmail: "kino@beispiel.de",
-    password: "Passwort",
-    remember: "Angemeldet bleiben",
-    forgot: "Passwort vergessen?",
-    cancel: "Abbrechen",
-    submit: "Login",
-    sso: "oder mit SSO",
-    institution: "Mit Hochschul-Login anmelden",
-    noAccount: "Noch kein Konto?",
-    register: "Jetzt registrieren.",
-  },
+/** Every visible and accessible string of LoginModal. */
+export interface LoginModalLabels {
+  /** Heading. */
+  title: string;
+  /** Accessible name of the close (X) button. */
+  close: string;
+  /** E-mail field placeholder and accessible name. */
+  email: string;
+  /** E-mail placeholder in the focus state. */
+  emailFocus: string;
+  /** Sample address filled in the disabled state. */
+  sampleEmail: string;
+  /** Password field placeholder and accessible name. */
+  password: string;
+  /** "Stay logged in" checkbox label. */
+  remember: string;
+  /** Forgot-password link. */
+  forgot: string;
+  /** Cancel button. */
+  cancel: string;
+  /** Submit button. */
+  submit: string;
+  /** Divider text above the SSO buttons. */
+  sso: string;
+  /** Institute login button. */
+  institution: string;
+  /** Prompt before the sign-up link. */
+  noAccount: string;
+  /** Sign-up link. */
+  register: string;
+}
+
+// "login | 1440px" screen + production strings. "Stay logged in" has no English source yet (production has no
+// remember-me string). German (the LoginModal master as it shipped): loginModalDe in src/i18n/de.ts.
+export const loginModalLabels: LoginModalLabels = {
+  title: "Login",
+  close: "Close",
+  email: "E-Mail",
+  emailFocus: "E-Mail",
+  sampleEmail: "cinema@example.com",
+  password: "Password",
+  remember: "Stay logged in",
+  forgot: "Forgot password",
+  cancel: "Cancel",
+  submit: "Login",
+  sso: "or sign in with SSO",
+  institution: "Login with your institute",
+  noAccount: "Don't have an account?",
+  register: "Sign up",
 };
 
 export interface LoginModalSelectedProductProps {
   /** Master axis visible[on,off] (e1bc9d53d909d53f). */
   visible?: boolean;
-  /** Plan shown in the ProductCard; default monthly. */
-  product?: PlanId;
+  /**
+   * Plan shown in the ProductCard. Content; English default plansEn.monthly, pass plansDe.* on DE screens
+   * (src/content/plans.ts).
+   */
+  product?: Plan;
   /** ProductCard's change-product link click. */
   onChangeProduct?: () => void;
-  /** Copy language; inherits the modal's locale. */
-  locale?: Locale;
+  /** ProductCard's change link. Label text; English default "< Change plan", pass German on DE screens (productCardDe.changeLabel). */
+  changeLabel?: string;
 }
 
 /** Checkout-only slot: the product the user is about to buy (a ProductCard at 352px). */
-function SelectedProduct({ visible = true, product = "monthly", onChangeProduct, locale }: LoginModalSelectedProductProps) {
+function SelectedProduct({ visible = true, product = plansEn.monthly, onChangeProduct, changeLabel }: LoginModalSelectedProductProps) {
   if (!visible) return null;
-  return <ProductCard product={product} locale={locale} onChangeProduct={onChangeProduct ?? (() => {})} />;
+  return <ProductCard product={product} changeLabel={changeLabel} onChangeProduct={onChangeProduct ?? (() => {})} />;
 }
 
 // Axes mirror the LoginModal master (3981f9f72f51ef72): type[login] × state[default,focus,disabled].
@@ -77,9 +94,11 @@ export interface LoginModalProps {
   selectedProduct?: LoginModalSelectedProductProps;
   /** Wrap the panel in a fixed, blurred scrim. */
   overlay?: boolean;
-  /** Copy language; English by default. */
-  locale?: Locale;
-  /** Heading text; defaults to the locale's title ("Login" / "Willkommen zurück"). */
+  /**
+   * Label text, merged over the English defaults (loginModalLabels); pass German on DE screens (loginModalDe).
+   */
+  labels?: Partial<LoginModalLabels>;
+  /** Heading text; overrides labels.title (English default "Login"). */
   title?: string;
   /** Close (X) and Cancel button click. */
   onClose?: () => void;
@@ -102,7 +121,7 @@ const textLink =
 
 /**
  * Login dialog (LoginModal master): title and close, e-mail, password, "Stay logged in", forgot password,
- * Cancel / Login, SSO providers, institute login and the sign-up link. All copy follows `locale`.
+ * Cancel / Login, SSO providers, institute login and the sign-up link. All copy comes from `labels` (English defaults).
  * LoginModal.SelectedProduct is the checkout product slot (also set via `selectedProduct`).
  * Use for: logging in on top of an existing page (`overlay` adds the fixed blurred scrim).
  * Not for: the full-page login/signup screen (use AuthForm).
@@ -111,7 +130,7 @@ function LoginModalRoot({
   state = "default",
   selectedProduct,
   overlay = false,
-  locale = "en",
+  labels,
   title,
   onClose,
   onSubmit,
@@ -121,7 +140,7 @@ function LoginModalRoot({
   onRegister,
   className,
 }: LoginModalProps) {
-  const t = copy[locale];
+  const t = { ...loginModalLabels, ...labels };
   const titleId = useId();
   const disabled = state === "disabled";
 
@@ -159,7 +178,7 @@ function LoginModalRoot({
         </button>
       </div>
 
-      {selectedProduct && <SelectedProduct locale={locale} {...selectedProduct} />}
+      {selectedProduct && <SelectedProduct {...selectedProduct} />}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <TextInput

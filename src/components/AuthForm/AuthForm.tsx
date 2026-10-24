@@ -6,65 +6,88 @@ import { Button } from "../Button/Button";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { SsoButtonGroup, type SsoProvider } from "../SsoButton/SsoButton";
 import { TextInput } from "../TextInput/TextInput";
-import type { Locale } from "../_shared/locale";
-import type { PlanId } from "../_shared/plans";
+import type { Plan } from "../_shared/plans";
 
 export type AuthFormMode = "login" | "signup";
 
-// Production strings (Copy/production-strings.json). "Login with your institute" has no strings-file entry;
-// en/de follow the LoginModal master. The SSO buttons' accessible names ("Mit Google anmelden") are production markup.
-const copy: Record<Locale, Record<string, string>> = {
-  en: {
-    login: "Login",
-    signup: "Create your account",
-    email: "E-Mail",
-    password: "Password",
-    showPassword: "Show password",
-    hidePassword: "Hide password",
-    submitLogin: "Login",
-    submitSignup: "Continue",
-    forgot: "Forgot password",
-    sso: "or sign in with SSO",
-    ssoProvider: "Sign in with {provider}",
-    institution: "Login with your institute",
-    terms: "By registering your account, you agree to our terms and conditions, privacy and services agreement.",
-    noAccount: "Don't have an account?",
-    toSignup: "Sign up",
-    hasAccount: "Do you already have an account?",
-    toLogin: "Login",
-    changePlan: "< Select another plan",
-  },
-  de: {
-    login: "Anmelden",
-    signup: "Konto erstellen",
-    email: "E-Mail",
-    password: "Passwort",
-    showPassword: "Passwort anzeigen",
-    hidePassword: "Passwort verbergen",
-    submitLogin: "Anmelden",
-    submitSignup: "Weiter",
-    forgot: "Passwort vergessen",
-    sso: "oder mit SSO anmelden",
-    ssoProvider: "Mit {provider} anmelden",
-    institution: "Mit Hochschul-Login anmelden",
-    terms: "Mit der Registrierung stimmst du unseren AGB, der Datenschutzerklärung und den Servicebedingungen zu.",
-    noAccount: "Noch kein Konto?",
-    toSignup: "Registrieren",
-    hasAccount: "Hast du bereits ein Konto?",
-    toLogin: "Anmelden",
-    changePlan: "< Anderes Abo wählen",
-  },
+/** Every visible and accessible string of AuthForm. */
+export interface AuthFormLabels {
+  /** Title in login mode. */
+  login: string;
+  /** Title in signup mode. */
+  signup: string;
+  /** E-mail field placeholder and accessible name. */
+  email: string;
+  /** Password field placeholder and accessible name. */
+  password: string;
+  /** Accessible name of the reveal-password toggle. */
+  showPassword: string;
+  /** Accessible name of the hide-password toggle. */
+  hidePassword: string;
+  /** Submit button in login mode. */
+  submitLogin: string;
+  /** Submit button in signup mode. */
+  submitSignup: string;
+  /** Forgot-password link (login mode). */
+  forgot: string;
+  /** Line above the SSO buttons. */
+  sso: string;
+  /** Accessible name of each SSO button; "{provider}" is replaced by the provider name. */
+  ssoProvider: string;
+  /** Institute login button. */
+  institution: string;
+  /** Legal copy (signup mode). */
+  terms: string;
+  /** Prompt before the sign-up link (login mode). */
+  noAccount: string;
+  /** Sign-up link (login mode). */
+  toSignup: string;
+  /** Prompt before the login link (signup mode). */
+  hasAccount: string;
+  /** Login link (signup mode). */
+  toLogin: string;
+  /** ProductCard's change link (signup with product). */
+  changePlan: string;
+}
+
+// Production strings (Copy/production-strings.json). "Login with your institute" has no strings-file entry and
+// follows the LoginModal master. German: authFormDe in src/i18n/de.ts.
+export const authFormLabels: AuthFormLabels = {
+  login: "Login",
+  signup: "Create your account",
+  email: "E-Mail",
+  password: "Password",
+  showPassword: "Show password",
+  hidePassword: "Hide password",
+  submitLogin: "Login",
+  submitSignup: "Continue",
+  forgot: "Forgot password",
+  sso: "or sign in with SSO",
+  ssoProvider: "Sign in with {provider}",
+  institution: "Login with your institute",
+  terms: "By registering your account, you agree to our terms and conditions, privacy and services agreement.",
+  noAccount: "Don't have an account?",
+  toSignup: "Sign up",
+  hasAccount: "Do you already have an account?",
+  toLogin: "Login",
+  changePlan: "< Select another plan",
 };
 
 export interface AuthFormProps {
   /** login (default) or signup: switches title, submit text (Login / Continue), forgot-password link (login) and terms copy (signup). */
   mode?: AuthFormMode;
-  /** Signup from checkout: the chosen plan above the form (ProductCard). Shown in signup mode only. */
-  product?: PlanId;
+  /**
+   * Signup from checkout: the chosen plan above the form (ProductCard). Shown in signup mode only. Content: pass
+   * plansEn.* on English screens, plansDe.* on DE screens (src/content/plans.ts).
+   */
+  product?: Plan;
   /** ProductCard's "< Select another plan" link click. */
   onChangeProduct?: () => void;
-  /** Copy language: en (default) or de. */
-  locale?: Locale;
+  /**
+   * Label text, merged over the English defaults (authFormLabels, production strings); pass German on DE screens
+   * (authFormDe).
+   */
+  labels?: Partial<AuthFormLabels>;
   /** Form submit with e-mail and password; the native submit is prevented. */
   onSubmit?: (values: { email: string; password: string }) => void;
   /** Forgot-password link click (login mode only). */
@@ -93,7 +116,7 @@ export function AuthForm({
   mode = "login",
   product,
   onChangeProduct,
-  locale = "en",
+  labels,
   onSubmit,
   onForgotPassword,
   onSso,
@@ -101,7 +124,7 @@ export function AuthForm({
   onSwitchMode,
   className,
 }: AuthFormProps) {
-  const t = copy[locale];
+  const t = { ...authFormLabels, ...labels };
   const titleId = useId();
   const signup = mode === "signup";
 
@@ -117,7 +140,7 @@ export function AuthForm({
         {signup ? t.signup : t.login}
       </h1>
 
-      {signup && product && <ProductCard product={product} locale={locale} changeLabel={t.changePlan} onChangeProduct={onChangeProduct} />}
+      {signup && product && <ProductCard product={product} changeLabel={t.changePlan} onChangeProduct={onChangeProduct} />}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <TextInput type="email" name="email" aria-label={t.email} placeholder={t.email} autoComplete="email" />

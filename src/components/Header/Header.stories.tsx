@@ -54,5 +54,5 @@ export const DesktopLoggedInWatchlist: Story = { args: { auth: "logged-in", acti
 export const MobileLoggedOut: Story = { decorators: [mobile], globals: viewport("mobile") };
 export const MobileLoggedIn: Story = { args: { auth: "logged-in" }, decorators: [mobile], globals: viewport("mobile") };
 
-/** Instance on "4 Sooner DE Marketing Pages" › Landing Page DE: Watchlist hidden, language DE. */
-export const LandingPageDe: Story = { args: { hideWatchlist: true, language: "de" }, decorators: [desktop] };
+/** Marketing pages: the Watchlist tab is hidden. */
+export const WatchlistHidden: Story = { args: { hideWatchlist: true }, decorators: [desktop] };

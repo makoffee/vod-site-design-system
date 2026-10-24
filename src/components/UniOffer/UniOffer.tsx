@@ -1,15 +1,18 @@
 "use client";
 
+import { uniOfferEn } from "@/content/plans";
 import { cn } from "@/lib/cn";
 import { Button } from "../Button/Button";
-import type { Locale } from "../_shared/locale";
-import { uniOfferByLocale } from "../_shared/plans";
+import type { UniOfferContent } from "../_shared/plans";
 
 export interface UniOfferProps {
   /** Click handler of the CTA button. */
   onSelect?: () => void;
-  /** Copy language; English by default. Pass "de" on DE screens (all copy comes from uniOfferByLocale). */
-  locale?: Locale;
+  /**
+   * Banner copy (title, lead, detail, CTA label). Content; English default (uniOfferEn), pass German on DE screens
+   * (uniOfferDe, src/content/plans.ts).
+   */
+  offer?: UniOfferContent;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
@@ -20,8 +23,7 @@ export interface UniOfferProps {
  * Use for: the student (UNI) offer below the plan cards (SubscriptionPlans includes it).
  * Not for: regular subscription plans (use PlanCard).
  */
-export function UniOffer({ onSelect, locale = "en", className }: UniOfferProps) {
-  const t = uniOfferByLocale[locale];
+export function UniOffer({ onSelect, offer: t = uniOfferEn, className }: UniOfferProps) {
   return (
     <section className={cn("@container w-full rounded-2xl border border-border-decorative bg-surface-uni", className)}>
       <div className="flex flex-col items-start gap-4 p-6 @2xl:flex-row @2xl:items-center @2xl:gap-6">

@@ -5,9 +5,10 @@ import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { ImageCtaBanner } from "@/components/ImageCtaBanner/ImageCtaBanner";
 import { SubscriptionPlans } from "@/components/SubscriptionPlans/SubscriptionPlans";
 import { TwoColumnMedia } from "@/components/TwoColumnMedia/TwoColumnMedia";
-import type { Locale } from "@/components/_shared/locale";
+import type { Locale } from "@/i18n/locale";
 import { SoonerBasket } from "@/components/_shared/icons";
-import { feedRowDe, filmCardDe } from "@/i18n/de";
+import { planList, plansDe, uniOfferDe } from "@/content/plans";
+import { feedRowDe, filmCardDe, subscriptionPlansDe } from "@/i18n/de";
 import { landing, landingFilms, type LandingCollection } from "@/mocks/landing";
 import { AppShell } from "./AppShell";
 
@@ -53,7 +54,7 @@ export function LandingScreen({ locale = "en" }: LandingScreenProps) {
       <Collection collection={highlights} locale={locale} />
       <Collection collection={newToRent} locale={locale} />
       <Collection collection={newInSubscription} locale={locale} />
-      <SubscriptionPlans locale={locale} />
+      <SubscriptionPlans {...(locale === "de" ? { ...subscriptionPlansDe, plans: planList(plansDe), uni: uniOfferDe } : {})} />
       <Collection collection={comingSoon} locale={locale} />
       {/* Production split_image_block: px-6 py-12 · sm:px-12 sm:py-20 · lg:px-20 around the white slice. */}
       <div className="px-6 py-12 sm:px-12 sm:py-20 lg:px-20">

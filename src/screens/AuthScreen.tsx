@@ -5,6 +5,8 @@ import { AuthForm, type AuthFormMode } from "@/components/AuthForm/AuthForm";
 import { SoonerLogo } from "@/components/SoonerLogo/SoonerLogo";
 import { BINOCULAR_PATH, BINOCULAR_VIEWBOX } from "@/components/_shared/icons";
 import type { PlanId } from "@/components/_shared/plans";
+import { plansDe } from "@/content/plans";
+import { authFormDe } from "@/i18n/de";
 
 export interface AuthScreenProps {
   defaultMode?: AuthFormMode;
@@ -44,9 +46,9 @@ export function AuthScreen({ defaultMode = "login", product }: AuthScreenProps) 
         <div className="flex justify-center @4xl:justify-start @4xl:pt-12">
           <AuthForm
             mode={mode}
-            product={mode === "signup" ? product : undefined}
+            product={mode === "signup" && product ? plansDe[product] : undefined}
             onChangeProduct={() => {}}
-            locale="de"
+            labels={authFormDe}
             onSwitchMode={() => setMode(mode === "login" ? "signup" : "login")}
             className="max-w-[400px]"
           />

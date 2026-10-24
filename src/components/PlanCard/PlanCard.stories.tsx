@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
+import { plansEn } from "@/content/plans";
 import { PlanCard } from "./PlanCard";
 import { frame } from "../_shared/storyFrames";
 
@@ -9,9 +10,9 @@ const placeholderStill = "/images/placeholder/seventh-seal.webp";
 const meta = {
   title: "Components/PlanCard",
   component: PlanCard,
-  args: { plan: "monthly", onSelect: fn(), imageSrc: placeholderStill, imageAlt: "" },
+  args: { plan: plansEn.monthly, onSelect: fn(), imageSrc: placeholderStill, imageAlt: "" },
   argTypes: {
-    plan: { control: "inline-radio", options: ["monthly", "yearly", "plus"] },
+    plan: { control: "inline-radio", options: ["monthly", "yearly", "plus"], mapping: plansEn },
     pricePosition: { control: "inline-radio", options: ["top", "bottom"] },
   },
   decorators: [frame(384)],
@@ -27,10 +28,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Monthly: Story = {};
-export const Yearly: Story = { args: { plan: "yearly" } };
-export const Plus: Story = { args: { plan: "plus" } };
+export const Yearly: Story = { args: { plan: plansEn.yearly } };
+export const Plus: Story = { args: { plan: plansEn.plus } };
 /** Subscribe page: price after the features. */
-export const PriceBottom: Story = { args: { plan: "yearly", pricePosition: "bottom" } };
+export const PriceBottom: Story = { args: { plan: plansEn.yearly, pricePosition: "bottom" } };
 
 /** Cards fill their grid cell; the grid goes to three columns at 896px of container width (@4xl). Switch the viewport to see it stack. */
 export const AllPlans: Story = {
@@ -38,9 +39,9 @@ export const AllPlans: Story = {
   render: (args) => (
     <div className="@container">
       <div className="grid gap-6 @4xl:grid-cols-3">
-        <PlanCard {...args} plan="monthly" />
-        <PlanCard {...args} plan="yearly" />
-        <PlanCard {...args} plan="plus" />
+        <PlanCard {...args} plan={plansEn.monthly} />
+        <PlanCard {...args} plan={plansEn.yearly} />
+        <PlanCard {...args} plan={plansEn.plus} />
       </div>
     </div>
   ),

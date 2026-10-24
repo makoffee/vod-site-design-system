@@ -11,7 +11,7 @@ import { SettingRow } from "@/components/SettingRow/SettingRow";
 import { Switch } from "@/components/Switch/Switch";
 import { TextAction } from "@/components/TextAction/TextAction";
 import { ActionLink } from "@/components/_shared/ActionLink";
-import type { Locale } from "@/components/_shared/locale";
+import type { Locale } from "@/i18n/locale";
 import { accountDe, accountNavDe } from "@/i18n/de";
 import { AppShell } from "./AppShell";
 

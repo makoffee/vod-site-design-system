@@ -60,7 +60,7 @@ Never put two violet buttons side by side.
 ## 6. States
 
 Every view that loads data designs four states: loading, content, empty, error. Examples live in Storybook (FeedRow
-Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found / Error, Foundations Overflow).
+Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found / Error).
 
 - Loading: keep the layout and show `Skeleton`s in the shape of what's coming (posters stay 3:4 / 16:9). A feed
   uses `FeedRow loading`. Announce "Loading…" once per region (FeedRow does), not per skeleton. No spinners.
@@ -77,8 +77,13 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
 
 ## 7. Copy and language
 
-- Components ship English defaults. German screens pass German strings in, from `src/i18n/de.ts` (for example
-  `{...filmCardDe}`, `labels={headerDe}`). Never hard-code German inside a component.
+- One language per view. A German screen is German from header to footer, an English screen English. Never mix.
+- Components have no language of their own: no `locale` prop, no copy tables, no German variants. They take every
+  string (or data object, like a plan) as props, with English defaults. German screens pass German strings from
+  `src/i18n/de.ts` (for example `{...filmCardDe}`, `labels={headerDe}`) and German plan content from
+  `src/content/plans.ts` (`plansDe`).
+- Component examples use generic placeholder content ("Film Title", "Director Name", Lorem ipsum). Real content
+  belongs to screens and plan blocks only.
 - Use real product copy. If the copy doesn't exist yet, leave the component's English default or a clearly marked
   placeholder. Never make up marketing lines, prices or legal text.
 - Buttons are short verbs ("Subscribe", "Continue", "Save").

@@ -1,58 +1,54 @@
 "use client";
 
+import { planList, plansEn, uniOfferEn } from "@/content/plans";
 import { cn } from "@/lib/cn";
 import { PlanCard } from "../PlanCard/PlanCard";
 import { UniOffer } from "../UniOffer/UniOffer";
-import type { Locale } from "../_shared/locale";
-import type { PlanId } from "../_shared/plans";
+import type { Plan, PlanId, UniOfferContent } from "../_shared/plans";
 
 /** landing = home page slice (Playfair heading); subscribe = onboarding / plan picker page (sooner.de/subscribe). */
 export type SubscriptionPlansLayout = "landing" | "subscribe";
 
-// landing: production slice subscription_plans (sooner.de home). subscribe: sooner.de/subscribe, 2026-10-22; legal =
-// Copy/production-strings.json "Subscribe legal".
-const copy: Record<SubscriptionPlansLayout, Record<Locale, { title: string; description: string; legal?: string }>> = {
+// English defaults. landing: production slice subscription_plans (sooner.de home). subscribe: sooner.de/subscribe,
+// 2026-10-22; legal = Copy/production-strings.json "Subscribe legal". German: subscriptionPlansDe /
+// subscriptionPlansSubscribeDe in src/i18n/de.ts.
+const defaults: Record<SubscriptionPlansLayout, { title: string; description: string; legal?: string }> = {
   landing: {
-    en: {
-      title: "Choose your Sooner Plan",
-      description: "Stream subscription films without limits – flexible monthly, with 3 rentals included, or save with an annual plan.",
-    },
-    de: {
-      title: "Wähle dein Sooner-Abo",
-      description: "Unbegrenzt Filme im Abo streamen – flexibel monatlich, mit 3 Leihfilmen inklusive oder günstiger im Jahresabo.",
-    },
+    title: "Choose your Sooner Plan",
+    description: "Stream subscription films without limits – flexible monthly, with 3 rentals included, or save with an annual plan.",
   },
   subscribe: {
-    en: {
-      title: "Choose your Sooner subscription",
-      description: "Stream unlimited films with a flexible monthly plan, 3 rentals included, or save with an annual subscription.",
-      legal:
-        "By clicking 'Select Plan', you agree to our Terms and Conditions and acknowledge our Privacy Policy. A 7-day free trial applies exclusively to the Monthly and Student plans. You can cancel at any time during this trial to avoid charges. If you do not cancel, your paid subscription will begin automatically on day 15, billing at €7.99/month or €5.99/month respectively. Both plans can be cancelled monthly. The Yearly plan has no free trial; a one-time payment of €59.95 is due upon sign-up for 12 months. It automatically renews for another 12 months unless cancelled at least one day before the term ends. Streaming quality (Full HD, Ultra HD, 5.1) depends on your internet connection, device compatibility, and content availability.",
-    },
-    de: {
-      title: "Wähle dein Sooner-Abo",
-      description: "Unbegrenzt Filme im Abo streamen – flexibel monatlich, mit 3 Leihfilmen inklusive oder günstiger im Jahresabo.",
-      legal:
-        "Durch Klicken auf „Tarif auswählen“ stimmst du unseren Allgemeinen Geschäftsbedingungen zu und bestätigst unsere Datenschutzerklärung. Eine 7-tägige kostenlose Testphase gilt ausschließlich für den Monatstarif und den Studierendentarif. Du kannst während dieser Testphase jederzeit kündigen, um keine Gebühren zu zahlen. Wenn du nicht kündigst, beginnt dein kostenpflichtiges Abonnement automatisch am Tag 15 und wird mit 7,99 €/Monat bzw. 5,99 €/Monat berechnet. Beide Tarife sind monatlich kündbar. Der Jahrestarif hat keine kostenlose Testphase; eine einmalige Zahlung von 59,95 € fällt bei Vertragsabschluss für 12 Monate an. Er verlängert sich automatisch um weitere 12 Monate, sofern nicht mindestens einen Tag vor Vertragsende gekündigt wird. Die Streaming-Qualität (Full HD, Ultra HD, 5.1) hängt von deiner Internetverbindung, der Gerätekompatibilität und der Inhaltsverfügbarkeit ab.",
-    },
+    title: "Choose your Sooner subscription",
+    description: "Stream unlimited films with a flexible monthly plan, 3 rentals included, or save with an annual subscription.",
+    legal:
+      "By clicking 'Select Plan', you agree to our Terms and Conditions and acknowledge our Privacy Policy. A 7-day free trial applies exclusively to the Monthly and Student plans. You can cancel at any time during this trial to avoid charges. If you do not cancel, your paid subscription will begin automatically on day 15, billing at €7.99/month or €5.99/month respectively. Both plans can be cancelled monthly. The Yearly plan has no free trial; a one-time payment of €59.95 is due upon sign-up for 12 months. It automatically renews for another 12 months unless cancelled at least one day before the term ends. Streaming quality (Full HD, Ultra HD, 5.1) depends on your internet connection, device compatibility, and content availability.",
   },
 };
 
-const allPlans: PlanId[] = ["monthly", "yearly", "plus"];
+const defaultPlans = planList(plansEn);
 
 export interface SubscriptionPlansProps {
   /** landing = home page slice (default); subscribe = plan picker page with h1 and legal paragraph. */
   layout?: SubscriptionPlansLayout;
-  /** Copy language for built-in heading, legal text, PlanCards and UniOffer: en (default) or de. */
-  locale?: Locale;
-  /** Overrides the production heading. */
+  /**
+   * Heading text. English default per layout ("Choose your Sooner Plan" / "Choose your Sooner subscription"); pass
+   * German on DE screens (subscriptionPlansDe / subscriptionPlansSubscribeDe).
+   */
   title?: string;
-  /** Overrides the production intro sentence under the heading. */
+  /** Intro sentence under the heading. English production default per layout; pass German on DE screens (subscriptionPlansDe). */
   description?: string;
-  /** Overrides the legal paragraph (subscribe layout only). */
+  /**
+   * Legal paragraph (subscribe layout only). English production default ("By clicking 'Select Plan'…"); pass German on
+   * DE screens (subscriptionPlansSubscribeDe).
+   */
   legal?: string;
-  /** Plans to show, in order: monthly, yearly, plus; default all three. */
-  plans?: PlanId[];
+  /**
+   * Plans to show, in order, one PlanCard each. Content; English default all three (planList(plansEn)), pass
+   * planList(plansDe) on DE screens (src/content/plans.ts).
+   */
+  plans?: Plan[];
+  /** UNI banner copy. Content; English default (uniOfferEn), pass uniOfferDe on DE screens (src/content/plans.ts). */
+  uni?: UniOfferContent;
   /** PlanCard header artwork per plan. */
   images?: Partial<Record<PlanId, string>>;
   /** Shows the UNI banner under the cards (both designs do; production /subscribe currently does not). Default true. */
@@ -74,18 +70,18 @@ export interface SubscriptionPlansProps {
  */
 export function SubscriptionPlans({
   layout = "landing",
-  locale = "en",
   title,
   description,
   legal,
-  plans = allPlans,
+  plans = defaultPlans,
+  uni = uniOfferEn,
   images,
   showUni = true,
   onSelect,
   onSelectUni,
   className,
 }: SubscriptionPlansProps) {
-  const t = copy[layout][locale];
+  const t = defaults[layout];
   const subscribe = layout === "subscribe";
   const Heading = subscribe ? "h1" : "h2";
 
@@ -113,17 +109,16 @@ export function SubscriptionPlans({
         >
           {plans.map((plan) => (
             <PlanCard
-              key={plan}
+              key={plan.id}
               plan={plan}
-              locale={locale}
-              imageSrc={images?.[plan]}
+              imageSrc={images?.[plan.id]}
               onSelect={onSelect}
               pricePosition={subscribe ? "bottom" : "top"}
               className={cn("h-full", !subscribe && "max-w-[433px]")}
             />
           ))}
         </div>
-        {showUni && <UniOffer locale={locale} onSelect={onSelectUni} className="mt-2" />}
+        {showUni && <UniOffer offer={uni} onSelect={onSelectUni} className="mt-2" />}
         {subscribe && (legal ?? t.legal) && (
           <p className="m-0 w-full py-6 text-left text-base leading-[30px] whitespace-pre-line text-gray-500">{legal ?? t.legal}</p>
         )}

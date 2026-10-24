@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
+import { plansEn } from "@/content/plans";
 import { LoginModal } from "./LoginModal";
 import { frame } from "../_shared/storyFrames";
 
@@ -39,11 +40,11 @@ export const Disabled: Story = { args: { state: "disabled" } };
 /** LoginModal.SelectedProduct, visible=on (the master shows the monthly product at 352px). */
 export const SelectedProduct: Story = {
   decorators: [frame(352)],
-  render: () => <LoginModal.SelectedProduct visible product="monthly" onChangeProduct={fn()} />,
+  render: () => <LoginModal.SelectedProduct visible product={plansEn.monthly} onChangeProduct={fn()} />,
 };
 
 export const Checkout: Story = {
-  args: { selectedProduct: { product: "yearly", onChangeProduct: fn() } },
+  args: { selectedProduct: { product: plansEn.yearly, onChangeProduct: fn() } },
 };
 
 export const AsOverlay: Story = {

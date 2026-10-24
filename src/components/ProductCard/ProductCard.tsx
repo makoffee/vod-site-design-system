@@ -2,18 +2,18 @@
 
 import { cn } from "@/lib/cn";
 import { Pill } from "../_shared/Pill";
-import type { Locale } from "../_shared/locale";
-import { plansByLocale, type PlanId } from "../_shared/plans";
+import type { Plan } from "../_shared/plans";
 
 export interface ProductCardProps {
-  /** Master axis product[monthly,yearly,plus]. */
-  product: PlanId;
-  /** Renders the "< Change plan" link when provided. */
+  /**
+   * The chosen plan (name, price, period, checkoutBadge are shown). Content: pass plansEn.* on English screens,
+   * plansDe.* on DE screens (src/content/plans.ts). Its id is the master axis product[monthly,yearly,plus].
+   */
+  product: Plan;
+  /** Renders the change link when provided. */
   onChangeProduct?: () => void;
-  /** Text of the change link; defaults to "< Change plan" (de "< Produkt ändern") by locale. */
+  /** Text of the change link. Label text; English default "< Change plan", pass German on DE screens (productCardDe). */
   changeLabel?: string;
-  /** Copy language; English by default. Pass "de" on DE screens. */
-  locale?: Locale;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
@@ -23,9 +23,7 @@ export interface ProductCardProps {
  * Use for: showing the chosen plan above the signup/checkout form (AuthForm, LoginModal use it).
  * Not for: offering plans to choose from (use PlanCard or SubscriptionPlans).
  */
-export function ProductCard({ product, onChangeProduct, changeLabel, locale = "en", className }: ProductCardProps) {
-  const plan = plansByLocale[locale][product];
-  const change = changeLabel ?? (locale === "de" ? "< Produkt ändern" : "< Change plan");
+export function ProductCard({ product: plan, onChangeProduct, changeLabel = "< Change plan", className }: ProductCardProps) {
   return (
     <div
       className={cn(
@@ -46,7 +44,7 @@ export function ProductCard({ product, onChangeProduct, changeLabel, locale = "e
           onClick={onChangeProduct}
           className="w-fit rounded-sm text-xs font-bold uppercase tracking-[0.3px] text-white/60 outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-white"
         >
-          {change}
+          {changeLabel}
         </button>
       )}
     </div>

@@ -4,20 +4,21 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { Button } from "../Button/Button";
 import { Pill } from "../_shared/Pill";
-import type { Locale } from "../_shared/locale";
-import { plansByLocale, type PlanId } from "../_shared/plans";
+import type { Plan, PlanId } from "../_shared/plans";
 
 export interface PlanCardProps {
-  /** Master axis plan[monthly,yearly,plus]; the master's state axis only has "default". */
-  plan: PlanId;
+  /**
+   * The plan to show (name, price, period, badge, features, CTA label, highlighted). Content, not copy in the
+   * component: pass plansEn.monthly / .yearly / .plus on English screens, plansDe.* on DE screens (src/content/plans.ts).
+   * Its id is the master axis plan[monthly,yearly,plus]; the master's state axis only has "default".
+   */
+  plan: Plan;
   /** Called with the plan id when the card's CTA button is pressed. */
   onSelect?: (plan: PlanId) => void;
   /** Artwork for the 384 × 199 header. The master's film stills are placeholders, so none ships by default. */
   imageSrc?: string;
   /** Alt text of imageSrc (default "", decorative). */
   imageAlt?: string;
-  /** Copy language; English by default. Pass "de" on DE screens (all card copy comes from the plan data). */
-  locale?: Locale;
   /** top = price under the name (landing, master price[top]); bottom = after the features (subscribe page, price[bottom]). */
   pricePosition?: "top" | "bottom";
   /** Extra classes for the root (layout/spacing only; don't override colours). */
@@ -29,8 +30,7 @@ export interface PlanCardProps {
  * Use for: a single plan offer with its CTA; SubscriptionPlans lays out all three.
  * Not for: the chosen plan summary in signup/checkout (use ProductCard); the full plan picker (use SubscriptionPlans).
  */
-export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale = "en", pricePosition = "top", className }: PlanCardProps) {
-  const plan = plansByLocale[locale][id];
+export function PlanCard({ plan, onSelect, imageSrc, imageAlt = "", pricePosition = "top", className }: PlanCardProps) {
   const price = (
     <p className="flex items-start gap-1.5 text-white">
       <span className="text-[30px] leading-9 font-bold tracking-[-0.75px]">{plan.price}</span>
@@ -73,7 +73,7 @@ export function PlanCard({ plan: id, onSelect, imageSrc, imageAlt = "", locale =
       </div>
       <div className="p-6">
         <Button
-          onClick={() => onSelect?.(id)}
+          onClick={() => onSelect?.(plan.id)}
           className={cn(plan.highlighted && "bg-black shadow-[0_3px_8px_rgb(0_0_0/0.25)] hover:bg-gray-900")}
         >
           {plan.cta}

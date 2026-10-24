@@ -5,10 +5,6 @@ import { frame, viewport } from "../_shared/storyFrames";
 const meta = {
   title: "Components/Footer",
   component: Footer,
-  args: { locale: "en" },
-  argTypes: {
-    locale: { control: "inline-radio", options: ["en", "de"] },
-  },
   parameters: {
     layout: "fullscreen",
     design: {
@@ -27,12 +23,6 @@ const mobile: Decorator = frame(393);
 export const Desktop: Story = { decorators: [desktop] };
 // The frame width picks the layout (the master's viewport axis).
 export const Mobile: Story = { decorators: [mobile], globals: viewport("mobile") };
-
-/** Instance override on "4 Sooner DE Marketing Pages". */
-export const MarketingCopyright: Story = {
-  args: { copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Germany" },
-  decorators: [desktop],
-};
 
 /** Belgian site: three sponsor logos (instance override on "3 Key Screens"). */
 export const BelgiumSponsors: Story = {

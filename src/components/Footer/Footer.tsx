@@ -4,54 +4,33 @@ import { cn } from "@/lib/cn";
 import { SocialIcons, type SocialPlatform } from "../SocialIcons/SocialIcons";
 import { SoonerLogo } from "../SoonerLogo/SoonerLogo";
 
-// Axes mirror the Footer master (cd51389682b4feaa): locale[en,de]. The master's viewport[desktop,mobile] axis is not a
-// prop: the layout follows the container (desktop from 768px).
-export type FooterLocale = "en" | "de";
+// The master's viewport[desktop,mobile] axis is not a prop: the layout follows the container (desktop from 768px).
+// English only; German screens pass footerDe (src/i18n/de.ts).
 
-const copy: Record<FooterLocale, { columns: { label: string; href: string }[][]; copyright: string }> = {
-  en: {
-    columns: [
-      [
-        { label: "Discover", href: "/discover" },
-        { label: "Help & Support", href: "/help" },
-        { label: "Blog", href: "/blog" },
-        { label: "Contact", href: "/contact" },
-      ],
-      [
-        { label: "Terms", href: "/terms" },
-        { label: "Imprint", href: "/imprint" },
-        { label: "Partner Program", href: "/partners" },
-      ],
-      [
-        { label: "Press", href: "/press" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Cookie Policy", href: "/cookies" },
-      ],
-    ],
-    copyright: "© 2026 ContentScope GmbH • Berlin, Germany",
-  },
-  de: {
-    columns: [
-      [
-        { label: "Discover", href: "/discover" },
-        { label: "Hilfe & Support", href: "/help" },
-        { label: "Blog", href: "/blog" },
-        { label: "Kontakt", href: "/contact" },
-      ],
-      [
-        { label: "AGB", href: "/terms" },
-        { label: "Impressum", href: "/imprint" },
-        { label: "Partnerprogramm", href: "/partners" },
-      ],
-      [
-        { label: "Presse", href: "/press" },
-        { label: "Datenschutz", href: "/privacy" },
-        { label: "Cookie-Richtlinie", href: "/cookies" },
-      ],
-    ],
-    copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Deutschland",
-  },
-};
+export interface FooterLink {
+  label: string;
+  href: string;
+}
+
+/** The three link columns sooner.de shows (English). */
+export const footerColumns: FooterLink[][] = [
+  [
+    { label: "Discover", href: "/discover" },
+    { label: "Help & Support", href: "/help" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
+  ],
+  [
+    { label: "Terms", href: "/terms" },
+    { label: "Imprint", href: "/imprint" },
+    { label: "Partner Program", href: "/partners" },
+  ],
+  [
+    { label: "Press", href: "/press" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Cookie Policy", href: "/cookies" },
+  ],
+];
 
 export interface FundingLogo {
   name: string;
@@ -80,11 +59,11 @@ const defaultSocial: { platform: SocialPlatform; href: string }[] = [
 ];
 
 export interface FooterProps {
-  /** Link labels and default copyright: en (default) or de. Link targets are the same in both. */
-  locale?: FooterLocale;
-  /** Defaults to "Curated Cinema" in both locales (every screen uses the default). */
+  /** Link columns (label + href). English default (footerColumns); pass German on DE screens (footerDe). */
+  columns?: FooterLink[][];
+  /** Line under the logo; default "Curated Cinema" (the brand line, the same on every site). */
   tagline?: string;
-  /** Instance override, e.g. "… • Adlershof-Berlin, Germany" on the marketing pages. */
+  /** Copyright line. English default; pass German on DE screens (footerDe). */
   copyright?: string;
   /** Social links shown as white 42px icons; defaults to Instagram, YouTube, Spotify, Facebook. */
   social?: { platform: SocialPlatform; href: string }[];
@@ -98,9 +77,14 @@ export interface FooterProps {
  * Fills its container (instances are s(fill, hug) on every screen).
  * Use for: the bottom of every page screen.
  */
-export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, social = defaultSocial, fundingLogos = defaultFundingLogos, className }: FooterProps) {
-  const t = copy[locale];
-
+export function Footer({
+  columns = footerColumns,
+  tagline = "Curated Cinema",
+  copyright = "© 2026 ContentScope GmbH • Berlin, Germany",
+  social = defaultSocial,
+  fundingLogos = defaultFundingLogos,
+  className,
+}: FooterProps) {
   return (
     // <footer> is the query container; the inner wrapper carries the layout so it can respond to it.
     <footer className={cn("@container w-full bg-black", className)}>
@@ -110,7 +94,7 @@ export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, s
             <SoonerLogo className="self-start text-white" />
             <p className="text-sm leading-6 text-white/60">{tagline}</p>
           </div>
-          {t.columns.map((column, i) => (
+          {columns.map((column, i) => (
             <ul key={i} className="flex flex-1 flex-col gap-2">
               {column.map((link) => (
                 <li key={link.href}>
@@ -146,7 +130,7 @@ export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, s
 
         <div className="border-t border-sooner-primary/20 pt-8">
           {/* Design gap: white/40 on black is 3.65:1, below WCAG AA (4.5:1). Kept as designed. */}
-          <p className="text-sm text-white/40 text-center @3xl:text-left">{copyright ?? t.copyright}</p>
+          <p className="text-sm text-white/40 text-center @3xl:text-left">{copyright}</p>
         </div>
       </div>
     </footer>
