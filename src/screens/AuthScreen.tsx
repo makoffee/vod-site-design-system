@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { AuthForm, type AuthFormMode } from "@/components/AuthForm/AuthForm";
 import { SoonerLogo } from "@/components/SoonerLogo/SoonerLogo";
-import { BINOCULAR_PATH, BINOCULAR_VIEWBOX } from "@/components/_shared/icons";
 import type { PlanId } from "@/components/_shared/plans";
 import { plansDe, plansEn } from "@/content/plans";
 import type { Locale } from "@/i18n/locale";
@@ -18,7 +18,7 @@ export interface AuthScreenProps {
 }
 
 /**
- * Login / signup page (login, signup, and signup with a chosen plan; desktop and mobile): the violet binocular mark fading to black behind the form, logo and tagline top left, no header or footer.
+ * Login / signup page (login, signup, and signup with a chosen plan; desktop and mobile): the violet brand glow behind the form, logo and tagline top left, no header or footer.
  */
 export function AuthScreen({ defaultMode = "login", product, locale = "en" }: AuthScreenProps) {
   const de = locale === "de";
@@ -26,20 +26,15 @@ export function AuthScreen({ defaultMode = "login", product, locale = "en" }: Au
 
   return (
     <main className="@container relative isolate min-h-screen overflow-hidden bg-black text-white">
-      <svg
-        viewBox={`0 0 ${BINOCULAR_VIEWBOX.width} ${BINOCULAR_VIEWBOX.height}`}
-        aria-hidden
-        className="absolute top-[18%] left-[-30%] -z-10 w-[190%] max-w-none -rotate-[14deg] @4xl:top-[3%] @4xl:left-[3%] @4xl:w-[93%] @4xl:-rotate-[10deg]"
-      >
-        <defs>
-          <linearGradient id="auth-mark" x1="0.75" y1="0" x2="0.45" y2="1">
-            <stop offset="0" stopColor="var(--color-sooner-primary)" />
-            <stop offset="0.5" stopColor="var(--color-sooner-primary)" stopOpacity="0.6" />
-            <stop offset="1" stopColor="#000" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path d={BINOCULAR_PATH} fill="url(#auth-mark)" />
-      </svg>
+      {/* Brand glow, top-anchored like the designs so the logo sits on black: full width on desktop, a 312% crop on mobile. */}
+      <Image
+        src="/images/brand/auth-glow.jpg"
+        alt=""
+        width={1718}
+        height={1190}
+        priority
+        className="absolute top-0 left-[-56%] -z-10 w-[312.5%] max-w-none @4xl:left-0 @4xl:w-full"
+      />
 
       <div className="mx-auto grid min-h-screen max-w-[1440px] gap-10 px-6 py-12 @4xl:grid-cols-2 @4xl:px-24 @4xl:py-24">
         <div className="flex flex-col gap-4">
