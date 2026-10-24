@@ -280,10 +280,16 @@ async function tokens(job) {
   const made = {};
   for (const t of job.vars) {
     const v = existing[t.name] || figma.variables.createVariable(t.name, col, t.type);
-    v.scopes = t.scopes; if (t.hidden) v.hiddenFromPublishing = true; if (t.desc) v.description = t.desc;
+    v.scopes = t.scopes; if (t.desc) v.description = t.desc;
+    if (t.code) try { v.setVariableCodeSyntax('WEB', t.code); } catch (e) {} else try { v.removeVariableCodeSyntax('WEB'); } catch (e) {}
     v.setValueForMode(mode, t.value); made[t.name] = v; varByName[t.name] = v;
   }
   for (const t of job.vars) if (t.alias && made[t.alias]) made[t.name].setValueForMode(mode, { type: 'VARIABLE_ALIAS', id: made[t.alias].id });
+  // drop variables and text styles that no longer exist in Brilliant (legacy names)
+  const keep = new Set(job.vars.map((t) => t.name)); let dropped = 0;
+  for (const [n, v] of Object.entries(existing)) if (!keep.has(n)) { v.remove(); dropped++; delete varByName[n]; }
+  const keepStyles = new Set(job.textStyles.map((s) => s.name));
+  for (const st of await figma.getLocalTextStylesAsync()) if (!keepStyles.has(st.name)) { st.remove(); dropped++; delete styleByName[st.name]; }
   for (const s of job.textStyles) {
     const st = styleByName[s.name] || figma.createTextStyle(); st.name = s.name;
     st.fontName = await font(s.fam, s.w); st.fontSize = s.sz;

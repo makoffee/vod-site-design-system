@@ -29,11 +29,40 @@ const scopesFor = (name, type) => {
   return ['WIDTH_HEIGHT'];
 };
 const hidden = new Set(TOK.hidden);
+// Code syntax shown in Dev Mode / read by the Figma MCP: the CSS or Tailwind the token is in code (globals.css + Tailwind theme).
+const CODE_COLORS = /^color\.(white|black|gray\.\d+|red\.\d+|green\.\d+|yellow\.\d+|sooner\.[\w-]+|genre\.[\w-]+|surface\.card|surface\.uni|border\.decorative|announcement)$/;
+const rootColor = (name) => { let n = name; const seen = new Set(); while (TOK.aliases[n] && TOK.colors[TOK.aliases[n]] && !seen.has(n)) { if (CODE_COLORS.test(n)) return n; seen.add(n); n = TOK.aliases[n]; } return n; };
+const cssVar = (name) => `var(--${name.replace(/\./g, '-')})`;
+function colorCode(name, alpha) {
+  const root = rootColor(name); const c = TOK.colors[root] || TOK.colors[name];
+  const a = alpha ?? c?.a ?? 1;
+  if (CODE_COLORS.test(root)) return a < 1 ? `${root.replace(/^color\./, '').replace(/\./g, '-')}/${Math.round(a * 100)}` : cssVar(root);
+  if (c && a < 1 && c.r === 1 && c.g === 1 && c.b === 1) return `white/${Math.round(a * 100)}`;
+  if (c && a < 1 && c.r === 0 && c.g === 0 && c.b === 0) return `black/${Math.round(a * 100)}`;
+  return undefined;
+}
+function numberCode(name, v) {
+  if (/^spacing\./.test(name)) return `calc(var(--spacing) * ${+(v / 4).toFixed(3)})`;
+  let m = name.match(/^radius\.(xs|sm|md|lg|xl|2xl|3xl|sooner)$/); if (m) return `var(--radius-${m[1]})`;
+  m = name.match(/^font\.size\.(xs|sm|base|lg|xl|[2-9]xl)$/); if (m) return `var(--text-${m[1]})`;
+  m = name.match(/^font\.weight\.(\w+)$/); if (m) return `var(--font-weight-${m[1]})`;
+  m = name.match(/^blur\.(cta|glass|input)$/); if (m) return `var(--blur-${m[1]})`;
+  return undefined;
+}
+const live = (name) => !hidden.has(name);
+const aliasOf = (name, table) => { const t = TOK.aliases[name]; return t && table[t] !== undefined && live(t) ? vn(t) : undefined; };
 const vars = [];
-for (const [name, c] of Object.entries(TOK.colors)) vars.push({ name: vn(name), type: 'COLOR', value: { r: c.r, g: c.g, b: c.b, a: c.a }, alias: TOK.aliases[name] && TOK.colors[TOK.aliases[name]] ? vn(TOK.aliases[name]) : undefined, scopes: scopesFor(name, 'COLOR'), hidden: hidden.has(name) });
-for (const [name, v] of Object.entries(TOK.numbers)) { const val = /^(alpha|opacity)\./.test(name) && v > 1 ? v / 100 : v; vars.push({ name: vn(name), type: 'FLOAT', value: val, alias: TOK.aliases[name] && TOK.numbers[TOK.aliases[name]] !== undefined ? vn(TOK.aliases[name]) : undefined, scopes: scopesFor(name, 'FLOAT'), hidden: hidden.has(name) }); }
-for (const [name, v] of Object.entries(TOK.strings)) vars.push({ name: vn(name), type: 'STRING', value: v, scopes: scopesFor(name, 'STRING') });
-const textStyles = Object.entries(TOK.typography).filter(([k, v]) => v && !k.startsWith('sooner.')).map(([k, v]) => ({ name: vn(k), fam: v.fontFamily, w: v.fontWeight, sz: v.fontSize, lh: v.lineHeight, ls: v.letterSpacing }));
+for (const [name, c] of Object.entries(TOK.colors)) if (live(name)) vars.push({ name: vn(name), type: 'COLOR', value: { r: c.r, g: c.g, b: c.b, a: c.a }, alias: aliasOf(name, TOK.colors), scopes: scopesFor(name, 'COLOR'), code: colorCode(name) });
+for (const [name, v] of Object.entries(TOK.numbers)) if (live(name)) { const val = /^(alpha|opacity)\./.test(name) && v > 1 ? v / 100 : v; vars.push({ name: vn(name), type: 'FLOAT', value: val, alias: aliasOf(name, TOK.numbers), scopes: scopesFor(name, 'FLOAT'), code: numberCode(name, val) }); }
+for (const [name, v] of Object.entries(TOK.strings)) if (live(name)) vars.push({ name: vn(name), type: 'STRING', value: v, scopes: scopesFor(name, 'STRING'), code: name === 'font.family.display' ? 'var(--font-display)' : 'var(--font-sans)' });
+const THEME_TEXT = new Set(['display.hero', 'display.section', 'display.section-mobile', 'heading.section', 'heading.plan', 'button.cta', 'button.sm', 'label', 'nav.tab', 'nav.action']);
+const WEIGHT_NAMES = { 400: 'normal', 500: 'medium', 600: 'semibold', 700: 'bold', 800: 'extrabold', 900: 'black' };
+const textStyles = Object.entries(TOK.typography).filter(([k, v]) => v && live('typography.' + k)).map(([k, v]) => {
+  const spec = `${v.fontFamily} ${v.fontWeight} · ${v.fontSize}px / ${v.lineHeight} · tracking ${v.letterSpacing}em`;
+  const m = k.match(/^text\.(xs|sm|base|lg|xl|2xl|3xl)(?:-(\w+))?$/);
+  const cls = THEME_TEXT.has(k) ? `text-${k.replace(/\./g, '-')}` : m ? `text-${m[1]} font-${WEIGHT_NAMES[v.fontWeight]}` : undefined;
+  return { name: vn(k), fam: v.fontFamily, w: v.fontWeight, sz: v.fontSize, lh: v.lineHeight, ls: v.letterSpacing, desc: cls ? `Code: ${cls}\n${spec}` : spec };
+});
 const effectStyles = Object.entries(TOK.shadows).map(([k, v]) => {
   const effects = [...v.matchAll(/drop\(([^)]*)\)/g)].map(([, a]) => { const o = Object.fromEntries(a.split(',').map((x) => x.split(':').map((s) => s.trim()))); const h = o.color.slice(1); return { type: 'DROP_SHADOW', color: { r: parseInt(h.slice(0, 2), 16) / 255, g: parseInt(h.slice(2, 4), 16) / 255, b: parseInt(h.slice(4, 6), 16) / 255, a: h.length > 6 ? parseInt(h.slice(6, 8), 16) / 255 : 1 }, offset: { x: +(o.x || 0), y: +(o.y || 0) }, radius: +(o.blur || 0), spread: +(o.spread || 0), visible: true, blendMode: 'NORMAL' }; });
   return { name: 'shadow/' + k, effects };
@@ -153,7 +182,7 @@ for (const [key, roots] of [['ds', ds], ['screens', screens]]) {
 }
 
 // derived alpha variables (registered while converting)
-for (const [name, v] of alphaVars) tokensJob.vars.push({ name: vn(name), type: 'COLOR', value: { r: v.r, g: v.g, b: v.b, a: v.a }, scopes: scopesFor(v.base, 'COLOR'), desc: `${v.base} at ${Math.round(v.a * 100)}%` });
+for (const [name, v] of alphaVars) tokensJob.vars.push({ name: vn(name), type: 'COLOR', value: { r: v.r, g: v.g, b: v.b, a: v.a }, scopes: scopesFor(v.base, 'COLOR'), desc: `${v.base} at ${Math.round(v.a * 100)}%`, code: colorCode(v.base, v.a) });
 
 // ── pack ────────────────────────────────────────────────────────────────────────────────────────────────
 const runtime = fs.readFileSync('runtime.js', 'utf8');
