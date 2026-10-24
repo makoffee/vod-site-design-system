@@ -4,5 +4,5 @@ import { OnboardingScreen } from "@/screens/OnboardingScreen";
 export const metadata: Metadata = { title: "Abo wählen · Sooner" };
 
 export default function SubscribePage() {
-  return <OnboardingScreen locale="de" />;
+  return <OnboardingScreen locale="de" planImages={{}} />;
 }

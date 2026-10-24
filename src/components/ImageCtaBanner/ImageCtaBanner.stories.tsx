@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { placeholderBanner } from "@/mocks/placeholder";
+import { placeholderBanner, placeholderImage } from "@/mocks/placeholder";
 import { SoonerBasket } from "../_shared/icons";
 import { ImageCtaBanner } from "./ImageCtaBanner";
 import { frame, viewport } from "../_shared/storyFrames";
@@ -13,6 +13,7 @@ const meta = {
     align: "center",
     title: placeholderBanner.title,
     description: placeholderBanner.subtitle,
+    imageSrc: placeholderImage,
     actions: placeholderBanner.actions.map((a, i) => ({ ...a, tone: i === 0 ? "white" : "primary" })),
   },
   argTypes: {

@@ -1,40 +1,13 @@
-// Demo data for the screens and the demo routes, in both site languages. Titles, row names, channel names and genre
-// names are taken from production (sooner.de/en/… and sooner.de/de/…, 2026-10-24): discover, channels,
-// categories, the Animale film page and the "Only on Sooner" channel page. No artwork: cards render the
-// placeholder gradient. Replace with the real catalog API once the repo is connected.
-// Screens read everything through getCatalog(locale); Storybook renders English, the German app routes German.
+// Production content for the app routes, in both site languages (never imported by Storybook: the screens default to
+// the placeholders in src/mocks/placeholder.ts). Titles, row names, channel names and genre names are taken from
+// production (sooner.de/en/… and sooner.de/de/…, 2026-10-24): discover, channels, categories, the Animale film page
+// and the "Only on Sooner" channel page. No artwork: cards render the placeholder gradient. Replace with the real
+// catalog API once the repo is connected. Routes pass getCatalog(locale) to the screens.
 
 import type { GenreTint } from "@/components/GenreTile/GenreTile";
 import { proposedDe } from "@/i18n/de";
 import type { Locale } from "@/i18n/locale";
-
-export interface FilmSummary {
-  id: string;
-  title: string;
-  href: string;
-  badge?: string;
-  rentable?: boolean;
-  availableFrom?: string;
-  ariaLabel?: string;
-}
-
-export interface ChannelSummary {
-  id: string;
-  name: string;
-  href: string;
-  /** Square artwork; channel tiles carry their name in the image, so name is the accessible label. */
-  imageSrc?: string;
-  /** Fallback tile colour when no artwork (festival tiles). */
-  tint?: string;
-}
-
-export interface GenreSummary {
-  id: string;
-  name: string;
-  href: string;
-  tint: GenreTint;
-  imageSrc?: string;
-}
+import type { Catalog, ChannelSummary, FilmPage, FilmSummary, GenreSummary, RowTitles } from "@/screens/content";
 
 /** One string per site language. */
 type L10n = Record<Locale, string>;
@@ -228,18 +201,6 @@ const genreTints: GenreTint[] = ["violet", "yellow", "magenta", "pink", "red", "
 // ---------------------------------------------------------------------------------------------------------------
 // Film page: Animale (production /en/id/1972094000164670082/animale and /de/id/…/animale).
 
-export interface FilmPage {
-  id: string;
-  title: string;
-  director: string;
-  tagline: string;
-  synopsis: string;
-  festivals: string[];
-  meta: { label: string; value: string[] }[];
-  /** Press quotes; the quotes row only shows when there are some (Animale has none in production). */
-  quotes: { source: string; quote: string; author?: string }[];
-  price: string;
-}
 
 const animaleCast = ["Oulaya Amamra", "Damien Rebattel", "Vivien Rodriguez", "Claude Chaballier", "Elies-Morgan", "Admi-Bensellam", "Pierre Roux"];
 
@@ -358,10 +319,10 @@ const rows = {
     featuredIn: "Enthalten in",
     quotes: proposedDe.quotes,
   },
-} satisfies Record<Locale, Record<string, string>>;
+} satisfies Record<Locale, RowTitles>;
 
 /** Everything a screen shows, in one language. */
-export function getCatalog(locale: Locale) {
+export function getCatalog(locale: Locale): Catalog {
   const festivals: ChannelSummary[] = festivalNames.map((name, i) => {
     const id = slug(name.en);
     return { id, name: name[locale], href: `/channel/${id}`, tint: festivalTints[i % festivalTints.length] };
@@ -376,6 +337,8 @@ export function getCatalog(locale: Locale) {
     exclusives: films(exclusiveFilms, locale),
     comingSoon: films(comingSoonFilms, locale),
     recommended: films(recommendedFilms, locale),
+    // À plein temps (first coming-soon film).
+    comingSoonDirector: { name: "Eric Gravel", href: "/cast/eric-gravel" },
     festivals,
     curators,
     directorFocus,
@@ -417,4 +380,3 @@ export function getCatalog(locale: Locale) {
   };
 }
 
-export type Catalog = ReturnType<typeof getCatalog>;

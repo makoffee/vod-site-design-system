@@ -33,7 +33,7 @@ export interface TwoColumnMediaProps {
   description?: string;
   /** Which side the image sits on from 1024px of container width (it stacks on top below); default left. */
   side?: TwoColumnMediaSide;
-  /** Image URL (575:372 rounded frame); gray gradient when omitted. */
+  /** Image URL, contained in the 575:372 frame; defaults to the Sooner devices illustration. Pass "" for the gray gradient. */
   imageSrc?: string;
   /** Image alt text; default "" (decorative). */
   imageAlt?: string;
@@ -49,14 +49,17 @@ export interface TwoColumnMediaProps {
  * Use for: a dark landing slice pairing an image with text, optionally listing the apps/devices.
  * Not for: the white discover feature panel (use EditorialSlice) or questions and answers (use Faq).
  */
-export function TwoColumnMedia({ title, description, side = "left", imageSrc, imageAlt = "", apps = defaultApps, className }: TwoColumnMediaProps) {
+/** Product illustration of the Sooner apps on TV, laptop, tablet and phone (production two_column_media image). */
+export const devicesImage = "/images/brand/devices.webp";
+
+export function TwoColumnMedia({ title, description, side = "left", imageSrc = devicesImage, imageAlt = "", apps = defaultApps, className }: TwoColumnMediaProps) {
   return (
     <div className={cn("@container w-full", className)}>
       <section className="w-full bg-black px-6 py-12 text-white @3xl:py-20">
         <div className="mx-auto grid w-full max-w-[1440px] gap-8 @5xl:grid-cols-2 @5xl:gap-0 @5xl:p-3">
           <div className={cn("min-w-0 @5xl:px-8", side === "right" && "@5xl:order-last")}>
-            <div className="relative mx-auto aspect-[575/372] w-full max-w-[620px] overflow-hidden rounded-3xl bg-linear-135 from-gray-700 to-gray-800">
-              {imageSrc && <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 620px, 100vw" className="object-cover" />}
+            <div className={cn("relative mx-auto aspect-[575/372] w-full max-w-[620px] overflow-hidden rounded-3xl", !imageSrc && "bg-linear-135 from-gray-700 to-gray-800")}>
+              {imageSrc && <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 620px, 100vw" className="object-contain" />}
             </div>
           </div>
           <div className="flex min-w-0 flex-col items-start gap-6 [overflow-wrap:anywhere] @5xl:pt-[52px] @5xl:pb-[119px]">

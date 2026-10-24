@@ -35,8 +35,8 @@ export interface PromoHeroProps {
   nextLabel?: string;
   /** Production "Featured titles" (carousel and tablist name). Label text; English default, pass German on DE screens. */
   slidesLabel?: string;
-  /** Screen-reader name for each dot (1-based index, total, title), e.g. "Promo 1 of 12: Cold War". English default, pass German on DE screens. */
-  slideLabel?: (index: number, total: number, title: string) => string;
+  /** Screen-reader name for each dot: template with {index} (1-based), {total} and {title}. English default, pass German on DE screens. */
+  slideLabel?: string;
   /** Slide shown first (0-based); default 0. */
   defaultIndex?: number;
   /** Called with the current slide when add-to-list is pressed. */
@@ -59,7 +59,7 @@ export function PromoHero({
   previousLabel = "Previous promo",
   nextLabel = "Next promo",
   slidesLabel = "Featured titles",
-  slideLabel = (i, n, title) => `Promo ${i} of ${n}: ${title}`,
+  slideLabel = "Promo {index} of {total}: {title}",
   defaultIndex = 0,
   onAddToList,
   className,
@@ -79,7 +79,7 @@ export function PromoHero({
       aria-label={slidesLabel}
       className={cn("@container w-full", className)}
     >
-      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-black @2xl:aspect-[2/1] @2xl:min-h-[400px]">
+      <div className="group/hero relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-black @2xl:aspect-[2/1] @2xl:min-h-[400px]">
         <div key={slide.id} className="absolute inset-0 bg-linear-135 from-gray-700 to-gray-800 motion-safe:animate-fade-in">
           {slide.imageSrc && <Image src={slide.imageSrc} alt="" fill priority sizes="100vw" className="object-cover" />}
         </div>
@@ -88,10 +88,10 @@ export function PromoHero({
 
         {slides.length > 1 && (
           <>
-            <button type="button" aria-label={previousLabel} onClick={() => go(-1)} className={cn(glassButton, "absolute top-1/2 left-4 z-10 hidden size-12 -translate-y-1/2 @2xl:flex")}>
+            <button type="button" aria-label={previousLabel} onClick={() => go(-1)} className={cn(glassButton, "absolute top-1/2 left-4 z-10 hidden size-12 -translate-y-1/2 @2xl:flex opacity-0 transition-[opacity,background-color] group-hover/hero:opacity-100 focus-visible:opacity-100")}>
               <ChevronLeft className="size-6" strokeWidth={2} aria-hidden />
             </button>
-            <button type="button" aria-label={nextLabel} onClick={() => go(1)} className={cn(glassButton, "absolute top-1/2 right-4 z-10 hidden size-12 -translate-y-1/2 @2xl:flex")}>
+            <button type="button" aria-label={nextLabel} onClick={() => go(1)} className={cn(glassButton, "absolute top-1/2 right-4 z-10 hidden size-12 -translate-y-1/2 @2xl:flex opacity-0 transition-[opacity,background-color] group-hover/hero:opacity-100 focus-visible:opacity-100")}>
               <ChevronRight className="size-6" strokeWidth={2} aria-hidden />
             </button>
           </>
@@ -146,7 +146,7 @@ export function PromoHero({
                     i === index ? "w-8 bg-white" : "w-2 bg-white/40 group-hover/dot:bg-white/60",
                   )}
                 />
-                <span className="sr-only">{slideLabel(i + 1, slides.length, s.title)}</span>
+                <span className="sr-only">{slideLabel.replace("{index}", String(i + 1)).replace("{total}", String(slides.length)).replace("{title}", s.title)}</span>
               </button>
             ))}
           </div>

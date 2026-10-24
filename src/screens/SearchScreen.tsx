@@ -14,15 +14,18 @@ import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { Search } from "lucide-react";
 import { availabilityDe, collectionHeaderDe, feedRowDe, filmCardDe, filmListItemDe, searchDe, searchResultsDe, statesDe } from "@/i18n/de";
 import type { Locale } from "@/i18n/locale";
-import { getCatalog, type FilmSummary } from "@/mocks/catalog";
+import { placeholderCatalog } from "@/mocks/placeholder";
 import { AppShell } from "./AppShell";
+import type { Catalog, FilmSummary } from "./content";
 
 export interface SearchScreenProps {
   defaultQuery?: string;
-  /** Results for the query (mock catalogue by default); an empty list shows the no-results state. */
+  /** Results for the query (films from the catalogue by default); an empty list shows the no-results state. */
   results?: FilmSummary[];
   /** Screen language: English (default, Storybook) or German (the /search route). */
   locale?: Locale;
+  /** Suggestions, feeds and default results; placeholder content by default (the /search route passes the catalogue). */
+  catalog?: Catalog;
 }
 
 /** Production EN strings (Copy/production-strings.json; "results for" capitalised as the heading's first word). */
@@ -36,11 +39,11 @@ const searchEn = {
  * Search results page, desktop and mobile. Without a query: the large
  * field, suggested searches and feeds. With a query: in-nav field, availability filter, grid switch, results grid.
  */
-export function SearchScreen({ defaultQuery = "", results, locale = "en" }: SearchScreenProps) {
+export function SearchScreen({ defaultQuery = "", results, locale = "en", catalog = placeholderCatalog }: SearchScreenProps) {
   const [query, setQuery] = useState(defaultQuery);
   const [view, setView] = useState<CollectionView>("grid");
   const de = locale === "de";
-  const c = getCatalog(locale);
+  const c = catalog;
   const hits = results ?? [...c.recommended, ...c.exclusives, ...c.newToRent, ...c.recommended, ...c.exclusives, ...c.newToRent].slice(0, 36);
   const t = de ? { resultsFor: searchResultsDe.resultsFor, noResultsFor: statesDe.noResultsFor, noResultsHint: statesDe.noResultsHint } : searchEn;
   const quoted = de ? `„${query}“` : `“${query}”`;
@@ -57,8 +60,8 @@ export function SearchScreen({ defaultQuery = "", results, locale = "en" }: Sear
           <div className="mx-auto flex w-full max-w-[768px] flex-col gap-6">
             <SearchField {...field} size="lg" value={query} onValueChange={setQuery} autoFocus />
             <div className="flex flex-wrap gap-2">
-              {c.searchSuggestions.map((term) => (
-                <Chip key={term} onClick={() => setQuery(term)}>
+              {c.searchSuggestions.map((term, i) => (
+                <Chip key={`${term}-${i}`} onClick={() => setQuery(term)}>
                   {term}
                 </Chip>
               ))}

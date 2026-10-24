@@ -11,11 +11,11 @@ import { OnboardingScreen } from "./OnboardingScreen";
 import { SearchScreen } from "./SearchScreen";
 import { ErrorScreen, NotFoundScreen } from "./StatusScreens";
 import { WatchlistScreen } from "./WatchlistScreen";
-import { getCatalog } from "@/mocks/catalog";
+import { placeholderCatalog } from "@/mocks/placeholder";
 import { figmaScreen } from "@/components/_shared/figma";
 
-// Full key screens composed from the library, one story per screen. Storybook is English
-// only: every screen renders its English default; the German app routes pass locale="de".
+// Full key screens composed from the library, one story per screen. Storybook is English only and shows placeholder
+// content: every screen renders its defaults (English UI, placeholder films and copy).
 const meta = {
   title: "Screens/Key screens",
   // Compositions, not components: kept out of the component manifest (the rules page points agents at src/screens).
@@ -54,9 +54,9 @@ export const CollectionExpanded: Story = { parameters: figmaScreen("Collection �
 /** Search before a query: suggestions and feeds. */
 export const Search: Story = { parameters: figmaScreen("Search Overlay | desktop"), render: () => <SearchScreen /> };
 /** Search results for a query, with the in-nav field. */
-export const SearchResults: Story = { parameters: figmaScreen("Search Results | desktop"), render: () => <SearchScreen defaultQuery="Drama" /> };
+export const SearchResults: Story = { parameters: figmaScreen("Search Results | desktop"), render: () => <SearchScreen defaultQuery="Search term" /> };
 /** "No results for" + hint, production strings. */
-export const SearchNoResults: Story = { render: () => <SearchScreen defaultQuery="Kubrik" results={[]} /> };
+export const SearchNoResults: Story = { render: () => <SearchScreen defaultQuery="Search term" results={[]} /> };
 /** Login page. */
 export const Login: Story = { parameters: figmaScreen("Login | desktop"), render: () => <AuthScreen /> };
 /** Signup page with the chosen plan above the form. */
@@ -65,8 +65,8 @@ export const Signup: Story = { parameters: figmaScreen("Signup · product card |
 /** Landing page (sooner.de home). */
 export const Landing: Story = { parameters: figmaScreen("Landing Page | EN | desktop"), render: () => <LandingScreen /> };
 
-/** Onboarding / plan picker (sooner.de/subscribe). */
-export const Onboarding: Story = { parameters: figmaScreen("Plan Select | EN | desktop"), render: () => <OnboardingScreen /> };
+/** Plan select (sooner.de/subscribe): the three plans in one row on desktop, stacked on mobile. */
+export const PlanSelect: Story = { name: "Plan Select", parameters: figmaScreen("Plan Select | EN | desktop"), render: () => <OnboardingScreen /> };
 
 /** Account · Profile (production /en/account). */
 export const AccountProfile: Story = { parameters: figmaScreen("Account · Profile | EN | desktop"), render: () => <AccountScreen section="profile" /> };
@@ -83,7 +83,7 @@ export const AccountDevices: Story = { parameters: figmaScreen("Account · Devic
 /** Watchlist, empty. */
 export const WatchlistEmpty: Story = { parameters: figmaScreen("Watchlist · empty | EN | desktop"), render: () => <WatchlistScreen /> };
 /** Watchlist with saved titles. */
-export const Watchlist: Story = { parameters: figmaScreen("Watchlist | EN | desktop"), render: () => <WatchlistScreen films={getCatalog("en").recommended} /> };
+export const Watchlist: Story = { parameters: figmaScreen("Watchlist | EN | desktop"), render: () => <WatchlistScreen films={placeholderCatalog.recommended} /> };
 /** 404: production "The page could not be found". */
 export const NotFound: Story = { render: () => <NotFoundScreen /> };
 /** A route that failed: production "Something went wrong", link Home. */

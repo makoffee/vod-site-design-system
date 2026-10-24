@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { AccountSection } from "@/components/AccountNav/AccountNav";
+import { demoAccount } from "@/content/account";
 import { AccountScreen } from "@/screens/AccountScreen";
 
 // Production routes: /account, /account/settings, /account/subscriptions, /account/purchases, /account/parental_pin, /account/devices.
@@ -23,5 +24,5 @@ export default async function AccountPage({ params }: PageProps<"/account/[[...s
   const { section = [] } = await params;
   const id = routes[section.join("/")];
   if (!id) notFound();
-  return <AccountScreen section={id} locale="de" />;
+  return <AccountScreen section={id} profile={demoAccount} locale="de" />;
 }

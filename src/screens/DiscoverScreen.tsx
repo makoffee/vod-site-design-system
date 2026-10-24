@@ -7,25 +7,30 @@ import { FeedItem, FeedRow } from "@/components/FeedRow/FeedRow";
 import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { MaskTile } from "@/components/MaskTile/MaskTile";
 import { PromoHero } from "@/components/PromoHero/PromoHero";
-import { getCatalog, type FilmSummary } from "@/mocks/catalog";
-import { getEditorial } from "@/mocks/editorial";
 import type { Locale } from "@/i18n/locale";
+import { placeholderCatalog, placeholderEditorial } from "@/mocks/placeholder";
+import type { Catalog, DiscoverEditorial, FilmSummary } from "./content";
 import { AppShell } from "./AppShell";
 import { availabilityDe, featuredFilmCardDe, feedRowDe, filmCardDe, promoHeroDe } from "@/i18n/de";
 
 export interface DiscoverScreenProps {
   /** Screen language: English (default, Storybook) or German (the /discover route). */
   locale?: Locale;
+  /** Films, channels and row titles; placeholder content by default (the /discover route passes the catalogue). */
+  catalog?: Catalog;
+  /** Promo hero and editorial blocks; placeholder content by default. */
+  editorial?: DiscoverEditorial;
 }
 
 /**
  * Discover (production /en/discover and /de/discover): promo hero + availability filter,
- * then feeds and editorial slices in production's section order, filled with production row titles, films and copy.
+ * then feeds and editorial slices in production's section order.
  */
-export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
+export function DiscoverScreen({ locale = "en", catalog = placeholderCatalog, editorial = placeholderEditorial }: DiscoverScreenProps) {
   const de = locale === "de";
-  const c = getCatalog(locale);
-  const e = getEditorial(locale);
+  const c = catalog;
+  const e = editorial;
+  const [slice1, slice2, slice3] = e.slices;
   const row = de ? feedRowDe : {};
   const card = de ? filmCardDe : {};
   const [featured, ...upcoming] = c.comingSoon;
@@ -55,7 +60,7 @@ export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
         <div className="flex flex-col gap-12 pb-16">
           {tallRow(c.rows.newToRent, c.newToRent, "/channel/new-to-rent")}
           {wideRow(c.rows.justReleased, c.exclusives)}
-          <CollectionFeature {...e.onlyOnSooner}>
+          <CollectionFeature {...e.feature}>
             {c.exclusives.slice(0, 4).map((f) => (
               <FilmCard {...card} key={f.id} {...f} />
             ))}
@@ -65,17 +70,17 @@ export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
               <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
-          <EditorialSlice {...e.theBeast} />
+          <EditorialSlice {...slice1} />
           {wideRow(c.rows.cinemaHighlights, c.recommended)}
           {tallRow(c.rows.onlyOnSooner, c.exclusives)}
-          <EditorialSlice {...e.veniVidiVici} media="mask" side="left" />
+          <EditorialSlice {...slice2} media="mask" side="left" />
           <FeedRow {...row} title={c.rows.curators} kind="square" href="/channels">
             {c.curators.map((ch) => (
               <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
           {tallRow(c.rows.userFavorites, c.recommended)}
-          <EditorialSlice {...e.sooner365} media="mask" side="right" />
+          <EditorialSlice {...slice3} media="mask" side="right" />
           <FeedRow {...row} title={c.rows.directorsFocus} kind="square" href="/channels">
             {c.directorFocus.map((ch) => (
               <ChannelTile key={ch.id} {...ch} />
@@ -88,8 +93,8 @@ export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
                 {...(de ? featuredFilmCardDe : {})}
                 title={featured.title}
                 href={featured.href}
-                director="Eric Gravel"
-                directorHref="/cast/eric-gravel"
+                director={c.comingSoonDirector.name}
+                directorHref={c.comingSoonDirector.href}
               />
             </FeedItem>
             {upcoming.map((f) => (
@@ -97,8 +102,8 @@ export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
             ))}
           </FeedRow>
           <FeedRow {...row} title={c.rows.collections} kind="wide">
-            {[e.onlyOnSooner, e.theBeast, e.veniVidiVici].map((block, i) => (
-              <MaskTile key={block.title} title={block.title} href={block.cta.href} tinted={i === 0} />
+            {[e.feature, slice1, slice2].map((block, i) => (
+              <MaskTile key={i} title={block.title} href={block.cta.href} tinted={i === 0} />
             ))}
           </FeedRow>
         </div>

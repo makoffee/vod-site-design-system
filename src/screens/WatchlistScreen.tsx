@@ -3,8 +3,8 @@ import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { FilmCard } from "@/components/FilmCard/FilmCard";
 import type { Locale } from "@/i18n/locale";
 import { filmCardDe, watchlistDe } from "@/i18n/de";
-import type { FilmSummary } from "@/mocks/catalog";
 import { AppShell, PageTitle } from "./AppShell";
+import type { FilmSummary } from "./content";
 
 export interface WatchlistScreenProps {
   /** Saved titles; empty shows the empty state. */

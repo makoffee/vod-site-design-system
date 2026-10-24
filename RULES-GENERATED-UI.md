@@ -78,8 +78,12 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
   string (or data object, like a plan) as props, with English defaults. German screens pass German strings from
   `src/i18n/de.ts` (for example `{...filmCardDe}`, `labels={headerDe}`) and German plan content from
   `src/content/plans.ts` (`plansDe`).
-- Component examples use generic placeholder content ("Film Title", "Director Name", Lorem ipsum). Real content
-  belongs to screens and plan blocks only.
+- Storybook shows placeholder content only ("Film Title", "Director Name", "Section Title", Lorem ipsum, the
+  placeholder still for non-film images, no film artwork). Only UI labels, plan blocks and site chrome (header, footer)
+  carry real copy.
+- Screens take their content as props (`catalog`, `editorial`, `content`, `profile`) and default to the placeholders in
+  `src/mocks/placeholder.ts`. Production content lives in `src/content` (catalog, editorial, landing, account, plans)
+  and only the app routes in `src/app` pass it in. Stories import nothing from `src/content` except the plans.
 - Use real product copy. If the copy doesn't exist yet, leave the component's English default or a clearly marked
   placeholder. Never make up marketing lines, prices or legal text.
 - Buttons are short verbs ("Subscribe", "Continue", "Save").

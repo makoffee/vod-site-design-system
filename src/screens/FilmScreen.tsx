@@ -5,25 +5,28 @@ import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { FilmDetails } from "@/components/FilmDetails/FilmDetails";
 import { FilmHero } from "@/components/FilmHero/FilmHero";
 import { QuoteCard } from "@/components/QuoteCard/QuoteCard";
-import { getCatalog, type FilmPage } from "@/mocks/catalog";
 import type { Locale } from "@/i18n/locale";
+import { placeholderCatalog } from "@/mocks/placeholder";
 import { AppShell } from "./AppShell";
+import type { Catalog, FilmPage } from "./content";
 import { feedRowDe, filmCardDe, filmDetailsDe, filmHeroDe } from "@/i18n/de";
 
 export interface FilmScreenProps {
   /** Screen language: English (default, Storybook) or German (the /film/[id] route). */
   locale?: Locale;
-  /** Film page data in the same language; the catalogue's Animale page by default. */
+  /** Film page data in the same language; the catalogue's film page by default. */
   film?: FilmPage;
+  /** Rows under the film; placeholder content by default (the /film/[id] route passes the catalogue). */
+  catalog?: Catalog;
 }
 
 /**
  * Single film view (production /en/id/… and /de/id/…): hero with the CTAs, the info
  * grid, then recommendations, festivals, channels it is featured in, and quotes (only when the film has some).
  */
-export function FilmScreen({ locale = "en", film }: FilmScreenProps) {
+export function FilmScreen({ locale = "en", film, catalog = placeholderCatalog }: FilmScreenProps) {
   const de = locale === "de";
-  const c = getCatalog(locale);
+  const c = catalog;
   const f = film ?? c.film;
   const row = de ? feedRowDe : {};
   return (
@@ -57,7 +60,7 @@ export function FilmScreen({ locale = "en", film }: FilmScreenProps) {
           {f.quotes.length > 0 && (
             <FeedRow {...row} title={c.rows.quotes} kind="wide">
               {f.quotes.map((q) => (
-                <QuoteCard key={q.source} {...q} />
+                <QuoteCard key={`${q.source}-${q.quote}`} {...q} />
               ))}
             </FeedRow>
           )}

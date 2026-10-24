@@ -1,15 +1,12 @@
-// Editorial blocks on discover, in both site languages, copied from production sooner.de/en/discover and
+// Production editorial blocks on discover, in both site languages, copied from sooner.de/en/discover and
 // /de/discover (2026-10-24): the promo hero, the "Collection" slices and the "Only on Sooner" channel text.
 // Production keeps the "Collection" eyebrow in English on the DE site. Never write new editorial copy here.
+// App routes pass getEditorial(locale) to DiscoverScreen; Storybook shows the placeholders.
 
 import type { Locale } from "@/i18n/locale";
+import type { DiscoverEditorial, EditorialBlock } from "@/screens/content";
 
-interface Editorial {
-  eyebrow?: string;
-  title: string;
-  description: string;
-  cta: { label: string; href: string };
-}
+type Editorial = EditorialBlock;
 
 const content: Record<
   Locale,
@@ -105,4 +102,7 @@ const content: Record<
 };
 
 /** Discover's editorial blocks in one language. */
-export const getEditorial = (locale: Locale) => content[locale];
+export const getEditorial = (locale: Locale): DiscoverEditorial => {
+  const c = content[locale];
+  return { promoSlides: c.promoSlides, feature: c.onlyOnSooner, slices: [c.theBeast, c.veniVidiVici, c.sooner365] };
+};

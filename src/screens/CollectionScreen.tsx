@@ -6,24 +6,27 @@ import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { FilmListItem } from "@/components/FilmListItem/FilmListItem";
 import { availabilityDe, collectionHeaderDe, filmCardDe, filmListItemDe } from "@/i18n/de";
 import type { Locale } from "@/i18n/locale";
-import { getCatalog } from "@/mocks/catalog";
+import { placeholderCatalog } from "@/mocks/placeholder";
 import { AppShell } from "./AppShell";
+import type { Catalog } from "./content";
 
 export interface CollectionScreenProps {
   defaultView?: CollectionView;
   defaultExpanded?: boolean;
   /** Screen language: English (default, Storybook) or German (the /collection/[id] route). */
   locale?: Locale;
+  /** Collection and its films; placeholder content by default (the /collection/[id] route passes the catalogue). */
+  catalog?: Catalog;
 }
 
 /**
  * Collection page (list or grid view, desktop and mobile): banner, then a poster grid or
- * film list. Collection and films are placeholder content.
+ * film list.
  */
-export function CollectionScreen({ defaultView = "list", defaultExpanded = false, locale = "en" }: CollectionScreenProps) {
+export function CollectionScreen({ defaultView = "list", defaultExpanded = false, locale = "en", catalog = placeholderCatalog }: CollectionScreenProps) {
   const [view, setView] = useState(defaultView);
   const de = locale === "de";
-  const { collection } = getCatalog(locale);
+  const { collection } = catalog;
 
   return (
     <AppShell locale={locale}>

@@ -21,7 +21,7 @@ export const Rows: Story = {
       <AccountPageTitle>Profile</AccountPageTitle>
       <AccountPanel variant="rows">
         <DetailRow label="Email" value="name@example.com" />
-        <DetailRow label="Name" value="Jane Doe" action={<TextAction>Edit</TextAction>} />
+        <DetailRow label="Name" value="User Name" action={<TextAction>Edit</TextAction>} />
         <DetailRow label="Date of birth" placeholder="Date of birth" action={<TextAction>Add</TextAction>} />
       </AccountPanel>
     </div>

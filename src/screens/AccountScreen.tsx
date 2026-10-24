@@ -56,11 +56,11 @@ export interface AccountProfile {
   location: string;
 }
 
-// Placeholder account (the production test account shows its member id as the name).
-const demoProfile: AccountProfile = {
+// Placeholder account; the /account routes pass the demo account from src/content/account.ts.
+const placeholderProfile: AccountProfile = {
   email: "name@example.com",
-  name: "Jane Doe",
-  memberId: "338408f2-1011-702e-8f8d-acc226671ba2",
+  name: "User Name",
+  memberId: "00000000-0000-0000-0000-000000000000",
   loginMethod: "Email",
   location: "DE",
 };
@@ -72,7 +72,7 @@ export interface AccountScreenProps {
 }
 
 /** Account area (production sooner.de/account/*): logged-in header, section nav beside the content, footer. */
-export function AccountScreen({ section = "profile", locale = "en", profile = demoProfile }: AccountScreenProps) {
+export function AccountScreen({ section = "profile", locale = "en", profile = placeholderProfile }: AccountScreenProps) {
   const de = locale === "de";
   const l: AccountLabels = de ? { ...accountLabels, ...accountDe } : accountLabels;
   const items: AccountNavItem[] = de ? accountNavDe : accountNavItems;

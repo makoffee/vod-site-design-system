@@ -1,11 +1,11 @@
-// Landing page content (sooner.de and sooner.de/en home, 2026-10-22). Copy, film rows and release dates are taken
-// from production, including the section order.
-// No artwork: blocks render the placeholder gradient.
+// Production landing page content (sooner.de and sooner.de/en home, 2026-10-22). Copy, film rows and release dates
+// are taken from production, including the section order. No artwork: blocks render the placeholder gradient.
+// The / and /en routes pass getLanding(locale) to LandingScreen; Storybook shows the placeholders.
 
 import type { Action } from "@/components/_shared/ActionLink";
 import type { FaqItem } from "@/components/Faq/Faq";
 import type { Locale } from "@/i18n/locale";
-import type { FilmSummary } from "./catalog";
+import type { FilmSummary, LandingContent } from "@/screens/content";
 
 const film = (id: string, title: string, extra: Partial<FilmSummary> = {}): FilmSummary => ({ id, title, href: `/film/${id}`, ...extra });
 
@@ -62,13 +62,13 @@ const rows = {
 type RowId = keyof typeof rows;
 const rentable: Record<RowId, boolean> = { highlights: true, newToRent: true, newInSubscription: false, comingSoon: true };
 
-export function landingFilms(row: RowId, locale: Locale): FilmSummary[] {
+function landingFilms(row: RowId, locale: Locale): FilmSummary[] {
   return rows[row].map(([id, title, dates]: [string, string, Dates?]) =>
     film(id, title, { rentable: rentable[row], availableFrom: dates?.[locale] }),
   );
 }
 
-export interface LandingCollection {
+interface Collection {
   row: RowId;
   title: string;
   lead?: string;
@@ -76,16 +76,16 @@ export interface LandingCollection {
   cta: Action;
 }
 
-export interface LandingContent {
+interface Landing {
   hero: { eyebrow: string; title: string; subtitle: string; description: string; rentLabel: string; trailerLabel: string };
-  collections: LandingCollection[];
+  collections: [Collection, Collection, Collection, Collection];
   split: { title: string; description: string };
   devices: { title: string; description: string };
   banner: { title: string; description: string; actions: Action[] };
   faq: { title: string; items: FaqItem[] };
 }
 
-export const landing: Record<Locale, LandingContent> = {
+const landing: Record<Locale, Landing> = {
   en: {
     hero: {
       eyebrow: "Sooner recommends",
@@ -256,3 +256,10 @@ export const landing: Record<Locale, LandingContent> = {
     },
   },
 };
+
+/** The landing page in one language, film rows resolved. */
+export function getLanding(locale: Locale): LandingContent {
+  const { hero, collections, ...rest } = landing[locale];
+  const [a, b, c, d] = collections.map(({ row, ...block }) => ({ ...block, films: landingFilms(row, locale) }));
+  return { ...rest, hero: { ...hero, href: "/film/nouvelle-vague" }, collections: [a, b, c, d] };
+}
