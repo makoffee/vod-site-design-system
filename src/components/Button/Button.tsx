@@ -13,7 +13,8 @@ export type ButtonVariant =
   | "cta-white"
   | "cta-text"
   | "cta-light"
-  | "cta-round";
+  | "cta-round"
+  | "cta-danger";
 /** hover pins the hover look for documentation; real interaction uses CSS. */
 export type ButtonState = "default" | "hover" | "disabled";
 /** sm = 36 (header, .sooner-filled-btn), md = 48 (compact design size, no production equivalent), lg = 56 (.sooner-cta-*). */
@@ -63,6 +64,13 @@ const variants: Record<ButtonVariant, { idle: string; hover: string; hovered: st
     hover: "hover:bg-white",
     hovered: "bg-white",
     disabled: "bg-white/25 text-gray-200",
+  },
+  // Destructive outline (production account "Delete account"): red-400 on a red-400/40 hairline, red tint on hover.
+  "cta-danger": {
+    idle: "border border-red-400/40 bg-transparent text-red-400 font-semibold",
+    hover: "hover:border-red-400 hover:bg-red-400/10",
+    hovered: "border-red-400 bg-red-400/10",
+    disabled: "border border-red-400/20 text-red-400/50 font-semibold",
   },
   // .sooner-cta-round: 56 circle, white/10 + blur 10, hover white/18
   "cta-round": {

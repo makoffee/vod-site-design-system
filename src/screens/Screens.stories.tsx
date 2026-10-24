@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AccountScreen } from "./AccountScreen";
 import { AuthScreen } from "./AuthScreen";
 import { CategoriesScreen } from "./CategoriesScreen";
 import { CollectionScreen } from "./CollectionScreen";
@@ -8,6 +9,8 @@ import { FilmScreen } from "./FilmScreen";
 import { LandingScreen } from "./LandingScreen";
 import { OnboardingScreen } from "./OnboardingScreen";
 import { SearchScreen } from "./SearchScreen";
+import { WatchlistScreen } from "./WatchlistScreen";
+import { recommended } from "@/mocks/catalog";
 
 // Full key screens composed from the library, one story per design screen on "2 Key Screens".
 const meta = {
@@ -65,3 +68,22 @@ export const LandingDe: Story = { render: () => <LandingScreen locale="de" /> };
 export const OnboardingEn: Story = { render: () => <OnboardingScreen locale="en" /> };
 /** "onboarding DE | 1440" */
 export const OnboardingDe: Story = { render: () => <OnboardingScreen locale="de" /> };
+
+/** "Account · Profile | DE" (production /de/account) */
+export const AccountProfile: Story = { render: () => <AccountScreen section="profile" /> };
+/** "Account · Settings | DE" */
+export const AccountSettings: Story = { render: () => <AccountScreen section="settings" /> };
+/** "Account · Subscriptions | DE" */
+export const AccountSubscriptions: Story = { render: () => <AccountScreen section="subscriptions" /> };
+/** "Account · Rentals | DE" */
+export const AccountRentals: Story = { render: () => <AccountScreen section="rentals" /> };
+/** "Account · Parental PIN | DE" */
+export const AccountParentalPin: Story = { render: () => <AccountScreen section="parental-pin" /> };
+/** "Account · Devices | DE" */
+export const AccountDevices: Story = { render: () => <AccountScreen section="devices" /> };
+/** English account profile (production /en/account). */
+export const AccountProfileEn: Story = { render: () => <AccountScreen section="profile" locale="en" /> };
+/** "Watchlist · empty | DE" */
+export const WatchlistEmpty: Story = { render: () => <WatchlistScreen /> };
+/** "Watchlist | DE" with saved titles. */
+export const Watchlist: Story = { render: () => <WatchlistScreen films={recommended} /> };

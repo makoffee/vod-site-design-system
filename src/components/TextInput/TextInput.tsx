@@ -6,8 +6,8 @@ import { cn } from "@/lib/cn";
 import { widthClass, type Sizing } from "../_shared/sizing";
 
 // Axes mirror the TextInput master (3cba7ff2b88f51f2). The master only draws password/default;
-// the other password states reuse the email styling.
-export type TextInputType = "email" | "password";
+// the other password states reuse the email styling. text = plain field (device codes).
+export type TextInputType = "email" | "password" | "text";
 export type TextInputState = "default" | "filled" | "focus" | "error" | "disabled";
 
 export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
