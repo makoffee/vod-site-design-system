@@ -101,7 +101,7 @@ export function Footer({ locale = "en", tagline = "Curated Cinema", copyright, s
       <div className="flex flex-col gap-12 px-6 py-12 @3xl:gap-8">
         <div className="flex flex-col gap-8 @3xl:flex-row @3xl:pb-4">
           <div className="flex flex-1 flex-col gap-6">
-            <SoonerLogo className="self-start" />
+            <SoonerLogo className="self-start text-white" />
             <p className="text-sm leading-6 text-white/60">{tagline}</p>
           </div>
           {t.columns.map((column, i) => (

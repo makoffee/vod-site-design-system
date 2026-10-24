@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Introduction" />
+
+# Sooner design system
+
+The component library behind **sooner.de**, the curated cinema streaming service. Every component here is the
+same component the product ships: React + Tailwind v4, built on the production theme, documented with live stories.
+
+## One system, three tools
+
+| | Role |
+| --- | --- |
+| **Brilliant** | Design source of truth: tokens, component masters, key screens |
+| **Storybook** (this site) | The coded components, their states and the full key screens |
+| **Figma** | A generated mirror of Brilliant for inspection, Dev Mode and handoff |
+
+Names match across all three: a token is `color/gray/700` in Figma, `color.gray.700` in Brilliant and
+`--color-gray-700` / `bg-gray-700` in code. Figma variables carry the code syntax, so Dev Mode shows the real CSS.
+
+## Principles
+
+- **Dark only.** Black canvas, white type, the Sooner violet (`sooner-primary`) for the one main action.
+- **Glass for controls.** Ghost glass (`surface-glass`, white/10 + blur) by default; the darker floating glass only
+  where content scrolls underneath.
+- **Responsive by container.** Components size to the space they are given (container queries), not the viewport,
+  so the same component works in a feed, a grid or a full-width slice.
+- **Design over drift.** Where production has drifted (hard-coded colours, one-off link styles), the library holds
+  the single designed version.
+- **English by default.** Components ship English copy; the German screens pass their strings in.
+
+## How to read this Storybook
+
+1. **Foundations**: this page.
+2. **Tokens**: colour, type and radius, straight from the theme.
+3. **Screens**: the key screens, composed only from library components.
+4. **Components**: grouped as on the design boards: core UI, account, feeds, discover, film, search, collections
+   and marketing.

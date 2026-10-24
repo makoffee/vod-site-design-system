@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 /** Visual check that the default.ds tokens resolve through globals.css (production class names). */
 const meta = {
-  title: "Foundations/Tokens",
+  title: "Tokens",
   parameters: {
     layout: "padded",
     design: {
