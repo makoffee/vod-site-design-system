@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/cn";
 import { AvailabilityFilter } from "@/components/AvailabilityFilter/AvailabilityFilter";
 import { ChannelTile } from "@/components/ChannelTile/ChannelTile";
 import { Chip } from "@/components/Chip/Chip";
@@ -9,21 +10,25 @@ import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { SearchField } from "@/components/SearchField/SearchField";
 import { ViewToggle, type CollectionView } from "@/components/ViewToggle/ViewToggle";
 import { FilmListItem } from "@/components/FilmListItem/FilmListItem";
-import { availabilityDe, feedRowDe, filmCardDe, filmListItemDe, searchDe, searchResultsDe } from "@/i18n/de";
-import { collection, exclusives, festivals, newToRent, recommended, searchSuggestions } from "@/mocks/catalog";
+import { EmptyState } from "@/components/EmptyState/EmptyState";
+import { Search } from "lucide-react";
+import { availabilityDe, feedRowDe, filmCardDe, filmListItemDe, searchDe, searchResultsDe, statesDe } from "@/i18n/de";
+import { collection, exclusives, festivals, newToRent, recommended, searchSuggestions, type FilmSummary } from "@/mocks/catalog";
 import { AppShell } from "./AppShell";
 
 export interface SearchScreenProps {
   defaultQuery?: string;
+  /** Results for the query (mock catalogue by default); an empty list shows the no-results state. */
+  results?: FilmSummary[];
 }
 
-const results = [...recommended, ...exclusives, ...newToRent, ...recommended, ...exclusives, ...newToRent].slice(0, 36);
+const mockResults = [...recommended, ...exclusives, ...newToRent, ...recommended, ...exclusives, ...newToRent].slice(0, 36);
 
 /**
  * Search (design "search results | Static / Sticky in-nav | 1440px" and "| 393px"). Without a query: the large
  * field, suggested searches and feeds. With a query: in-nav field, availability filter, grid switch, results grid.
  */
-export function SearchScreen({ defaultQuery = "" }: SearchScreenProps) {
+export function SearchScreen({ defaultQuery = "", results = mockResults }: SearchScreenProps) {
   const [query, setQuery] = useState(defaultQuery);
   const [view, setView] = useState<CollectionView>("grid");
 
@@ -69,7 +74,8 @@ export function SearchScreen({ defaultQuery = "" }: SearchScreenProps) {
           <AvailabilityFilter {...availabilityDe} className="hidden @3xl:inline-flex" />
           <ViewToggle view={view} onViewChange={setView} className="hidden @3xl:flex" />
         </div>
-        <div className="flex items-center justify-between gap-4">
+        {/* No results: the empty state says it once; the results heading and its filters would only repeat it. */}
+        <div className={cn("flex items-center justify-between gap-4", results.length === 0 && "hidden")}>
           <h1 className="m-0 text-xl leading-[26px] font-bold tracking-[0.6px] text-white @min-[640px]:text-heading-section">
             {searchResultsDe.resultsFor} „{query}“
           </h1>
@@ -78,7 +84,14 @@ export function SearchScreen({ defaultQuery = "" }: SearchScreenProps) {
             <ViewToggle view={view} onViewChange={setView} />
           </div>
         </div>
-        {view === "grid" ? (
+        {results.length === 0 ? (
+          <EmptyState
+            surface="plain"
+            icon={<Search strokeWidth={1.5} aria-hidden />}
+            message={`${statesDe.noResultsFor} „${query}“`}
+            description={statesDe.noResultsHint}
+          />
+        ) : view === "grid" ? (
           <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-5 @6xl:grid-cols-6">
             {results.map((f, i) => (
               <FilmCard {...filmCardDe} key={`${f.id}-${i}`} {...f} />

@@ -55,3 +55,8 @@ export const ComingSoon: Story = {
     </FeedRow>
   ),
 };
+
+/** Loading: skeleton cards in the row's shape (whole cards, no arrows); "Loading…" for screen readers. */
+export const Loading: Story = { args: { loading: true } };
+/** Loading a wide row whose title isn't known yet. */
+export const LoadingWideNoTitle: Story = { args: { loading: true, kind: "wide", title: undefined, href: undefined } };

@@ -59,8 +59,19 @@ Never put two violet buttons side by side.
 
 ## 6. States
 
+Every view that loads data designs four states: loading, content, empty, error. Examples live in Storybook (FeedRow
+Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found / Error, Foundations Overflow).
+
+- Loading: keep the layout and show `Skeleton`s in the shape of what's coming (posters stay 3:4 / 16:9). A feed
+  uses `FeedRow loading`. Announce "Loading…" once per region (FeedRow does), not per skeleton. No spinners.
 - Nothing to show: `EmptyState` (`surface="panel"` inside account pages, `surface="plain"` on a full page), with at
-  most one action.
+  most one action. Search: "No results for „…“" plus the hint as `description`.
+- Failed to load: `EmptyState tone="error"` with production "Something went wrong". It looks as calm as an empty
+  state; it is announced as an alert. There is no production retry label yet, so don't invent one: link Home or
+  leave the action out.
+- Page not found: production "The page could not be found" / "We can't find the page you're looking for", link Home.
+- Overflow: long German labels, long e-mails and long titles wrap; one-line elements (Chip) truncate. Never let text
+  push a layout wider than its column; check at 393.
 - Disabled actions stay visible with their disabled state (for example Save before anything changed). Don't hide them.
 - Form errors belong to the field (`TextInput state="error"`), not to a banner.
 

@@ -9,6 +9,7 @@ import { FilmScreen } from "./FilmScreen";
 import { LandingScreen } from "./LandingScreen";
 import { OnboardingScreen } from "./OnboardingScreen";
 import { SearchScreen } from "./SearchScreen";
+import { ErrorScreen, NotFoundScreen } from "./StatusScreens";
 import { WatchlistScreen } from "./WatchlistScreen";
 import { recommended } from "@/mocks/catalog";
 
@@ -56,6 +57,8 @@ export const CollectionExpanded: Story = { render: () => <CollectionScreen defau
 export const Search: Story = { render: () => <SearchScreen /> };
 /** "search results | Sticky in-nav | 1440px" and "| 393px": results for a query. */
 export const SearchResults: Story = { render: () => <SearchScreen defaultQuery="Drama" /> };
+/** "No results for" + hint, production strings. */
+export const SearchNoResults: Story = { render: () => <SearchScreen defaultQuery="Kubrik" results={[]} /> };
 /** "login | 1440px" / "login | 393px" */
 export const Login: Story = { render: () => <AuthScreen /> };
 /** "signup with product card | 1440px" / "Signup | 393px" */
@@ -89,3 +92,7 @@ export const AccountProfileEn: Story = { render: () => <AccountScreen section="p
 export const WatchlistEmpty: Story = { render: () => <WatchlistScreen /> };
 /** "Watchlist | DE" with saved titles. */
 export const Watchlist: Story = { render: () => <WatchlistScreen films={recommended} /> };
+/** 404: production "The page could not be found". */
+export const NotFound: Story = { render: () => <NotFoundScreen /> };
+/** A route that failed: production "Something went wrong", link Home. */
+export const RouteError: Story = { name: "Error", render: () => <ErrorScreen /> };

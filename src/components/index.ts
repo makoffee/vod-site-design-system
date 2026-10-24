@@ -53,5 +53,6 @@ export * from "./AccountPanel/AccountPanel";
 export * from "./DetailRow/DetailRow";
 export * from "./DeviceCodeForm/DeviceCodeForm";
 export * from "./EmptyState/EmptyState";
+export * from "./Skeleton/Skeleton";
 export * from "./SettingRow/SettingRow";
 export * from "./TextAction/TextAction";

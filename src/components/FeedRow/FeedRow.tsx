@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Children, isValidElement, useCallback, useEffect, useRef, useState, type ReactElement, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { SectionHeader } from "../SectionHeader/SectionHeader";
+import { Skeleton, type SkeletonShape } from "../Skeleton/Skeleton";
 
 /** tall = boxart feeds, wide = 16:9 stills, square = channel/festival tiles. */
 export type FeedKind = "tall" | "wide" | "square";
@@ -16,6 +17,8 @@ const itemsPerRow: Record<FeedKind, string> = {
   wide: "[--items:1] @xl:[--items:2] @4xl:[--items:3] @7xl:[--items:4] @min-[1600px]:[--items:5]",
   square: "[--items:2] @xl:[--items:3] @4xl:[--items:5] @7xl:[--items:6] @min-[1600px]:[--items:7]",
 };
+
+const skeletonShape: Record<FeedKind, SkeletonShape> = { tall: "poster-tall", wide: "poster-wide", square: "square" };
 
 export interface FeedItemProps {
   /** The card for this slot. */
@@ -58,8 +61,12 @@ export interface FeedRowProps {
   previousLabel?: string;
   /** Accessible name of the next arrow (default "Next"). Label text; English default, pass German on DE screens (feedRowDe). */
   nextLabel?: string;
-  /** Cards; each child is wrapped in a FeedItem unless it already is one. */
-  children: ReactNode;
+  /** Cards; each child is wrapped in a FeedItem unless it already is one. Ignored while loading. */
+  children?: ReactNode;
+  /** Shows Skeleton cards in the row's card shape instead of children (whole cards, no arrows). The title shows if known, else a skeleton line. */
+  loading?: boolean;
+  /** Screen-reader text while loading (production "Loading…"). Label text; English default, pass German on DE screens (feedRowDe). */
+  loadingLabel?: string;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
@@ -79,6 +86,8 @@ export function FeedRow({
   previousLabel = "Previous",
   nextLabel = "Next",
   children,
+  loading = false,
+  loadingLabel = "Loading…",
   className,
 }: FeedRowProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -106,7 +115,9 @@ export function FeedRow({
     el?.scrollBy({ left: direction * el.clientWidth * 0.9, behavior: "smooth" });
   };
 
-  const items = Children.map(children, (child) =>
+  const items = loading
+    ? Array.from({ length: 7 }, (_, i) => <FeedItem key={i}><Skeleton shape={skeletonShape[kind]} /></FeedItem>)
+    : Children.map(children, (child) =>
     isValidElement(child) && child.type === FeedItem ? (child as ReactElement<FeedItemProps>) : <FeedItem>{child}</FeedItem>,
   );
 
@@ -115,22 +126,26 @@ export function FeedRow({
     "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white @3xl:flex";
 
   return (
-    <section aria-label={title ? undefined : label} className={cn("@container flex w-full flex-col gap-4", className)}>
-      {title && <SectionHeader title={title} href={href} moreLabel={moreLabel} />}
+    <section aria-label={title ? undefined : label} aria-busy={loading || undefined} className={cn("@container flex w-full flex-col gap-4", className)}>
+      {title ? <SectionHeader title={title} href={href} moreLabel={moreLabel} /> : loading && <Skeleton shape="text" className="h-6 w-48" />}
+      {loading && <span role="status" className="sr-only">{loadingLabel}</span>}
       <div className={cn("relative [--gap:12px]", itemsPerRow[kind])}>
         <div
           ref={trackRef}
           onScroll={update}
-          className="flex snap-x snap-mandatory gap-(--gap) overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={cn(
+            "flex snap-x snap-mandatory gap-(--gap) overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            loading ? "overflow-hidden" : "overflow-x-auto",
+          )}
         >
           {items}
         </div>
-        {canPrev && (
+        {!loading && canPrev && (
           <button type="button" aria-label={previousLabel} onClick={() => scroll(-1)} className={cn(arrow, "left-2")}>
             <ChevronLeft className="size-6" strokeWidth={2} aria-hidden />
           </button>
         )}
-        {canNext && (
+        {!loading && canNext && (
           <button type="button" aria-label={nextLabel} onClick={() => scroll(1)} className={cn(arrow, "right-2")}>
             <ChevronRight className="size-6" strokeWidth={2} aria-hidden />
           </button>

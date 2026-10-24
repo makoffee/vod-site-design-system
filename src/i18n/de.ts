@@ -35,6 +35,7 @@ export const feedRowDe = {
   moreLabel: "mehr",
   previousLabel: "Zurück",
   nextLabel: "Weiter",
+  loadingLabel: "Laden…",
 } satisfies Partial<FeedRowProps>;
 
 export const featuredFilmCardDe = {
@@ -116,3 +117,13 @@ export const accountDe = {
 } satisfies Partial<AccountLabels>;
 
 export const watchlistDe = { title: "Meine Liste", empty: "Deine Watchlist ist leer" };
+
+/** Production strings (de): search with no results, a failed load, page not found. */
+export const statesDe = {
+  noResultsFor: "Keine Ergebnisse für",
+  noResultsHint: "Versuchen Sie einen anderen Titel, Regisseur oder Schauspieler",
+  error: "Etwas ist schiefgelaufen",
+  notFound: "Die Seite wurde nicht gefunden",
+  notFoundHint: "Wir können die gesuchte Seite nicht finden",
+  home: "Startseite",
+};
