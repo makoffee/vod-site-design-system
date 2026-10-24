@@ -122,14 +122,16 @@ export function FeedRow({
   );
 
   const arrow =
-    "absolute top-1/2 z-20 hidden size-[54px] -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/75 text-white transition-colors hover:bg-black " +
-    "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white @3xl:flex";
+    "absolute top-1/2 z-20 hidden size-[54px] -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/75 text-white hover:bg-black " +
+    "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white @3xl:flex " +
+    // Arrows appear while the row is hovered, and whenever one has keyboard focus.
+    "opacity-0 transition-[opacity,background-color] group-hover/row:opacity-100 focus-visible:opacity-100";
 
   return (
     <section aria-label={title ? undefined : label} aria-busy={loading || undefined} className={cn("@container flex w-full flex-col gap-4", className)}>
       {title ? <SectionHeader title={title} href={href} moreLabel={moreLabel} /> : loading && <Skeleton shape="text" className="h-6 w-48" />}
       {loading && <span role="status" className="sr-only">{loadingLabel}</span>}
-      <div className={cn("relative [--gap:12px]", itemsPerRow[kind])}>
+      <div className={cn("group/row relative [--gap:12px]", itemsPerRow[kind])}>
         <div
           ref={trackRef}
           onScroll={update}
