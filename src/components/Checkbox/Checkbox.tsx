@@ -5,23 +5,22 @@ import { ChoiceField, type ChoiceFieldProps } from "../_shared/ChoiceField";
 
 export type CheckboxProps = ChoiceFieldProps;
 
-// Master f9dae187dc319424: 24px box, 4px radius, gray-500 border (kept when checked), violet fill.
+// Production signup checkbox (h-4 w-4 rounded border-white/40 bg-white/10, accent #AE00FF): 16px box,
+// white/40 hairline when off, solid violet with a white tick when on (no border, no outline).
 export function Checkbox(props: CheckboxProps) {
   return (
     <ChoiceField
       {...props}
       type="checkbox"
-      boundaryClassName="size-9 rounded-sooner"
+      boundaryClassName="rounded"
       control={
         <span
           className={
-            "flex size-6 items-center justify-center rounded-sm border border-gray-500 bg-white/10 text-white " +
-            "group-has-checked/choice:bg-sooner-primary " +
-            "group-has-disabled/choice:border-gray-500/25 group-has-disabled/choice:bg-white/4 " +
-            "group-has-disabled/choice:group-has-checked/choice:bg-gray-800 group-has-disabled/choice:text-gray-500"
+            "flex size-4 items-center justify-center rounded border border-white/40 bg-white/10 text-white " +
+            "group-has-checked/choice:border-sooner-primary group-has-checked/choice:bg-sooner-primary"
           }
         >
-          <Check className="hidden size-5 group-has-checked/choice:block" strokeWidth={2.5} aria-hidden />
+          <Check className="hidden size-3 group-has-checked/choice:block" strokeWidth={3} aria-hidden />
         </span>
       }
     />

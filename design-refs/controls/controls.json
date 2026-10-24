@@ -1,0 +1,82 @@
+[
+ {
+  "url": "https://sooner.de/de/login",
+  "controls": []
+ },
+ {
+  "url": "https://sooner.de/de/signup",
+  "controls": [
+   {
+    "i": 0,
+    "type": "checkbox",
+    "checked": true,
+    "cls": "mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]",
+    "label": "Ich möchte personalisierte Updates, Empfehlungen und Sonderangebote erhalten.",
+    "html": "<label class=\"flex cursor-pointer items-start gap-2.5 text-[13px] leading-[18px] text-white/80\"><input class=\"mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]\" type=\"checkbox\" checked=\"\" data-ctl=\"0\" style=\"\"><span class=\"flex-1\">Ich möchte personalisierte Updates, Empfehlungen und Sonderangebote erhalten.</span></label>",
+    "self": {
+     "w": 16,
+     "h": 16,
+     "appearance": "auto",
+     "bg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+     "border": "0px none oklab(0.999994 0.0000455677 0.0000200868 / 0.8)",
+     "radius": "0px",
+     "accent": "rgb(174, 0, 255)",
+     "opacity": "1"
+    },
+    "visuals": [
+     {
+      "tag": "INPUT",
+      "cls": "mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]",
+      "w": 16,
+      "h": 16,
+      "bg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+      "border": "0px none oklab(0.999994 0.0000455677 0.0000200868 / 0.8)",
+      "radius": "0px",
+      "outline": "oklab(0.999994 0.0000455677 0.0000200868 / 0.8) none 3px",
+      "shadow": "none"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "url": "https://sooner.de/de/subscribe",
+  "controls": []
+ },
+ {
+  "url": "https://sooner.de/de/register",
+  "controls": [
+   {
+    "i": 0,
+    "type": "checkbox",
+    "checked": true,
+    "cls": "mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]",
+    "label": "Ich möchte personalisierte Updates, Empfehlungen und Sonderangebote erhalten.",
+    "html": "<label class=\"flex cursor-pointer items-start gap-2.5 text-[13px] leading-[18px] text-white/80\"><input class=\"mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]\" type=\"checkbox\" checked=\"\" data-ctl=\"0\" style=\"\"><span class=\"flex-1\">Ich möchte personalisierte Updates, Empfehlungen und Sonderangebote erhalten.</span></label>",
+    "self": {
+     "w": 16,
+     "h": 16,
+     "appearance": "auto",
+     "bg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+     "border": "0px none oklab(0.999994 0.0000455677 0.0000200868 / 0.8)",
+     "radius": "0px",
+     "accent": "rgb(174, 0, 255)",
+     "opacity": "1"
+    },
+    "visuals": [
+     {
+      "tag": "INPUT",
+      "cls": "mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer rounded border border-white/40 bg-white/10 accent-[#AE00FF]",
+      "w": 16,
+      "h": 16,
+      "bg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+      "border": "0px none oklab(0.999994 0.0000455677 0.0000200868 / 0.8)",
+      "radius": "0px",
+      "outline": "oklab(0.999994 0.0000455677 0.0000200868 / 0.8) none 3px",
+      "shadow": "none"
+     }
+    ]
+   }
+  ]
+ }
+]

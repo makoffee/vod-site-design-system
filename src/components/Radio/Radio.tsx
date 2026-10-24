@@ -4,23 +4,22 @@ import { ChoiceField, type ChoiceFieldProps } from "../_shared/ChoiceField";
 
 export type RadioProps = ChoiceFieldProps;
 
-// Master a7d0b1715fdbf208: 24px circle, gray-500 border, 10px white dot when checked.
+// Production has no radio; this follows the signup checkbox: 16px circle, white/40 hairline when off,
+// solid violet with a 6px white dot when on.
 export function Radio(props: RadioProps) {
   return (
     <ChoiceField
       {...props}
       type="radio"
-      boundaryClassName="size-9 rounded-full"
+      boundaryClassName="rounded-full"
       control={
         <span
           className={
-            "flex size-6 items-center justify-center rounded-full border border-gray-500 bg-white/10 " +
-            "group-has-checked/choice:bg-sooner-primary " +
-            "group-has-disabled/choice:border-gray-500/25 group-has-disabled/choice:bg-white/4 " +
-            "group-has-disabled/choice:group-has-checked/choice:bg-gray-800"
+            "flex size-4 items-center justify-center rounded-full border border-white/40 bg-white/10 " +
+            "group-has-checked/choice:border-sooner-primary group-has-checked/choice:bg-sooner-primary"
           }
         >
-          <span className="hidden size-2.5 rounded-full bg-white group-has-checked/choice:block group-has-disabled/choice:bg-gray-500" />
+          <span className="hidden size-1.5 rounded-full bg-white group-has-checked/choice:block" />
         </span>
       }
     />

@@ -27,7 +27,7 @@ interface ControlProps {
   control: ReactNode;
 }
 
-/** Shared shell for Checkbox, Radio and Switch: native input, focus boundary, label and supporting text. */
+/** Shared shell for Checkbox, Radio and Switch (production sooner.de signup / account settings): native input, focus ring, 14px label in white/80, optional 12px description. Disabled dims the whole row to 40%. */
 export function ChoiceField({
   label,
   description,
@@ -50,7 +50,7 @@ export function ChoiceField({
   return (
     <label
       htmlFor={inputId}
-      className={cn("group/choice flex items-center gap-4", widthClass[width], description ? "py-3" : "min-h-11", isDisabled ? "cursor-not-allowed" : "cursor-pointer", className)}
+      className={cn("group/choice flex items-start gap-3", widthClass[width], isDisabled ? "cursor-not-allowed opacity-40" : "cursor-pointer", className)}
     >
       <input
         id={inputId}
@@ -67,18 +67,18 @@ export function ChoiceField({
       <span
         aria-hidden
         className={cn(
-          "flex shrink-0 items-center justify-center border-2 border-transparent",
-          "peer-focus-visible:border-white",
-          state === "focus" && "border-white",
+          // Production focus: ring-2 white with a 2px offset, on keyboard focus only (never on the selected state).
+          "mt-0.5 flex shrink-0 items-center justify-center ring-offset-2 ring-offset-black peer-focus-visible:ring-2 peer-focus-visible:ring-white",
+          state === "focus" && "ring-2 ring-white",
           boundaryClassName,
         )}
       >
         {control}
       </span>
       <span className="flex flex-col gap-1">
-        <span className={cn("text-base font-medium", isDisabled ? "text-gray-200" : "text-white")}>{label}</span>
+        <span className="text-sm text-white/80">{label}</span>
         {description && (
-          <span id={`${inputId}-description`} className="text-sm text-gray-200">
+          <span id={`${inputId}-description`} className="text-xs text-white/40">
             {description}
           </span>
         )}
