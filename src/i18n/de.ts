@@ -13,6 +13,46 @@ import type { AuthFormLabels } from "@/components/AuthForm/AuthForm";
 import type { LoginModalLabels } from "@/components/LoginModal/LoginModal";
 import type { ProductCardProps } from "@/components/ProductCard/ProductCard";
 import type { SubscriptionPlansProps } from "@/components/SubscriptionPlans/SubscriptionPlans";
+import type { FilmDetailsProps } from "@/components/FilmDetails/FilmDetails";
+import type { CollectionHeaderProps } from "@/components/CollectionHeader/CollectionHeader";
+
+/**
+ * Proposed German (no production string yet) — needs copy review.
+ * UI labels production has no German for (or shows in English on the DE site). Every German screen references these
+ * keys, so the copy team can replace them here in one place. Short, neutral UI terms only; no marketing copy.
+ */
+export const proposedDe = {
+  /** Header tab "Collections". */
+  collections: "Kollektionen",
+  /** Header tab "Magazine". */
+  magazine: "Magazin",
+  /** AvailabilityFilter "All". */
+  all: "Alle",
+  /** FilmBadge "Exclusive". */
+  exclusive: "Exklusiv",
+  /** FilmDetails "Synopsis" (production DE film pages show "Synopsis"). */
+  synopsis: "Inhalt",
+  /** Film fact "Casting" (production DE film pages show "Casting"). */
+  casting: "Besetzung",
+  /** FilmDetails "Festivals & Awards" (production DE film pages show "Festivals & Awards"). */
+  festivalsAwards: "Festivals & Preise",
+  /** Film page row "Quotes and reviews" (shown only for films with quotes). */
+  quotes: "Pressestimmen",
+  /** CollectionHeader collapse toggle "Show less" (production expand label is "Zeig mehr"). */
+  showLess: "Zeig weniger",
+  /** ViewToggle / CollectionHeader "Grid view". */
+  gridView: "Rasteransicht",
+  /** ViewToggle / CollectionHeader "List view". */
+  listView: "Listenansicht",
+  /** SearchField clear button "Clear search". */
+  clearSearch: "Suche löschen",
+  /** Footer "Help & Support" (production DE footer shows "Help & Support"). */
+  helpSupport: "Hilfe & Support",
+  /** Footer "Press". */
+  press: "Presse",
+  /** Footer "Cookie Policy". */
+  cookiePolicy: "Cookie-Richtlinie",
+};
 
 export const filmHeroDe = {
   directorLabel: "Regie:",
@@ -52,7 +92,20 @@ export const featuredFilmCardDe = {
 
 export const filmCardDe = { availableLabel: "Ab" };
 
-// CollectionHeader's toggle names ("Show more", "Grid view", …) have no production source and stay English.
+/** FilmDetails headings (proposed: production DE film pages show them in English). */
+export const filmDetailsDe = {
+  synopsisLabel: proposedDe.synopsis,
+  festivalsLabel: proposedDe.festivalsAwards,
+} satisfies Partial<FilmDetailsProps>;
+
+/** CollectionHeader toggles: "Zeig mehr" is production (DE channel page); the others are proposed. */
+export const collectionHeaderDe = {
+  showMoreLabel: "Zeig mehr",
+  showLessLabel: proposedDe.showLess,
+  gridViewLabel: proposedDe.gridView,
+  listViewLabel: proposedDe.listView,
+} satisfies Partial<CollectionHeaderProps>;
+
 export const filmListItemDe = {
   byLabel: "Von",
   subscribeLabel: "Abonnieren",
@@ -60,17 +113,33 @@ export const filmListItemDe = {
   watchlistLabel: "Zur Merkliste hinzufügen",
 } satisfies Partial<FilmListItemProps>;
 
-export const headerDe: HeaderLabels = { home: "Sooner Startseite", navigation: "Hauptnavigation", search: "Suche", menu: "Menü" };
+/** Header: production DE strings (footer "Entdecken", strings file "Genre", "Meine Liste", "Anmelden", "Registrieren", "Oberflächensprache"). */
+export const headerDe: HeaderLabels = {
+  home: "Sooner Startseite",
+  navigation: "Hauptnavigation",
+  search: "Suche",
+  menu: "Menü",
+  tabs: {
+    discover: "Entdecken",
+    collections: proposedDe.collections,
+    genres: "Genre",
+    magazine: proposedDe.magazine,
+    watchlist: "Meine Liste",
+  },
+  login: "Anmelden",
+  signUp: "Registrieren",
+  language: "Oberflächensprache",
+};
 
 export const availabilityDe = {
   label: "Verfügbarkeit",
-  // No German "All" exists in production; it stays as designed.
-  labels: { subscription: "Abonnement", rentals: "Mieten & Kaufen" },
+  labels: { all: proposedDe.all, subscription: "Abonnement", rentals: "Mieten & Kaufen" },
 };
 
 export const searchDe = {
   placeholder: "Filme, Regisseure, Schauspieler suchen…",
   label: "Suche",
+  clearLabel: proposedDe.clearSearch,
 };
 
 /** Production "results for" / "No results for" / hint (strings file, de). */
@@ -136,20 +205,20 @@ export const statesDe = {
 export const footerDe = {
   columns: [
     [
-      { label: "Discover", href: "/discover" },
-      { label: "Hilfe & Support", href: "/help" },
+      { label: "Entdecken", href: "/discover" },
+      { label: proposedDe.helpSupport, href: "/help" },
       { label: "Blog", href: "/blog" },
       { label: "Kontakt", href: "/contact" },
     ],
     [
       { label: "AGB", href: "/terms" },
       { label: "Impressum", href: "/imprint" },
-      { label: "Partnerprogramm", href: "/partners" },
+      { label: "Partner Programm", href: "/partners" },
     ],
     [
-      { label: "Presse", href: "/press" },
+      { label: proposedDe.press, href: "/press" },
       { label: "Datenschutz", href: "/privacy" },
-      { label: "Cookie-Richtlinie", href: "/cookies" },
+      { label: proposedDe.cookiePolicy, href: "/cookies" },
     ],
   ],
   copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Deutschland",

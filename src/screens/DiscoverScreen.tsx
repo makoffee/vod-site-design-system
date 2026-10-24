@@ -7,94 +7,98 @@ import { FeedItem, FeedRow } from "@/components/FeedRow/FeedRow";
 import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { MaskTile } from "@/components/MaskTile/MaskTile";
 import { PromoHero } from "@/components/PromoHero/PromoHero";
-import { SocialIcons } from "@/components/SocialIcons/SocialIcons";
-import { channelSections, comingSoon, directorFocus, exclusives, festivals, newToRent, recommended, type FilmSummary } from "@/mocks/catalog";
-import { documentarySlice, iffrSlice, podcastSlice, promoSlides, sfccCollection } from "@/mocks/editorial";
+import { getCatalog, type FilmSummary } from "@/mocks/catalog";
+import { getEditorial } from "@/mocks/editorial";
+import type { Locale } from "@/i18n/locale";
 import { AppShell } from "./AppShell";
 import { availabilityDe, featuredFilmCardDe, feedRowDe, filmCardDe, promoHeroDe } from "@/i18n/de";
 
-const curators = channelSections.find((section) => section.title === "The Sooner Curators")!.channels;
-
-function TallRow({ title, films }: { title: string; films: FilmSummary[] }) {
-  return (
-    <FeedRow {...feedRowDe} title={title} href={`/channel/${films[0].id}`}>
-      {films.map((f) => (
-        <FilmCard {...filmCardDe} key={f.id} {...f} />
-      ))}
-    </FeedRow>
-  );
-}
-
-function WideRow({ title, films }: { title: string; films: FilmSummary[] }) {
-  return (
-    <FeedRow {...feedRowDe} title={title} kind="wide">
-      {films.map((f) => (
-        <FilmCard {...filmCardDe} key={f.id} aspect="wide" {...f} />
-      ))}
-    </FeedRow>
-  );
+export interface DiscoverScreenProps {
+  /** Screen language: English (default, Storybook) or German (the /discover route). */
+  locale?: Locale;
 }
 
 /**
- * Discover (design "discover | 1440", production /de/discover): promo hero + availability filter, then feeds and
- * editorial slices in the design's section order, filled with production row titles and films.
+ * Discover (design "discover | 1440", production /en/discover and /de/discover): promo hero + availability filter,
+ * then feeds and editorial slices in the design's section order, filled with production row titles, films and copy.
  */
-export function DiscoverScreen() {
-  const [featured, ...upcoming] = comingSoon;
+export function DiscoverScreen({ locale = "en" }: DiscoverScreenProps) {
+  const de = locale === "de";
+  const c = getCatalog(locale);
+  const e = getEditorial(locale);
+  const row = de ? feedRowDe : {};
+  const card = de ? filmCardDe : {};
+  const [featured, ...upcoming] = c.comingSoon;
+
+  const tallRow = (title: string, films: FilmSummary[], href?: string) => (
+    <FeedRow {...row} title={title} href={href}>
+      {films.map((f) => (
+        <FilmCard {...card} key={f.id} {...f} />
+      ))}
+    </FeedRow>
+  );
+  const wideRow = (title: string, films: FilmSummary[]) => (
+    <FeedRow {...row} title={title} kind="wide">
+      {films.map((f) => (
+        <FilmCard {...card} key={f.id} aspect="wide" {...f} />
+      ))}
+    </FeedRow>
+  );
 
   return (
-    <AppShell active="discover">
+    <AppShell active="discover" locale={locale}>
       <div className="flex flex-col gap-6 px-6">
         <div className="flex flex-col">
-          <PromoHero {...promoHeroDe} slides={promoSlides} />
-          <AvailabilityFilter {...availabilityDe} surface="floating" className="mx-auto my-4" />
+          <PromoHero {...(de ? promoHeroDe : {})} slides={e.promoSlides} />
+          <AvailabilityFilter {...(de ? availabilityDe : {})} surface="floating" className="mx-auto my-4" />
         </div>
         <div className="flex flex-col gap-12 pb-16">
-          <TallRow title="New to Rent" films={newToRent} />
-          <WideRow title="Neu im Abo" films={exclusives} />
-          <CollectionFeature {...sfccCollection}>
-            {exclusives.slice(0, 4).map((f) => (
-              <FilmCard {...filmCardDe} key={f.id} {...f} />
+          {tallRow(c.rows.newToRent, c.newToRent, "/channel/new-to-rent")}
+          {wideRow(c.rows.justReleased, c.exclusives)}
+          <CollectionFeature {...e.onlyOnSooner}>
+            {c.exclusives.slice(0, 4).map((f) => (
+              <FilmCard {...card} key={f.id} {...f} />
             ))}
           </CollectionFeature>
-          <FeedRow {...feedRowDe} title="Festivals" kind="square" href="/channels">
-            {festivals.map((c) => (
-              <ChannelTile key={c.id} {...c} />
+          <FeedRow {...row} title={c.rows.festivals} kind="square" href="/channels">
+            {c.festivals.map((ch) => (
+              <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
-          <EditorialSlice {...iffrSlice} />
-          <WideRow title="Cinema Highlights" films={recommended} />
-          <TallRow title="Nur bei Sooner" films={exclusives} />
-          <EditorialSlice
-            {...podcastSlice}
-            media="mask"
-            side="left"
-            cta={{ ...podcastSlice.cta, icon: <SocialIcons platform="Spotify" size={20} className="text-white" /> }}
-          />
-          <FeedRow {...feedRowDe} title="The Sooner Curators" kind="square" href="/channels">
-            {curators.map((c) => (
-              <ChannelTile key={c.id} {...c} />
+          <EditorialSlice {...e.theBeast} />
+          {wideRow(c.rows.cinemaHighlights, c.recommended)}
+          {tallRow(c.rows.onlyOnSooner, c.exclusives)}
+          <EditorialSlice {...e.veniVidiVici} media="mask" side="left" />
+          <FeedRow {...row} title={c.rows.curators} kind="square" href="/channels">
+            {c.curators.map((ch) => (
+              <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
-          <TallRow title="User Favorites: Top 25" films={recommended} />
-          <EditorialSlice {...documentarySlice} media="mask" side="right" />
-          <FeedRow {...feedRowDe} title="Director Focus" kind="square" href="/channels">
-            {directorFocus.map((c) => (
-              <ChannelTile key={c.id} {...c} />
+          {tallRow(c.rows.userFavorites, c.recommended)}
+          <EditorialSlice {...e.sooner365} media="mask" side="right" />
+          <FeedRow {...row} title={c.rows.directorsFocus} kind="square" href="/channels">
+            {c.directorFocus.map((ch) => (
+              <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
-          <WideRow title="Cult Classics: Early Works" films={newToRent} />
-          <FeedRow {...feedRowDe} title="Coming Soon" href="/channel/coming-soon">
+          {wideRow(c.rows.cultClassics, c.newToRent)}
+          <FeedRow {...row} title={c.rows.comingSoon} href="/channel/coming-soon">
             <FeedItem className="basis-[min(619px,85%)]">
-              <FeaturedFilmCard {...featuredFilmCardDe} title={featured.title} href={featured.href} director="Eric Gravel" directorHref="/cast/eric-gravel" />
+              <FeaturedFilmCard
+                {...(de ? featuredFilmCardDe : {})}
+                title={featured.title}
+                href={featured.href}
+                director="Eric Gravel"
+                directorHref="/cast/eric-gravel"
+              />
             </FeedItem>
             {upcoming.map((f) => (
-              <FilmCard {...filmCardDe} key={f.id} {...f} />
+              <FilmCard {...card} key={f.id} {...f} />
             ))}
           </FeedRow>
-          <FeedRow {...feedRowDe} title="Collections" kind="wide">
-            {[sfccCollection, iffrSlice, documentarySlice].map((c, i) => (
-              <MaskTile key={c.title} title={c.title} href={c.cta.href} tinted={i === 0} />
+          <FeedRow {...row} title={c.rows.collections} kind="wide">
+            {[e.onlyOnSooner, e.theBeast, e.veniVidiVici].map((block, i) => (
+              <MaskTile key={block.title} title={block.title} href={block.cta.href} tinted={i === 0} />
             ))}
           </FeedRow>
         </div>

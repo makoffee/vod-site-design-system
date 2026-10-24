@@ -4,5 +4,5 @@ import { ChannelsScreen } from "@/screens/ChannelsScreen";
 export const metadata: Metadata = { title: "Kanäle · Sooner" };
 
 export default function ChannelsPage() {
-  return <ChannelsScreen />;
+  return <ChannelsScreen locale="de" />;
 }

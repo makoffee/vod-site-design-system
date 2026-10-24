@@ -12,52 +12,70 @@ import { ViewToggle, type CollectionView } from "@/components/ViewToggle/ViewTog
 import { FilmListItem } from "@/components/FilmListItem/FilmListItem";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { Search } from "lucide-react";
-import { availabilityDe, feedRowDe, filmCardDe, filmListItemDe, searchDe, searchResultsDe, statesDe } from "@/i18n/de";
-import { collection, exclusives, festivals, newToRent, recommended, searchSuggestions, type FilmSummary } from "@/mocks/catalog";
+import { availabilityDe, collectionHeaderDe, feedRowDe, filmCardDe, filmListItemDe, searchDe, searchResultsDe, statesDe } from "@/i18n/de";
+import type { Locale } from "@/i18n/locale";
+import { getCatalog, type FilmSummary } from "@/mocks/catalog";
 import { AppShell } from "./AppShell";
 
 export interface SearchScreenProps {
   defaultQuery?: string;
   /** Results for the query (mock catalogue by default); an empty list shows the no-results state. */
   results?: FilmSummary[];
+  /** Screen language: English (default, Storybook) or German (the /search route). */
+  locale?: Locale;
 }
 
-const mockResults = [...recommended, ...exclusives, ...newToRent, ...recommended, ...exclusives, ...newToRent].slice(0, 36);
+/** Production EN strings (Copy/production-strings.json; "results for" capitalised as the heading's first word). */
+const searchEn = {
+  resultsFor: "Results for",
+  noResultsFor: "No results for",
+  noResultsHint: "Try a different title, director or actor",
+};
 
 /**
  * Search (design "search results | Static / Sticky in-nav | 1440px" and "| 393px"). Without a query: the large
  * field, suggested searches and feeds. With a query: in-nav field, availability filter, grid switch, results grid.
  */
-export function SearchScreen({ defaultQuery = "", results = mockResults }: SearchScreenProps) {
+export function SearchScreen({ defaultQuery = "", results, locale = "en" }: SearchScreenProps) {
   const [query, setQuery] = useState(defaultQuery);
   const [view, setView] = useState<CollectionView>("grid");
+  const de = locale === "de";
+  const c = getCatalog(locale);
+  const hits = results ?? [...c.recommended, ...c.exclusives, ...c.newToRent, ...c.recommended, ...c.exclusives, ...c.newToRent].slice(0, 36);
+  const t = de ? { resultsFor: searchResultsDe.resultsFor, noResultsFor: statesDe.noResultsFor, noResultsHint: statesDe.noResultsHint } : searchEn;
+  const quoted = de ? `„${query}“` : `“${query}”`;
+  const row = de ? feedRowDe : {};
+  const card = de ? filmCardDe : {};
+  const field = de ? searchDe : {};
+  const filter = de ? availabilityDe : {};
+  const toggle = de ? { gridViewLabel: collectionHeaderDe.gridViewLabel, listViewLabel: collectionHeaderDe.listViewLabel } : {};
 
   if (!query) {
     return (
-      <AppShell>
+      <AppShell locale={locale}>
         <div className="@container flex flex-col gap-12 px-6 pt-8 pb-16">
           <div className="mx-auto flex w-full max-w-[768px] flex-col gap-6">
-            <SearchField {...searchDe} size="lg" value={query} onValueChange={setQuery} autoFocus />
+            <SearchField {...field} size="lg" value={query} onValueChange={setQuery} autoFocus />
             <div className="flex flex-wrap gap-2">
-              {searchSuggestions.map((term) => (
+              {c.searchSuggestions.map((term) => (
                 <Chip key={term} onClick={() => setQuery(term)}>
                   {term}
                 </Chip>
               ))}
             </div>
           </div>
-          <FeedRow {...feedRowDe} title="Recommended" href="/channel/recommended">
-            {recommended.map((f) => (
-              <FilmCard {...filmCardDe} key={f.id} {...f} />
+          <FeedRow {...row} title={c.rows.recommended} href="/channel/recommended">
+            {c.recommended.map((f) => (
+              <FilmCard {...card} key={f.id} {...f} />
             ))}
           </FeedRow>
-          <FeedRow {...feedRowDe} title="Recently Added" href="/channel/new-to-rent">
-            {newToRent.map((f) => (
-              <FilmCard {...filmCardDe} key={f.id} {...f} />
+          <FeedRow {...row} title={c.rows.newToRent} href="/channel/new-to-rent">
+            {c.newToRent.map((f) => (
+              <FilmCard {...card} key={f.id} {...f} />
             ))}
           </FeedRow>
-          <FeedRow {...feedRowDe} title="Collections" kind="square" href="/channels">
-            {festivals.map((channel) => (
+          <FeedRow {...row} title={c.rows.collections} kind="square" href="/channels">
+            {c.festivals.map((channel) => (
               <ChannelTile key={channel.id} {...channel} />
             ))}
           </FeedRow>
@@ -67,46 +85,46 @@ export function SearchScreen({ defaultQuery = "", results = mockResults }: Searc
   }
 
   return (
-    <AppShell>
+    <AppShell locale={locale}>
       <div className="@container flex flex-col gap-6 px-6 pt-8 pb-16">
         <div className="flex items-center gap-4">
-          <SearchField {...searchDe} size="md" value={query} onValueChange={setQuery} className="flex-1" />
-          <AvailabilityFilter {...availabilityDe} className="hidden @3xl:inline-flex" />
-          <ViewToggle view={view} onViewChange={setView} className="hidden @3xl:flex" />
+          <SearchField {...field} size="md" value={query} onValueChange={setQuery} className="flex-1" />
+          <AvailabilityFilter {...filter} className="hidden @3xl:inline-flex" />
+          <ViewToggle {...toggle} view={view} onViewChange={setView} className="hidden @3xl:flex" />
         </div>
         {/* No results: the empty state says it once; the results heading and its filters would only repeat it. */}
-        <div className={cn("flex items-center justify-between gap-4", results.length === 0 && "hidden")}>
+        <div className={cn("flex items-center justify-between gap-4", hits.length === 0 && "hidden")}>
           <h1 className="m-0 text-xl leading-[26px] font-bold tracking-[0.6px] text-white @min-[640px]:text-heading-section">
-            {searchResultsDe.resultsFor} „{query}“
+            {t.resultsFor} {quoted}
           </h1>
           <div className="flex items-center gap-3 @3xl:hidden">
-            <AvailabilityFilter {...availabilityDe} variant="menu" />
-            <ViewToggle view={view} onViewChange={setView} />
+            <AvailabilityFilter {...filter} variant="menu" />
+            <ViewToggle {...toggle} view={view} onViewChange={setView} />
           </div>
         </div>
-        {results.length === 0 ? (
+        {hits.length === 0 ? (
           <EmptyState
             surface="plain"
             icon={<Search strokeWidth={1.5} aria-hidden />}
-            message={`${statesDe.noResultsFor} „${query}“`}
-            description={statesDe.noResultsHint}
+            message={`${t.noResultsFor} ${quoted}`}
+            description={t.noResultsHint}
           />
         ) : view === "grid" ? (
           <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-5 @6xl:grid-cols-6">
-            {results.map((f, i) => (
-              <FilmCard {...filmCardDe} key={`${f.id}-${i}`} {...f} />
+            {hits.map((f, i) => (
+              <FilmCard {...card} key={`${f.id}-${i}`} {...f} />
             ))}
           </div>
         ) : (
           <div className="flex flex-col gap-4 @2xl:gap-8">
-            {results.slice(0, 6).map((f, i) => (
+            {hits.slice(0, 6).map((f, i) => (
               <FilmListItem
-                {...filmListItemDe}
+                {...(de ? filmListItemDe : {})}
                 key={`${f.id}-${i}`}
                 title={f.title}
                 href={f.href}
-                meta={collection.films[0].meta}
-                synopsis={collection.films[0].synopsis}
+                meta={c.collection.films[0].meta}
+                synopsis={c.collection.films[0].synopsis}
               />
             ))}
           </div>

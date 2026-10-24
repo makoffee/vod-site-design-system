@@ -1,48 +1,108 @@
-// Editorial copy exactly as on the discover design screen ("discover | 1440", 2 Key Screens).
+// Editorial blocks on discover, in both site languages, copied from production sooner.de/en/discover and
+// /de/discover (2026-10-24): the promo hero, the "Collection" slices and the "Only on Sooner" channel text.
+// Production keeps the "Collection" eyebrow in English on the DE site. Never write new editorial copy here.
 
-export const iffrSlice = {
-  eyebrow: "Festival Highlights",
-  title: "IFF Rotterdam Collection",
-  description:
-    "The International Film Festival Rotterdam 2026 has wrapped. Missed it? Discover the highlights on our exclusive Sooner IFFR channel with curated selections from emerging filmmakers.",
-  cta: { label: "View films", href: "/channel/iffr" },
-};
+import type { Locale } from "@/i18n/locale";
 
-export const podcastSlice = {
-  eyebrow: "Sooner Podcast",
-  title: "Paris in Film",
-  description:
-    "Join us for intimate conversations with independent filmmakers, exploring their creative process, challenges, and breakthrough moments in cinema.",
-  cta: { label: "Listen on Spotify", href: "https://open.spotify.com/" },
-};
+interface Editorial {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  cta: { label: string; href: string };
+}
 
-export const sfccCollection = {
-  eyebrow: "Collection",
-  title: "80 Years of French Film Critics Society",
-  description:
-    "Since 1946, the French Film Critics Society has defended free, independent, and vibrant criticism. Each year, it honors the best in cinematic creation by awarding the SFCC Critics' Prizes. Classics, revelations, films from around the world: (re)discover a selection of award-winning works from across the decades.",
-  cta: { label: "View films", href: "/collection/sfcc" },
-};
-
-/** Hero slide on the design screen; the remaining titles are the production promo order (no copy captured). */
-export const promoSlides = [
+const content: Record<
+  Locale,
   {
-    id: "dear-prudence",
-    title: "Dear Prudence",
-    badge: "Exclusive",
-    description:
-      "17-year-old Prudence lives alone in Paris. After a botched shoplifting attempt she meets Marilyne at the police station.",
-    href: "/film/dear-prudence",
+    promoSlides: { id: string; title: string; description?: string; badge?: string; href: string }[];
+    onlyOnSooner: Editorial;
+    theBeast: Editorial;
+    veniVidiVici: Editorial;
+    sooner365: Editorial;
+  }
+> = {
+  en: {
+    promoSlides: [
+      {
+        id: "the-invite",
+        title: "The Invite",
+        description:
+          "A dinner between neighbors turns into a provocative game of desire and jealousy. Olivia Wilde’s wickedly funny comedy stars Seth Rogen, Penélope Cruz, and Edward Norton.",
+        href: "/film/the-invite",
+      },
+      { id: "cold-war", title: "Cold War", href: "/film/cold-war" },
+      { id: "exit-8", title: "Exit 8", href: "/film/exit-8" },
+      { id: "titane", title: "Titane", href: "/film/titane" },
+    ],
+    onlyOnSooner: {
+      eyebrow: "Collection",
+      title: "Only on Sooner",
+      description:
+        "Discover distinctive films available exclusively on Sooner in Germany — acclaimed festival and international cinema that never received a German release.",
+      cta: { label: "View all", href: "/channel/only-on-sooner" },
+    },
+    theBeast: {
+      eyebrow: "Collection",
+      title: "The Beast",
+      description:
+        "What remains of us when emotions are meant to be erased? Bertrand Bonello’s hypnotic drama with Léa Seydoux and George MacKay traces love, fear, and fate across time.",
+      cta: { label: "Watch here", href: "/film/la-bete" },
+    },
+    veniVidiVici: {
+      eyebrow: "Collection",
+      title: "Veni Vidi Vici",
+      description: "A razor-sharp satire on the ultra-wealthy and a life untouched by consequence. A precise look at power, privilege, and moral detachment.",
+      cta: { label: "Watch here", href: "/film/veni-vidi-vici" },
+    },
+    sooner365: {
+      eyebrow: "Collection",
+      title: "Give the gift of great cinema with Sooner 365",
+      description: "A gift for anyone who loves truly great films.",
+      cta: { label: "Gift now", href: "/gift" },
+    },
   },
-  { id: "cold-war", title: "Cold War", href: "/film/cold-war" },
-  { id: "exit-8", title: "Exit 8", href: "/film/exit-8" },
-  { id: "titane", title: "Titane", href: "/film/titane" },
-];
-
-export const documentarySlice = {
-  eyebrow: "Documentary Collection",
-  title: "Documentary Spotlight",
-  description:
-    "Dive deep into powerful real-life stories that challenge perspectives and inspire change. Experience documentaries that go beyond the surface.",
-  cta: { label: "View films", href: "/collection/documentary" },
+  de: {
+    promoSlides: [
+      {
+        id: "the-invite",
+        title: "The Invite",
+        description:
+          "Ein Abendessen unter Nachbarn wird zum riskanten Spiel mit Begehren und Eifersucht. Olivia Wildes bissige Komödie mit Seth Rogen, Penélope Cruz und Edward Norton.",
+        href: "/film/the-invite",
+      },
+      { id: "cold-war", title: "Cold War", href: "/film/cold-war" },
+      { id: "exit-8", title: "Exit 8", href: "/film/exit-8" },
+      { id: "titane", title: "Titane", href: "/film/titane" },
+    ],
+    onlyOnSooner: {
+      eyebrow: "Collection",
+      title: "Only on Sooner",
+      description:
+        "Entdecke besondere Filme, die in Deutschland exklusiv bei Sooner zu sehen sind – international gefeiertes Kino und Festivalentdeckungen, die hier nie veröffentlicht wurden.",
+      cta: { label: "Alle ansehen", href: "/channel/only-on-sooner" },
+    },
+    theBeast: {
+      eyebrow: "Collection",
+      title: "The Beast",
+      description:
+        "Was bleibt vom Menschen, wenn Gefühle verschwinden sollen? Bertrand Bonello erzählt mit Léa Seydoux und George MacKay von Liebe, Angst und Schicksal über die Grenzen der Zeit hinweg.",
+      cta: { label: "Hier anschauen", href: "/film/la-bete" },
+    },
+    veniVidiVici: {
+      eyebrow: "Collection",
+      title: "Veni Vidi Vici",
+      description:
+        "Eine bitterböse Politsatire über die Superreichen und ein Leben ohne sichtbare Konsequenzen. Ein präziser Blick auf Macht, Kapital und moralische Blindstellen.",
+      cta: { label: "Hier anschauen", href: "/film/veni-vidi-vici" },
+    },
+    sooner365: {
+      eyebrow: "Collection",
+      title: "Verschenke einzigartige Geschichten mit Sooner 365",
+      description: "Ein Geschenk für alle, die gutes Kino lieben.",
+      cta: { label: "Jetzt verschenken", href: "/gift" },
+    },
+  },
 };
+
+/** Discover's editorial blocks in one language. */
+export const getEditorial = (locale: Locale) => content[locale];

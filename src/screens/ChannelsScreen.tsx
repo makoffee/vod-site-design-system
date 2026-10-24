@@ -1,33 +1,40 @@
 import { ChannelTagTile } from "@/components/ChannelTagTile/ChannelTagTile";
 import { ChannelTile } from "@/components/ChannelTile/ChannelTile";
 import { FeedRow } from "@/components/FeedRow/FeedRow";
-import { channelSections, featuredIn } from "@/mocks/catalog";
+import type { Locale } from "@/i18n/locale";
+import { getCatalog } from "@/mocks/catalog";
 import { AppShell, PageTitle } from "./AppShell";
 import { feedRowDe } from "@/i18n/de";
 
-/** Design "Tag Collection Title" rows: tag channels as landscape tiles (placeholder copy on the canvas). */
-const tagCollections = [1, 2, 3].map((n) => ({ title: "Tag Collection Title", id: `tag-collection-${n}` }));
+export interface ChannelsScreenProps {
+  /** Screen language: English (default, Storybook) or German (the /channels route). */
+  locale?: Locale;
+  /** Page title; production "Channels" (EN) / "Kanäle" (DE). */
+  title?: string;
+}
 
 /**
- * Channels (design "channels | 1440", production /de/channels "Kanäle"): page title, then one square-tile
- * row per channel group, then the tag collections.
+ * Channels (design "channels | 1440", production /en/channels and /de/channels): page title, one square-tile row per
+ * channel group, then the text-tile groups (Screen, Topic, Storyline) as tag collections.
  */
-export function ChannelsScreen({ title = "Kanäle" }: { title?: string }) {
+export function ChannelsScreen({ locale = "en", title = locale === "de" ? "Kanäle" : "Channels" }: ChannelsScreenProps) {
+  const c = getCatalog(locale);
+  const row = locale === "de" ? feedRowDe : {};
   return (
-    <AppShell active="collections">
+    <AppShell active="collections" locale={locale}>
       <div className="flex flex-col gap-8 px-6 pt-8 pb-16">
         <PageTitle>{title}</PageTitle>
-        {channelSections.map((section) => (
-          <FeedRow {...feedRowDe} key={section.title} title={section.title} kind="square">
-            {section.channels.map((c) => (
-              <ChannelTile key={c.id} {...c} />
+        {c.channelSections.map((section) => (
+          <FeedRow {...row} key={section.title} title={section.title} kind="square">
+            {section.channels.map((ch) => (
+              <ChannelTile key={ch.id} {...ch} />
             ))}
           </FeedRow>
         ))}
-        {tagCollections.map((collection) => (
-          <FeedRow {...feedRowDe} key={collection.id} title={collection.title} kind="square">
-            {[...featuredIn, ...featuredIn.slice(0, 2)].map((tag, i) => (
-              <ChannelTagTile key={i} {...tag} aspect="square" />
+        {c.tagSections.map((section) => (
+          <FeedRow {...row} key={section.title} title={section.title} kind="square">
+            {section.tags.map((tag) => (
+              <ChannelTagTile key={tag.href} {...tag} aspect="square" />
             ))}
           </FeedRow>
         ))}

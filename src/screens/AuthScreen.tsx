@@ -5,20 +5,24 @@ import { AuthForm, type AuthFormMode } from "@/components/AuthForm/AuthForm";
 import { SoonerLogo } from "@/components/SoonerLogo/SoonerLogo";
 import { BINOCULAR_PATH, BINOCULAR_VIEWBOX } from "@/components/_shared/icons";
 import type { PlanId } from "@/components/_shared/plans";
-import { plansDe } from "@/content/plans";
+import { plansDe, plansEn } from "@/content/plans";
+import type { Locale } from "@/i18n/locale";
 import { authFormDe } from "@/i18n/de";
 
 export interface AuthScreenProps {
   defaultMode?: AuthFormMode;
   /** Signup from checkout ("signup with product card"). */
   product?: PlanId;
+  /** Screen language: English (default, Storybook) or German (the /login and /signup routes). */
+  locale?: Locale;
 }
 
 /**
  * Login / signup page (design "login | 1440px", "signup | 1440px", "signup with product card | 1440px" and the 393
  * versions): the violet binocular mark fading to black behind the form, logo and tagline top left, no header or footer.
  */
-export function AuthScreen({ defaultMode = "login", product }: AuthScreenProps) {
+export function AuthScreen({ defaultMode = "login", product, locale = "en" }: AuthScreenProps) {
+  const de = locale === "de";
   const [mode, setMode] = useState<AuthFormMode>(defaultMode);
 
   return (
@@ -46,9 +50,9 @@ export function AuthScreen({ defaultMode = "login", product }: AuthScreenProps) 
         <div className="flex justify-center @4xl:justify-start @4xl:pt-12">
           <AuthForm
             mode={mode}
-            product={mode === "signup" && product ? plansDe[product] : undefined}
+            product={mode === "signup" && product ? (de ? plansDe : plansEn)[product] : undefined}
             onChangeProduct={() => {}}
-            labels={authFormDe}
+            labels={de ? authFormDe : undefined}
             onSwitchMode={() => setMode(mode === "login" ? "signup" : "login")}
             className="max-w-[400px]"
           />

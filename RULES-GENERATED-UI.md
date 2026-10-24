@@ -1,13 +1,9 @@
-import { Meta } from "@storybook/addon-docs/blocks";
-
-<Meta title="Foundations/Rules for generated UI" />
-
 # Rules for generated UI
 
-These rules are written for people and for agents that compose sooner.de pages from this library (Storybook MCP at
-`/mcp`, component contracts at `/manifests/components.json`). Each component's own contract (description, props,
-stories) says what it does; this page says how the pieces go together. When a rule and production disagree, the
-rule wins: production has drifted, the design has not.
+These rules are for people and for agents that compose sooner.de pages from this library. Each component's contract
+(description, props, stories) comes from Storybook: MCP at `/mcp`, manifest at `/manifests/components.json`. The
+contract says what a component does; this file says how the pieces go together. When a rule and production disagree,
+the rule wins: production has drifted, the design has not.
 
 ## 1. Build only from the library
 

@@ -14,22 +14,44 @@ import { SoonerLogo } from "../SoonerLogo/SoonerLogo";
 export type HeaderAuth = "logged-out" | "logged-in";
 export type HeaderTab = "discover" | "collections" | "genres" | "magazine" | "watchlist";
 
-const tabs: { id: HeaderTab; label: string; href: string }[] = [
-  { id: "discover", label: "Discover", href: "/discover" },
-  { id: "collections", label: "Collections", href: "/collections" },
-  { id: "genres", label: "Genres", href: "/genres" },
-  { id: "magazine", label: "Magazine", href: "/magazine" },
-  { id: "watchlist", label: "Watchlist", href: "/watchlist" },
+const tabs: { id: HeaderTab; href: string }[] = [
+  { id: "discover", href: "/discover" },
+  { id: "collections", href: "/collections" },
+  { id: "genres", href: "/genres" },
+  { id: "magazine", href: "/magazine" },
+  { id: "watchlist", href: "/watchlist" },
 ];
 
+/** Every string the Header renders. English by default; German screens pass `headerDe` from src/i18n/de.ts. */
 export interface HeaderLabels {
+  /** Accessible name of the logo link ("Sooner home"). */
   home: string;
+  /** Accessible name of the tab nav ("Main navigation"). */
   navigation: string;
+  /** Accessible name of the search icon button ("Search"). */
   search: string;
+  /** Accessible name of the mobile menu button ("Menu"). */
   menu: string;
+  /** Tab text, one per HeaderTab ("Discover", "Collections", "Genres", "Magazine", "Watchlist"). */
+  tabs: Record<HeaderTab, string>;
+  /** Login button text ("Login"). */
+  login: string;
+  /** Sign up button text ("Sign up"). */
+  signUp: string;
+  /** Accessible name of the LanguageSelect ("Interface language"). */
+  language: string;
 }
 
-const defaultLabels: HeaderLabels = { home: "Sooner home", navigation: "Main navigation", search: "Search", menu: "Menu" };
+export const headerLabels: HeaderLabels = {
+  home: "Sooner home",
+  navigation: "Main navigation",
+  search: "Search",
+  menu: "Menu",
+  tabs: { discover: "Discover", collections: "Collections", genres: "Genres", magazine: "Magazine", watchlist: "Watchlist" },
+  login: "Login",
+  signUp: "Sign up",
+  language: "Interface language",
+};
 
 export interface HeaderProps {
   /** logged-out (default) shows Login + Sign up (desktop only); logged-in shows the Avatar instead. */
@@ -54,7 +76,7 @@ export interface HeaderProps {
   onSignUp?: () => void;
   /** Menu button click (mobile layout only). */
   onMenu?: () => void;
-  /** Accessible names; English by default. */
+  /** Tab, button and accessible-name text, merged over the English defaults (`headerLabels`). Label text; pass German on DE screens. */
   labels?: Partial<HeaderLabels>;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
@@ -66,7 +88,7 @@ const iconButton =
 /**
  * Sticky 64px site header (Header master): logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
  * Sign up or the Avatar. Below 1024px of container width: logo, search, language, Avatar (logged in) and a menu
- * button; tabs and Login / Sign up are hidden. Tab and button text is fixed English; only `labels` is translatable.
+ * button; tabs and Login / Sign up are hidden. All text comes from `labels` (English defaults).
  * Use for: the top bar of every page screen.
  * Not for: account-section navigation (use AccountNav).
  */
@@ -85,7 +107,7 @@ export function Header({
   labels,
   className,
 }: HeaderProps) {
-  const l = { ...defaultLabels, ...labels };
+  const l = { ...headerLabels, ...labels, tabs: { ...headerLabels.tabs, ...labels?.tabs } };
   const loggedIn = auth === "logged-in";
   const visibleTabs = hideWatchlist ? tabs.filter((t) => t.id !== "watchlist") : tabs;
 
@@ -98,7 +120,7 @@ export function Header({
       <SoonerLogo />
     </Link>
   );
-  const languageSelect = <LanguageSelect value={language} onValueChange={onLanguageChange} />;
+  const languageSelect = <LanguageSelect value={language} onValueChange={onLanguageChange} label={l.language} />;
   const avatar = <Avatar initials={userInitials} name={userName} />;
 
   return (
@@ -109,7 +131,7 @@ export function Header({
           <nav aria-label={l.navigation} className="flex items-center gap-1">
             {visibleTabs.map((t) => (
               <NavLink key={t.id} href={t.href} active={active === t.id}>
-                {t.label}
+                {l.tabs[t.id]}
               </NavLink>
             ))}
           </nav>
@@ -124,10 +146,10 @@ export function Header({
           ) : (
             <>
               <Button variant="cta-text" size="sm" onClick={onLogin}>
-                Login
+                {l.login}
               </Button>
               <Button variant="cta-primary" size="sm" onClick={onSignUp}>
-                Sign up
+                {l.signUp}
               </Button>
             </>
           )}

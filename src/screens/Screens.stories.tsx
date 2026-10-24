@@ -11,9 +11,10 @@ import { OnboardingScreen } from "./OnboardingScreen";
 import { SearchScreen } from "./SearchScreen";
 import { ErrorScreen, NotFoundScreen } from "./StatusScreens";
 import { WatchlistScreen } from "./WatchlistScreen";
-import { recommended } from "@/mocks/catalog";
+import { getCatalog } from "@/mocks/catalog";
 
-// Full key screens composed from the library, one story per design screen on "2 Key Screens".
+// Full key screens composed from the library, one story per design screen on "2 Key Screens". Storybook is English
+// only: every screen renders its English default; the German app routes pass locale="de".
 const meta = {
   title: "Screens/Key screens",
   // Compositions, not components: kept out of the component manifest (the rules page points agents at src/screens).
@@ -65,33 +66,27 @@ export const Login: Story = { render: () => <AuthScreen /> };
 export const Signup: Story = { render: () => <AuthScreen defaultMode="signup" product="monthly" /> };
 
 /** "Landing Page EN | 1440w" (4 Sooner DE Marketing Pages) */
-export const LandingEn: Story = { render: () => <LandingScreen locale="en" /> };
-/** "Landing Page DE | 1440w" */
-export const LandingDe: Story = { render: () => <LandingScreen locale="de" /> };
+export const Landing: Story = { render: () => <LandingScreen /> };
 
 /** "onboarding EN | 1440" (4 Sooner DE Marketing Pages) */
-export const OnboardingEn: Story = { render: () => <OnboardingScreen locale="en" /> };
-/** "onboarding DE | 1440" */
-export const OnboardingDe: Story = { render: () => <OnboardingScreen locale="de" /> };
+export const Onboarding: Story = { render: () => <OnboardingScreen /> };
 
-/** "Account · Profile | DE" (production /de/account) */
+/** "Account · Profile" (production /en/account) */
 export const AccountProfile: Story = { render: () => <AccountScreen section="profile" /> };
-/** "Account · Settings | DE" */
+/** "Account · Settings" */
 export const AccountSettings: Story = { render: () => <AccountScreen section="settings" /> };
-/** "Account · Subscriptions | DE" */
+/** "Account · Subscriptions" */
 export const AccountSubscriptions: Story = { render: () => <AccountScreen section="subscriptions" /> };
-/** "Account · Rentals | DE" */
+/** "Account · Rentals" */
 export const AccountRentals: Story = { render: () => <AccountScreen section="rentals" /> };
-/** "Account · Parental PIN | DE" */
+/** "Account · Parental PIN" */
 export const AccountParentalPin: Story = { render: () => <AccountScreen section="parental-pin" /> };
-/** "Account · Devices | DE" */
+/** "Account · Devices" */
 export const AccountDevices: Story = { render: () => <AccountScreen section="devices" /> };
-/** English account profile (production /en/account). */
-export const AccountProfileEn: Story = { render: () => <AccountScreen section="profile" locale="en" /> };
-/** "Watchlist · empty | DE" */
+/** "Watchlist · empty" */
 export const WatchlistEmpty: Story = { render: () => <WatchlistScreen /> };
-/** "Watchlist | DE" with saved titles. */
-export const Watchlist: Story = { render: () => <WatchlistScreen films={recommended} /> };
+/** "Watchlist" with saved titles. */
+export const Watchlist: Story = { render: () => <WatchlistScreen films={getCatalog("en").recommended} /> };
 /** 404: production "The page could not be found". */
 export const NotFound: Story = { render: () => <NotFoundScreen /> };
 /** A route that failed: production "Something went wrong", link Home. */

@@ -8,13 +8,13 @@ export interface AppShellProps {
   active?: HeaderTab | "none";
   /** Account and watchlist pages show the logged-in header. */
   auth?: HeaderAuth;
-  /** The key screens are German; the landing page also ships in English. */
+  /** Screen language: English by default (Storybook); the German app routes pass "de". */
   locale?: Locale;
   children: ReactNode;
 }
 
 /** Header + page + Footer, as every key screen composes them (Header/Footer instances on the canvas). */
-export function AppShell({ active = "none", auth, locale = "de", children }: AppShellProps) {
+export function AppShell({ active = "none", auth, locale = "en", children }: AppShellProps) {
   const de = locale === "de";
   return (
     <>

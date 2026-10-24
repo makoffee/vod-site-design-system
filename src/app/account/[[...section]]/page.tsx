@@ -13,7 +13,7 @@ const routes: Record<string, AccountSection> = {
   devices: "devices",
 };
 
-export const metadata: Metadata = { title: "Account · Sooner" };
+export const metadata: Metadata = { title: "Konto · Sooner" };
 
 export function generateStaticParams() {
   return Object.keys(routes).map((r) => ({ section: r ? [r] : [] }));
@@ -23,5 +23,5 @@ export default async function AccountPage({ params }: PageProps<"/account/[[...s
   const { section = [] } = await params;
   const id = routes[section.join("/")];
   if (!id) notFound();
-  return <AccountScreen section={id} />;
+  return <AccountScreen section={id} locale="de" />;
 }

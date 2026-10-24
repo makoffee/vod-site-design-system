@@ -16,7 +16,7 @@ export interface WatchlistScreenProps {
  * Watchlist (production sooner.de/watchlist "My list"): page title, then the saved titles as a poster grid (the
  * collection grid) or the empty state. Production sets this title in Playfair; it uses PageTitle like the other list pages.
  */
-export function WatchlistScreen({ films = [], locale = "de" }: WatchlistScreenProps) {
+export function WatchlistScreen({ films = [], locale = "en" }: WatchlistScreenProps) {
   const de = locale === "de";
   const l = de ? watchlistDe : { title: "My list", empty: "Your watchlist is empty" };
   return (

@@ -7,5 +7,5 @@ export default function ErrorPage({ error }: { error: unknown; retry: () => void
   useEffect(() => {
     console.error(error);
   }, [error]);
-  return <ErrorScreen />;
+  return <ErrorScreen locale="de" />;
 }

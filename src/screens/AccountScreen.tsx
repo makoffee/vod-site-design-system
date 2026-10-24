@@ -72,7 +72,7 @@ export interface AccountScreenProps {
 }
 
 /** Account area (production sooner.de/account/*): logged-in header, section nav beside the content, footer. */
-export function AccountScreen({ section = "profile", locale = "de", profile = demoProfile }: AccountScreenProps) {
+export function AccountScreen({ section = "profile", locale = "en", profile = demoProfile }: AccountScreenProps) {
   const de = locale === "de";
   const l: AccountLabels = de ? { ...accountLabels, ...accountDe } : accountLabels;
   const items: AccountNavItem[] = de ? accountNavDe : accountNavItems;
