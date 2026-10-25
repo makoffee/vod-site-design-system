@@ -1,4 +1,4 @@
-// Pasted as use_figma code: decode the payload PNG on brilliant-assets, run the runtime, persist state.
+// Pasted as use_figma code: decode the payload PNG on the Assets page, run the runtime, persist state.
 const AP = await figma.getNodeByIdAsync('2660:257'); await AP.loadAsync();
 const holder = AP.findOne((n) => n.name === 'data:payload');
 const bytes = await figma.getImageByHash(holder.fills[0].imageHash).getBytesAsync();
