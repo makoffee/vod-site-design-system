@@ -21,6 +21,7 @@ from instances with only their differences applied as overrides.
 ## Storybook design links
 
 Stories link their Design tab to Figma through `src/figma-nodes.json` (`figmaComponent("Button")`,
-`figmaScreen("Discover | desktop")` in `src/components/_shared/figma.ts`). A sync rebuilds the Figma pages, so node ids
+`figmaScreen("Discover | desktop")` in `src/components/_shared/figma.ts`). A sync clears and rebuilds the "Components", "Design System" and "Key Screens" pages (names set in `gen.mjs`
+PAGES; renaming a page in Figma means updating PAGES first, or the sync builds new pages beside it), so node ids
 change: after every sync run `links.js` through `use_figma`, save the returned JSON and run
 `node tools/brilliant-figma/write-links.mjs <file>`.

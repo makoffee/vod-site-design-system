@@ -7,7 +7,7 @@ import { encode } from './datapng.mjs';
 
 const PHOSPHOR = process.env.PHOSPHOR || '/Users/makoffee/.claude/jobs/173a3516/tmp/ph/package/assets';
 const GLYPH_NAMES = { 'glyph:v8d0a0b7c': 'Icon/play (drawn)', 'glyph:vea182cbe': 'Icon/plus (drawn)', 'glyph:vaebbfee8': 'Icon/share (drawn)', 'glyph:va6a10f36': 'Icon/speaker-x (drawn)', 'glyph:v12de02cc': 'Icon/cta-round default' };
-const PAGES = { components: 'brilliant-Components', ds: 'brilliant-Design System', screens: 'brilliant-Key Screens' };
+const PAGES = { components: 'Components', ds: 'Design System', screens: 'Key Screens' };
 const SPLIT = 350; // max nodes per build job
 
 const comps = readRows('data/components.x.bl'), ds = readRows('data/ds.x.bl'), screens = readRows('data/screens.x.bl');
