@@ -154,6 +154,7 @@ export const placeholderCatalog: Catalog = {
   comingSoon: screenFilms("coming-soon", 6, () => ({ availableFrom: "Nov 1, 2026" })),
   recommended: screenFilms("recommended", 6, () => ({ badge: placeholder.badge, rentable: true })),
   comingSoonDirector: { name: placeholder.director, href: "/cast/director-name" },
+  comingSoonDescription: loremLong,
   festivals,
   curators: screenChannels("curator", 7),
   directorFocus: screenChannels("director", 7),

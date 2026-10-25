@@ -88,6 +88,8 @@ export interface Catalog {
   recommended: FilmSummary[];
   /** Director of the first coming-soon film (the featured card on discover). */
   comingSoonDirector: { name: string; href: string };
+  /** Synopsis on the featured card; the card shows none when omitted. */
+  comingSoonDescription?: string;
   festivals: ChannelSummary[];
   curators: ChannelSummary[];
   directorFocus: ChannelSummary[];

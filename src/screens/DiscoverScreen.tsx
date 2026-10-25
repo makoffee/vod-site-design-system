@@ -88,13 +88,17 @@ export function DiscoverScreen({ locale = "en", catalog = placeholderCatalog, ed
           </FeedRow>
           {wideRow(c.rows.cultClassics, c.newToRent)}
           <FeedRow {...row} title={c.rows.comingSoon} href="/channel/coming-soon">
-            <FeedItem className="basis-[min(619px,85%)]">
+            {/* Three card slots (the whole row when fewer fit); the film cards set the row height and the featured card fills it. */}
+            <FeedItem className="relative basis-[min(100%,calc(3_*_(100%_-_(var(--items)_-_1)_*_var(--gap))_/_var(--items)_+_2_*_var(--gap)))]">
               <FeaturedFilmCard
+                fitHeight
+                className="absolute inset-0"
                 {...(de ? featuredFilmCardDe : {})}
                 title={featured.title}
                 href={featured.href}
                 director={c.comingSoonDirector.name}
                 directorHref={c.comingSoonDirector.href}
+                description={c.comingSoonDescription}
               />
             </FeedItem>
             {upcoming.map((f) => (

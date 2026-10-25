@@ -36,6 +36,8 @@ export interface FeaturedFilmCardProps {
   onSubscribe?: () => void;
   /** Watchlist (+) button click. */
   onAddToWatchlist?: () => void;
+  /** Fill the parent's height (poster as tall as the card, hidden below 448px of card width; synopsis only from 280px of card height) instead of sizing from the poster width. Use in a FeedRow beside FilmCards so all cards line up. */
+  fitHeight?: boolean;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
@@ -61,14 +63,15 @@ export function FeaturedFilmCard({
   onRent,
   onSubscribe,
   onAddToWatchlist,
+  fitHeight = false,
   className,
 }: FeaturedFilmCardProps) {
   const focus = "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sooner-primary";
 
   return (
-    <div className={cn("@container h-full w-full", className)}>
-      <article className="flex h-full w-full items-center gap-4 overflow-hidden rounded-2xl bg-white p-3 @lg:gap-6 @lg:p-4">
-        <div className="flex min-w-0 flex-1 flex-col gap-2 py-2 pl-2 @lg:py-4 @lg:pl-4">
+    <div className={cn("@container h-full w-full", fitHeight && "[container-type:size]", className)}>
+      <article className={cn("flex h-full w-full gap-4 overflow-hidden rounded-2xl bg-white p-3 @lg:gap-6 @lg:p-4", fitHeight ? "items-stretch" : "items-center")}>
+        <div className={cn("flex min-w-0 flex-1 flex-col gap-2 py-2 pl-2 @lg:py-4 @lg:pl-4", fitHeight && "justify-center overflow-hidden [&>*]:shrink-0")}>
           <div className="flex items-center gap-2.5 pb-2">
             <BinocularIcon className="h-[15px] w-7 shrink-0 text-sooner-primary" />
             <span className="text-xs leading-4 font-bold tracking-[0.3px] text-sooner-primary uppercase">{eyebrow}</span>
@@ -90,7 +93,10 @@ export function FeaturedFilmCard({
               )}
             </p>
           )}
-          {description && <p className="m-0 line-clamp-3 text-sm leading-5 text-gray-700 @lg:line-clamp-4">{description}</p>}
+          {description && (
+            <p className={cn("m-0 text-sm leading-5 text-gray-700", // Fitted cards show the synopsis only when the card is tall enough (280px) to keep every other line whole.
+              fitHeight ? "hidden [@container(min-height:280px)]:line-clamp-3" : "line-clamp-3 @lg:line-clamp-4")}>{description}</p>
+          )}
           <div className="flex flex-wrap items-center gap-2 pt-4">
             {subscribeLabel && (
               <button
@@ -135,7 +141,11 @@ export function FeaturedFilmCard({
           href={href}
           tabIndex={-1}
           aria-hidden
-          className="relative block aspect-[3/4] w-[40%] max-w-[238px] shrink-0 overflow-hidden rounded-sooner bg-linear-135 from-gray-700 to-gray-800"
+          className={cn(
+            "relative block aspect-[3/4] shrink-0 overflow-hidden rounded-sooner bg-linear-135 from-gray-700 to-gray-800",
+            // Fitted cards drop the poster below 448px of card width so the text keeps its room.
+            fitHeight ? "hidden h-full w-auto @md:block" : "w-[40%] max-w-[238px]",
+          )}
         >
           {imageSrc && <Image src={imageSrc} alt="" fill sizes="(max-width: 768px) 40vw, 20vw" className="object-cover" />}
           <span className="pointer-events-none absolute top-3 right-3 z-10 flex h-[26px] w-6 items-center justify-center text-sooner-primary drop-shadow-[0_1px_2px_rgb(0_0_0/0.6)]">
