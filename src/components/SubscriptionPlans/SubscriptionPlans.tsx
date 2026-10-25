@@ -101,7 +101,7 @@ export function SubscriptionPlans({
         <p className="m-0 max-w-[672px] text-center text-base leading-[30px]">{description ?? t.description}</p>
         <div
           className={cn(
-            "grid w-full grid-cols-1 gap-6",
+            "plan-grid grid w-full grid-cols-1 gap-6",
             subscribe
               ? "items-stretch @3xl:grid-cols-2 @6xl:grid-cols-3"
               : "justify-items-center @3xl:grid-cols-2 @3xl:[&>*:nth-child(3):nth-last-child(1)]:col-span-2 @5xl:grid-cols-3 @5xl:[&>*:nth-child(3):nth-last-child(1)]:col-span-1",

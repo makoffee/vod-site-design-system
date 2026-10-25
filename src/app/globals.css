@@ -162,3 +162,39 @@ body {
     scrollbar-color: var(--scrollbar-thumb) transparent;
   }
 }
+
+/*
+ * Plan picker (PlanCard, laid out by SubscriptionPlans). The highlighted plan is violet at rest. Hovering a card, or
+ * keyboard focus inside it, makes that card the violet one with a black CTA; every other card, the highlighted one
+ * included, turns black with a violet CTA. Unlayered so it wins over the Button's own utilities.
+ */
+.plan-card {
+  background-color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 200ms ease-out;
+}
+.plan-card[data-highlighted],
+.plan-card:is(:hover, :has(:focus-visible)) {
+  background-color: var(--color-sooner-primary);
+}
+.plan-card[data-highlighted] .plan-cta,
+.plan-card:is(:hover, :has(:focus-visible)) .plan-cta {
+  background-color: var(--color-black);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
+}
+.plan-card .plan-cta:hover {
+  background-color: var(--color-gray-900);
+}
+/* :has() can't nest, so the grid checks for a hovered card or a focus-visible element inside one. */
+.plan-grid:has(.plan-card:hover, .plan-card :focus-visible) .plan-card[data-highlighted]:not(:hover, :has(:focus-visible)) {
+  background-color: var(--color-black);
+  & .plan-cta {
+    background-color: var(--color-sooner-primary);
+    box-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-card {
+    transition: none;
+  }
+}

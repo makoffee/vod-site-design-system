@@ -13,7 +13,7 @@ export interface PlanCardProps {
    * Its id is monthly, yearly or plus.
    */
   plan: Plan;
-  /** Called with the plan id when the card's CTA button is pressed. */
+  /** Called with the plan id when the card or its CTA button is pressed. */
   onSelect?: (plan: PlanId) => void;
   /** Artwork for the 384 × 199 header. None ships by default. */
   imageSrc?: string;
@@ -26,7 +26,8 @@ export interface PlanCardProps {
 }
 
 /**
- * One subscription plan with its CTA (Prismic slice subscription_plans). The yearly plan is the highlighted card.
+ * One subscription plan with its CTA (Prismic slice subscription_plans). The yearly plan is the highlighted (violet) card
+ * until another card is hovered or focused; the active card turns violet with a black CTA. The whole card is clickable.
  * Use for: a single plan offer with its CTA; SubscriptionPlans lays out all three.
  * Not for: the chosen plan summary in signup/checkout (use ProductCard); the full plan picker (use SubscriptionPlans).
  */
@@ -39,12 +40,12 @@ export function PlanCard({ plan, onSelect, imageSrc, imageAlt = "", pricePositio
   );
 
   return (
+    // The whole card is the click target (the button's click bubbles here too); colours and the active card live in
+    // globals.css (.plan-card / .plan-grid) so a hovered or focused card takes the highlight from the yearly plan.
     <article
-      className={cn(
-        "flex w-full flex-col overflow-hidden rounded-2xl border-2 border-sooner-primary",
-        plan.highlighted ? "bg-sooner-primary" : "bg-black",
-        className,
-      )}
+      data-highlighted={plan.highlighted || undefined}
+      onClick={() => onSelect?.(plan.id)}
+      className={cn("plan-card flex w-full flex-col overflow-hidden rounded-2xl border-2 border-sooner-primary", className)}
     >
       <div className={cn("relative aspect-[384/199] w-full", !imageSrc && "bg-white/5")}>
         {imageSrc && <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 384px, 100vw" className="object-cover" />}
@@ -72,10 +73,7 @@ export function PlanCard({ plan, onSelect, imageSrc, imageAlt = "", pricePositio
         {pricePosition === "bottom" && price}
       </div>
       <div className="p-6">
-        <Button
-          onClick={() => onSelect?.(plan.id)}
-          className={cn(plan.highlighted && "bg-black shadow-[0_3px_8px_rgb(0_0_0/0.25)] hover:bg-gray-900")}
-        >
+        <Button className="plan-cta">
           {plan.cta}
         </Button>
       </div>
