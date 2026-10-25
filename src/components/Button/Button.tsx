@@ -14,7 +14,8 @@ export type ButtonVariant =
   | "cta-text"
   | "cta-light"
   | "cta-round"
-  | "cta-danger";
+  | "cta-danger"
+  | "cta-black";
 /** hover pins the hover look for documentation; real interaction uses CSS. */
 export type ButtonState = "default" | "hover" | "disabled";
 /** sm = 36 (header, .sooner-filled-btn), md = 48 (compact design size, no production equivalent), lg = 56 (.sooner-cta-*). */
@@ -23,7 +24,7 @@ export type ButtonSize = "sm" | "md" | "lg";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Native button type; "button" unless set (use "submit" for a form's submit button). */
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  /** cta-primary (default) violet main action; cta-ghost white/10 glass; cta-white white on dark; cta-text transparent; cta-light gray-100, 14px semibold (UNI banner); cta-round 56px glass circle, play icon when empty; cta-danger red outline (destructive). */
+  /** cta-primary (default) violet main action; cta-ghost white/10 glass; cta-white white on dark; cta-text transparent; cta-light gray-100, 14px semibold (UNI banner); cta-round 56px glass circle, play icon when empty; cta-danger red outline (destructive); cta-black black on light surfaces (white editorial panels, the violet plan card). */
   variant?: ButtonVariant;
   /** default follows real hover/disabled; hover pins the hover look (documentation); disabled disables the button like `disabled`. */
   state?: ButtonState;
@@ -76,6 +77,13 @@ const variants: Record<ButtonVariant, { idle: string; hover: string; hovered: st
     hover: "hover:border-red-400 hover:bg-red-400/10",
     hovered: "border-red-400 bg-red-400/10",
     disabled: "border border-red-400/20 text-red-400/50 font-semibold",
+  },
+  // Dark twin of cta-white for light surfaces: editorial panels, the highlighted (violet) plan card, the yellow banner.
+  "cta-black": {
+    idle: "bg-black text-white font-medium",
+    hover: "hover:bg-gray-900",
+    hovered: "bg-gray-900",
+    disabled: "bg-black text-white font-medium opacity-60",
   },
   // .sooner-cta-round: 56 circle, white/10 + blur 10, hover white/18
   "cta-round": {

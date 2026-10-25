@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { ActionLink } from "../_shared/ActionLink";
 import { BinocularMask } from "../_shared/BinocularMask";
 
 /** image = full-bleed half panel; mask = image clipped to the Sooner binocular. */
@@ -44,13 +44,8 @@ export function EditorialContent({ eyebrow, title, description, cta, as: Heading
       {description && <p className="m-0 text-lg leading-[1.64] text-gray-700">{description}</p>}
       {cta && (
         <div className="pt-4">
-          <Link
-            href={cta.href}
-            className="inline-flex h-12 items-center gap-2 rounded-sooner bg-black px-6 text-base font-medium text-white transition-colors hover:bg-gray-900 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sooner-primary"
-          >
-            {cta.icon}
-            {cta.label}
-          </Link>
+          {/* Black action on the white panel; a violet focus ring, since white would vanish here. */}
+          <ActionLink label={cta.label} href={cta.href} icon={cta.icon} tone="black" className="focus-visible:outline-sooner-primary" />
         </div>
       )}
     </div>

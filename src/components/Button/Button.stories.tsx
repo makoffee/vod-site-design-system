@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import type { Decorator, Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 import { Button } from "./Button";
 import { figmaComponent } from "../_shared/figma";
@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["cta-primary", "cta-ghost", "cta-white", "cta-text", "cta-light", "cta-round"],
+      options: ["cta-primary", "cta-ghost", "cta-white", "cta-black", "cta-text", "cta-light", "cta-round", "cta-danger"],
     },
     state: { control: "inline-radio", options: ["default", "hover", "disabled"] },
     size: { control: "inline-radio", options: ["md", "lg", "sm"] },
@@ -57,3 +57,15 @@ export const PrimaryMdHug: Story = { args: { width: "hug" } };
 export const RoundLgHover: Story = {
   args: { size: "lg", variant: "cta-round", state: "hover", children: undefined, "aria-label": "Play" },
 };
+
+// Black buttons sit on light surfaces, so their stories show them on a white panel.
+const onLight: Decorator = (Story) => (
+  <div className="rounded-2xl bg-white p-6">
+    <Story />
+  </div>
+);
+export const BlackMdDefault: Story = { args: { variant: "cta-black" }, decorators: [onLight] };
+export const BlackMdHover: Story = { args: { variant: "cta-black", state: "hover" }, decorators: [onLight] };
+export const BlackMdDisabled: Story = { args: { variant: "cta-black", state: "disabled" }, decorators: [onLight] };
+export const BlackLgDefault: Story = { args: { variant: "cta-black", size: "lg" }, decorators: [onLight] };
+export const BlackSmDefault: Story = { args: { variant: "cta-black", size: "sm", children: "Button" }, decorators: [onLight] };

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-/** primary = violet, white = white on dark imagery, black = the yearly plan's button on violet. */
+/** primary = violet, white = white on dark imagery, black = on light surfaces (Button cta-black as a link). */
 export type ActionTone = "primary" | "white" | "black";
 
 export interface Action {
@@ -16,7 +16,7 @@ export interface Action {
 const tones: Record<ActionTone, string> = {
   primary: "bg-sooner-primary text-white hover:bg-sooner-primary-dark",
   white: "bg-white text-black hover:bg-white/90",
-  black: "border border-black bg-black text-white hover:bg-black/80",
+  black: "bg-black text-white hover:bg-gray-900",
 };
 
 export interface ActionLinkProps extends Action {
