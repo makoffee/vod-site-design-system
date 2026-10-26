@@ -10,7 +10,7 @@ const meta = {
   component: CollectionHeader,
   args: { ...placeholderCollection, view: "list", onViewChange: fn(), onAvailabilityChange: fn() },
   argTypes: { view: { control: "inline-radio", options: ["grid", "list"] } },
-  decorators: [frame(1152)],
+  decorators: [frame(1872)],
   parameters: {
     ...figmaComponent("CollectionHeader"),
   },
