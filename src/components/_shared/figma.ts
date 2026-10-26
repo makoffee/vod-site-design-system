@@ -3,7 +3,7 @@ import nodes from "@/figma-nodes.json";
 // Story-only helper: the Design tab link to a component or screen in the Sooner Figma file.
 // src/figma-nodes.json maps names to node ids; refresh it with scripts/figma when components or frames are added or renamed.
 
-const url = (id: string) => `https://www.figma.com/design/${nodes.file}/sooner.de-rebrand?node-id=${id.replace(":", "-")}`;
+const url = (id: string) => `https://www.figma.com/design/${nodes.file}/Sooner-Design-System-v2?node-id=${id.replace(":", "-")}`;
 
 /** Design tab parameters for a component (by its name in Figma, which is the React component name). */
 export function figmaComponent(name: keyof typeof nodes.components) {
