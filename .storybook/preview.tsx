@@ -14,7 +14,7 @@ const preview: Preview = {
     // Tokens → Screens → components.
     options: {
       storySort: {
-        order: ["Tokens", "Screens", "Components", "Account", "Feeds", "Discover", "Film", "Search", "Collections", "Marketing", "*"],
+        order: ["Tokens", "Icons", "Screens", "Components", "Account", "Feeds", "Discover", "Film", "Search", "Collections", "Marketing", "*"],
       },
     },
     // Sooner is a dark-only UI; the page background comes from globals.css
