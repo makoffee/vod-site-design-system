@@ -1,5 +1,5 @@
-// Pasted as use_figma code after a sync: returns { components, screens } (name → node id) for src/figma-nodes.json.
-// Save the returned JSON to a file and run: node tools/brilliant-figma/write-links.mjs <file>
+// Run as use_figma code (Figma plugin API) when Figma components or key-screen frames are added or renamed: returns { components, screens } (name → node id) for src/figma-nodes.json.
+// Save the returned JSON to a file and run: node scripts/figma/write-links.mjs <file>
 const out = { components: {}, screens: {} };
 const comps = figma.root.children.find((p) => p.name === "Components");
 await comps.loadAsync();

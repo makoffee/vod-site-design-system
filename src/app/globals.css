@@ -2,7 +2,8 @@
 
 /*
  * Sooner design system tokens.
- * Source of truth: Styles/default.ds and DESIGN-SYSTEM.md in the Brilliant workspace.
+ * Source of truth for tokens: this file. Figma mirrors them as the "Sooner" variable collection (same names,
+ * with the Tailwind class as each variable's code syntax); change both together.
  * Names follow production (sooner.de): the Tailwind palette for text, surfaces and status
  * (text-white/60, bg-white/10, border-white/10, red-500), the sooner-* brand vars, and the
  * "Production drift" fixes (rounded-sooner instead of rounded-[10px], text-display-* sizes).

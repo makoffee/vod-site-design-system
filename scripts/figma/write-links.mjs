@@ -1,4 +1,4 @@
-// Writes src/figma-nodes.json from the JSON returned by links.js. Usage: node tools/brilliant-figma/write-links.mjs <links.json>
+// Writes src/figma-nodes.json from the JSON returned by links.js. Usage: node scripts/figma/write-links.mjs <links.json>
 import fs from "node:fs";
 const src = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
 const sort = (o) => Object.fromEntries(Object.entries(o).sort(([a], [b]) => a.localeCompare(b)));
