@@ -35,14 +35,10 @@ When Figma components or key-screen frames are added or renamed, refresh `src/fi
 `scripts/figma/links.js` as Figma plugin code (e.g. through the Figma MCP `use_figma` tool), save the returned JSON, then
 `node scripts/figma/write-links.mjs <file>`.
 
-## Storybook in Figma (Storybook Connect)
+## Storybook links in Figma
 
-The Storybook is published to Chromatic on every push to `main` (`.github/workflows/chromatic.yml`), and the
-Storybook Connect plugin in Figma links each Figma component to its live story.
-
-1. Create a Chromatic project from this GitHub repo (chromatic.com, sign in with GitHub) and copy its project token.
-2. Add it as the repository secret `CHROMATIC_PROJECT_TOKEN` (GitHub → Settings → Secrets and variables → Actions),
-   then push or run the "Publish Storybook to Chromatic" workflow.
-3. List the links: `node scripts/storybook-connect-links.mjs <appId>` (the `appId` is in the Chromatic project URL;
-   the Storybook dev server must be running for the story index).
-4. In Figma, select a component, run Storybook Connect and paste its story URL from the list.
+Every Figma component's documentation link opens its story on the hosted Storybook
+(https://makoffee.github.io/vod-site-design-system, deployed by GitHub Pages on push to `main`). It shows in the
+component's properties in design mode and in Dev Mode. To refresh after adding components or renaming stories:
+`node scripts/figma/story-links.mjs > links.json`, then run `scripts/figma/set-story-links.js` as Figma plugin code with
+those links.
