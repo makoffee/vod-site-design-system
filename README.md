@@ -12,7 +12,7 @@ The React + Tailwind component library behind sooner.de, documented in Storybook
 | `RULES-GENERATED-UI.md` | How pages are composed | Read it before generating or editing pages |
 
 Code and Figma are linked, not synced: each story's Design tab opens its Figma component or screen
-(`src/figma-nodes.json`), and Storybook Connect shows the live story inside Figma. A change to a component is made
+(`src/figma-nodes.json`), and each Figma component's documentation link opens its story. A change to a component is made
 in code (with its story) and in the Figma component; a change to a token is made in `globals.css` and in the Figma
 "Sooner" variables.
 
@@ -26,7 +26,7 @@ placeholder content only.
 npm run storybook        # Storybook on :6006
 npm run dev              # the app (German routes, /en for English) on :3000
 npx vitest run --project=storybook   # story tests (render, interactions, a11y)
-npm run build-storybook  # static Storybook (deployed to GitHub Pages and Chromatic on push to main)
+npm run build-storybook  # static Storybook (deployed to GitHub Pages on push to main)
 ```
 
 ## Figma links
