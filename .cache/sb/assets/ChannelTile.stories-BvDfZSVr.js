@@ -1,7 +1,0 @@
-import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{l as t}from"./iframe-DOekyo14.js";import{l as n,o as r}from"./catalog-SyQ0kYJV.js";import{n as i,t as a}from"./ChannelTile-BzEgrnSB.js";var o,s,c,l,u;function d(){return(d=e((()=>{o=t(),n(),i(),s={title:`Feeds/ChannelTile`,component:a,args:r[1],decorators:[e=>(0,o.jsx)(`div`,{className:`w-[222px]`,children:(0,o.jsx)(e,{})})],parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},c={},l={args:{name:`Albert Serra`,href:`/channel/albert-serra`,tint:void 0}},u=[`Festival`,`Person`],c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{}`,...c.parameters?.docs?.source},description:{story:`Festival tile ("Collection row squares"); the real tiles use festival artwork.`,...c.parameters?.docs?.description}}},l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
-  args: {
-    name: "Albert Serra",
-    href: "/channel/albert-serra",
-    tint: undefined
-  }
-}`,...l.parameters?.docs?.source},description:{story:`Curator / director tile without artwork.`,...l.parameters?.docs?.description}}}})))()}d();export{c as Festival,l as Person,u as __namedExportsOrder,s as default};

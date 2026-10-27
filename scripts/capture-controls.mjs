@@ -1,7 +1,8 @@
 // Inventory production checkbox / radio / switch controls (markup, classes, computed styles, screenshots).
 import { chromium } from 'playwright';
 import fs from 'fs';
-const OUT = 'design-refs/controls';
+// Production captures live outside the repo (../component-design-refs) so agents searching the project don't treat drifted production UI as the source.
+const OUT = '../component-design-refs/design-refs/controls';
 const URLS = ['https://sooner.de/de/login', 'https://sooner.de/de/signup', 'https://sooner.de/de/subscribe', 'https://sooner.de/de/register'];
 const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 }); const p = await ctx.newPage();
 const report = [];

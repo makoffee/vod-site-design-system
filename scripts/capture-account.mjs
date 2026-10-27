@@ -3,7 +3,8 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 
-const OUT = 'design-refs/account';
+// Production captures live outside the repo (../component-design-refs) so agents searching the project don't treat drifted production UI as the source.
+const OUT = '../component-design-refs/design-refs/account';
 const PATHS = ['account', 'account/settings', 'account/subscriptions', 'account/purchases', 'account/parental_pin', 'account/devices', 'watchlist'];
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: 'de-DE' });

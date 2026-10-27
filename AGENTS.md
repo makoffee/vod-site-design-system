@@ -8,6 +8,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Current state of this project
+
+- This is the sooner.de component library: React + Tailwind v4 components and tokens (`src/components`,
+  `src/app/globals.css`) are the source of truth. Storybook documents them; read the component contract from
+  Storybook MCP (`/mcp`) or `/manifests/components.json` rather than reading source or screenshots.
+- Figma (file `uVA7tqdgZDMe6JK3M8AZQb`, "Sooner Design System v2") is edited directly and mirrors the components;
+  icons are Lucide (same names as `lucide-react`) plus the Sooner basket and binocular. There is no design-tool sync.
+- Components are English-only and take every string as a prop; German lives in `src/i18n/de.ts`, plan copy in
+  `src/content/plans.ts`, production content in `src/content/*`. Storybook shows placeholder content only.
+- Never mix languages in one view. Rows show whole cards only; posters keep 3:4 / 16:9.
+- Work items live in the backlog (`BACKLOG.md` until they move to Linear), not in chat history.
+
 ## Composing UI from this library
 
 Before generating or editing pages, read `RULES-GENERATED-UI.md` (composition, actions, surfaces, states, language)

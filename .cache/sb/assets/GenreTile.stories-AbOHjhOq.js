@@ -1,6 +1,0 @@
-import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{l as t}from"./iframe-DOekyo14.js";import{n,t as r}from"./storyFrames-DETwqqSC.js";import{c as i,l as a}from"./catalog-SyQ0kYJV.js";import{n as o,t as s}from"./GenreTile-DsSEwGB6.js";var c,l,u,d,f;function p(){return(p=e((()=>{c=t(),a(),n(),o(),l={title:`Feeds/GenreTile`,component:s,args:i[0],decorators:[r(`w-[336px]`)],parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},u={},d={decorators:[r(`w-[1392px]`)],render:()=>(0,c.jsx)(`div`,{className:`grid grid-cols-3 gap-4`,children:i.slice(0,6).map(e=>(0,c.jsx)(s,{...e},e.id))})},f=[`Violet`,`Tints`],u.parameters={...u.parameters,docs:{...u.parameters?.docs,source:{originalSource:`{}`,...u.parameters?.docs?.source}}},d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
-  decorators: [frame("w-[1392px]")],
-  render: () => <div className="grid grid-cols-3 gap-4">
-      {genres.slice(0, 6).map(genre => <GenreTile key={genre.id} {...genre} />)}
-    </div>
-}`,...d.parameters?.docs?.source},description:{story:`All six duotones in the design's order.`,...d.parameters?.docs?.description}}}})))()}p();export{d as Tints,u as Violet,f as __namedExportsOrder,l as default};

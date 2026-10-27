@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-/** Visual check that the default.ds tokens resolve through globals.css (production class names). */
+/** Visual check of the design tokens in globals.css (Figma "Sooner" variables use the same names). */
 const meta = {
   title: "Tokens",
   // No component to describe; the tokens live in globals.css.
@@ -13,7 +13,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// [token in default.ds, production class]
+// [token name, Tailwind class]
 const colors = [
   ["color.sooner.primary", "bg-sooner-primary"],
   ["color.sooner.primary-light", "bg-sooner-primary-light"],

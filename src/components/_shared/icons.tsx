@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-// Bespoke Sooner glyphs. Everything else is Lucide (DESIGN-SYSTEM.md: "Lucide, plus the bespoke SoonerBasket").
+// Bespoke Sooner glyphs. Every other icon is Lucide (lucide-react; the same names as the Lucide icons in Figma).
 
 /** Rental basket, path from production sooner.de film cards (18 × 20). Fill follows currentColor. */
 export function SoonerBasket(props: SVGProps<SVGSVGElement>) {

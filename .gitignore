@@ -29,3 +29,7 @@ storybook-static/
 *.sln
 *.swp
 .next/
+
+# Generated caches (Storybook screenshots, TypeScript incremental build)
+.cache/
+tsconfig.tsbuildinfo

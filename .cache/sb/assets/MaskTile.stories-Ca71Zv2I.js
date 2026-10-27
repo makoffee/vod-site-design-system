@@ -1,5 +1,0 @@
-import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{l as t}from"./iframe-DOekyo14.js";import{n,t as r}from"./MaskTile-BHZUVMc8.js";var i,a,o,s,c;function l(){return(l=e((()=>{i=t(),n(),a={title:`Feeds/MaskTile`,component:r,args:{title:`Example Title`,href:`/collection/example`},decorators:[e=>(0,i.jsx)(`div`,{className:`w-[455px]`,children:(0,i.jsx)(e,{})})],parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},o={},s={args:{tinted:!0}},c=[`Default`,`Tinted`],o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{}`,...o.parameters?.docs?.source},description:{story:`Design "Collection row with icon-mask" (copy "Example Title" as on the screen).`,...o.parameters?.docs?.description}}},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
-  args: {
-    tinted: true
-  }
-}`,...s.parameters?.docs?.source}}}})))()}l();export{o as Default,s as Tinted,c as __namedExportsOrder,a as default};

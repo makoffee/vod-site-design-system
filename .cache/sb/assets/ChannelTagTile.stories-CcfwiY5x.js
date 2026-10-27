@@ -1,6 +1,0 @@
-import{n as e}from"./rolldown-runtime-2s6bX4vc.js";import{n as t,t as n}from"./storyFrames-DETwqqSC.js";import{a as r,l as i}from"./catalog-SyQ0kYJV.js";import{n as a,t as o}from"./ChannelTagTile-CgAZGTlG.js";var s,c,l,u;function d(){return(d=e((()=>{i(),t(),a(),s={title:`Film/ChannelTagTile`,component:o,args:r[0],decorators:[n(`w-[339px]`)],parameters:{design:{type:`figma`,url:`https://www.figma.com/file/bl-mvauqmo6-kg62ml22147e174l`}}},c={},l={args:{aspect:`square`},decorators:[n(`w-[222px]`)]},u=[`Default`,`Square`],c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{}`,...c.parameters?.docs?.source}}},l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
-  args: {
-    aspect: "square"
-  },
-  decorators: [frame("w-[222px]")]
-}`,...l.parameters?.docs?.source},description:{story:`Channels page "Tag Collection" rows.`,...l.parameters?.docs?.description}}}})))()}d();export{c as Default,l as Square,u as __namedExportsOrder,s as default};
