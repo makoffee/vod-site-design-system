@@ -18,7 +18,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Components are English-only and take every string as a prop; German lives in `src/i18n/de.ts`, plan copy in
   `src/content/plans.ts`, production content in `src/content/*`. Storybook shows placeholder content only.
 - Never mix languages in one view. Rows show whole cards only; posters keep 3:4 / 16:9.
-- Work items live in the backlog (`BACKLOG.md` until they move to Linear), not in chat history.
+- Work items live in Linear (EYZ Media team, project "Sooner Design System"), not in chat history or repo files.
 
 ## Composing UI from this library
 
