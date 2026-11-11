@@ -119,6 +119,8 @@ export const headerDe: HeaderLabels = {
   search: "Suche",
   menu: "Menü",
   closeMenu: "Menü schließen",
+  // Mobile menu: live DE shows "Genres"; "Discover"/"Channels" are English there, so ours ("Entdecken", "Kanäle").
+  menuItems: { discover: "Entdecken", channels: "Kanäle", categories: "Genres", search: "Suche", watchlist: "Watchlist" },
   tabs: {
     discover: "Entdecken",
     collections: uiDe.collections,

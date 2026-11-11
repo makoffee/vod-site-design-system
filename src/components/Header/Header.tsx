@@ -17,6 +17,14 @@ import { SoonerLogo } from "../SoonerLogo/SoonerLogo";
 export type HeaderAuth = "logged-out" | "logged-in";
 export type HeaderTab = "discover" | "collections" | "genres" | "magazine" | "watchlist";
 
+// Mobile menu rows (production sooner.de below 768px): not the desktop tabs.
+export type MenuItem = "discover" | "channels" | "categories" | "search" | "watchlist";
+const menuLinks: { id: Exclude<MenuItem, "search">; href: string; activeFor: HeaderTab | "none" }[] = [
+  { id: "discover", href: "/discover", activeFor: "discover" },
+  { id: "channels", href: "/channels", activeFor: "none" },
+  { id: "categories", href: "/categories", activeFor: "genres" },
+];
+
 const tabs: { id: HeaderTab; href: string }[] = [
   { id: "discover", href: "/discover" },
   { id: "collections", href: "/collections" },
@@ -37,6 +45,8 @@ export interface HeaderLabels {
   menu: string;
   /** Accessible name of the menu button while the menu is open ("Close menu"). */
   closeMenu: string;
+  /** Mobile menu rows, as on production: Discover, Channels, Categories, Search, and Watchlist when logged in. */
+  menuItems: Record<MenuItem, string>;
   /** Tab text, one per HeaderTab ("Discover", "Collections", "Genres", "Magazine", "Watchlist"). */
   tabs: Record<HeaderTab, string>;
   /** Login button text ("Login"). */
@@ -57,6 +67,7 @@ export const headerLabels: HeaderLabels = {
   search: "Search",
   menu: "Menu",
   closeMenu: "Close menu",
+  menuItems: { discover: "Discover", channels: "Channels", categories: "Categories", search: "Search", watchlist: "Watchlist" },
   tabs: { discover: "Discover", collections: "Collections", genres: "Genres", magazine: "Magazine", watchlist: "Watchlist" },
   login: "Login",
   signUp: "Sign up",
@@ -114,7 +125,8 @@ const iconButton =
 /**
  * Sticky 64px site header: logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
  * Sign up or the Avatar. Below 1024px of container width: logo, search, language, Avatar (logged in) and a menu
- * button that opens the menu (the tabs and Search as rows, plus Login / Sign up when logged out). All text comes from
+ * button that opens the menu (production rows: Discover, Channels, Categories, Search, Watchlist when logged in; Login /
+ * Sign up when logged out). All text comes from
  * `labels` (English defaults).
  * Use for: the top bar of every page screen.
  * Not for: account-section navigation (use AccountNav).
@@ -236,29 +248,38 @@ export function Header({
       </div>
 
       {open && (
-        // Mobile menu (production sooner.de below 768px): the tabs and Search as full-width rows, then Login / Sign up
-        // when logged out. It drops down inside the header, so the header's floating glass covers it.
+        // Mobile menu (production sooner.de below 768px): Discover, Channels, Categories, Search (+ Watchlist when logged
+        // in) as full-width rows, then left-aligned Login / Sign up when logged out. It drops down inside the header.
         <div id="header-menu" className="border-t border-white/10 @5xl:hidden">
           <nav aria-label={l.navigation} className="flex flex-col gap-1 px-6 py-4">
-            {visibleTabs.map((t) => (
+            {menuLinks.map((m) => (
               <Link
-                key={t.id}
-                href={t.href}
-                aria-current={active === t.id ? "page" : undefined}
-                className={cn(menuItem, active === t.id ? "bg-sooner-primary/10" : "hover:text-sooner-primary-light")}
+                key={m.id}
+                href={m.href}
+                aria-current={active !== "none" && active === m.activeFor ? "page" : undefined}
+                className={cn(menuItem, active !== "none" && active === m.activeFor ? "bg-sooner-primary/10" : "hover:text-sooner-primary-light")}
               >
-                {l.tabs[t.id]}
+                {l.menuItems[m.id]}
               </Link>
             ))}
             <button type="button" onClick={onSearch} className={cn(menuItem, "text-left hover:text-sooner-primary-light")}>
-              {l.search}
+              {l.menuItems.search}
             </button>
+            {loggedIn && !hideWatchlist && (
+              <Link
+                href="/watchlist"
+                aria-current={active === "watchlist" ? "page" : undefined}
+                className={cn(menuItem, active === "watchlist" ? "bg-sooner-primary/10" : "hover:text-sooner-primary-light")}
+              >
+                {l.menuItems.watchlist}
+              </Link>
+            )}
             {!loggedIn && (
               <div className="flex flex-col gap-2 pt-4">
-                <Button variant="cta-text" size="sm" width="fill" onClick={onLogin}>
+                <Button variant="cta-text" size="sm" width="fill" onClick={onLogin} className="justify-start">
                   {l.login}
                 </Button>
-                <Button variant="cta-primary" size="sm" width="fill" onClick={onSignUp}>
+                <Button variant="cta-primary" size="sm" width="fill" onClick={onSignUp} className="justify-start">
                   {l.signUp}
                 </Button>
               </div>
