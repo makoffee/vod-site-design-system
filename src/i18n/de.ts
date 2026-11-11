@@ -21,12 +21,12 @@ import type { CollectionHeaderProps } from "@/components/CollectionHeader/Collec
  * screen references these keys, so a change here applies everywhere. Short, neutral UI terms only; no marketing copy.
  */
 export const uiDe = {
-  /** Header tab "Collections". */
-  collections: "Kollektionen",
+  /** Header tab "Collections" (production DE "Collections", e.g. "Thematische Collections"). */
+  collections: "Collections",
   /** Header tab "Magazine". */
   magazine: "Magazin",
-  /** AvailabilityFilter "All". */
-  all: "Alle",
+  /** AvailabilityFilter "All" (production DE "Alles"). */
+  all: "Alles",
   /** FilmBadge "Exclusive". */
   exclusive: "Exklusiv",
   /** FilmDetails "Synopsis" (production DE film pages show "Synopsis"). */
@@ -34,11 +34,11 @@ export const uiDe = {
   /** Film fact "Casting" (production DE film pages show "Casting"). */
   casting: "Besetzung",
   /** FilmDetails "Festivals & Awards" (production DE film pages show "Festivals & Awards"). */
-  festivalsAwards: "Festivals & Preise",
+  festivalsAwards: "Festivals & Auszeichnungen",
   /** Film page row "Quotes and reviews" (shown only for films with quotes). */
   quotes: "Pressestimmen",
-  /** CollectionHeader collapse toggle "Show less" (production expand label is "Zeig mehr"). */
-  showLess: "Zeig weniger",
+  /** CollectionHeader collapse toggle "Show less" (production DE "Weniger anzeigen"; expand is "Zeig mehr"). */
+  showLess: "Weniger anzeigen",
   /** ViewToggle / CollectionHeader "Grid view". */
   gridView: "Rasteransicht",
   /** ViewToggle / CollectionHeader "List view". */
@@ -49,8 +49,8 @@ export const uiDe = {
   helpSupport: "Hilfe & Support",
   /** Footer "Press". */
   press: "Presse",
-  /** Footer "Cookie Policy". */
-  cookiePolicy: "Cookie-Richtlinie",
+  /** Footer "Cookie Policy" (production DE "Cookie-Richtlinien"). */
+  cookiePolicy: "Cookie-Richtlinien",
 };
 
 export const filmHeroDe = {
@@ -58,7 +58,7 @@ export const filmHeroDe = {
   subscribeLabel: "Abonnieren",
   rentLabel: "Leihen",
   trailerLabel: "Trailer",
-  watchlistLabel: "Zur Merkliste hinzufügen",
+  watchlistLabel: "Zur Watchlist hinzufügen",
   shareLabel: "Teilen",
   muteLabel: "Stumm",
   unmuteLabel: "Stumm aus",
@@ -67,7 +67,7 @@ export const filmHeroDe = {
 export const promoHeroDe = {
   // Production markup (not in the strings file).
   watchLabel: "Hier anschauen",
-  addToListLabel: "Zur Merkliste hinzufügen",
+  addToListLabel: "Zur Liste hinzufügen",
   previousLabel: "Vorherige Promo",
   nextLabel: "Nächste Promo",
   slideLabel: "Promo {index} von {total}: {title}",
@@ -86,7 +86,7 @@ export const featuredFilmCardDe = {
   byLabel: "Von",
   rentLabel: "Leihen",
   subscribeLabel: "Abonnieren",
-  watchlistLabel: "Zur Merkliste hinzufügen",
+  watchlistLabel: "Zur Watchlist hinzufügen",
 } satisfies Partial<FeaturedFilmCardProps>;
 
 export const filmCardDe = { availableLabel: "Ab" };
@@ -109,10 +109,10 @@ export const filmListItemDe = {
   byLabel: "Von",
   subscribeLabel: "Abonnieren",
   rentLabel: "Leihen",
-  watchlistLabel: "Zur Merkliste hinzufügen",
+  watchlistLabel: "Zur Watchlist hinzufügen",
 } satisfies Partial<FilmListItemProps>;
 
-/** Header: production DE strings (footer "Entdecken", strings file "Genre", "Anmelden", "Registrieren", "Oberflächensprache"). */
+/** Header: production DE strings (footer "Entdecken", "Genres", "Watchlist", "Anmelden", "Registrieren", "Oberflächensprache"). */
 export const headerDe: HeaderLabels = {
   home: "Sooner Startseite",
   navigation: "Hauptnavigation",
@@ -122,10 +122,10 @@ export const headerDe: HeaderLabels = {
   tabs: {
     discover: "Entdecken",
     collections: uiDe.collections,
-    genres: "Genre",
+    genres: "Genres",
     magazine: uiDe.magazine,
-    // One term for the watchlist everywhere: "Merkliste".
-    watchlist: "Merkliste",
+    // Production DE uses "Watchlist" everywhere ("Meine Watchlist", "Zur Watchlist hinzufügen").
+    watchlist: "Watchlist",
   },
   login: "Anmelden",
   signUp: "Registrieren",
@@ -152,7 +152,7 @@ export const searchResultsDe = { resultsFor: "Ergebnisse für" };
 export const accountNavDe = [
   { id: "profile", label: "Profil", href: "/account" },
   { id: "settings", label: "Einstellungen", href: "/account/settings" },
-  { id: "subscriptions", label: "Abos | Cards", href: "/account/subscriptions" },
+  { id: "subscriptions", label: "SOONER+ - mein Abo", href: "/account/subscriptions" },
   { id: "rentals", label: "Ausleihen", href: "/account/purchases" },
   { id: "parental-pin", label: "Jugendschutz-PIN", href: "/account/parental_pin" },
   { id: "devices", label: "Geräte", href: "/account/devices" },
@@ -188,12 +188,12 @@ export const accountDe = {
   devicesSubmit: "Weiter",
 } satisfies Partial<AccountLabels>;
 
-export const watchlistDe = { title: "Merkliste", empty: "Deine Merkliste ist leer" };
+export const watchlistDe = { title: "Meine Watchlist", empty: "Deine Watchlist ist leer" };
 
-/** Production strings (de): search with no results, a failed load, page not found. */
+/** Production strings (de): search with no results (live "Keine Suchergebnisse", no query or hint), a failed load
+ * (live "Etwas ist schief gelaufen", spelled correctly here), page not found. */
 export const statesDe = {
-  noResultsFor: "Keine Ergebnisse für",
-  noResultsHint: "Versuch es mit einem anderen Titel, Regisseur oder Schauspieler",
+  noResults: "Keine Suchergebnisse",
   error: "Etwas ist schiefgelaufen",
   notFound: "Die Seite wurde nicht gefunden",
   notFoundHint: "Wir können die gesuchte Seite nicht finden",

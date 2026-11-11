@@ -56,10 +56,10 @@ German passed through a `locale` prop on a component.
 
 **Expected**
 - `SearchField {...searchDe}` with the query
-- `EmptyState surface="plain"`, `message` "Keine Ergebnisse für „Xyzzy“", `description` from `searchResultsDe.noResultsHint`
+- `EmptyState surface="plain"`, `message` "Keine Suchergebnisse" (`statesDe.noResults`), no description (production DE shows no query or hint)
 - At most one action
 
-**Fails if:** the hint is put in the message; a made-up suggestion list; "Sie" mixed with "du".
+**Fails if:** an invented hint line; a made-up suggestion list; English on the page.
 
 ## 5. Watchlist, empty and full
 
@@ -67,11 +67,11 @@ German passed through a `locale` prop on a component.
 
 **Expected**
 - Logged-in header (`auth="logged-in"`, `active="watchlist"`)
-- Title from `watchlistDe.title` ("Merkliste")
-- Empty: `EmptyState surface="plain"`, message "Deine Merkliste ist leer"
+- Title from `watchlistDe.title` ("Meine Watchlist")
+- Empty: `EmptyState surface="plain"`, message "Deine Watchlist ist leer"
 - Full: `FilmCard`s in the collection grid (same card as the rows)
 
-**Fails if:** a new card component for the grid; "Watchlist", "Meine Liste" or "Merkliste" mixed in one view.
+**Fails if:** a new card component for the grid; "Merkliste" or "Meine Liste" instead of production's "Watchlist".
 
 ## 6. Account settings
 

@@ -65,7 +65,7 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
 - Loading: keep the layout and show `Skeleton`s in the shape of what's coming (posters stay 3:4 / 16:9). A feed
   uses `FeedRow loading`. Announce "Loading…" once per region (FeedRow does), not per skeleton. No spinners.
 - Nothing to show: `EmptyState` (`surface="panel"` inside account pages, `surface="plain"` on a full page), with at
-  most one action. Search: "No results for „…“" plus the hint as `description`.
+  most one action. Search: "No results for “…”" plus the hint as `description` (English); German production shows only "Keine Suchergebnisse" (`statesDe.noResults`), no query or hint.
 - Failed to load: `EmptyState tone="error"` with production "Something went wrong". It looks as calm as an empty
   state; it is announced as an alert. There is no production retry label yet, so don't invent one: link Home or
   leave the action out.
@@ -90,6 +90,8 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
 - Screens take their content as props (`catalog`, `editorial`, `content`, `profile`) and default to the placeholders in
   `src/mocks/placeholder.ts`. Production content lives in `src/content` (catalog, editorial, landing, account, plans)
   and only the app routes in `src/app` pass it in. Stories import nothing from `src/content` except the plans.
+- German copy matches live sooner.de/de wherever it has a German string (`src/i18n/de.ts`), except obvious spelling
+  mistakes; our translation only where production shows English or has nothing.
 - Use real product copy. If the copy doesn't exist yet, leave the component's English default or a clearly marked
   placeholder. Never make up marketing lines, prices or legal text.
 - Buttons are short verbs ("Subscribe", "Continue", "Save").

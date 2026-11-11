@@ -7,14 +7,14 @@ import type { Catalog } from "./content";
 export interface CategoriesScreenProps {
   /** Screen language: English (default, Storybook) or German (the /categories route). */
   locale?: Locale;
-  /** Page title; production "Genres" (EN) / "Genre" (DE). */
+  /** Page title; production "Genres" (EN and DE). */
   title?: string;
   /** Genres; placeholder content by default (the /categories route passes the catalogue). */
   catalog?: Catalog;
 }
 
 /** Genres (production /en/categories and /de/categories): duotone genre tiles, 2 → 4 columns. */
-export function CategoriesScreen({ locale = "en", title = locale === "de" ? "Genre" : "Genres", catalog = placeholderCatalog }: CategoriesScreenProps) {
+export function CategoriesScreen({ locale = "en", title = "Genres", catalog = placeholderCatalog }: CategoriesScreenProps) {
   const { genres } = catalog;
   return (
     <AppShell active="genres" locale={locale}>

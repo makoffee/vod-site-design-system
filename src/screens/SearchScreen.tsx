@@ -45,7 +45,7 @@ export function SearchScreen({ defaultQuery = "", results, locale = "en", catalo
   const de = locale === "de";
   const c = catalog;
   const hits = results ?? [...c.recommended, ...c.exclusives, ...c.newToRent, ...c.recommended, ...c.exclusives, ...c.newToRent].slice(0, 36);
-  const t = de ? { resultsFor: searchResultsDe.resultsFor, noResultsFor: statesDe.noResultsFor, noResultsHint: statesDe.noResultsHint } : searchEn;
+  const t = de ? { resultsFor: searchResultsDe.resultsFor } : searchEn;
   const quoted = de ? `„${query}“` : `“${query}”`;
   const row = de ? feedRowDe : {};
   const card = de ? filmCardDe : {};
@@ -109,8 +109,9 @@ export function SearchScreen({ defaultQuery = "", results, locale = "en", catalo
           <EmptyState
             surface="plain"
             icon={<Search strokeWidth={1.5} aria-hidden />}
-            message={`${t.noResultsFor} ${quoted}`}
-            description={t.noResultsHint}
+            // DE production shows only "Keine Suchergebnisse" (no query, no hint).
+            message={de ? statesDe.noResults : `${searchEn.noResultsFor} ${quoted}`}
+            description={de ? undefined : searchEn.noResultsHint}
           />
         ) : view === "grid" ? (
           <div className="grid grid-cols-2 gap-3 @xl:grid-cols-3 @4xl:grid-cols-5 @6xl:grid-cols-6">

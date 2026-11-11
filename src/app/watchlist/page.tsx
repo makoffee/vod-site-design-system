@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WatchlistScreen } from "@/screens/WatchlistScreen";
 
-export const metadata: Metadata = { title: "Merkliste · Sooner" };
+export const metadata: Metadata = { title: "Meine Watchlist · Sooner" };
 
 export default function WatchlistPage() {
   return <WatchlistScreen locale="de" />;
