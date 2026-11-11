@@ -5,7 +5,7 @@
 // catalog API once the repo is connected. Routes pass getCatalog(locale) to the screens.
 
 import type { GenreTint } from "@/components/GenreTile/GenreTile";
-import { proposedDe } from "@/i18n/de";
+import { uiDe } from "@/i18n/de";
 import type { Locale } from "@/i18n/locale";
 import type { Catalog, ChannelSummary, FilmPage, FilmSummary, GenreSummary, RowTitles } from "@/screens/content";
 
@@ -76,7 +76,7 @@ const recommendedFilms: FilmEntry[] = [
   f("cold-war", "Cold War", { exclusive: true, rentable: true }),
 ];
 
-const exclusiveBadge: L10n = { en: "Exclusive", de: proposedDe.exclusive };
+const exclusiveBadge: L10n = { en: "Exclusive", de: uiDe.exclusive };
 
 const films = (entries: FilmEntry[], locale: Locale): FilmSummary[] =>
   entries.map(({ id, title, exclusive, rentable, availableFrom }) => ({
@@ -237,11 +237,11 @@ const animale: Record<Locale, FilmPage> = {
     synopsis:
       "ANIMALE folgt Nejma, 22, auf einer Farm in der Camargue, wo Bullen für die Arena gezüchtet werden und Härte den Ton angibt. Emma Benestan stellt eine junge Frau ins Zentrum, die sich in einem streng männlich geprägten Umfeld behaupten muss, zwischen Neugier, Anspannung und latenter Gefahr. Je länger Nejma dort arbeitet, desto deutlicher wird, wie sehr sie beobachtet, geprüft und auch benutzt wird. Einige Männer machen sich über sie lustig, andere behandeln ihre Anwesenheit als Anlass für zweifelhafte Annäherungen, während die Sorge der Mutter das körperliche Risiko noch einmal verschärft. Der Konflikt wächst aus diesen Begegnungen und aus dem Druck, sich in einer Ordnung zurechtzufinden, die nicht für sie gemacht ist. Gleichzeitig verbindet ANIMALE Nejmas Geschichte mit den Stieren selbst: Sie sind stark, ausgestellt und doch unter Kontrolle. Gerade dort, wo der Film vom Dialog weg in visuelle und körperliche Eindrücke übergeht, entfaltet er seine größte Wirkung. ANIMALE bleibt ein konzentriertes, offenes Werk, das seinen Figuren aufmerksam folgt und den Blick ruhig hält.",
     festivals: ["Cannes - La Semaine de la Critique", "Festival de Cannes"],
-    // Production DE labels, except "Casting" (shown in English on the DE page): proposed German.
+    // Production DE labels, except "Casting" (shown in English on the DE page): uiDe.
     meta: [
       { label: "Regie", value: ["Emma Benestan"] },
       { label: "Genre", value: ["Drama, Horror"] },
-      { label: proposedDe.casting, value: animaleCast },
+      { label: uiDe.casting, value: animaleCast },
       { label: "Laufzeit (Min.)", value: ["98"] },
       { label: "Jahr", value: ["2024"] },
       { label: "Land", value: ["Frankreich, Belgien, Saudi-Arabien"] },
@@ -313,11 +313,11 @@ const rows = {
     cultClassics: "Cult Classics: Early Works",
     // Production keeps "Coming Soon" as the row name on the DE site.
     comingSoon: "Coming Soon",
-    collections: proposedDe.collections,
+    collections: uiDe.collections,
     recommended: "Empfohlen",
     recommendedForYou: "Das könnte dir gefallen",
     featuredIn: "Enthalten in",
-    quotes: proposedDe.quotes,
+    quotes: uiDe.quotes,
   },
 } satisfies Record<Locale, RowTitles>;
 

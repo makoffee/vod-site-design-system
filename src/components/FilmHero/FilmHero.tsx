@@ -19,7 +19,7 @@ export interface FilmHeroProps {
   directorLabel?: string;
   /** Production "Subscribe" (de "Abonnieren"), or e.g. "FREE TRIAL". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   subscribeLabel?: string | null;
-  /** Production "Rent" (de "Leihen"), or with a price, e.g. "Rent - 4,99€". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
+  /** Production "Rent" (de "Leihen"), or with a price from the catalogue, e.g. "Rent - 4,99€" (production format). Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   rentLabel?: string | null;
   /** Production "Trailer". Omit with null. Label text; English default, pass German on DE screens (filmHeroDe). */
   trailerLabel?: string | null;

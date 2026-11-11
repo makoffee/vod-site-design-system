@@ -18,8 +18,8 @@ export type ButtonVariant =
   | "cta-black";
 /** hover pins the hover look for documentation; real interaction uses CSS. */
 export type ButtonState = "default" | "hover" | "disabled";
-/** sm = 36 (header, .sooner-filled-btn), md = 48 (compact design size, no production equivalent), lg = 56 (.sooner-cta-*). */
-export type ButtonSize = "sm" | "md" | "lg";
+/** sm = 36 (header, .sooner-filled-btn), compact = 36 in sentence case (card actions), md = 48 (compact design size, no production equivalent), lg = 56 (.sooner-cta-*). */
+export type ButtonSize = "sm" | "compact" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Native button type; "button" unless set (use "submit" for a form's submit button). */
@@ -28,9 +28,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   /** default follows real hover/disabled; hover pins the hover look (documentation); disabled disables the button like `disabled`. */
   state?: ButtonState;
-  /** sm = 36px, uppercase 14px nav type (header); md = 48px (default); lg = 56px (production CTA). Ignored by cta-round. */
+  /** sm = 36px, uppercase 14px nav type (header); compact = 36px, 14px semibold in sentence case (card actions, e.g. FeaturedFilmCard); md = 48px (default); lg = 56px (production CTA). Ignored by cta-round. */
   size?: ButtonSize;
-  /** fill = stretch to the parent (default for md/lg); hug = fit the label (default for sm). */
+  /** fill = stretch to the parent (default for md/lg); hug = fit the label (default for sm and compact). */
   width?: Sizing;
 }
 
@@ -97,6 +97,7 @@ const variants: Record<ButtonVariant, { idle: string; hover: string; hovered: st
 // md/lg are 16/24 with the variant's weight and case (above); sm uses typography.nav.action.
 const sizes: Record<ButtonSize, string> = {
   sm: "h-9 px-4",
+  compact: "h-9 px-3",
   md: "h-12 px-6 text-base",
   lg: "h-14 px-8 text-base",
 };
@@ -132,10 +133,12 @@ export function Button({
         focusVisible,
         "disabled:cursor-not-allowed",
         isRound ? "size-14 rounded-full" : cn("rounded-sooner", sizes[size]),
-        !isRound && cn(widthClass[width ?? (size === "sm" ? "hug" : "fill")], "shrink"),
+        !isRound && cn(widthClass[width ?? (size === "sm" || size === "compact" ? "hug" : "fill")], "shrink"),
         isDisabled ? styles.disabled : cn(styles.idle, state === "hover" ? styles.hovered : styles.hover),
         // sm keeps typography.nav.action (14/500, 0.05em, uppercase) regardless of variant.
         size === "sm" && "text-nav-action font-medium uppercase tracking-[0.05em]",
+        // compact uses typography.text.sm-semibold in sentence case regardless of variant.
+        size === "compact" && "text-sm font-semibold normal-case tracking-normal",
         // cta-light keeps typography.text.sm-semibold (UNI banner).
         variant === "cta-light" && "px-3 text-sm font-semibold normal-case tracking-normal",
         className,

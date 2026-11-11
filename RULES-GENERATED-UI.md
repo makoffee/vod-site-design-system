@@ -21,6 +21,10 @@ the rule wins: production has drifted, the design has not.
   (`auth="logged-in"`).
 - Content sits on black. Section rhythm comes from the components; don't add dividers or background bands between
   feeds.
+- Use `AppShell` (header + content + footer, `auth`, `active`, `locale`) and `PageTitle` from `src/screens/AppShell.tsx`
+  for the page frame and the page heading; they are part of the library even though they live next to the screens.
+- Film grids (watchlist, collection, search results) copy the grid from `src/screens/WatchlistScreen.tsx`; there is
+  no grid component.
 - Reference compositions live in `src/screens/*.tsx` (Discover, Film, Collection, Search, Account, Watchlist, Landing,
   Auth, Onboarding). Copy their structure before inventing a new one.
 
@@ -73,6 +77,8 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
 
 ## 7. Copy and language
 
+- A prompt that names no language gets English (the Storybook language). German only when asked for, or on the app's
+  German routes.
 - One language per view. A German screen is German from header to footer, an English screen English. Never mix.
 - Components have no language of their own: no `locale` prop, no copy tables, no German variants. They take every
   string (or data object, like a plan) as props, with English defaults. German screens pass German strings from
@@ -87,6 +93,8 @@ Loading, EmptyState NoResults / LoadError, Screens Search no results / Not found
 - Use real product copy. If the copy doesn't exist yet, leave the component's English default or a clearly marked
   placeholder. Never make up marketing lines, prices or legal text.
 - Buttons are short verbs ("Subscribe", "Continue", "Save").
+- A rent button shows a price only when the screen passes one from the catalogue, in the production format "Rent - 4,99€" /
+  "Leihen - 4,99€". Never write a price into a label yourself.
 
 ## 8. Layout and responsiveness
 

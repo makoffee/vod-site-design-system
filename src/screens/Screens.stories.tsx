@@ -56,7 +56,7 @@ export const Search: Story = { parameters: figmaScreen("Search Overlay | desktop
 /** Search results for a query, with the in-nav field. */
 export const SearchResults: Story = { parameters: figmaScreen("Search Results | desktop"), render: () => <SearchScreen defaultQuery="Search term" /> };
 /** "No results for" + hint, production strings. */
-export const SearchNoResults: Story = { render: () => <SearchScreen defaultQuery="Search term" results={[]} /> };
+export const SearchNoResults: Story = { parameters: figmaScreen("Search · no results | EN | desktop"), render: () => <SearchScreen defaultQuery="Search term" results={[]} /> };
 /** Login page. */
 export const Login: Story = { parameters: figmaScreen("Login | desktop"), render: () => <AuthScreen /> };
 /** Signup page with the chosen plan above the form. */
@@ -85,6 +85,6 @@ export const WatchlistEmpty: Story = { parameters: figmaScreen("Watchlist · emp
 /** Watchlist with saved titles. */
 export const Watchlist: Story = { parameters: figmaScreen("Watchlist | EN | desktop"), render: () => <WatchlistScreen films={placeholderCatalog.recommended} /> };
 /** 404: production "The page could not be found". */
-export const NotFound: Story = { render: () => <NotFoundScreen /> };
+export const NotFound: Story = { parameters: figmaScreen("Not found | EN | desktop"), render: () => <NotFoundScreen /> };
 /** A route that failed: production "Something went wrong", link Home. */
-export const RouteError: Story = { name: "Error", render: () => <ErrorScreen /> };
+export const RouteError: Story = { name: "Error", parameters: figmaScreen("Error | EN | desktop"), render: () => <ErrorScreen /> };

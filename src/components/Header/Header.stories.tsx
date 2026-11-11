@@ -14,6 +14,7 @@ const meta = {
     onLogin: fn(),
     onSignUp: fn(),
     onMenu: fn(),
+    onLogout: fn(),
     onLanguageChange: fn(),
   },
   argTypes: {
@@ -50,6 +51,16 @@ export const DesktopLoggedInMagazine: Story = { args: { auth: "logged-in", activ
 export const DesktopLoggedInWatchlist: Story = { args: { auth: "logged-in", active: "watchlist" }, decorators: [desktop] };
 export const MobileLoggedOut: Story = { decorators: [mobile], globals: viewport("mobile") };
 export const MobileLoggedIn: Story = { args: { auth: "logged-in" }, decorators: [mobile], globals: viewport("mobile") };
+/** Mobile menu open, logged out: tabs and Search as rows, then Login / Sign up. */
+export const MobileMenuLoggedOut: Story = { args: { menuOpen: true, active: "discover" }, decorators: [mobile], globals: viewport("mobile") };
+/** Mobile menu open, logged in: tabs and Search (the Avatar stays in the bar). */
+export const MobileMenuLoggedIn: Story = { args: { menuOpen: true, auth: "logged-in", active: "discover" }, decorators: [mobile], globals: viewport("mobile") };
+/** Logged in, Avatar menu open (desktop). */
+export const DesktopAccountMenu: Story = { args: { auth: "logged-in", active: "discover", accountMenuOpen: true }, decorators: [desktop] };
+/** Logged in, Avatar menu open (mobile). */
+export const MobileAccountMenu: Story = { args: { auth: "logged-in", accountMenuOpen: true }, decorators: [mobile], globals: viewport("mobile") };
+/** Tablet (768): still the mobile layout below 1024px, menu open. */
+export const TabletMenuLoggedOut: Story = { args: { menuOpen: true, active: "discover" }, decorators: [frame(768)] };
 
 /** Marketing pages: the Watchlist tab is hidden. */
 export const WatchlistHidden: Story = { args: { hideWatchlist: true }, decorators: [desktop] };

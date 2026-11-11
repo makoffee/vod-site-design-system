@@ -4,6 +4,7 @@ import { Play, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { Button } from "../Button/Button";
 import { BinocularIcon } from "../_shared/BinocularMask";
 import { SoonerBasket } from "../_shared/icons";
 
@@ -99,30 +100,16 @@ export function FeaturedFilmCard({
           )}
           <div className="flex flex-wrap items-center gap-2 pt-4">
             {subscribeLabel && (
-              <button
-                type="button"
-                onClick={onSubscribe}
-                className={cn(
-                  "inline-flex h-9 items-center gap-2 rounded-sooner bg-black px-3 text-sm font-semibold text-white transition-colors hover:bg-gray-900",
-                  focus,
-                )}
-              >
+              <Button variant="cta-black" size="compact" onClick={onSubscribe} className="focus-visible:outline-sooner-primary">
                 <Play className="size-4" fill="currentColor" aria-hidden />
                 {subscribeLabel}
-              </button>
+              </Button>
             )}
             {rentLabel && (
-              <button
-                type="button"
-                onClick={onRent}
-                className={cn(
-                  "inline-flex h-9 items-center gap-2 rounded-sooner bg-gray-100 px-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-200",
-                  focus,
-                )}
-              >
+              <Button variant="cta-light" size="compact" onClick={onRent} className="focus-visible:outline-sooner-primary">
                 <SoonerBasket className="h-[18px] w-4" />
                 {rentLabel}
-              </button>
+              </Button>
             )}
             <button
               type="button"

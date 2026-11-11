@@ -1,8 +1,11 @@
 "use client";
 
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
+import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import type { AccountNavItem } from "../AccountNav/AccountNav";
+import { AccountMenu } from "../AccountMenu/AccountMenu";
 import { Avatar } from "../Avatar/Avatar";
 import { Button } from "../Button/Button";
 import { LanguageSelect, type Language } from "../LanguageSelect/LanguageSelect";
@@ -32,6 +35,8 @@ export interface HeaderLabels {
   search: string;
   /** Accessible name of the mobile menu button ("Menu"). */
   menu: string;
+  /** Accessible name of the menu button while the menu is open ("Close menu"). */
+  closeMenu: string;
   /** Tab text, one per HeaderTab ("Discover", "Collections", "Genres", "Magazine", "Watchlist"). */
   tabs: Record<HeaderTab, string>;
   /** Login button text ("Login"). */
@@ -40,6 +45,10 @@ export interface HeaderLabels {
   signUp: string;
   /** Accessible name of the LanguageSelect ("Interface language"). */
   language: string;
+  /** Accessible name of the Avatar button and its menu ("Account"). */
+  account: string;
+  /** Log out row in the account menu ("Log out"). */
+  logout: string;
 }
 
 export const headerLabels: HeaderLabels = {
@@ -47,10 +56,13 @@ export const headerLabels: HeaderLabels = {
   navigation: "Main navigation",
   search: "Search",
   menu: "Menu",
+  closeMenu: "Close menu",
   tabs: { discover: "Discover", collections: "Collections", genres: "Genres", magazine: "Magazine", watchlist: "Watchlist" },
   login: "Login",
   signUp: "Sign up",
   language: "Interface language",
+  account: "Account",
+  logout: "Log out",
 };
 
 export interface HeaderProps {
@@ -74,13 +86,27 @@ export interface HeaderProps {
   onLogin?: () => void;
   /** Sign up button click (logged out, desktop layout only). */
   onSignUp?: () => void;
-  /** Menu button click (mobile layout only). */
+  /** Menu button click (mobile layout only), before the menu opens or closes. */
   onMenu?: () => void;
+  /** Mobile menu open (controlled). Leave unset to let the menu button toggle it. Pass true to show the open state. */
+  menuOpen?: boolean;
+  /** Called with the new open state when the menu button is pressed. */
+  onMenuOpenChange?: (open: boolean) => void;
+  /** Account menu under the Avatar open (logged in; controlled). Leave unset to let the Avatar toggle it. */
+  accountMenuOpen?: boolean;
+  /** Account sections in the Avatar menu; defaults to the English account sections. Pass accountNavDe on DE screens. */
+  accountItems?: AccountNavItem[];
+  /** Log out click in the Avatar menu. */
+  onLogout?: () => void;
   /** Tab, button and accessible-name text, merged over the English defaults (`headerLabels`). Label text; pass German on DE screens. */
   labels?: Partial<HeaderLabels>;
   /** Extra classes for the root (layout/spacing only; don't override colours). */
   className?: string;
 }
+
+// Mobile menu row: typography.nav.tab on a 44px row, violet/10 when active.
+const menuItem =
+  "rounded-lg px-4 py-3 text-nav-tab uppercase text-white outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white";
 
 const iconButton =
   "flex items-center justify-center rounded-sooner text-white outline-none hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white";
@@ -88,7 +114,8 @@ const iconButton =
 /**
  * Sticky 64px site header: logo, nav tabs (Discover … Watchlist), search, LanguageSelect, and Login /
  * Sign up or the Avatar. Below 1024px of container width: logo, search, language, Avatar (logged in) and a menu
- * button; tabs and Login / Sign up are hidden. All text comes from `labels` (English defaults).
+ * button that opens the menu (the tabs and Search as rows, plus Login / Sign up when logged out). All text comes from
+ * `labels` (English defaults).
  * Use for: the top bar of every page screen.
  * Not for: account-section navigation (use AccountNav).
  */
@@ -104,9 +131,23 @@ export function Header({
   onLogin,
   onSignUp,
   onMenu,
+  menuOpen,
+  onMenuOpenChange,
+  accountMenuOpen,
+  accountItems,
+  onLogout,
   labels,
   className,
 }: HeaderProps) {
+  const [openState, setOpenState] = useState(false);
+  const open = menuOpen ?? openState;
+  const [accountState, setAccountState] = useState(false);
+  const accountOpen = accountMenuOpen ?? accountState;
+  const toggleMenu = () => {
+    onMenu?.();
+    onMenuOpenChange?.(!open);
+    if (menuOpen === undefined) setOpenState(!open);
+  };
   const l = { ...headerLabels, ...labels, tabs: { ...headerLabels.tabs, ...labels?.tabs } };
   const loggedIn = auth === "logged-in";
   const visibleTabs = hideWatchlist ? tabs.filter((t) => t.id !== "watchlist") : tabs;
@@ -121,7 +162,24 @@ export function Header({
     </Link>
   );
   const languageSelect = <LanguageSelect value={language} onValueChange={onLanguageChange} label={l.language} />;
-  const avatar = <Avatar initials={userInitials} name={userName} />;
+  // The Avatar opens the account menu (production: Account, Settings, … then Log out).
+  const avatar = (
+    <div className="relative">
+      <button
+        type="button"
+        aria-label={l.account}
+        aria-haspopup="menu"
+        aria-expanded={accountOpen}
+        onClick={() => accountMenuOpen === undefined && setAccountState(!accountOpen)}
+        className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white"
+      >
+        <Avatar initials={userInitials} name={userName} aria-hidden />
+      </button>
+      {accountOpen && (
+        <AccountMenu items={accountItems} label={l.account} logoutLabel={l.logout} onLogout={onLogout} className="absolute top-full right-0 z-50 mt-2" />
+      )}
+    </div>
+  );
 
   return (
     <header className={cn("@container sticky top-0 z-40 w-full border-b border-white/10 bg-black/80 backdrop-blur-glass", className)}>
@@ -164,11 +222,50 @@ export function Header({
           </button>
           {languageSelect}
           {loggedIn && avatar}
-          <button type="button" onClick={onMenu} aria-label={l.menu} className={cn(iconButton, "size-6")}>
-            <Menu className="size-6" strokeWidth={1.5} aria-hidden />
+          <button
+            type="button"
+            onClick={toggleMenu}
+            aria-label={open ? l.closeMenu : l.menu}
+            aria-expanded={open}
+            aria-controls="header-menu"
+            className={cn(iconButton, "size-6")}
+          >
+            {open ? <X className="size-6" strokeWidth={1.5} aria-hidden /> : <Menu className="size-6" strokeWidth={1.5} aria-hidden />}
           </button>
         </div>
       </div>
+
+      {open && (
+        // Mobile menu (production sooner.de below 768px): the tabs and Search as full-width rows, then Login / Sign up
+        // when logged out. It drops down inside the header, so the header's floating glass covers it.
+        <div id="header-menu" className="border-t border-white/10 @5xl:hidden">
+          <nav aria-label={l.navigation} className="flex flex-col gap-1 px-6 py-4">
+            {visibleTabs.map((t) => (
+              <Link
+                key={t.id}
+                href={t.href}
+                aria-current={active === t.id ? "page" : undefined}
+                className={cn(menuItem, active === t.id ? "bg-sooner-primary/10" : "hover:text-sooner-primary-light")}
+              >
+                {l.tabs[t.id]}
+              </Link>
+            ))}
+            <button type="button" onClick={onSearch} className={cn(menuItem, "text-left hover:text-sooner-primary-light")}>
+              {l.search}
+            </button>
+            {!loggedIn && (
+              <div className="flex flex-col gap-2 pt-4">
+                <Button variant="cta-text" size="sm" width="fill" onClick={onLogin}>
+                  {l.login}
+                </Button>
+                <Button variant="cta-primary" size="sm" width="fill" onClick={onSignUp}>
+                  {l.signUp}
+                </Button>
+              </div>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

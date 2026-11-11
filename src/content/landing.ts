@@ -185,8 +185,7 @@ const landing: Record<Locale, Landing> = {
         title: "Kuratiertes Kino.\nDeine Wahl.",
         lead: "Entdecke außergewöhnliche Filme – von aktuellen Kino-Highlights und Festivalfavoriten bis zu neuen Stimmen.",
         description: "Bei Sooner entscheidest du, wie du schaust: im Abo oder einzeln zum Leihen.",
-        // Production shows the channel name as the button label here.
-        cta: { label: "Cinema Highlights", href: "/channel/cinema-highlights" },
+        cta: { label: "Kino-Highlights entdecken", href: "/channel/cinema-highlights" },
       },
       {
         row: "newToRent",

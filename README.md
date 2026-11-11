@@ -10,6 +10,7 @@ The React + Tailwind component library behind sooner.de, documented in Storybook
 | **Storybook** | Component inventory and usage examples | Every component and prop is documented; the contract agents read via Storybook MCP (`/mcp`) and `/manifests/components.json` |
 | **Figma** (`uVA7tqdgZDMe6JK3M8AZQb`) | Design: components, key screens, explorations | Pages: Design System, Components, Key Screens, _archive. Edited directly; nothing overwrites it |
 | `RULES-GENERATED-UI.md` | How pages are composed | Read it before generating or editing pages |
+| `evals/generated-ui.md` | Evaluation prompts for generated UI | Re-run after component or rule changes; log results in the file |
 
 Code and Figma are linked, not synced: each story's Design tab opens its Figma component or screen
 (`src/figma-nodes.json`), and each Figma component's documentation link opens its story. A change to a component is made

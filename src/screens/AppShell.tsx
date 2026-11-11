@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer/Footer";
 import { Header, type HeaderAuth, type HeaderTab } from "@/components/Header/Header";
 import type { Locale } from "@/i18n/locale";
-import { footerDe, headerDe } from "@/i18n/de";
+import { accountNavDe, footerDe, headerDe } from "@/i18n/de";
 
 export interface AppShellProps {
   active?: HeaderTab | "none";
@@ -18,7 +18,7 @@ export function AppShell({ active = "none", auth, locale = "en", children }: App
   const de = locale === "de";
   return (
     <>
-      <Header active={active} auth={auth} language={locale} labels={de ? headerDe : undefined} />
+      <Header active={active} auth={auth} language={locale} labels={de ? headerDe : undefined} accountItems={de ? accountNavDe : undefined} />
       <main className="flex w-full flex-1 flex-col bg-black">{children}</main>
       <Footer {...(de ? footerDe : {})} />
     </>

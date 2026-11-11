@@ -17,11 +17,10 @@ import type { FilmDetailsProps } from "@/components/FilmDetails/FilmDetails";
 import type { CollectionHeaderProps } from "@/components/CollectionHeader/CollectionHeader";
 
 /**
- * Proposed German (no production string yet) — needs copy review.
- * UI labels production has no German for (or shows in English on the DE site). Every German screen references these
- * keys, so the copy team can replace them here in one place. Short, neutral UI terms only; no marketing copy.
+ * German UI labels that production has no German for (or shows in English on the DE site). Approved; every German
+ * screen references these keys, so a change here applies everywhere. Short, neutral UI terms only; no marketing copy.
  */
-export const proposedDe = {
+export const uiDe = {
   /** Header tab "Collections". */
   collections: "Kollektionen",
   /** Header tab "Magazine". */
@@ -68,7 +67,7 @@ export const filmHeroDe = {
 export const promoHeroDe = {
   // Production markup (not in the strings file).
   watchLabel: "Hier anschauen",
-  addToListLabel: "Zur Liste hinzufügen",
+  addToListLabel: "Zur Merkliste hinzufügen",
   previousLabel: "Vorherige Promo",
   nextLabel: "Nächste Promo",
   slideLabel: "Promo {index} von {total}: {title}",
@@ -92,18 +91,18 @@ export const featuredFilmCardDe = {
 
 export const filmCardDe = { availableLabel: "Ab" };
 
-/** FilmDetails headings (proposed: production DE film pages show them in English). */
+/** FilmDetails headings (production DE film pages show them in English). */
 export const filmDetailsDe = {
-  synopsisLabel: proposedDe.synopsis,
-  festivalsLabel: proposedDe.festivalsAwards,
+  synopsisLabel: uiDe.synopsis,
+  festivalsLabel: uiDe.festivalsAwards,
 } satisfies Partial<FilmDetailsProps>;
 
-/** CollectionHeader toggles: "Zeig mehr" is production (DE channel page); the others are proposed. */
+/** CollectionHeader toggles: "Zeig mehr" is production (DE channel page); the others are from uiDe. */
 export const collectionHeaderDe = {
   showMoreLabel: "Zeig mehr",
-  showLessLabel: proposedDe.showLess,
-  gridViewLabel: proposedDe.gridView,
-  listViewLabel: proposedDe.listView,
+  showLessLabel: uiDe.showLess,
+  gridViewLabel: uiDe.gridView,
+  listViewLabel: uiDe.listView,
 } satisfies Partial<CollectionHeaderProps>;
 
 export const filmListItemDe = {
@@ -113,41 +112,41 @@ export const filmListItemDe = {
   watchlistLabel: "Zur Merkliste hinzufügen",
 } satisfies Partial<FilmListItemProps>;
 
-/** Header: production DE strings (footer "Entdecken", strings file "Genre", "Meine Liste", "Anmelden", "Registrieren", "Oberflächensprache"). */
+/** Header: production DE strings (footer "Entdecken", strings file "Genre", "Anmelden", "Registrieren", "Oberflächensprache"). */
 export const headerDe: HeaderLabels = {
   home: "Sooner Startseite",
   navigation: "Hauptnavigation",
   search: "Suche",
   menu: "Menü",
+  closeMenu: "Menü schließen",
   tabs: {
     discover: "Entdecken",
-    collections: proposedDe.collections,
+    collections: uiDe.collections,
     genres: "Genre",
-    magazine: proposedDe.magazine,
-    watchlist: "Meine Liste",
+    magazine: uiDe.magazine,
+    // One term for the watchlist everywhere: "Merkliste".
+    watchlist: "Merkliste",
   },
   login: "Anmelden",
   signUp: "Registrieren",
   language: "Oberflächensprache",
+  account: "Konto",
+  logout: "Abmelden",
 };
 
 export const availabilityDe = {
   label: "Verfügbarkeit",
-  labels: { all: proposedDe.all, subscription: "Abonnement", rentals: "Mieten & Kaufen" },
+  labels: { all: uiDe.all, subscription: "Abonnement", rentals: "Mieten & Kaufen" },
 };
 
 export const searchDe = {
   placeholder: "Filme, Regisseure, Schauspieler suchen…",
   label: "Suche",
-  clearLabel: proposedDe.clearSearch,
+  clearLabel: uiDe.clearSearch,
 };
 
-/** Production "results for" / "No results for" / hint (strings file, de). */
-export const searchResultsDe = {
-  resultsFor: "Ergebnisse für",
-  noResultsFor: "Keine Ergebnisse für",
-  noResultsHint: "Versuchen Sie einen anderen Titel, Regisseur oder Schauspieler",
-};
+/** Production "results for" (strings file, de). No-results message and hint: statesDe. */
+export const searchResultsDe = { resultsFor: "Ergebnisse für" };
 
 // Account and watchlist (production sooner.de/de/account/*, /de/watchlist).
 export const accountNavDe = [
@@ -184,18 +183,17 @@ export const accountDe = {
   noPin: "Kein PIN festgelegt",
   setPin: "PIN festlegen",
   devicesTitle: "Einloggen in andere Geräte",
-  // Production shows this hint untranslated on the German page.
-  devicesHint: "Enter the code shown on your TV or device.",
+  devicesHint: "Gib den Code ein, der auf deinem Fernseher oder Gerät angezeigt wird.",
   devicesPlaceholder: "Gib deinen Code ein",
   devicesSubmit: "Weiter",
 } satisfies Partial<AccountLabels>;
 
-export const watchlistDe = { title: "Meine Liste", empty: "Deine Watchlist ist leer" };
+export const watchlistDe = { title: "Merkliste", empty: "Deine Merkliste ist leer" };
 
 /** Production strings (de): search with no results, a failed load, page not found. */
 export const statesDe = {
   noResultsFor: "Keine Ergebnisse für",
-  noResultsHint: "Versuchen Sie einen anderen Titel, Regisseur oder Schauspieler",
+  noResultsHint: "Versuch es mit einem anderen Titel, Regisseur oder Schauspieler",
   error: "Etwas ist schiefgelaufen",
   notFound: "Die Seite wurde nicht gefunden",
   notFoundHint: "Wir können die gesuchte Seite nicht finden",
@@ -206,7 +204,7 @@ export const footerDe = {
   columns: [
     [
       { label: "Entdecken", href: "/discover" },
-      { label: proposedDe.helpSupport, href: "/help" },
+      { label: uiDe.helpSupport, href: "/help" },
       { label: "Blog", href: "/blog" },
       { label: "Kontakt", href: "/contact" },
     ],
@@ -216,9 +214,9 @@ export const footerDe = {
       { label: "Partner Programm", href: "/partners" },
     ],
     [
-      { label: proposedDe.press, href: "/press" },
+      { label: uiDe.press, href: "/press" },
       { label: "Datenschutz", href: "/privacy" },
-      { label: proposedDe.cookiePolicy, href: "/cookies" },
+      { label: uiDe.cookiePolicy, href: "/cookies" },
     ],
   ],
   copyright: "© 2026 ContentScope GmbH • Adlershof-Berlin, Deutschland",

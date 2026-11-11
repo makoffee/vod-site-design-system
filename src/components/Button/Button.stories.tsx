@@ -14,13 +14,13 @@ const meta = {
       options: ["cta-primary", "cta-ghost", "cta-white", "cta-black", "cta-text", "cta-light", "cta-round", "cta-danger"],
     },
     state: { control: "inline-radio", options: ["default", "hover", "disabled"] },
-    size: { control: "inline-radio", options: ["md", "lg", "sm"] },
+    size: { control: "inline-radio", options: ["md", "lg", "sm", "compact"] },
   },
   decorators: [
     // md/lg default to width="fill": cap them at 401px; sm and round hug their content.
     function ButtonFrame(Story, { args }) {
       return (
-        <div className={args.size === "sm" || args.variant === "cta-round" ? "w-fit" : "w-full max-w-[401px]"}>
+        <div className={args.size === "sm" || args.size === "compact" || args.variant === "cta-round" ? "w-fit" : "w-full max-w-[401px]"}>
           <Story />
         </div>
       );
@@ -49,6 +49,8 @@ export const PrimarySmDefault: Story = { args: { size: "sm", children: "Button" 
 export const PrimarySmHover: Story = { args: { size: "sm", state: "hover", children: "Button" } };
 export const TextSmDefault: Story = { args: { size: "sm", variant: "cta-text", children: "Button" } };
 export const TextSmHover: Story = { args: { size: "sm", variant: "cta-text", state: "hover", children: "Button" } };
+export const BlackCompactDefault: Story = { args: { size: "compact", variant: "cta-black", children: "Subscribe" } };
+export const LightCompactDefault: Story = { args: { size: "compact", variant: "cta-light", children: "Rent" } };
 export const LightSmDefault: Story = { args: { size: "sm", variant: "cta-light", children: "Button" } };
 export const LightSmHover: Story = { args: { size: "sm", variant: "cta-light", state: "hover", children: "Button" } };
 export const RoundLgDefault: Story = { args: { size: "lg", variant: "cta-round", children: undefined, "aria-label": "Play" } };

@@ -7,6 +7,11 @@ for (const n of comps.findAllWithCriteria({ types: ["COMPONENT_SET", "COMPONENT"
   if (n.type === "COMPONENT" && n.parent && n.parent.type === "COMPONENT_SET") continue;
   out.components[n.name] = n.id;
 }
+// Brand logo sets (Social Icons) live on the Icons page, frame "Brand logos".
+const icons = figma.root.children.find((p) => p.name === "Icons");
+await icons.loadAsync();
+const brand = icons.findOne((n) => n.name === "Brand logos");
+for (const n of brand ? brand.findAllWithCriteria({ types: ["COMPONENT_SET"] }) : []) out.components[n.name] = n.id;
 const screens = figma.root.children.find((p) => p.name === "Key Screens");
 await screens.loadAsync();
 for (const n of screens.findAll((n) => n.type === "FRAME" && n.name.includes(" | ") && /desktop|widescreen/i.test(n.name))) out.screens[n.name] = n.id;

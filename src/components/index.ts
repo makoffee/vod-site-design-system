@@ -49,6 +49,7 @@ export { ViewToggle, type ViewToggleProps } from "./ViewToggle/ViewToggle";
 export type { Plan, PlanId, UniOfferContent } from "./_shared/plans";
 export { ActionLink, type Action, type ActionTone } from "./_shared/ActionLink";
 export * from "./AccountNav/AccountNav";
+export * from "./AccountMenu/AccountMenu";
 export * from "./AccountPanel/AccountPanel";
 export * from "./DetailRow/DetailRow";
 export * from "./DeviceCodeForm/DeviceCodeForm";
